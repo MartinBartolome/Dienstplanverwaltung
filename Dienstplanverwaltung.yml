@@ -20,7 +20,7 @@ services:
     image: openjdk:10-jre-slim
     container_name: springapi
     ports:
-      - 8080:8080
+      - 8088:8088
     depends_on:
       - database
     volumes:
