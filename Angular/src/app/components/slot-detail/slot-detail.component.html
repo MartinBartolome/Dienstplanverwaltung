@@ -1,0 +1,15 @@
+<div>
+  <div>{{ slot.title }}</div>
+  <div>zugewiesen:
+    <ul *ngFor="let a of slot.assigned">
+      <li>{{ a.name }}
+      </li>
+    </ul>
+  </div>
+  <div>gemeldet:
+    <ul *ngFor="let a of slot.applied">
+      <li>{{ a.name }}
+      </li>
+    </ul>
+  </div>
+</div>

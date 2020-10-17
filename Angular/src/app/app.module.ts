@@ -1,21 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
-
-import { HttpRequestService } from './http-request.service';
-
 import { AppComponent } from './app.component';
+import { SlotDetailComponent } from './components/slot-detail/slot-detail.component';
+import { ShiftDetailComponent } from './components/shift-detail/shift-detail.component';
+import { ShiftDayDetailComponent } from './components/shift-day-detail/shift-day-detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SlotDetailComponent,
+    ShiftDetailComponent,
+    ShiftDayDetailComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule
+    BrowserModule
   ],
-  providers: [HttpRequestService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
