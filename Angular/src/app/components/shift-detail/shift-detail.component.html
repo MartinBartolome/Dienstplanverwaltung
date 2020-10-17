@@ -1,6 +1,9 @@
-<div>
-  <header>{{shift.title}} ( von {{shift.from}} bis {{ shift.to }} )
+<section>
+  <div class="HeadContainer">
+    <header>{{shift.title}} ( von {{shift.from}} bis {{ shift.to }} )</header>
     <input type="checkbox" id="canceled" name="canceled" value="canceled" [checked]="shift.isCanceled"> fällt aus
-  </header>
-  <app-slot-detail *ngFor="let slot of shift.slots" [slot]="slot"></app-slot-detail>
-</div>
+  </div>
+  <div class="SlotContainer">
+    <app-slot-detail *ngFor="let slot of shift.slots" [slot]="slot" class="Slot"></app-slot-detail>
+  </div>
+</section>

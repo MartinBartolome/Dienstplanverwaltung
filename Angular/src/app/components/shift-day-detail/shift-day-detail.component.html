@@ -1,4 +1,6 @@
-<div>
+<section>
   <header>{{shiftdays.date}}</header>
-  <app-shift-detail *ngFor="let shift of shiftdays.shifts" [shift]="shift"></app-shift-detail>
-</div>
+  <div class="ShiftContainer">
+    <app-shift-detail *ngFor="let shift of shiftdays.shifts" [shift]="shift" class="Shift"></app-shift-detail>
+  </div>
+</section>
