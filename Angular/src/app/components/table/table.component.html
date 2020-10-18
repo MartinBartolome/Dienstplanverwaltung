@@ -1,0 +1,15 @@
+<table>
+  <tr class="headerrow">
+    <th>{{ table.title }}</th>
+  </tr>
+  <div class="subrows">
+    <tr *ngFor="let a of table.listItems" (click)="SelectRow($event, a) ">
+      <label *ngIf="a.isSelected; else elseBlock" class="Hightlight">
+        {{ a.title }}
+      </label>
+      <ng-template #elseBlock class="normal">
+        {{a.title}}
+      </ng-template>
+    </tr>
+  </div>
+</table>

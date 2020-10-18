@@ -10,9 +10,7 @@ li {
 
 section{
   width: auto;
-  border: black;
-  border-style: solid;
-  border-width: 0.1em;
+  border: 0.1em solid black;
   padding: 0.5em;
 }
 

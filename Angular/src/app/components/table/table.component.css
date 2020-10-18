@@ -1,0 +1,11 @@
+th{
+  border: 0.1em solid black;
+}
+.subrows{
+  border: 0.1em solid black;
+}
+
+.Hightlight{
+  background: lightblue;
+  padding:1px;
+}
