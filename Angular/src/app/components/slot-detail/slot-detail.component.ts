@@ -14,4 +14,12 @@ export class SlotDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  clickOnAssigned(event, item): void{
+    this.slot.assigned = this.slot.assigned.filter(obj => obj !== item);
+    this.slot.applied.push(item);
+  }
+  clickOnApplied(event, item): void{
+    this.slot.applied = this.slot.applied.filter(obj => obj !== item);
+    this.slot.assigned.push(item);
+  }
 }

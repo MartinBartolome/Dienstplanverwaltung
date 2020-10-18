@@ -1,0 +1,10 @@
+<section>
+  <div class="Employeetable">
+    <app-table [table]="employees.employeesTable"></app-table>
+  </div>
+  <div class="Employee" *ngFor="let emp of employees.employeesTable.listItems">
+    <div *ngIf="emp.isSelected">
+      <app-employee-config [employee]="getEmployeeConfig(emp)"></app-employee-config>
+    </div>
+  </div>
+</section>

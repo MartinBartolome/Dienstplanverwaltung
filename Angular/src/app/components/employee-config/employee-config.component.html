@@ -1,0 +1,19 @@
+<section>
+  <label class="header">{{ employee.employeeEmail }}</label>
+  <div class="inputwrapper"><input type="checkbox" id="isActive" name="isActive" value="{{employee.isActive}}" [checked]="employee.isActive">Inaktiv</div>
+  <div class="settingscontainer">
+    <div class="Roles">
+      <app-table [table]="employee.serviceRolesTable"></app-table>
+    </div>
+    <form>
+      <div class="hourlyRate">
+        <label class="formlabel" for="hourlyRate">Stundensatz</label>
+        <input class="forminput" type="text" id="hourlyRate" name="hourlyRate" value="{{employee.hourlyRate}}"> {{employee.currency}}
+      </div>
+      <div class="monthlyContingent">
+        <label class="formlabel" for="monthlyContingent">Monatskontingent</label>
+        <input class="forminput" type="text" id="monthlyContingent" name="hourlyRate" value="{{employee.monthlyContingent}}"> Stunden
+      </div>
+    </form>
+  </div>
+</section>

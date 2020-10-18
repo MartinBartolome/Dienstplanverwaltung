@@ -3,15 +3,16 @@
   <div class="usercontainer">
     <div class="user">
       <label>zugewiesen:</label>
-      <ul *ngFor="let a of slot.assigned">
-        <li>{{ a.name }}
-        </li>
+      <ul *ngFor="let a of slot.assigned ; last as isLast">
+        <li *ngIf="isLast == false" (click)="clickOnAssigned($event, a)">{{ a.name }},</li>
+        <li *ngIf="isLast == true" (click)="clickOnAssigned($event, a)">{{ a.name }}</li>
       </ul>
     </div>
     <div class="user">
       <label>gemeldet:</label>
-      <ul *ngFor="let a of slot.applied">
-        <li>{{ a.name }}</li>
+      <ul *ngFor="let a of slot.applied ; last as isLast">
+        <li *ngIf="isLast == false" (click)="clickOnApplied($event, a)">{{ a.name }},</li>
+        <li *ngIf="isLast == true" (click)="clickOnApplied($event, a)">{{ a.name }}</li>
       </ul>
     </div>
 

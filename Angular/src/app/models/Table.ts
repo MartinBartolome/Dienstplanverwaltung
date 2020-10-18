@@ -1,7 +1,7 @@
-import {TableItem} from './TableItem';
+import {ListItem} from './ListItem';
 
 export class Table {
   title: string;
   type: string;
-  listItems: TableItem[];
+  listItems: ListItem[];
 }

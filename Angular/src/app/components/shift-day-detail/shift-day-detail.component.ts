@@ -8,6 +8,10 @@ import {ShiftDays} from '../../models/ShiftDays';
   styleUrls: ['./shift-day-detail.component.css']
 })
 export class ShiftDayDetailComponent implements OnInit {
+  /*
+    austauschen, wenn es die Daten von wo anders kommen
+    @Input() shiftdays: ShiftDays;
+  */
   shiftdays: ShiftDays = shiftdayimport;
   constructor() { }
 

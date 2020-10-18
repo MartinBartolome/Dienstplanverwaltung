@@ -1,4 +1,4 @@
-export class TableItem {
+export class ListItem {
   type: string;
   title: string;
   setting: string;
