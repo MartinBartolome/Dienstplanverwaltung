@@ -1,8 +1,12 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.database;
+
+import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
+import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
+import ffhs.students.projects.dienstplanverwaltung.database.ISlotType;
 
 import java.util.List;
 
-public class Slot implements ISlot{
+class Slot implements ISlot {
     private final int id;
     private final List<IEmployee> assigned;
     private final List<IEmployee> applied;

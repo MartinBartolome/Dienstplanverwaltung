@@ -1,4 +1,6 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.database;
+
+import ffhs.students.projects.dienstplanverwaltung.Helper;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

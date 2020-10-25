@@ -1,4 +1,8 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.database;
+
+import ffhs.students.projects.dienstplanverwaltung.database.IShift;
+import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
+import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,7 +39,7 @@ public class Shift implements IShift {
         return slots;
     }
 
-    public Shift(IShiftTemplate template,LocalDate day){
+    public Shift(IShiftTemplate template, LocalDate day){
         this.day = day;
         title = template.getTitle();
         shiftTemplateId = template.getId();

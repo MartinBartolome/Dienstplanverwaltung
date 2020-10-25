@@ -1,4 +1,4 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.database;
 
 
 import java.util.List;

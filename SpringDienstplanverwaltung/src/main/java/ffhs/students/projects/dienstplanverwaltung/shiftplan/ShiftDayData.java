@@ -1,4 +1,6 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.shiftplan;
+
+import ffhs.students.projects.dienstplanverwaltung.database.IShift;
 
 import java.time.LocalDate;
 import java.util.List;

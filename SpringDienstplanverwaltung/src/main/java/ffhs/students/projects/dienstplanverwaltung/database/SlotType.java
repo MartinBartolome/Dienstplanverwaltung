@@ -1,6 +1,8 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.database;
 
-public class SlotType implements ISlotType{
+import ffhs.students.projects.dienstplanverwaltung.database.ISlotType;
+
+class SlotType implements ISlotType {
     private String title;
 
     public SlotType(String title) {

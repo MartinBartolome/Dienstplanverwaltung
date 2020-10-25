@@ -1,9 +1,11 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.shiftplan;
+
+import ffhs.students.projects.dienstplanverwaltung.database.IShift;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShiftVM {
+class ShiftVM {
     private int id;
     private final String title;
     private final boolean isCanceled;

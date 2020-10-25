@@ -1,6 +1,6 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.database;
 
-public class User implements IUser{
+class User implements IUser {
     private String name;
 
     public User(String name) {

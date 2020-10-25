@@ -1,9 +1,11 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.shiftplan;
+
+import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SlotVM {
+class SlotVM {
     private final int id;
     private final String title;
     private final List<String> assigned;

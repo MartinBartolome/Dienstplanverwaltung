@@ -1,6 +1,7 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.shiftplan;
 
-import java.time.DayOfWeek;
+import ffhs.students.projects.dienstplanverwaltung.database.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
 import static java.util.stream.Collectors.*;
 
 public class ShiftPlanManager {
-    public static Shiftplan GetShiftPlan(LocalDate month,int localId){
+    public static Shiftplan GetShiftPlan(LocalDate month, int localId){
         List<ShiftDayData> shiftDayDataList = generateShiftDayDatas(month,localId);
         return new Shiftplan(shiftDayDataList,month);
     }

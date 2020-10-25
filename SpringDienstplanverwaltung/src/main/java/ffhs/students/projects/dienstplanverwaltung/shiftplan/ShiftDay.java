@@ -1,11 +1,10 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.shiftplan;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShiftDay {
+class ShiftDay {
     private final LocalDate day;
     private final List<ShiftVM> shiftVMs;
 

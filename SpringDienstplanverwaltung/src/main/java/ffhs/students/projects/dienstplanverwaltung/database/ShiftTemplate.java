@@ -1,10 +1,10 @@
-package ffhs.students.projects.dienstplanverwaltung;
+package ffhs.students.projects.dienstplanverwaltung.database;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
-public class ShiftTemplate implements IShiftTemplate{
+class ShiftTemplate implements IShiftTemplate {
     private final List<ISlot> slots;
     private int id;
     private RecurrenceType recurrenceType;
