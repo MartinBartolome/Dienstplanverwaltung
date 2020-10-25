@@ -8,6 +8,7 @@ import { ShiftDayDetailComponent } from './components/shift-day-detail/shift-day
 import { TableComponent } from './components/table/table.component';
 import { EmployeeConfigComponent } from './components/employee-config/employee-config.component';
 import { EmployeesConfigComponent } from './components/employees-config/employees-config.component';
+import { ShiftplanComponent } from './components/shiftplan/shiftplan.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { EmployeesConfigComponent } from './components/employees-config/employee
     ShiftDayDetailComponent,
     TableComponent,
     EmployeeConfigComponent,
-    EmployeesConfigComponent
+    EmployeesConfigComponent,
+    ShiftplanComponent
   ],
   imports: [
     BrowserModule
