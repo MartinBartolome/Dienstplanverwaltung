@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import shiftdayimport from '../../SampleData/ShiftDay.json';
+import {Component, Input, OnInit} from '@angular/core';
 import {ShiftDays} from '../../models/ShiftDays';
 
 @Component({
@@ -8,11 +7,8 @@ import {ShiftDays} from '../../models/ShiftDays';
   styleUrls: ['./shift-day-detail.component.css']
 })
 export class ShiftDayDetailComponent implements OnInit {
-  /*
-    austauschen, wenn es die Daten von wo anders kommen
-    @Input() shiftdays: ShiftDays;
-  */
-  shiftdays: ShiftDays = shiftdayimport;
+  @Input() shiftdays: ShiftDays;
+
   constructor() { }
 
   ngOnInit(): void {

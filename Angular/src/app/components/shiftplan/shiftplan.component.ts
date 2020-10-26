@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {first} from 'rxjs/operators';
+import {ShiftPlan} from '../../models/ShiftPlan';
+import shiftplanimport from '../../SampleData/ShiftPlan.json';
 
 @Component({
   selector: 'app-shiftplan',
@@ -10,6 +11,12 @@ export class ShiftplanComponent implements OnInit {
   CurrentMonth: number;
   CurrentYear: number;
   TableDays: Array<number>;
+  ShiftPlan: ShiftPlan = shiftplanimport;
+
+  /*
+  austauschen, wenn es die Daten von wo anders kommen
+  @Input() ShiftPlan: ShiftPlan;
+*/
 
   constructor() { }
 
@@ -55,19 +62,18 @@ export class ShiftplanComponent implements OnInit {
 
   clickNextMonth(): void{
     this.CurrentMonth++;
-    if (this.CurrentMonth > 12)
+    if (this.CurrentMonth > 11)
     {
-      this.CurrentMonth = 1;
+      this.CurrentMonth = 0;
       this.CurrentYear++;
     }
     this.setDate();
   }
   clickPrevMonth(): void{
     this.CurrentMonth--;
-    if (this.CurrentMonth < 1)
+    if (this.CurrentMonth < 0)
     {
-      this.CurrentMonth = 12;
-      this.CurrentMonth--;
+      this.CurrentMonth = 11;
     }
 
     this.setDate();
