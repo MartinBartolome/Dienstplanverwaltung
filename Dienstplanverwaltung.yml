@@ -26,7 +26,7 @@ services:
     links:
       - database
     volumes:
-      - ./Spring/target/spring-0.0.1-SNAPSHOT.jar:/application.jar
+      - ./SpringDienstplanverwaltung/build/libs/dienstplanverwaltung-0.0.1-SNAPSHOT.jar:/application.jar
     command: ["java", "-jar", "application.jar"]
     networks:
       - backendNetwork
