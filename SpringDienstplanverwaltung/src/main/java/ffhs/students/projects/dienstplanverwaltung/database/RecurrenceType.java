@@ -1,6 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
-enum RecurrenceType {
+public enum RecurrenceType {
     Single,
     Weekly,
     BiWeekly,

@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.shiftplan;
 
 import ffhs.students.projects.dienstplanverwaltung.database.IShift;
+import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,17 +21,25 @@ public class ShiftDayData {
     }
     public List<IShift> getShifts() { return shifts; }
 
-    public static Optional<IShift> getShiftOnDayForTemplate(LocalDate day, int templateId, List<ShiftDayData> shiftDayDataList){
+    /**
+     * Findet in der Liste von Datenbank Schicht-Tagen für ein Template an einem Tag einen Eintrag, falls dieser existiert.
+     * @param day Tag an dem die Schicht gesucht wirde
+     * @param shiftTemplate Template für das eine Schicht gesucht wird
+     * @param shiftDayDataList Die Liste in der gesucht wird
+     * @return die gefundene Schicht oder Null, falls keine gefunden wurde.
+     */
+    public static Optional<IShift> getShiftOnDayForTemplate(LocalDate day, IShiftTemplate shiftTemplate, List<ShiftDayData> shiftDayDataList){
         return shiftDayDataList.stream()
                 .filter(sdd -> sdd.getDay().equals(day))
-                .map(sdd -> sdd.getIfExistsForTemplate(templateId))
+                .map(sdd -> sdd.getIfExistsForTemplate(shiftTemplate))
                 .flatMap(Optional::stream)
                 .findAny();
+
     }
 
-    private Optional<IShift> getIfExistsForTemplate(int templateId){
+    private Optional<IShift> getIfExistsForTemplate(IShiftTemplate shiftTemplate){
         return getShifts().stream()
-                .filter(shift -> shift.getShiftTemplateId() == templateId)
+                .filter(shift -> shift.getShiftTemplate() == shiftTemplate)
                 .findAny();
     }
 }

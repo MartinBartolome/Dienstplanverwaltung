@@ -49,12 +49,13 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
     @Override
     public List<IShift> getShifts(int localId, LocalDate from, LocalDate to) {
-        return null;
+        return new ArrayList<>();
+        //return shiftRepository.findAllByDayBetween(from,to);
     }
 
     @Override
     public List<IShiftTemplate> getShiftTemplates(int localId) {
-        return null;
+        return shiftTemplateRepository.findByLocalId(localId);
     }
 
     @Override

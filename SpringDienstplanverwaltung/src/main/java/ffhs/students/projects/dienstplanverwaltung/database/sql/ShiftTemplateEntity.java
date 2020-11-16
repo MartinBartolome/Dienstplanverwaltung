@@ -98,13 +98,13 @@ public class ShiftTemplateEntity implements IShiftTemplate {
     private LocalTime fromTime;
     @Override
     public LocalTime getFromTime() {
-        return null;
+        return fromTime;
     }
 
     private LocalTime toTime;
     @Override
     public LocalTime getToTime() {
-        return null;
+        return toTime;
     }
 
 

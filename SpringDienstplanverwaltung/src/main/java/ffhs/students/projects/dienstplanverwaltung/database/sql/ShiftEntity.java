@@ -8,6 +8,7 @@ import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,8 @@ public class ShiftEntity implements IShift {
 
     @OneToMany(mappedBy = "shift")
     private List<SlotEntity> slots;
+
+
 
     @Override
     public long getId() {  return id;  }
@@ -60,7 +63,7 @@ public class ShiftEntity implements IShift {
     @Override
     public LocalTime getToTime() { return toTime;  }
 
-
+    public ShiftEntity() {}
     public ShiftEntity(ShiftTemplateEntity template, LocalDate day){
         this.day = day;
         title = template.getTitle();
@@ -68,5 +71,7 @@ public class ShiftEntity implements IShift {
         isCanceled = false;
         fromTime = template.getFromTime();
         toTime = template.getToTime();
+
+        slots = new ArrayList<>();
     }
 }
