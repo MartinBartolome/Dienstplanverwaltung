@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-class Shift implements IShift {
+public class Shift implements IShift {
     private final LocalDate day;
     private final String title;
     private final int shiftTemplateId;

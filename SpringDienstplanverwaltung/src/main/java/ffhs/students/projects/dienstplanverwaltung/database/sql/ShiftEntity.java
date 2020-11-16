@@ -20,8 +20,7 @@ public class ShiftEntity implements IShift {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany(mappedBy = "shift")
-    private List<SlotEntity> slots;
+
 
 
 
@@ -48,6 +47,8 @@ public class ShiftEntity implements IShift {
     public boolean getIsCanceled() { return isCanceled; }
 
 
+    @OneToMany(mappedBy = "shift")
+    private List<SlotEntity> slots;
     @Override
     public List<ISlot> getSlots() {
         return slots.stream()

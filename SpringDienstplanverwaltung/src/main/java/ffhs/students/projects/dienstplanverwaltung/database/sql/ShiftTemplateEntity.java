@@ -92,8 +92,15 @@ public class ShiftTemplateEntity implements IShiftTemplate {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Erstellt einen Schicht auf Basis des Templates für den Tag.
+     * @param day Tag der Schicht
+     * @return Schicht auf Basis des Templates
+     */
     @Override
-    public IShift shiftForDay(LocalDate day) {   return new ShiftEntity(this,day); }
+    public IShift shiftForDay(LocalDate day) {
+        return new Shift(this,day);
+    }
 
     private LocalTime fromTime;
     @Override

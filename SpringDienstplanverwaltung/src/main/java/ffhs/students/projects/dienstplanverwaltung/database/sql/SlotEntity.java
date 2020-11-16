@@ -1,9 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
-import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
-import ffhs.students.projects.dienstplanverwaltung.database.IShift;
-import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
-import ffhs.students.projects.dienstplanverwaltung.database.ISlotType;
+import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +8,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table
-public class SlotEntity implements ISlot {
+public class SlotEntity implements ISlot, ISlotDisplay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

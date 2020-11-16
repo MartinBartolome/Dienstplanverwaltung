@@ -20,7 +20,7 @@ public class ShiftplanController {
     @GetMapping("/shiftPlan")
     public Shiftplan getShiftplan(
             @RequestParam(value = "localId", defaultValue = "1") int localId,
-            @RequestParam(value = "month", defaultValue = "11.11.2020") String date) {
+            @RequestParam(value = "month", defaultValue = "11.05.2020") String date) {
         LocalDate month =  LocalDate.parse(date,Helper.dateFormatter);
 
         ShiftPlanManager.databaseManager = dbManager;
