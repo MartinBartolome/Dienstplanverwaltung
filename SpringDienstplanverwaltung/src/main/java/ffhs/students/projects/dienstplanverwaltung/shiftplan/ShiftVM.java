@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.shiftplan;
 
 import ffhs.students.projects.dienstplanverwaltung.database.IShift;
+import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,11 +13,11 @@ class ShiftVM {
     private final List<SlotVM> slotVMs;
 
     public ShiftVM(IShift shift){
-        id = shift.getShiftTemplateId();
-        title = shift.getTitle();
+        //id = shift.getShiftTemplate();
+        title = shift.getTitle() + " " +shift.getFromTime() + "-" + shift.getToTime();
         isCanceled = shift.getIsCanceled();
         slotVMs = shift.getSlots().stream()
-                .map(SlotVM::new)
+                .map((ISlot slot) -> new SlotVM(slot,shift))
                 .collect(Collectors.toList());
     }
 

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b0d6122a-0b5b-4504-82e3-80391e9cd9d8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/ILocal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/ISlotDisplay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/Local.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/EmployeeEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/EmployeeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/LocalEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/LocalRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/ShiftEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/ShiftRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/ShiftTemplateEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/ShiftTemplateRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/SlotEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/SlotRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/SlotTypeEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/SlotTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/SqlDatabaseManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/UserEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/sql/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/test/java/ffhs/students/projects/dienstplanverwaltung/database/ISlotDisplayTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/test/java/ffhs/students/projects/dienstplanverwaltung/database/sqlDatabaseManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/Helper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/ShiftplanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/ShiftplanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/FakeDataBaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/FakeDataBaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IDatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IDatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IEmployee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IShiftTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IShiftTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/ISlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/ISlot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/IUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/RecurrenceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/RecurrenceType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/ShiftTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/ShiftTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/Slot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/database/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/ShiftDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/ShiftDay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/ShiftDayData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/ShiftDayData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/ShiftPlanManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/ShiftPlanManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/ShiftVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/ShiftVM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/SlotVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/java/ffhs/students/projects/dienstplanverwaltung/shiftplan/SlotVM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringDienstplanverwaltung/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$USER_HOME$/.m2/wrapper/dists/apache-maven-3.6.0-bin/2dakv70gp803gtm5ve1ufmvttn/apache-maven-3.6.0" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jKjJgRqKDxn1iyUDiLJLfyAePN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="15" />
+    <property name="RequestMappingsPanelWidth1" value="15" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.38129032" />
+    <property name="settings.editor.selected.configurable" value="build.tools" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean package" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Dienstplanverwaltung.Backend.Application" />
+      <module name="spring" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Dienstplanverwaltung.Backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="Dienstplanverwaltung.Backend.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="../Dienstplanverwaltung.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="../Dienstplanverwaltung.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="../Dienstplanverwaltung.yml.angular: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="angular" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="../Dienstplanverwaltung.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="../Dienstplanverwaltung.yml.database: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="database" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="../Dienstplanverwaltung.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="../Dienstplanverwaltung.yml.springapi: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="springapi" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="../Dienstplanverwaltung.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Application" />
+      <item itemvalue="Docker.../Dienstplanverwaltung.yml.angular: Compose Deployment" />
+      <item itemvalue="Docker.../Dienstplanverwaltung.yml.database: Compose Deployment" />
+      <item itemvalue="Docker.../Dienstplanverwaltung.yml.springapi: Compose Deployment" />
+      <item itemvalue="Docker.../Dienstplanverwaltung.yml: Compose Deployment" />
+      <item itemvalue="Spring Boot.Application" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.../Dienstplanverwaltung.yml.springapi: Compose Deployment" />
+        <item itemvalue="Application.Application" />
+        <item itemvalue="Docker.../Dienstplanverwaltung.yml: Compose Deployment" />
+        <item itemvalue="Docker.../Dienstplanverwaltung.yml.database: Compose Deployment" />
+        <item itemvalue="Docker.../Dienstplanverwaltung.yml.angular: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringBeansView">
+    <option name="beanDetailsProportion" value="0.3" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0d6122a-0b5b-4504-82e3-80391e9cd9d8" name="Default Changelist" comment="" />
+      <created>1603554878478</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603554878478</updated>
+      <workItem from="1603554880977" duration="4012000" />
+      <workItem from="1603559610345" duration="54000" />
+      <workItem from="1603716807031" duration="5314000" />
+      <workItem from="1605521848677" duration="1014000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Dienstplanverwaltung_Backend_in_spring - 2020.10.24 at 18h 02m 20s.xml">
+      <configuration name="Dienstplanverwaltung.Backend in spring" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Dienstplanverwaltung_Backend_in_spring - 2020.10.24 at 18h 02m 27s.xml">
+      <configuration name="Dienstplanverwaltung.Backend in spring" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Dienstplanverwaltung_Backend_in_spring - 2020.10.24 at 18h 02m 37s.xml">
+      <configuration name="Dienstplanverwaltung.Backend in spring" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1750" y="256" key="#Project_Structure" timestamp="1603560836335">
+      <screen x="-2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-1750" y="256" key="#Project_Structure/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603560836335" />
+    <state x="-1739" y="343" width="1338" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603563565656">
+      <screen x="-2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-1739" y="343" width="1338" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603563565656" />
+    <state x="916" y="540" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603561930671">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="916" y="540" key="#com.intellij.fileTypes.FileTypeChooser/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603561930671" />
+    <state x="-1442" y="559" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1603563643812">
+      <screen x="-2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-1442" y="559" key="#com.intellij.ide.util.TreeClassChooserDialog/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603563643812" />
+    <state x="-1215" y="437" width="623" height="535" key="EnvironmentVariablesDialog" timestamp="1603563559097">
+      <screen x="-2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-1215" y="437" width="623" height="535" key="EnvironmentVariablesDialog/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603563559097" />
+    <state width="2518" height="502" key="GridCell.Tab.0.bottom" timestamp="1603567353248">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.0.bottom/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353248" />
+    <state width="2518" height="502" key="GridCell.Tab.0.center" timestamp="1603567353247">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.0.center/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353247" />
+    <state width="2518" height="502" key="GridCell.Tab.0.left" timestamp="1603567353247">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.0.left/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353247" />
+    <state width="2518" height="502" key="GridCell.Tab.0.right" timestamp="1603567353248">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.0.right/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353248" />
+    <state width="2518" height="502" key="GridCell.Tab.1.bottom" timestamp="1603567353249">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.1.bottom/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353249" />
+    <state width="2518" height="502" key="GridCell.Tab.1.center" timestamp="1603567353248">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.1.center/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353248" />
+    <state width="2518" height="502" key="GridCell.Tab.1.left" timestamp="1603567353248">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.1.left/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353248" />
+    <state width="2518" height="502" key="GridCell.Tab.1.right" timestamp="1603567353248">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.1.right/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353248" />
+    <state width="2518" height="502" key="GridCell.Tab.2.bottom" timestamp="1603567353249">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.2.bottom/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353249" />
+    <state width="2518" height="502" key="GridCell.Tab.2.center" timestamp="1603567353249">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.2.center/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353249" />
+    <state width="2518" height="502" key="GridCell.Tab.2.left" timestamp="1603567353249">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.2.left/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353249" />
+    <state width="2518" height="502" key="GridCell.Tab.2.right" timestamp="1603567353249">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2518" height="502" key="GridCell.Tab.2.right/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603567353249" />
+    <state x="-2141" y="289" width="1824" height="837" key="SettingsEditor" timestamp="1603564170194">
+      <screen x="-2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-2141" y="289" width="1824" height="837" key="SettingsEditor/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603564170194" />
+    <state x="-1809" y="486" key="SpringBootCustomization" timestamp="1603563081562">
+      <screen x="-2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-1809" y="486" key="SpringBootCustomization/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603563081562" />
+    <state x="945" y="346" width="670" height="675" key="run.anything.popup" timestamp="1603562273641">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="945" y="346" width="670" height="675" key="run.anything.popup/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603562273641" />
+    <state x="-1890" y="398" key="spring file set editor" timestamp="1603562969238">
+      <screen x="-2560" y="23" width="2560" height="1417" />
+    </state>
+    <state x="-1890" y="398" key="spring file set editor/-2560.23.2560.1417/0.23.2560.1417@0.23.2560.1417" timestamp="1603562969238" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Dienstplanverwaltung/Backend/Application.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="mavenExecuteGoalHistory">
+    <option value="$PROJECT_DIR$" />
+    <option value="clean package" />
+    <option value="compile" />
+    <option value="build" />
+    <option value="clean build" />
+  </component>
+</project>

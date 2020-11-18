@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class ShiftDay {
+public class ShiftDay {
     private final LocalDate day;
     private final List<ShiftVM> shiftVMs;
 

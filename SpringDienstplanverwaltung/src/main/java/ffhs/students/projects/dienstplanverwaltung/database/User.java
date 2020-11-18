@@ -1,14 +1,14 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
 class User implements IUser {
-    private String name;
+    private String email;
 
     public User(String name) {
-        this.name = name;
+        this.email = name;
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 }
