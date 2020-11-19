@@ -6,11 +6,12 @@ table {
   border:solid black;
   border-collapse: collapse;
   border-width:0.1em 0.1em 0 0;
-  width: 20em;
-  height: 20em;
 }
 table th, table td {
   border:solid black;
-
   border-width:0 0 0.1em 0.1em;
+}
+
+.date{
+  float:right;
 }

@@ -3,6 +3,6 @@ import {Shift} from './Shift';
 export class ShiftDays {
   id: string;
   type: string;
-  date: string;
+  day: string;
   shifts: Shift[];
 }

@@ -9,6 +9,10 @@ import { TableComponent } from './components/table/table.component';
 import { EmployeeConfigComponent } from './components/employee-config/employee-config.component';
 import { EmployeesConfigComponent } from './components/employees-config/employees-config.component';
 import { ShiftplanComponent } from './components/shiftplan/shiftplan.component';
+import {HttpClientModule} from '@angular/common/http';
+import { ShiftDayComponent } from './components/shift-day/shift-day.component';
+import { SlotComponent } from './components/slot/slot.component';
+import { ShiftComponent } from './components/shift/shift.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +23,14 @@ import { ShiftplanComponent } from './components/shiftplan/shiftplan.component';
     TableComponent,
     EmployeeConfigComponent,
     EmployeesConfigComponent,
-    ShiftplanComponent
+    ShiftplanComponent,
+    ShiftDayComponent,
+    SlotComponent,
+    ShiftComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

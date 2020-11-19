@@ -1,28 +1,27 @@
 <section>
   <div>
-    <button type="button" (click)="clickPrevMonth()"><</button>
-    <label> {{ this.CurrentMonth+1 }} / {{ this.CurrentYear }} </label>
-    <button type="button" (click)="clickNextMonth()">></button>
+
   </div>
+
   <table id="calendar">
     <tbody>
     <tr>
-      <td *ngFor="let numb of TableDays | slice: 0:7">{{numb}}</td>
+      <td *ngFor="let numb of data.shiftDays | slice: 0:7"><div class="date">{{numb.day.slice(8,10)}}</div><app-shift-day [shiftdays]="numb"></app-shift-day></td>
     </tr>
     <tr>
-      <td *ngFor="let numb of TableDays | slice: 7:14">{{numb}}</td>
+      <td *ngFor="let numb of data.shiftDays | slice: 7:14"><div class="date">{{numb.day.slice(8,10)}}</div><app-shift-day [shiftdays]="numb"></app-shift-day></td>
     </tr>
     <tr>
-      <td *ngFor="let numb of TableDays | slice: 14:21">{{numb}}</td>
+      <td *ngFor="let numb of data.shiftDays | slice: 14:21"><div class="date">{{numb.day.slice(8,10)}}</div><app-shift-day [shiftdays]="numb"></app-shift-day></td>
     </tr>
     <tr>
-      <td *ngFor="let numb of TableDays | slice: 21:28">{{numb}}</td>
+      <td *ngFor="let numb of data.shiftDays | slice: 21:28"><div class="date">{{numb.day.slice(8,10)}}</div><app-shift-day [shiftdays]="numb"></app-shift-day></td>
     </tr>
     <tr>
-      <td *ngFor="let numb of TableDays | slice: 28:35">{{numb}}</td>
+      <td *ngFor="let numb of data.shiftDays | slice: 28:35"><div class="date">{{numb.day.slice(8,10)}}</div><app-shift-day [shiftdays]="numb"></app-shift-day></td>
     </tr>
     <tr>
-      <td *ngFor="let numb of TableDays | slice: 35:42">{{numb}}</td>
+      <td *ngFor="let numb of data.shiftDays | slice: 35:42"><div class="date">{{numb.day.slice(8,10)}}</div><app-shift-day [shiftdays]="numb"></app-shift-day></td>
     </tr>
     </tbody>
   </table>

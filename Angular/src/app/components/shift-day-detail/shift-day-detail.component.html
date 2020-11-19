@@ -1,5 +1,5 @@
 <section>
-  <header>{{shiftdays.date}}</header>
+  <header>{{shiftdays.day}}</header>
   <div class="ShiftContainer">
     <app-shift-detail *ngFor="let shift of shiftdays.shifts" [shift]="shift" class="Shift"></app-shift-detail>
   </div>
