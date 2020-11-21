@@ -6,20 +6,20 @@ import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ShiftDayData {
     private final LocalDate day;
-    private final List<IShift> shifts;
+    private final List<ShiftDisplay> shifts;
 
     public ShiftDayData(LocalDate day, List<IShift> shifts) {
         this.day = day;
-        this.shifts = shifts;
+        this.shifts = shifts.stream().map(ShiftDisplay::new).collect(Collectors.toList());
     }
-
     public LocalDate getDay() {
         return day;
     }
-    public List<IShift> getShifts() { return shifts; }
+    public List<ShiftDisplay> getShifts() { return shifts; }
 
     /**
      * Findet in der Liste von Datenbank Schicht-Tagen für ein Template an einem Tag einen Eintrag, falls dieser existiert.
@@ -28,7 +28,7 @@ public class ShiftDayData {
      * @param shiftDayDataList Die Liste in der gesucht wird
      * @return die gefundene Schicht oder Null, falls keine gefunden wurde.
      */
-    public static Optional<IShift> getShiftOnDayForTemplate(LocalDate day, IShiftTemplate shiftTemplate, List<ShiftDayData> shiftDayDataList){
+    public static Optional<IShift> getShiftOnDayForTemplate(LocalDate day, Optional<IShiftTemplate> shiftTemplate, List<ShiftDayData> shiftDayDataList){
         return shiftDayDataList.stream()
                 .filter(sdd -> sdd.getDay().equals(day))
                 .map(sdd -> sdd.getIfExistsForTemplate(shiftTemplate))
@@ -37,9 +37,12 @@ public class ShiftDayData {
 
     }
 
-    private Optional<IShift> getIfExistsForTemplate(IShiftTemplate shiftTemplate){
-        return getShifts().stream()
-                .filter(shift -> shift.getShiftTemplate() == shiftTemplate)
+    private Optional<IShift> getIfExistsForTemplate(Optional<IShiftTemplate> shiftTemplate){
+        if (!shiftTemplate.isPresent())
+            return Optional.empty();
+
+        return getShifts().stream().map(IShift.class::cast)
+                .filter(shift -> shiftTemplate.equals(shift.getShiftTemplate()) )
                 .findAny();
     }
 }

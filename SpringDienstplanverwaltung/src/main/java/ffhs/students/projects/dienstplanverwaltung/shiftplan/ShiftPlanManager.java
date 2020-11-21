@@ -3,7 +3,12 @@ package ffhs.students.projects.dienstplanverwaltung.shiftplan;
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 
+import java.security.InvalidParameterException;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,54 +22,69 @@ public class ShiftPlanManager {
 
     //ganzer Schichtplan
     public static Shiftplan GetShiftPlan(LocalDate month, int localId){
-        List<ShiftDayData> shiftDayDataList = generateShiftDayDatas(month,localId);
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
+            return null; //todo
+
+        List<ShiftDayData> shiftDayDataList = generateShiftDayDatas(month,local.get());
         return new Shiftplan(shiftDayDataList,month);
     }
-    public static Optional<ShiftDay> assignEmployeeToSlot(int localId,String employeeName,String slotIdString, boolean isAssigned){
+
+    public enum AddingType{apply, assign}
+    public enum AddOrRemove{add, remove}
+    public static ShiftDay addEmployeeToSlot(int localId,String employeeName,String slotIdString, AddOrRemove addOrRemove, AddingType addingType) {
         LocalDate day = Helper.getDateFromSlotId(slotIdString);
-        Optional<ISlot> slot = getSlotAndCreateShiftIfNeeded(databaseManager,day,slotIdString,localId);
-        Optional<IEmployee> employee = databaseManager.getEmployeeForName(localId,employeeName);
-        if (!employee.isPresent() || !slot.isPresent())
-            return Optional.empty();
 
-        databaseManager.assignEmployeeToSlot(employee.get(),slot.get(),isAssigned);
-        return Optional.of(GetShiftDay(day,localId));
+        //Local
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
+            return null; // todo
+
+        //Employee
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),employeeName);
+        if (!employee.isPresent())
+            return GetShiftDay(day,local.get());
+
+        //Slot
+        Optional<ISlot> slot = getSlotAndCreateShiftIfNeeded(databaseManager,day,slotIdString,local.get());
+        if (!slot.isPresent())
+            return GetShiftDay(day,local.get());
+
+
+        if (addingType == AddingType.assign)
+            databaseManager.assignEmployeeToSlot(employee.get(),slot.get(),addOrRemove == AddOrRemove.add);
+        if (addingType == AddingType.apply)
+            databaseManager.applyEmployeeToSlot(employee.get(),slot.get(),addOrRemove == AddOrRemove.add);
+
+        return GetShiftDay(day,local.get());
     }
-    public static Optional<ShiftDay> applyEmployeeToSlot(int localId,String employeeName,String slotIdString, boolean isApplied){
-        LocalDate day = Helper.getDateFromSlotId(slotIdString);
-        Optional<ISlot> slot = getSlotAndCreateShiftIfNeeded(databaseManager,day,slotIdString,localId);
-        Optional<IEmployee> employee = databaseManager.getEmployeeForName(localId,employeeName);
-        if (!employee.isPresent() || !slot.isPresent())
-            return Optional.empty();
 
-        databaseManager.applyEmployeeToSlot(employee.get(),slot.get(),isApplied);
-        return Optional.of(GetShiftDay(day,localId));
-    }
-
-    private static Optional<ISlot> getSlotAndCreateShiftIfNeeded(IDatabaseManager databaseManager, LocalDate day, String slotIdString, int localId) {
+    private static Optional<ISlot> getSlotAndCreateShiftIfNeeded(IDatabaseManager databaseManager, LocalDate day, String slotIdString, ILocal local) {
         int shiftTemplateId = Helper.getShiftTemplateIdFromSlotId(slotIdString);
-        Optional<IShift> shift = databaseManager.getShift(localId,day,shiftTemplateId);
-        //erstelle DB Eintrag falls noch kein Eintrag vorhanden
-        Optional<IShift> dbShift = shift;
-        if (!dbShift.isPresent())
-            dbShift = databaseManager.createShift(shiftTemplateId,day);
-        if (!dbShift.isPresent())
+        Optional<IShiftTemplate> shiftTemplate = databaseManager.getShiftTemplateById(shiftTemplateId);
+        if (!shiftTemplate.isPresent())
             return Optional.empty();
 
+        Optional<IShift> existingShift = databaseManager.getShift(local,day,shiftTemplate);
+
+        //erstelle DB Schicht falls noch kein Eintrag vorhanden
+        IShift dbShift = existingShift.orElseGet(() -> databaseManager.createShift(shiftTemplate.get(), day));
+
+        //SlotType finden
         String slotTypeTitle = Helper.getSlotTypeTitleFromSlotId(slotIdString);
-        Optional<ISlotType> slotType = databaseManager.getSlotType(localId,slotTypeTitle);
+        Optional<ISlotType> slotType = databaseManager.getSlotType(local,slotTypeTitle);
         if (!slotType.isPresent())
             return Optional.empty();
 
-        return databaseManager.getSlotForShiftAndType(dbShift.get(),slotType.get());
+        return databaseManager.getSlotForShiftAndType(dbShift,slotType.get());
     }
 
 
     // einzelner Schichttag für Rückgabe bei Änderungen (assign,appply,state)
-    private static ShiftDay GetShiftDay(LocalDate day, int localId){
-        List<IShift> dbShifts = databaseManager.getShifts(localId,day,day);
+    private static ShiftDay GetShiftDay(LocalDate day, ILocal local){
+        List<IShift> dbShifts = databaseManager.getShifts(local,day,day);
         List<ShiftDayData> dbShiftDayDataList = getDbShiftDayDataList(dbShifts);
-        List<IShiftTemplate> shiftTemplates = databaseManager.getShiftTemplates(localId);
+        List<IShiftTemplate> shiftTemplates = databaseManager.getShiftTemplates(local);
         ShiftDayData shiftDayData = getShiftDayData(day,dbShiftDayDataList,shiftTemplates);
         return new ShiftDay(shiftDayData);
     }
@@ -75,17 +95,17 @@ public class ShiftPlanManager {
      * Schichten mit vorhanden Einträgen werden angezeigt.
      * Tage ohne Schichten in DB werden auf Basis der Templates generiert.
      * @param month
-     * @param localId
+     * @param local
      * @return
      */
-    private static List<ShiftDayData> generateShiftDayDatas(LocalDate month,int localId){
+    private static List<ShiftDayData> generateShiftDayDatas(LocalDate month,ILocal local){
 
         List<LocalDate> days = getDaysForMonthView(month);
         LocalDate from = days.get(0);
         LocalDate to = days.get(days.size() -1);
 
-        List<IShift> dbShifts = databaseManager.getShifts(localId,from,to);
-        List<IShiftTemplate> shiftTemplates = databaseManager.getShiftTemplates(localId);
+        List<IShift> dbShifts = databaseManager.getShifts(local,from,to);
+        List<IShiftTemplate> shiftTemplates = databaseManager.getShiftTemplates(local);
 
         List<ShiftDayData> dbShiftDayDataList = getDbShiftDayDataList(dbShifts);
         return getShiftDayDataList(days,dbShiftDayDataList,shiftTemplates);
@@ -96,7 +116,7 @@ public class ShiftPlanManager {
                 .collect(toList());
     }
     private static ShiftDayData getShiftDayData(LocalDate day,List<ShiftDayData> dbShiftDayDataList, List<IShiftTemplate> shiftTemplates){
-        List<IShift> shiftsLikeTemplate = getShiftsLikeTemplateForDay(day,shiftTemplates);
+        List<ShiftDisplay> shiftsLikeTemplate = getShiftsLikeTemplateForDay(day,shiftTemplates);
         List<IShift> shiftsOnDay = shiftsLikeTemplate.stream()
                 .map(templateShift -> getShiftFromDbOrFromTemplate(day,templateShift,dbShiftDayDataList))
                 .collect(toList());
@@ -112,13 +132,14 @@ public class ShiftPlanManager {
      * @return Datenbankschicht, falls für Template vorhanden - sonst Template
      */
     private static IShift getShiftFromDbOrFromTemplate(LocalDate day, IShift templateShift, List<ShiftDayData> dbShiftDayDataList){
+
         Optional<IShift> dbShift = ShiftDayData.getShiftOnDayForTemplate(day,templateShift.getShiftTemplate(),dbShiftDayDataList);
         return dbShift.orElse(templateShift);
     }
-    private static List<IShift> getShiftsLikeTemplateForDay(LocalDate day, List<IShiftTemplate> shiftTemplates){
+    private static List<ShiftDisplay> getShiftsLikeTemplateForDay(LocalDate day, List<IShiftTemplate> shiftTemplates){
         return shiftTemplates.stream()
                 .filter(st -> st.isOnDay(day))
-                .map(st -> st.shiftForDay(day))
+                .map(st -> new ShiftDisplay(st,day))
                 .collect(toList());
     }
 
@@ -127,7 +148,7 @@ public class ShiftPlanManager {
      * Transformiert Liste von Schichten in Liste von ShiftDayData.
      * ShiftDayData = Tag + Schichten des Tages
      */
-    private static List<ShiftDayData> getDbShiftDayDataList(@org.jetbrains.annotations.NotNull List<IShift> dbShifts){
+    private static List<ShiftDayData> getDbShiftDayDataList(List<IShift> dbShifts){
         Map<LocalDate,List<IShift>> result = dbShifts.stream()
                 .collect(groupingBy(IShift::getDay,toList()));
         return result.keySet().stream()

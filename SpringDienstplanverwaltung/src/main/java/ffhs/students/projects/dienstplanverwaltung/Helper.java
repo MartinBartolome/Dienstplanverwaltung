@@ -14,7 +14,8 @@ public abstract class Helper {
     }
 
     public static String generateSlotId(ISlot slot, IShift shift){
-        return shift.getDay() + slotIdDevider + shift.getShiftTemplate() + slotIdDevider + slot.getSlotId();
+        long shiftTemplateId = shift.getShiftTemplate().isPresent() ? shift.getShiftTemplate().get().getId() : -1;
+        return shift.getDay() + slotIdDevider + shiftTemplateId  + slotIdDevider + slot.getSlotId();
     }
 
     public static LocalDate getDateFromSlotId(String slotId){
