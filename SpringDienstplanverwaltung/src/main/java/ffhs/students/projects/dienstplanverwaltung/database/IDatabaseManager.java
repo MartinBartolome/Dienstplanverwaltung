@@ -19,4 +19,6 @@ public interface IDatabaseManager {
 
     Optional<ILocal> getLocalById(long localID);
     Optional<IShiftTemplate> getShiftTemplateById(long localID);
+    List<ILocal> getLocalsForUser(IUser user);
+    public Optional<IUser> getUser(String nickName);
 }
