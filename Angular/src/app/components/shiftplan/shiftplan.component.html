@@ -1,4 +1,9 @@
 <section>
+  <div>
+    <button type="button" (click)="PrevMonth()"><</button>
+    <label> {{ this.DateTitle }}</label>
+    <button type="button" (click)="NextMonth()">></button>
+  </div>
   <table id="calendar">
     <tbody>
     <tr>
