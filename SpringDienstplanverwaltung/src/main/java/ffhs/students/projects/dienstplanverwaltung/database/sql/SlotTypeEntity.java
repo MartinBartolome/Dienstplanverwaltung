@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class SlotTypeEntity implements ISlotType {
+class SlotTypeEntity implements ISlotType {
     @Id
     @Column(length = 64)
     private String title;
@@ -15,10 +15,17 @@ public class SlotTypeEntity implements ISlotType {
     @Override
     public String getTitle() { return title; }
 
+    @ManyToOne
+    @JoinColumn()
+    private LocalEntity local;
+
     @OneToMany(mappedBy = "slotType")
     private List<SlotEntity> slots;
 
     public SlotTypeEntity(){}
 
-    public SlotTypeEntity(String title){ this.title = title; }
+    public SlotTypeEntity(String title,LocalEntity local){
+        this.title = title;
+        this.local = local;
+    }
 }

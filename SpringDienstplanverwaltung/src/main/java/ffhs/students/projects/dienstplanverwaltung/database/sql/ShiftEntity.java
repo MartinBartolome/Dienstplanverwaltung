@@ -1,27 +1,27 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
-import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
-import ffhs.students.projects.dienstplanverwaltung.database.IShift;
-import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
-import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
+import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
 @Entity
 @Table
-public class ShiftEntity implements IShift {
+class ShiftEntity implements IShift {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
 
-
+    @ManyToOne
+    @JoinColumn()
+    private LocalEntity local;
 
 
     @Override
@@ -39,7 +39,7 @@ public class ShiftEntity implements IShift {
     @JoinColumn()
     private ShiftTemplateEntity shiftTemplate;
     @Override
-    public IShiftTemplate getShiftTemplate() { return shiftTemplate; }
+    public Optional<IShiftTemplate> getShiftTemplate() { return Optional.ofNullable(shiftTemplate); }
 
 
     private boolean isCanceled;
@@ -72,7 +72,7 @@ public class ShiftEntity implements IShift {
         isCanceled = false;
         fromTime = template.getFromTime();
         toTime = template.getToTime();
-
         slots = new ArrayList<>();
+        local = (LocalEntity) template.getLocal(); //todo
     }
 }

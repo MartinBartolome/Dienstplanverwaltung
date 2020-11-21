@@ -24,17 +24,20 @@ public class ShiftplanController {
         LocalDate month =  LocalDate.parse(date,Helper.dateFormatter);
 
         ShiftPlanManager.databaseManager = dbManager;
-        
         return ShiftPlanManager.GetShiftPlan(month, localId);
     }
 
     @GetMapping("/assignEmployeeToSlot")
     public ShiftDay assignEmployeeToSlot(
-            @RequestParam(value = "localId") int localId,
+            @RequestParam(value = "localId", defaultValue = "1") int localId,
             @RequestParam(value = "employeeName") String employeeName,
             @RequestParam(value = "slotIdString") String slotIdString,
             @RequestParam(value = "isAssigned") boolean isAssigned){
-        return ShiftPlanManager.assignEmployeeToSlot(localId,employeeName,slotIdString,isAssigned).get();
+
+        ShiftPlanManager.databaseManager = dbManager;
+        return ShiftPlanManager.addEmployeeToSlot(localId,employeeName,slotIdString,
+                isAssigned ? ShiftPlanManager.AddOrRemove.add : ShiftPlanManager.AddOrRemove.remove,
+                ShiftPlanManager.AddingType.assign);
     }
 
     @GetMapping("/applyEmployeeToSlot")
@@ -42,8 +45,10 @@ public class ShiftplanController {
             @RequestParam(value = "localId") int localId,
             @RequestParam(value = "employeeName") String employeeName,
             @RequestParam(value = "slotIdString") String slotIdString,
-            @RequestParam(value = "isAssigned") boolean isAssigned){
-        return ShiftPlanManager.applyEmployeeToSlot(localId,employeeName,slotIdString,isAssigned).get();
+            @RequestParam(value = "isApplied") boolean isApplied){
+        return ShiftPlanManager.addEmployeeToSlot(localId,employeeName,slotIdString,
+                isApplied ? ShiftPlanManager.AddOrRemove.add : ShiftPlanManager.AddOrRemove.remove,
+                ShiftPlanManager.AddingType.apply);
     }
 
 

@@ -3,14 +3,13 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
-import ffhs.students.projects.dienstplanverwaltung.database.Local;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
-public class EmployeeEntity implements IEmployee {
+class EmployeeEntity implements IEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,6 +20,11 @@ public class EmployeeEntity implements IEmployee {
     @Override
     public ILocal getLocal() {
         return null;
+    }
+
+    @Override
+    public boolean isEqual(IEmployee employee) {
+        return employee.getUser().getNickname() == user.getNickname();
     }
 
     //todo - wie kann man den User als zweiten Teil des Keys verwenden?

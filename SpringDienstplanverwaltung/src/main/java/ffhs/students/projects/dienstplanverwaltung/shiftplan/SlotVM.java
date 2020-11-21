@@ -3,9 +3,7 @@ package ffhs.students.projects.dienstplanverwaltung.shiftplan;
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.database.IShift;
 import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
-import ffhs.students.projects.dienstplanverwaltung.database.ISlotDisplay;
 
-import java.time.LocalDate;
 import java.util.List;
 
 class SlotVM {
