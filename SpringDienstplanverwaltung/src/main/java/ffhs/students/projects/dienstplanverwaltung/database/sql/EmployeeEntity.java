@@ -19,7 +19,7 @@ class EmployeeEntity implements IEmployee {
 
     @Override
     public ILocal getLocal() {
-        return null;
+        return local;
     }
 
     @Override
