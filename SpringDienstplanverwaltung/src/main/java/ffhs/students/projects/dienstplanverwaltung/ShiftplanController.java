@@ -6,6 +6,7 @@ import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDay;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftPlanManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.Shiftplan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 @RestController
 public class ShiftplanController {
 
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/shiftPlan")
     public Shiftplan getShiftplan(
             @RequestParam(value = "localId", defaultValue = "1") int localId,
@@ -26,7 +27,8 @@ public class ShiftplanController {
         ShiftPlanManager.databaseManager = dbManager;
         return ShiftPlanManager.GetShiftPlan(month, localId);
     }
-
+    
+    @CrossOrigin(origins = "*")
     @GetMapping("/assignEmployeeToSlot")
     public ShiftDay assignEmployeeToSlot(
             @RequestParam(value = "localId", defaultValue = "1") int localId,
@@ -40,6 +42,7 @@ public class ShiftplanController {
                 ShiftPlanManager.AddingType.assign);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/applyEmployeeToSlot")
     public ShiftDay applyEmployeeToSlot(
             @RequestParam(value = "localId") int localId,
