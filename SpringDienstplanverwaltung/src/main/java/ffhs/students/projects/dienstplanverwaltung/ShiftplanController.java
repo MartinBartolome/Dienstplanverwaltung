@@ -29,7 +29,7 @@ public class ShiftplanController {
         ShiftPlanManager.databaseManager = dbManager;
         return ShiftPlanManager.GetShiftPlan(month, localId);
     }
-
+    
     @CrossOrigin(origins = "*")
     @GetMapping("/assignEmployeeToSlot")
     public ShiftDay assignEmployeeToSlot(
