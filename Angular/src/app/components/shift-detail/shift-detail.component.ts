@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Shift} from '../../models/Shift';
+import {Slot} from '../../models/Slot';
 
 @Component({
   selector: 'app-shift-detail',
@@ -12,5 +13,4 @@ export class ShiftDetailComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

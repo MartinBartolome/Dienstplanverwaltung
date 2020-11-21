@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Slot} from '../../models/Slot';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
@@ -9,7 +9,7 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./slot-detail.component.css']
 })
 export class SlotDetailComponent implements OnInit {
-  @Input() slot: any;
+  @Input() slot: Slot;
 
   constructor(private api: HttpClient) { }
 
@@ -33,7 +33,9 @@ export class SlotDetailComponent implements OnInit {
 
   private sendData(url): void{
     this.api.get(environment.Backendserver + url).subscribe((data: any) => {
-        this.slot = data.shifts[0].slots[0];
+        this.slot.assigned = data.shifts[0].slots[0].assigned;
+        this.slot.applied = data.shifts[0].slots[0].applied;
+        this.slot.title = data.shifts[0].slots[0].title;
         console.log(data);
       },
       (err: HttpErrorResponse) => {
