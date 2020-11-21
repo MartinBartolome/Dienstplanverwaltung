@@ -6,6 +6,6 @@ export class Shift {
   title: string;
   from: string;
   to: string;
-  isCanceled: boolean;
+  canceled: boolean;
   slots: Slot[];
 }

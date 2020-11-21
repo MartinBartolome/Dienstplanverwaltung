@@ -3,32 +3,32 @@
     <tbody>
     <tr>
       <td *ngFor="let numb of data.shiftDays | slice: 0:7">
-        <div class="date">{{numb.day.slice(8,10)}}</div>
+        <div class="date">{{numb.day.slice(0,2)}}</div>
         <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
     </tr>
     <tr>
       <td *ngFor="let numb of data.shiftDays | slice: 7:14">
-        <div class="date">{{numb.day.slice(8,10)}}</div>
+        <div class="date">{{numb.day.slice(0,2)}}</div>
         <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
     </tr>
     <tr>
       <td *ngFor="let numb of data.shiftDays | slice: 14:21">
-        <div class="date">{{numb.day.slice(8,10)}}</div>
+        <div class="date">{{numb.day.slice(0,2)}}</div>
         <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
     </tr>
     <tr>
       <td *ngFor="let numb of data.shiftDays | slice: 21:28">
-        <div class="date">{{numb.day.slice(8,10)}}</div>
+        <div class="date">{{numb.day.slice(0,2)}}</div>
         <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
     </tr>
     <tr>
       <td *ngFor="let numb of data.shiftDays | slice: 28:35">
-        <div class="date">{{numb.day.slice(8,10)}}</div>
+        <div class="date">{{numb.day.slice(0,2)}}</div>
         <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
     </tr>
     <tr>
       <td *ngFor="let numb of data.shiftDays | slice: 35:42">
-        <div class="date">{{numb.day.slice(8,10)}}</div>
+        <div class="date">{{numb.day.slice(0,2)}}</div>
         <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
     </tr>
     </tbody>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ShiftDays} from '../../models/ShiftDays';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-shiftplan',
@@ -8,7 +9,7 @@ import {ShiftDays} from '../../models/ShiftDays';
   styleUrls: ['./shiftplan.component.css']
 })
 export class ShiftplanComponent implements OnInit {
-  url = 'http://192.168.178.20:8080/shiftPlan';
+  url = environment.Backendserver + '/shiftPlan';
   public data: any;
   public showDetail = false;
   public selectedDay: ShiftDays;
