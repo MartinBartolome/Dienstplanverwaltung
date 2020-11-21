@@ -1,5 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
+import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 
 import javax.persistence.*;
@@ -20,8 +21,11 @@ class UserEntity implements IUser {
     public UserEntity() { }
 
 
+    public List<EmployeeEntity> getEmployees() {  return employees;  }
+
     @OneToMany(mappedBy = "user")
     private List<EmployeeEntity> employees;
 
-
+    @OneToMany(mappedBy = "owner")
+    private List<LocalEntity> ownedLocals;
 }

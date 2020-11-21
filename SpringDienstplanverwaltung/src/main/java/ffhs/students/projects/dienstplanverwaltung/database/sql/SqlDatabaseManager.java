@@ -16,15 +16,18 @@ import java.util.stream.Collectors;
 @Service
 public class SqlDatabaseManager implements IDatabaseManager {
     public void createFakeDate(){
-        LocalEntity local = localRepository.save(new LocalEntity());
 
         UserEntity martin = userRepository.save(new UserEntity("Martin"));
         UserEntity celine = userRepository.save(new UserEntity("Celine"));
         UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
 
+        LocalEntity local = localRepository.save(new LocalEntity("City Cafe",martin));
+        LocalEntity local2 = localRepository.save(new LocalEntity("Staubsauger e.V.",matthias));
+
         EmployeeEntity eMartin = employeeRepository.save(new EmployeeEntity(martin,local));
         EmployeeEntity eCeline = employeeRepository.save(new EmployeeEntity(celine,local));
         EmployeeEntity eMatthias = employeeRepository.save(new EmployeeEntity(matthias,local));
+        EmployeeEntity eMatthias2 = employeeRepository.save(new EmployeeEntity(matthias,local2));
 
         SlotTypeEntity bar = slotTypedRepository.save(new SlotTypeEntity("bar",local));
 
@@ -139,6 +142,18 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .findById(shiftTemplateId);
     }
 
+    public List<ILocal> getLocalsForUser(IUser user){
+        if (!(user instanceof UserEntity))
+            return new ArrayList<>();
+
+        return ((UserEntity)user).getEmployees().stream()
+                .map(EmployeeEntity::getLocal)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<IUser> getUser(String nickName){
+        return userRepository.findByNickname(nickName);
+    }
 
     @Autowired
     private LocalRepository localRepository;
