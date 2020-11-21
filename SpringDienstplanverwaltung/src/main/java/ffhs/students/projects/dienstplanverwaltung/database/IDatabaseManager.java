@@ -5,15 +5,20 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDatabaseManager {
-    List<IShift> getShifts(int localId, LocalDate from, LocalDate to);
-    List<IShiftTemplate> getShiftTemplates(int localId);
+    List<IShift> getShifts(ILocal local, LocalDate from, LocalDate to);
+    List<IShiftTemplate> getShiftTemplates(ILocal local);
     List<IEmployee> getEmployees(int localId);
-    Optional<IShift> getShift(int localId,LocalDate day, int shiftTemplateId);
-    Optional<IShift> createShift(int shiftTemplateId,LocalDate day);
-    Optional<ISlotType> getSlotType(int localId, String title);
+    Optional<IShift> getShift(ILocal local, LocalDate day, Optional<IShiftTemplate> shiftTemplate);
+
+    IShift createShift(IShiftTemplate shiftTemplate, LocalDate day);
+    Optional<ISlotType> getSlotType(ILocal local, String title);
     Optional<ISlot> getSlotForShiftAndType(IShift shift,ISlotType slotType);
-    int assignEmployeeToSlot(IEmployee employee, ISlot slot, boolean isAssigned);
-    Optional<IEmployee> getEmployeeForName(int localId,String employeeName);
-    int applyEmployeeToSlot(IEmployee employee, ISlot slot, boolean isApplied);
-    Optional<IShiftTemplate> getShiftTemplate(int id);
+    void assignEmployeeToSlot(IEmployee employee, ISlot slot, boolean isAssigned);
+    Optional<IEmployee> getEmployeeForName(ILocal local,String employeeName);
+    void applyEmployeeToSlot(IEmployee employee, ISlot slot, boolean isApplied);
+
+    Optional<ILocal> getLocalById(long localID);
+    Optional<IShiftTemplate> getShiftTemplateById(long localID);
+    List<ILocal> getLocalsForUser(IUser user);
+    public Optional<IUser> getUser(String nickName);
 }

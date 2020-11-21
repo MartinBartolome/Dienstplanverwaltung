@@ -1,0 +1,25 @@
+package ffhs.students.projects.dienstplanverwaltung.administration;
+
+
+import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
+import ffhs.students.projects.dienstplanverwaltung.database.IUser;
+
+public class ListItem {
+    public enum DisplayType{ Default,Highlighted,Inactiv  } // Wie wird es angezeigt?
+
+    private final DisplayType displayType;
+    private final String title;
+
+    public ListItem(DisplayType displayType, String title) {
+        this.displayType = displayType;
+        this.title = title;
+    }
+
+    public ListItem(ILocal local, IUser user){
+        this.displayType = local.getOwner() == user ? DisplayType.Highlighted : DisplayType.Default;
+        this.title = local.getTitle();
+    }
+
+    public DisplayType getDisplayType() {  return displayType; }
+    public String getTitle() {   return title;  }
+}

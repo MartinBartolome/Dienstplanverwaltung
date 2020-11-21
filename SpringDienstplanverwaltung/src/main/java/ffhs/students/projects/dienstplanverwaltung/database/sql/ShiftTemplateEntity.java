@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
 import ffhs.students.projects.dienstplanverwaltung.database.*;
+import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDisplay;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table
-public class ShiftTemplateEntity implements IShiftTemplate {
+class ShiftTemplateEntity implements IShiftTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -26,8 +27,8 @@ public class ShiftTemplateEntity implements IShiftTemplate {
     public ShiftTemplateEntity() { }
 
     @Override
-    public int getId() {
-        return 0;
+    public long getId() {
+        return id;
     }
 
     @ManyToOne
@@ -92,16 +93,6 @@ public class ShiftTemplateEntity implements IShiftTemplate {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Erstellt einen Schicht auf Basis des Templates für den Tag.
-     * @param day Tag der Schicht
-     * @return Schicht auf Basis des Templates
-     */
-    @Override
-    public IShift shiftForDay(LocalDate day) {
-        return new Shift(this,day);
-    }
-
     private LocalTime fromTime;
     @Override
     public LocalTime getFromTime() {
@@ -112,6 +103,11 @@ public class ShiftTemplateEntity implements IShiftTemplate {
     @Override
     public LocalTime getToTime() {
         return toTime;
+    }
+
+    @Override
+    public boolean equals(IShiftTemplate template) {
+        return id == template.getId();
     }
 
 

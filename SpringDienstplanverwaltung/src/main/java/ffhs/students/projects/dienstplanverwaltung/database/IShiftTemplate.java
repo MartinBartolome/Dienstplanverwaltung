@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
+import ffhs.students.projects.dienstplanverwaltung.database.sql.SlotEntity;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 public interface IShiftTemplate {
-    int getId();
+    long getId();
     ILocal getLocal();
     String getTitle();
     RecurrenceType getRecurrence();
@@ -16,9 +17,9 @@ public interface IShiftTemplate {
     LocalDate getTo();
     List<DayOfWeek> getWeekDays();
     List<ISlot> getSlots();
-    IShift shiftForDay(LocalDate day);
     LocalTime getFromTime();
     LocalTime getToTime();
+    boolean equals(IShiftTemplate template);
 
     default boolean isOnDay(LocalDate day){
         if (getRecurrence() == RecurrenceType.Single){

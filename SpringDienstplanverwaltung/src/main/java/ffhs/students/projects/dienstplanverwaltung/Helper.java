@@ -13,14 +13,18 @@ public abstract class Helper {
         return true; // todo
     }
 
+    public static String stringFromDate(LocalDate date){ return dateFormatter.format(date);  }
+    public static LocalDate dateFromString(String dateString){ return LocalDate.parse(dateString,dateFormatter); }
+
+
     public static String generateSlotId(ISlot slot, IShift shift){
-        return shift.getDay() + slotIdDevider + shift.getShiftTemplate() + slotIdDevider + slot.getSlotId();
+        long shiftTemplateId = shift.getShiftTemplate().isPresent() ? shift.getShiftTemplate().get().getId() : -1;
+        return stringFromDate(shift.getDay()) + slotIdDevider + shiftTemplateId  + slotIdDevider + slot.getSlotType().getTitle();
     }
 
     public static LocalDate getDateFromSlotId(String slotId){
         String dateString = slotId.split(slotIdDevider)[0];
-        DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        return LocalDate.parse(dateString,dateFormatter);
+        return dateFromString(dateString);
     }
     public static int getShiftTemplateIdFromSlotId(String slotId){
         String shiftTemplateId = slotId.split(slotIdDevider)[1];

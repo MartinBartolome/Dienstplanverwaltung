@@ -1,12 +1,16 @@
-package ffhs.students.projects.dienstplanverwaltung.database;
+package ffhs.students.projects.dienstplanverwaltung.shiftplan;
+
+import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public interface ISlotDisplay extends ISlot{
+public interface ISlotDisplay extends ISlot {
     default String getTitle(){
-        String applied = getAssigned().stream()
-                .map(e -> e.getUser().getEmail())
+        String applied = "";
+        if (getAssigned().size() > 0)
+            applied = getAssigned().stream()
+                .map(e -> e.getUser().getNickname())
                 .reduce("", (acc, name) -> acc + ", " + name)
                 .substring(2);
         return getDetailTitle() + ": " + applied;
@@ -18,12 +22,12 @@ public interface ISlotDisplay extends ISlot{
     }
     default List<String> getAssignedStrings(){
         return getAssigned().stream()
-                .map(iEmployee -> iEmployee.getUser().getEmail())
+                .map(iEmployee -> iEmployee.getUser().getNickname())
                 .collect(Collectors.toList());
     }
     default List<String> getAppliedStrings(){
         return getApplied().stream()
-                .map(iEmployee -> iEmployee.getUser().getEmail())
+                .map(iEmployee -> iEmployee.getUser().getNickname())
                 .collect(Collectors.toList());
     }
 }
