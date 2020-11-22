@@ -4,6 +4,7 @@ package ffhs.students.projects.dienstplanverwaltung;
 import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
 import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenantConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDay;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftPlanManager;
@@ -144,6 +145,15 @@ public class ShiftplanController {
 
         AdministrationManager.databaseManager = dbManager;
         return AdministrationManager.localSetState(localId,isGranted,isActive);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getEmployeesConfig")
+    public EmployeesConfig getEmployeesConfig(
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getEmployeesConfig(localId);
     }
 
     @Autowired

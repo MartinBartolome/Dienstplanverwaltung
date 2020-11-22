@@ -13,4 +13,5 @@ public interface ILocal {
     List<IServiceRole> getServiceRoles();
     boolean isGranted();
     boolean isActive();
+    List<IEmployee> getEmployees();
 }

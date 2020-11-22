@@ -44,6 +44,12 @@ class LocalEntity implements ILocal, ISaveable {
     @OneToMany(mappedBy = "local")
     private List<ServiceRoleEntity> serviceRoles;
 
+    public List<IEmployee> getEmployees() {
+        return employees.stream()
+            .map(IEmployee.class::cast)
+            .collect(Collectors.toList());
+    }
+
     @OneToMany(mappedBy = "local")
     private List<EmployeeEntity> employees;
 

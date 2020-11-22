@@ -1,5 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.IDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
@@ -79,5 +80,12 @@ public class AdministrationManager {
     public static SysAdminTenantConfig localSetState(long localId, boolean isGranted, boolean isActive){
         databaseManager.localSetState(localId,isGranted,isActive);
         return getSysAdminTenantConfig();
+    }
+
+    public static EmployeesConfig getEmployeesConfig(long localId){
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        return local
+                .map(EmployeesConfig::new)
+                .orElseGet(EmployeesConfig::new);
     }
 }
