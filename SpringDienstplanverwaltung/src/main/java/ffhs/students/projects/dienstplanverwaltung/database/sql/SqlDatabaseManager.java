@@ -208,6 +208,11 @@ public class SqlDatabaseManager implements IDatabaseManager {
         ((LocalEntity)local.get()).save(localRepository);
         return local;
     }
+    public List<ILocal> getAllLocals(){
+        return localRepository.findAll().stream()
+                .map(ILocal.class::cast)
+                .collect(Collectors.toList());
+    }
 
     public Optional<IUser> getUser(String nickName){
         return userRepository.findByNickname(nickName);

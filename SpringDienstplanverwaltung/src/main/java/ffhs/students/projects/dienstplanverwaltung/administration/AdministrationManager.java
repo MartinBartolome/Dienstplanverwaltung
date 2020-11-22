@@ -71,4 +71,8 @@ public class AdministrationManager {
                 .map(iLocal -> getOwnedLocals(iLocal.getOwner().getNickname()))
                 .orElseGet(TableViewData::new);
     }
+
+    public static SysAdminTenantConfig getSysAdminTenantConfig(){
+        return new SysAdminTenantConfig(databaseManager.getAllLocals());
+    }
 }

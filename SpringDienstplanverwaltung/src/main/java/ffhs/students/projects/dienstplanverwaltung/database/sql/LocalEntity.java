@@ -26,6 +26,8 @@ class LocalEntity implements ILocal, ISaveable {
 
     public void setActive(boolean active) { isActive = active; }
 
+    public boolean isActive() { return isActive;  }
+
     private boolean isActive;
 
     public void setGranted(boolean granted) {  isGranted = granted;  }
