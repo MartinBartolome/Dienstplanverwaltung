@@ -12,4 +12,5 @@ public interface ILocal {
     String getTitle();
     List<IServiceRole> getServiceRoles();
     boolean isGranted();
+    boolean isActive();
 }

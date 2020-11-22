@@ -33,6 +33,12 @@ public class ListItem {
         this.title = serviceRole.getName();
         this.id = serviceRole.getId();
     }
+    public ListItem(IUser user){
+        this.displayType = DisplayType.Default;
+        this.title = user.getNickname();
+        this.id = -1;
+    }
+
     public DisplayType getDisplayType() {  return displayType; }
     public String getTitle() {   return title;  }
     public long getId() { return id;  }
