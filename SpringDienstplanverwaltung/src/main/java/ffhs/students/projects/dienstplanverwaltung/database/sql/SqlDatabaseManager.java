@@ -3,7 +3,9 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.swing.text.html.Option;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,12 +19,17 @@ import java.util.stream.Collectors;
 public class SqlDatabaseManager implements IDatabaseManager {
     public void createFakeDate(){
 
+
         UserEntity martin = userRepository.save(new UserEntity("Martin"));
         UserEntity celine = userRepository.save(new UserEntity("Celine"));
         UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
 
         LocalEntity local = localRepository.save(new LocalEntity("City Cafe",martin));
         LocalEntity local2 = localRepository.save(new LocalEntity("Staubsauger e.V.",matthias));
+
+        IServiceRole serviceRole1 = serviceRoleRepository.save(new ServiceRoleEntity("Barkeeper",local,true));
+        IServiceRole serviceRole2 = serviceRoleRepository.save(new ServiceRoleEntity("Kellner",local,true));
+
 
         EmployeeEntity eMartin = employeeRepository.save(new EmployeeEntity(martin,local));
         EmployeeEntity eCeline = employeeRepository.save(new EmployeeEntity(celine,local));
@@ -129,6 +136,28 @@ public class SqlDatabaseManager implements IDatabaseManager {
     }
 
 
+    public void addServiceRole(long localId, String title){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return;
+
+        Optional<IServiceRole> serviceRole = serviceRoleRepository.findFirstByLocalAndName(local.get(),title);
+        if (serviceRole.isPresent())
+            return;
+
+        serviceRoleRepository.save(new ServiceRoleEntity(title,(LocalEntity)local.get(),true));
+    }
+
+    public Optional<IServiceRole> updateServiceRole(long serviceRoleId, String title, boolean isActive ){
+        Optional<IServiceRole> serviceRole = serviceRoleRepository.findById(serviceRoleId);
+        if (!serviceRole.isPresent())
+            return Optional.empty();
+
+        ((ServiceRoleEntity)serviceRole.get()).setName(title);
+        ((ServiceRoleEntity)serviceRole.get()).setActive(isActive);
+        ((ServiceRoleEntity)serviceRole.get()).save(serviceRoleRepository);
+        return serviceRole;
+    }
 
     @Override
     public Optional<ILocal> getLocalById(long localID) {
@@ -151,10 +180,41 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .collect(Collectors.toList());
     }
 
+    public List<ILocal> getOwnedLocalsForUser(IUser user){
+        if (!(user instanceof UserEntity))
+            return new ArrayList<>();
+
+        return localRepository.findAllByOwner(user);
+    }
+
+    public ILocal requestNewLocal(IUser user,String localName){
+        Optional<ILocal> localWithName = getOwnedLocalsForUser(user).stream().filter(loc -> loc.getTitle().equals(localName)).findFirst();
+        if (localWithName.isPresent())
+            return localWithName.get();
+
+        LocalEntity local = new LocalEntity(localName,user);
+        local.setGranted(false);
+        local.save(localRepository);
+        return local;
+    }
+
+    public Optional<ILocal> updateLocal(long localId, String title, boolean isActive){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return Optional.empty();
+
+        ((LocalEntity)local.get()).setTitle(title);
+        ((LocalEntity)local.get()).setActive(isActive);
+        ((LocalEntity)local.get()).save(localRepository);
+        return local;
+    }
+
     public Optional<IUser> getUser(String nickName){
         return userRepository.findByNickname(nickName);
     }
 
+    @Autowired
+    private ServiceRoleRepository serviceRoleRepository;
     @Autowired
     private LocalRepository localRepository;
     @Autowired

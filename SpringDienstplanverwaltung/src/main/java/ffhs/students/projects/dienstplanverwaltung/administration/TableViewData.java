@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
+import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 
 import java.util.ArrayList;
@@ -12,7 +13,16 @@ public class TableViewData {
     private final boolean showsAddButton;
     private final List<ListItem> items;
 
+    public static TableViewData getForOwnedLocals(List<ILocal> locals){
+        String title = "Lokale in meinem Besitz";
+        List<ListItem> items = locals.stream()
+                .map(ListItem::new)
+                .collect(Collectors.toList());
+        return new TableViewData(title,true,items);
+    }
 
+
+    //Lokale, wo User Mitarbeiter ist
     public TableViewData(List<ILocal> locals, IUser user){
         this.title = "Meine Lokale";
         this.showsAddButton = false;
@@ -20,6 +30,14 @@ public class TableViewData {
                 .map(item -> new ListItem(item,user))
                 .collect(Collectors.toList());
     }
+    public TableViewData(List<IServiceRole> serviceRoles){
+        this.title = "Dienstrollen";
+        this.showsAddButton = true;
+        items = serviceRoles.stream()
+                .map(ListItem::new)
+                .collect(Collectors.toList());
+    }
+
 
     public TableViewData(String title, boolean showsAddButton, List<ListItem> items) {
         this.title = title;

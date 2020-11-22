@@ -1,7 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung;
 
 //import ffhs.students.projects.dienstplanverwaltung.database.sql.UserRepository;
-import ffhs.students.projects.dienstplanverwaltung.administration.AdminstrationManager;
+import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDay;
@@ -63,10 +63,69 @@ public class ShiftplanController {
     public TableViewData getChooseLocal(
             @RequestParam(value = "userNickName") String userNickName){
 
-        AdminstrationManager.databaseManager = dbManager;
-        return AdminstrationManager.getChooseLocal(userNickName);
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getChooseLocal(userNickName);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getServiceRoles")
+    public TableViewData getServiceRoles(
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getServiceRoles(localId);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/addServiceRole")
+    public TableViewData addServiceRole(
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "title") String title){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.addServiceRole(localId,title);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/updateServiceRole")
+    public TableViewData updateServiceRole(
+            @RequestParam(value = "serviceRoleId") long serviceRoleId,
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "isActive") boolean isActive){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.updateServiceRole(serviceRoleId,title,isActive);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getOwnedLocals")
+    public TableViewData getOwnedLocals(
+            @RequestParam(value = "userNickName") String userNickName){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getOwnedLocals(userNickName);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/requestNewLocal")
+    public TableViewData requestNewLocal(
+            @RequestParam(value = "userNickName") String userNickName,
+            @RequestParam(value = "title") String title){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.requestNewLocal(userNickName,title);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/updateLocal")
+    public TableViewData updateLocal(
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "isActive") boolean isActive){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.updateLocal(localId,title,isActive);
+    }
 
     @Autowired
     public SqlDatabaseManager dbManager;
@@ -75,7 +134,4 @@ public class ShiftplanController {
     public void test(){
         dbManager.createFakeDate();
     }
-
-
-
 }
