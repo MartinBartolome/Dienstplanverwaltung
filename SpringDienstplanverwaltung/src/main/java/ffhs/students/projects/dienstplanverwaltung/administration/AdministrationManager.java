@@ -6,6 +6,7 @@ import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,5 +35,12 @@ public class AdministrationManager {
     public static TableViewData addServiceRole(long localId, String title){
         databaseManager.addServiceRole(localId,title);
         return getServiceRoles(localId);
+    }
+
+    public static TableViewData updateServiceRole(long serviceRoleId,String title, boolean isActive){
+        Optional<IServiceRole> serviceRole = databaseManager.updateServiceRole(serviceRoleId,title,isActive);
+        return serviceRole
+                .map(iServiceRole -> getServiceRoles(iServiceRole.getLocal().getId()))
+                .orElseGet(TableViewData::new);
     }
 }

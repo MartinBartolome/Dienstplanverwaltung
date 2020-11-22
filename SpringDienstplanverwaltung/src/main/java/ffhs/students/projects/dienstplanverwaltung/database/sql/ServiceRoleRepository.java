@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface ServiceRoleRepository  extends JpaRepository<ServiceRoleEntity, Integer> {
     public Optional<IServiceRole> findFirstByLocalAndName(ILocal local, String name);
+    public Optional<IServiceRole> findById(long id);
 }

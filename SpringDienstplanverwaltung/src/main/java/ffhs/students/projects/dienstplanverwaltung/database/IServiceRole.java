@@ -5,4 +5,5 @@ public interface IServiceRole {
     String getName();
     boolean isActive();
     ILocal getLocal();
+    long getId();
 }

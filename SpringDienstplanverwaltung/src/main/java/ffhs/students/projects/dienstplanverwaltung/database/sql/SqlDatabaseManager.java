@@ -147,6 +147,17 @@ public class SqlDatabaseManager implements IDatabaseManager {
         serviceRoleRepository.save(new ServiceRoleEntity(title,(LocalEntity)local.get(),true));
     }
 
+    public Optional<IServiceRole> updateServiceRole(long serviceRoleId, String title, boolean isActive ){
+        Optional<IServiceRole> serviceRole = serviceRoleRepository.findById(serviceRoleId);
+        if (!serviceRole.isPresent())
+            return Optional.empty();
+
+        ((ServiceRoleEntity)serviceRole.get()).setName(title);
+        ((ServiceRoleEntity)serviceRole.get()).setActive(isActive);
+        ((ServiceRoleEntity)serviceRole.get()).save(serviceRoleRepository);
+        return serviceRole;
+    }
+
     @Override
     public Optional<ILocal> getLocalById(long localID) {
         return localRepository

@@ -22,4 +22,5 @@ public interface IDatabaseManager {
     List<ILocal> getLocalsForUser(IUser user);
     Optional<IUser> getUser(String nickName);
     void addServiceRole(long localId, String title);
+    Optional<IServiceRole> updateServiceRole(long serviceRoleId, String title, boolean isActive);
 }
