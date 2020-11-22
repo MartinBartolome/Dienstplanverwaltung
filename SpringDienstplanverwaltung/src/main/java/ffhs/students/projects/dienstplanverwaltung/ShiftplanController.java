@@ -76,6 +76,17 @@ public class ShiftplanController {
         return AdministrationManager.getServiceRoles(localId);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/addServiceRole")
+    public TableViewData addServiceRole(
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "title") String title){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.addServiceRole(localId,title);
+    }
+
+
     @Autowired
     public SqlDatabaseManager dbManager;
 

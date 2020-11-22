@@ -30,4 +30,9 @@ public class AdministrationManager {
         List<IServiceRole> serviceRoles = local.get().getServiceRoles();
         return new TableViewData(serviceRoles);
     }
+
+    public static TableViewData addServiceRole(long localId, String title){
+        databaseManager.addServiceRole(localId,title);
+        return getServiceRoles(localId);
+    }
 }

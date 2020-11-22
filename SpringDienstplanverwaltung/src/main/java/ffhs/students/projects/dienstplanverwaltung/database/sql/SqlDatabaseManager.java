@@ -3,6 +3,7 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -134,6 +135,17 @@ public class SqlDatabaseManager implements IDatabaseManager {
     }
 
 
+    public void addServiceRole(long localId, String title){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return;
+
+        Optional<IServiceRole> serviceRole = serviceRoleRepository.findFirstByLocalAndName(local.get(),title);
+        if (serviceRole.isPresent())
+            return;
+
+        serviceRoleRepository.save(new ServiceRoleEntity(title,(LocalEntity)local.get(),true));
+    }
 
     @Override
     public Optional<ILocal> getLocalById(long localID) {
