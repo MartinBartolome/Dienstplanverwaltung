@@ -43,4 +43,15 @@ public class AdministrationManager {
                 .map(iServiceRole -> getServiceRoles(iServiceRole.getLocal().getId()))
                 .orElseGet(TableViewData::new);
     }
+
+    public static TableViewData getOwnedLocals(String userNickName){
+        if (userNickName.isEmpty())
+            return new TableViewData();
+        Optional<IUser> user = databaseManager.getUser(userNickName);
+        if (!user.isPresent())
+            return new TableViewData();
+
+        List<ILocal> locals = databaseManager.getOwnedLocalsForUser(user.get());
+        return TableViewData.createForOwnedLocals(locals);
+    }
 }

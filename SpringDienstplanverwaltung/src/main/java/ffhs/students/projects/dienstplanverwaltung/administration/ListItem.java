@@ -22,6 +22,11 @@ public class ListItem {
         this.title = local.getTitle();
         this.id = local.getId();
     }
+    public ListItem(ILocal local){
+        this.displayType = DisplayType.Default;
+        this.title = local.getTitle();
+        this.id = local.getId();
+    }
     public ListItem(IServiceRole serviceRole){
         this.displayType = serviceRole.isActive() ? DisplayType.Default : DisplayType.Inactiv;
         this.title = serviceRole.getName();

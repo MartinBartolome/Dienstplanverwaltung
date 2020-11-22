@@ -13,7 +13,16 @@ public class TableViewData {
     private final boolean showsAddButton;
     private final List<ListItem> items;
 
+    public static TableViewData createForOwnedLocals(List<ILocal> locals){
+        String title = "Lokale in meinem Besitz";
+        List<ListItem> items = locals.stream()
+                .map(ListItem::new)
+                .collect(Collectors.toList());
+        return new TableViewData(title,true,items);
+    }
 
+
+    //Lokale, wo User Mitarbeiter ist
     public TableViewData(List<ILocal> locals, IUser user){
         this.title = "Meine Lokale";
         this.showsAddButton = false;

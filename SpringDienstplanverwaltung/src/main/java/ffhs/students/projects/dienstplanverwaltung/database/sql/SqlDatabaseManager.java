@@ -179,6 +179,13 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .collect(Collectors.toList());
     }
 
+    public List<ILocal> getOwnedLocalsForUser(IUser user){
+        if (!(user instanceof UserEntity))
+            return new ArrayList<>();
+
+        return localRepository.findAllByOwner(user);
+    }
+
     public Optional<IUser> getUser(String nickName){
         return userRepository.findByNickname(nickName);
     }

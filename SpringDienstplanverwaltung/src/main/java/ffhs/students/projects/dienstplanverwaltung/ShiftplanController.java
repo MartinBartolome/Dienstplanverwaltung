@@ -97,6 +97,15 @@ public class ShiftplanController {
         return AdministrationManager.updateServiceRole(serviceRoleId,title,isActive);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getOwnedLocals")
+    public TableViewData getOwnedLocals(
+            @RequestParam(value = "userNickName") String userNickName){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getOwnedLocals(userNickName);
+    }
+
 
     @Autowired
     public SqlDatabaseManager dbManager;
@@ -105,7 +114,4 @@ public class ShiftplanController {
     public void test(){
         dbManager.createFakeDate();
     }
-
-
-
 }
