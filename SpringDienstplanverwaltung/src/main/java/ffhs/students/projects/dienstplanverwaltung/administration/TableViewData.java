@@ -1,8 +1,11 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
+import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
+import ffhs.students.projects.dienstplanverwaltung.database.sql.ServiceRoleEntity;
+import javassist.compiler.ast.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,22 @@ public class TableViewData {
                 .map(ListItem::new)
                 .collect(Collectors.toList());
     }
+    public TableViewData(List<IServiceRole> localServiceRoles, List<IServiceRole> employeeServiceRoles){
+        this.title = "Dienstrollen";
+        this.showsAddButton = true;
 
+        items = localServiceRoles.stream()
+                .map(role -> new ListItem(role,employeeServiceRoles.contains(role)))
+                .collect(Collectors.toList());
+    }
+
+
+    public static TableViewData getForEmployees(List<IEmployee> employees) {
+        String title = "Mitarbeiter";
+        boolean showsAddButton = true;
+        List<ListItem> items = employees.stream().map(ListItem::new).collect(Collectors.toList());
+        return new TableViewData(title,showsAddButton,items);
+    }
 
     public TableViewData(String title, boolean showsAddButton, List<ListItem> items) {
         this.title = title;

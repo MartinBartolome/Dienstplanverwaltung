@@ -1,16 +1,22 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
 
+import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 
 public class ListItem {
+
+
     public enum DisplayType{ Default,Highlighted, Weakend ,Inactiv  } // Wie wird es angezeigt?
 
     private final DisplayType displayType;
     private final String title;
     private long id;
+    private boolean isSelected;
+
+    public boolean isSelected() { return isSelected;  }
 
     public ListItem(DisplayType displayType, String title) {
         this.displayType = displayType;
@@ -37,6 +43,17 @@ public class ListItem {
         this.displayType = DisplayType.Default;
         this.title = user.getNickname();
         this.id = -1;
+    }
+    public ListItem(IEmployee employee){
+        this.displayType = DisplayType.Default;
+        this.title = employee.getUser().getNickname();
+        this.id = employee.getId();
+    }
+    public ListItem(IServiceRole serviceRole, boolean isSelected){
+        this.displayType = DisplayType.Default;
+        this.title = serviceRole.getName();
+        this.id = serviceRole.getId();
+        this.isSelected = isSelected;
     }
 
     public DisplayType getDisplayType() {  return displayType; }
