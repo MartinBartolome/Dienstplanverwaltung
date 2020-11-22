@@ -75,4 +75,9 @@ public class AdministrationManager {
     public static SysAdminTenantConfig getSysAdminTenantConfig(){
         return new SysAdminTenantConfig(databaseManager.getAllLocals());
     }
+
+    public static SysAdminTenantConfig localSetState(long localId, boolean isGranted, boolean isActive){
+        databaseManager.localSetState(localId,isGranted,isActive);
+        return getSysAdminTenantConfig();
+    }
 }

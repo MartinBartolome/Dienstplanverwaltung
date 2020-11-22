@@ -213,7 +213,16 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .map(ILocal.class::cast)
                 .collect(Collectors.toList());
     }
+    public Optional<ILocal> localSetState(long localId, boolean isGranted, boolean isActive){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return Optional.empty();
 
+        ((LocalEntity)local.get()).setGranted(isGranted);
+        ((LocalEntity)local.get()).setActive(isActive);
+        ((LocalEntity)local.get()).save(localRepository);
+        return local;
+    }
     public Optional<IUser> getUser(String nickName){
         return userRepository.findByNickname(nickName);
     }

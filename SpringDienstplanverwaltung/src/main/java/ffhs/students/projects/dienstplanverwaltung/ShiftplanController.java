@@ -135,6 +135,17 @@ public class ShiftplanController {
         return AdministrationManager.getSysAdminTenantConfig();
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/localSetState")
+    public SysAdminTenantConfig localSetState(
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "isGranted") boolean isGranted,
+            @RequestParam(value = "isActive") boolean isActive){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.localSetState(localId,isGranted,isActive);
+    }
+
     @Autowired
     public SqlDatabaseManager dbManager;
 

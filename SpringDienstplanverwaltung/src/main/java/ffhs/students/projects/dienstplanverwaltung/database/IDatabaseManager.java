@@ -27,4 +27,5 @@ public interface IDatabaseManager {
     ILocal requestNewLocal(IUser user,String localName);
     Optional<ILocal> updateLocal(long localId, String title, boolean isActive);
     List<ILocal> getAllLocals();
+    Optional<ILocal> localSetState(long localId, boolean isGranted, boolean isActive);
 }
