@@ -6,7 +6,6 @@ import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +51,17 @@ public class AdministrationManager {
             return new TableViewData();
 
         List<ILocal> locals = databaseManager.getOwnedLocalsForUser(user.get());
-        return TableViewData.createForOwnedLocals(locals);
+        return TableViewData.getForOwnedLocals(locals);
+    }
+
+    public static TableViewData requestNewLocal(String userNickName, String localName){
+        if (userNickName.isEmpty())
+            return new TableViewData();
+        Optional<IUser> user = databaseManager.getUser(userNickName);
+        if (!user.isPresent())
+            return new TableViewData();
+
+        databaseManager.requestNewLocal(user.get(),localName);
+        return getOwnedLocals(userNickName);
     }
 }

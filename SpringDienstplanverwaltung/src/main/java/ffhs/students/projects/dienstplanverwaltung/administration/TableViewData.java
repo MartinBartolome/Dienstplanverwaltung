@@ -13,7 +13,7 @@ public class TableViewData {
     private final boolean showsAddButton;
     private final List<ListItem> items;
 
-    public static TableViewData createForOwnedLocals(List<ILocal> locals){
+    public static TableViewData getForOwnedLocals(List<ILocal> locals){
         String title = "Lokale in meinem Besitz";
         List<ListItem> items = locals.stream()
                 .map(ListItem::new)

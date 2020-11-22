@@ -6,7 +6,7 @@ import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 
 public class ListItem {
-    public enum DisplayType{ Default,Highlighted,Inactiv  } // Wie wird es angezeigt?
+    public enum DisplayType{ Default,Highlighted, Weakend ,Inactiv  } // Wie wird es angezeigt?
 
     private final DisplayType displayType;
     private final String title;
@@ -16,14 +16,15 @@ public class ListItem {
         this.displayType = displayType;
         this.title = title;
     }
-
+    //Lokale für Mitarbeiter
     public ListItem(ILocal local, IUser user){
         this.displayType = local.getOwner() == user ? DisplayType.Highlighted : DisplayType.Default;
         this.title = local.getTitle();
         this.id = local.getId();
     }
+    //Lokale in Besitz
     public ListItem(ILocal local){
-        this.displayType = DisplayType.Default;
+        this.displayType = local.isGranted() ? DisplayType.Default : DisplayType.Weakend;
         this.title = local.getTitle();
         this.id = local.getId();
     }

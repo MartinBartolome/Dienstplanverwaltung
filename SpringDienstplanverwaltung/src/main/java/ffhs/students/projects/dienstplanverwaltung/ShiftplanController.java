@@ -106,6 +106,15 @@ public class ShiftplanController {
         return AdministrationManager.getOwnedLocals(userNickName);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/requestNewLocal")
+    public TableViewData requestNewLocal(
+            @RequestParam(value = "userNickName") String userNickName,
+            @RequestParam(value = "title") String title){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.requestNewLocal(userNickName,title);
+    }
 
     @Autowired
     public SqlDatabaseManager dbManager;

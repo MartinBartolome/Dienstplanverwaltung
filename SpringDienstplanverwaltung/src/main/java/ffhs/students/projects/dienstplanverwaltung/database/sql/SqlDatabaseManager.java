@@ -186,6 +186,18 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return localRepository.findAllByOwner(user);
     }
 
+    public ILocal requestNewLocal(IUser user,String localName){
+        Optional<ILocal> localWithName = getOwnedLocalsForUser(user).stream().filter(loc -> loc.getTitle().equals(localName)).findFirst();
+        if (localWithName.isPresent())
+            return localWithName.get();
+
+        LocalEntity local = new LocalEntity(localName,user);
+        local.setGranted(false);
+        local.save(localRepository);
+        return local;
+    }
+
+
     public Optional<IUser> getUser(String nickName){
         return userRepository.findByNickname(nickName);
     }

@@ -11,4 +11,5 @@ public interface ILocal {
     IUser getOwner();
     String getTitle();
     List<IServiceRole> getServiceRoles();
+    boolean isGranted();
 }
