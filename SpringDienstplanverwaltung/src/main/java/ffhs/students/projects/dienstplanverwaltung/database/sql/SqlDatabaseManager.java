@@ -17,12 +17,17 @@ import java.util.stream.Collectors;
 public class SqlDatabaseManager implements IDatabaseManager {
     public void createFakeDate(){
 
+
         UserEntity martin = userRepository.save(new UserEntity("Martin"));
         UserEntity celine = userRepository.save(new UserEntity("Celine"));
         UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
 
         LocalEntity local = localRepository.save(new LocalEntity("City Cafe",martin));
         LocalEntity local2 = localRepository.save(new LocalEntity("Staubsauger e.V.",matthias));
+
+        IServiceRole serviceRole1 = serviceRoleRepository.save(new ServiceRoleEntity("Barkeeper",local,true));
+        IServiceRole serviceRole2 = serviceRoleRepository.save(new ServiceRoleEntity("Kellner",local,true));
+
 
         EmployeeEntity eMartin = employeeRepository.save(new EmployeeEntity(martin,local));
         EmployeeEntity eCeline = employeeRepository.save(new EmployeeEntity(celine,local));
@@ -155,6 +160,8 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return userRepository.findByNickname(nickName);
     }
 
+    @Autowired
+    private ServiceRoleRepository serviceRoleRepository;
     @Autowired
     private LocalRepository localRepository;
     @Autowired

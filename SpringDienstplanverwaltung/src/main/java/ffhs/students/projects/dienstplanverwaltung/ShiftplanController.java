@@ -1,7 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung;
 
 //import ffhs.students.projects.dienstplanverwaltung.database.sql.UserRepository;
-import ffhs.students.projects.dienstplanverwaltung.administration.AdminstrationManager;
+import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDay;
@@ -63,10 +63,18 @@ public class ShiftplanController {
     public TableViewData getChooseLocal(
             @RequestParam(value = "userNickName") String userNickName){
 
-        AdminstrationManager.databaseManager = dbManager;
-        return AdminstrationManager.getChooseLocal(userNickName);
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getChooseLocal(userNickName);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getServiceRoles")
+    public TableViewData getServiceRoles(
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getServiceRoles(localId);
+    }
 
     @Autowired
     public SqlDatabaseManager dbManager;

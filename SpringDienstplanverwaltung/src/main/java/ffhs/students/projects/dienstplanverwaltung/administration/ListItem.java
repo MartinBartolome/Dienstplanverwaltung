@@ -2,6 +2,7 @@ package ffhs.students.projects.dienstplanverwaltung.administration;
 
 
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
+import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 
 public class ListItem {
@@ -19,7 +20,10 @@ public class ListItem {
         this.displayType = local.getOwner() == user ? DisplayType.Highlighted : DisplayType.Default;
         this.title = local.getTitle();
     }
-
+    public ListItem(IServiceRole serviceRole){
+        this.displayType = serviceRole.isActive() ? DisplayType.Default : DisplayType.Inactiv;
+        this.title = serviceRole.getName();
+    }
     public DisplayType getDisplayType() {  return displayType; }
     public String getTitle() {   return title;  }
 }

@@ -1,9 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
-import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
-import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
-import ffhs.students.projects.dienstplanverwaltung.database.ISlotType;
-import ffhs.students.projects.dienstplanverwaltung.database.IUser;
+import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +23,10 @@ class LocalEntity implements ILocal {
     @JoinColumn()
     private UserEntity owner;
 
+
+    @OneToMany(mappedBy = "local")
+    private List<ServiceRoleEntity> serviceRoles;
+
     @OneToMany(mappedBy = "local")
     private List<EmployeeEntity> employees;
 
@@ -40,6 +41,12 @@ class LocalEntity implements ILocal {
     public List<ISlotType> getSlotTypes(){
         return slotTypes.stream()
                 .map(ISlotType.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public List<IServiceRole> getServiceRoles() {
+        return serviceRoles.stream()
+                .map(IServiceRole.class::cast)
                 .collect(Collectors.toList());
     }
 
