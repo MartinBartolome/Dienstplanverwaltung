@@ -116,6 +116,17 @@ public class ShiftplanController {
         return AdministrationManager.requestNewLocal(userNickName,title);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/updateLocal")
+    public TableViewData updateLocal(
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "isActive") boolean isActive){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.updateLocal(localId,title,isActive);
+    }
+
     @Autowired
     public SqlDatabaseManager dbManager;
 

@@ -25,4 +25,5 @@ public interface IDatabaseManager {
     Optional<IServiceRole> updateServiceRole(long serviceRoleId, String title, boolean isActive);
     List<ILocal> getOwnedLocalsForUser(IUser user);
     ILocal requestNewLocal(IUser user,String localName);
+    Optional<ILocal> updateLocal(long localId, String title, boolean isActive);
 }

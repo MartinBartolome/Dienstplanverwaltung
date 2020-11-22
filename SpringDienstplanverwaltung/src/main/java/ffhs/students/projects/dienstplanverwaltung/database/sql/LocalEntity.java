@@ -16,8 +16,15 @@ class LocalEntity implements ILocal, ISaveable {
     @Override
     public long getId() { return id; }
 
+    public void setTitle(String title) {
+        if (!title.isEmpty())
+            this.title = title;
+    }
+
     private String title;
     public String getTitle() { return title; }
+
+    public void setActive(boolean active) { isActive = active; }
 
     private boolean isActive;
 

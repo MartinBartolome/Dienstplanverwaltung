@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.swing.text.html.Option;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -197,6 +198,16 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return local;
     }
 
+    public Optional<ILocal> updateLocal(long localId, String title, boolean isActive){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return Optional.empty();
+
+        ((LocalEntity)local.get()).setTitle(title);
+        ((LocalEntity)local.get()).setActive(isActive);
+        ((LocalEntity)local.get()).save(localRepository);
+        return local;
+    }
 
     public Optional<IUser> getUser(String nickName){
         return userRepository.findByNickname(nickName);

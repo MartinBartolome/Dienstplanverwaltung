@@ -64,4 +64,11 @@ public class AdministrationManager {
         databaseManager.requestNewLocal(user.get(),localName);
         return getOwnedLocals(userNickName);
     }
+
+    public static TableViewData updateLocal(long localId, String title, boolean isActive){
+        Optional<ILocal> local = databaseManager.updateLocal(localId,title,isActive);
+        return local
+                .map(iLocal -> getOwnedLocals(iLocal.getOwner().getNickname()))
+                .orElseGet(TableViewData::new);
+    }
 }
