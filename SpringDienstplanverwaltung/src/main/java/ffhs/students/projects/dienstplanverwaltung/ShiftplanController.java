@@ -6,15 +6,13 @@ import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenant
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDay;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftPlanManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.Shiftplan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -166,11 +164,27 @@ public class ShiftplanController {
         return AdministrationManager.getShiftPlanConfig(localId);
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("/updateShiftTemplateConfig")
+    public ShiftTemplateConfig updateShiftTemplateConfig(
+            @RequestBody ShiftTemplateConfig shiftTemplateConfig){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.updateShiftTemplateConfig(shiftTemplateConfig);
+    }
+
+
+
+
     @Autowired
     public SqlDatabaseManager dbManager;
+
 
     @GetMapping("/createFakeData")
     public void test(){
         dbManager.createFakeDate();
     }
+
+
+
 }

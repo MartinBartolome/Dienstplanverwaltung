@@ -1,6 +1,5 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
-
 import java.util.List;
 
 public interface ISlot extends ISaveable {
@@ -14,6 +13,7 @@ public interface ISlot extends ISaveable {
     void assignEmployee(IEmployee employee);
     void unApplyEmployee(IEmployee employee);
     void unAssignEmployee(IEmployee employee);
+    List<IServiceRole> getServiceRoles();
 
     default String getSlotStringWithNeededEmpl(){
         return getSlotType().getTitle() + " (" + getNumberOfEmployeesNeeded() + ")";

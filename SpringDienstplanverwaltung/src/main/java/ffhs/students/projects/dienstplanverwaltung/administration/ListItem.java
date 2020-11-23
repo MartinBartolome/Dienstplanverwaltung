@@ -8,14 +8,16 @@ public class ListItem {
 
     public enum DisplayType{ Default,Highlighted, Weakend ,Inactiv  } // Wie wird es angezeigt?
 
-    private final DisplayType displayType;
-    private final String title;
+    private DisplayType displayType;
+    private String title;
     private long id;
     private boolean isSelected;
 
     public boolean isSelected() { return isSelected;  }
 
+    public ListItem(){
 
+    }
     public ListItem(ISlot slot) {
         this.displayType = DisplayType.Default;
         this.title = slot.getSlotStringWithNeededEmpl();

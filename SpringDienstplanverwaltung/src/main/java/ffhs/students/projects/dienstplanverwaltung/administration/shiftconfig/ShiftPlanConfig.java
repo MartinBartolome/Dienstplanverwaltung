@@ -16,7 +16,7 @@ public class ShiftPlanConfig {
         List<IShiftTemplate> shiftTemplates = local.getShiftTemplates();
         shiftTemplatesTable = TableViewData.getForShiftTemplates(shiftTemplates);
         shiftTemplateConfigs = shiftTemplates.stream()
-                .map(ShiftTemplateConfig::new)
+                .map(template -> new ShiftTemplateConfig(template,local.getServiceRoles()))
                 .collect(Collectors.toList());
     }
     public ShiftPlanConfig(){

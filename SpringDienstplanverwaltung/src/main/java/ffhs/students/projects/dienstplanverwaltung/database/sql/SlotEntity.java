@@ -1,19 +1,25 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
+import ffhs.students.projects.dienstplanverwaltung.Helper;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotData;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ISlotDisplay;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Entity
 @Table
 public
-class SlotEntity implements ISlot, ISlotDisplay {
+class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+
+
     @Override
     public long getSlotId() { return id;  }
 
@@ -23,6 +29,9 @@ class SlotEntity implements ISlot, ISlotDisplay {
     @ManyToMany(cascade = CascadeType.DETACH)
     private List<EmployeeEntity> applied;
 
+    @ManyToMany(mappedBy ="slots")
+    private List<ServiceRoleEntity> serviceRoles;
+
     @ManyToOne
     @JoinColumn()
     private SlotTypeEntity slotType;
@@ -30,6 +39,10 @@ class SlotEntity implements ISlot, ISlotDisplay {
     @ManyToOne
     @JoinColumn()
     private ShiftEntity shift;
+
+    public void setShiftTemplate(ShiftTemplateEntity shiftTemplate) {
+        this.shiftTemplate = shiftTemplate;
+    }
 
     @ManyToOne
     @JoinColumn()
@@ -56,6 +69,12 @@ class SlotEntity implements ISlot, ISlotDisplay {
                 .collect(Collectors.toList());
     }
 
+    public void update(SlotEntity newSlot,SlotRepository repo){
+        slotType = newSlot.slotType;
+        numberOfEmployeesNeeded = newSlot.numberOfEmployeesNeeded;
+        serviceRoles = newSlot.serviceRoles;
+        save(repo);
+    }
 
     private int numberOfEmployeesNeeded;
     @Override
@@ -103,15 +122,21 @@ class SlotEntity implements ISlot, ISlotDisplay {
     public SlotEntity(SlotEntity slotTemplate,ShiftEntity shift,SlotRepository repo){
         this.slotType = slotTemplate.slotType;
         this.numberOfEmployeesNeeded = slotTemplate.numberOfEmployeesNeeded;
-        this.applied = applied;
-        this.assigned = assigned;
         this.shift = shift;
         this.save(repo);
     }
-
     public void addToShiftTemplate(ShiftTemplateEntity shiftTemplate){
         this.shiftTemplate = shiftTemplate;
     }
-
-
+    public List<IServiceRole> getServiceRoles() {
+        return serviceRoles.stream()
+                .map(IServiceRole.class::cast)
+                .collect(Collectors.toList());
+    }
+    public SlotEntity(long id, List<ServiceRoleEntity> serviceRoles, SlotTypeEntity slotType, int numberOfEmployeesNeeded) {
+        this.id = id;
+        this.serviceRoles = serviceRoles;
+        this.slotType = slotType;
+        this.numberOfEmployeesNeeded = numberOfEmployeesNeeded;
+    }
 }

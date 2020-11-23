@@ -2,6 +2,7 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
 import ffhs.students.projects.dienstplanverwaltung.database.ISaveable;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
+import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,6 +22,8 @@ public class ServiceRoleEntity implements IServiceRole, ISaveable {
             this.name = name;
     }
 
+    @ManyToMany()
+    private List<SlotEntity> slots;
 
     @ManyToMany()
     private List<EmployeeEntity> employees;

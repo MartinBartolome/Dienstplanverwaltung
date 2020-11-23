@@ -23,7 +23,7 @@ public abstract class Helper {
             return "";
         return dateFormatter.format(date);  }
     public static LocalDate dateFromString(String dateString){
-        if (dateString == null)
+        if (dateString.isEmpty())
             return LocalDate.now();
         return LocalDate.parse(dateString,dateFormatter);
     }
@@ -42,6 +42,18 @@ public abstract class Helper {
         }
         return "";
     }
+    public static RecurrenceType getRecurrenceType(String recurrenceString){
+        if (recurrenceString.isEmpty())
+            return null;
+
+        switch (recurrenceString){
+            case "einmalig": return RecurrenceType.Single;
+            case "wöchentlich": return RecurrenceType.Weekly;
+            case "zwei wöchentlich":  return RecurrenceType.BiWeekly;
+            case "monatlich":  return RecurrenceType.Monthly;
+        }
+        return null;
+    }
 
     public static String getDayString(DayOfWeek dayOfWeek){
         switch (dayOfWeek){
@@ -58,6 +70,22 @@ public abstract class Helper {
     public static List<DayOfWeek> weekDayList(){
         return Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY,DayOfWeek.SATURDAY,DayOfWeek.SUNDAY);
     }
+    public static DayOfWeek getWeekDay(String dayOfWeekString){
+        if (dayOfWeekString.isEmpty())
+            return null;
+
+        switch (dayOfWeekString){
+            case "Montag":  return DayOfWeek.MONDAY;
+            case "Dienstag":  return DayOfWeek.TUESDAY;
+            case "Mittwoch": return DayOfWeek.WEDNESDAY;
+            case "Donnerstag":  return DayOfWeek.THURSDAY;
+            case "Freitag": return DayOfWeek.FRIDAY;
+            case "Samstag": return DayOfWeek.SATURDAY ;
+            case "Sonntag": return DayOfWeek.SUNDAY;
+        }
+        return null;
+    }
+
 
     public static LocalDate getDateFromSlotId(String slotId){
         String dateString = slotId.split(slotIdDevider)[0];
