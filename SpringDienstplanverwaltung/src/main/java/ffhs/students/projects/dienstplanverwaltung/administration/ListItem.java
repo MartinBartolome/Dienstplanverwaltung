@@ -1,10 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
 
-import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
-import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
-import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
-import ffhs.students.projects.dienstplanverwaltung.database.IUser;
+import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 public class ListItem {
 
@@ -18,6 +15,24 @@ public class ListItem {
 
     public boolean isSelected() { return isSelected;  }
 
+
+    public ListItem(ISlot slot) {
+        this.displayType = DisplayType.Default;
+        this.title = slot.getSlotStringWithNeededEmpl();
+        this.isSelected = false;
+        this.id = slot.getSlotId();
+    }
+    public ListItem( String title, long id) {
+        this.displayType = DisplayType.Default;
+        this.title = title;
+        this.isSelected = false;
+        this.id = id;
+    }
+    public ListItem( String title, boolean isSelected) {
+        this.displayType = DisplayType.Default;
+        this.title = title;
+        this.isSelected = isSelected;
+    }
     public ListItem(DisplayType displayType, String title) {
         this.displayType = displayType;
         this.title = title;
@@ -44,6 +59,12 @@ public class ListItem {
         this.title = user.getNickname();
         this.id = -1;
     }
+    public ListItem(IShiftTemplate shiftTemplate){
+        this.displayType = DisplayType.Default;
+        this.title = shiftTemplate.getLongTitle();
+        this.id = shiftTemplate.getId();
+    }
+
     public ListItem(IEmployee employee){
         this.displayType = DisplayType.Default;
         this.title = employee.getUser().getNickname();

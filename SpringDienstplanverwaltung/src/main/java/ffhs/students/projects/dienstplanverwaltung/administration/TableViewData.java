@@ -1,9 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
-import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
-import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
-import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
-import ffhs.students.projects.dienstplanverwaltung.database.IUser;
+import ffhs.students.projects.dienstplanverwaltung.Helper;
+import ffhs.students.projects.dienstplanverwaltung.database.*;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.ServiceRoleEntity;
 import javassist.compiler.ast.Pair;
 
@@ -25,7 +23,7 @@ public class TableViewData {
     }
 
 
-    //Lokale, wo User Mitarbeiter ist
+    //Lokale, in denen User Mitarbeiter ist
     public TableViewData(List<ILocal> locals, IUser user){
         this.title = "Meine Lokale";
         this.showsAddButton = false;
@@ -43,10 +41,35 @@ public class TableViewData {
     public TableViewData(List<IServiceRole> localServiceRoles, List<IServiceRole> employeeServiceRoles){
         this.title = "Dienstrollen";
         this.showsAddButton = true;
-
         items = localServiceRoles.stream()
                 .map(role -> new ListItem(role,employeeServiceRoles.contains(role)))
                 .collect(Collectors.toList());
+    }
+    public static TableViewData getForShiftTemplates(List<IShiftTemplate> shiftTemplates){
+        String title = "Schichttemplates";
+        boolean showsAddButton = true;
+        List<ListItem> items = shiftTemplates.stream()
+                .map(ListItem::new)
+                .collect(Collectors.toList());
+        return new TableViewData(title,showsAddButton,items);
+    }
+    public static TableViewData getForSlots(List<ISlot> slots){
+        String title = "Slots";
+        boolean showsAddButton = true;
+        List<ListItem> items = slots.stream()
+                .map(ListItem::new)
+                .collect(Collectors.toList());
+        return new TableViewData(title,showsAddButton,items);
+    }
+
+    public static TableViewData getWeekDayTableForShiftTemplate(IShiftTemplate shiftTemplate){
+        String title = "Tage";
+        boolean showsAddButton = false;
+        List<ListItem> items = Helper.weekDayList().stream()
+                .map(day -> new ListItem(Helper.getDayString(day),
+                        shiftTemplate.getWeekDays().contains(day)))
+                .collect(Collectors.toList());
+        return new TableViewData(title,showsAddButton,items);
     }
 
 

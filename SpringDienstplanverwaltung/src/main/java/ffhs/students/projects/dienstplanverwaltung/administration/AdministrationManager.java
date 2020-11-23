@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.IDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
@@ -87,5 +88,12 @@ public class AdministrationManager {
         return local
                 .map(EmployeesConfig::new)
                 .orElseGet(EmployeesConfig::new);
+    }
+
+    public static ShiftPlanConfig getShiftPlanConfig(long localId){
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        return local
+                .map(ShiftPlanConfig::new)
+                .orElseGet(ShiftPlanConfig::new);
     }
 }

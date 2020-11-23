@@ -1,5 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
+import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDisplay;
 
@@ -108,6 +109,34 @@ class ShiftTemplateEntity implements IShiftTemplate {
     @Override
     public boolean equals(IShiftTemplate template) {
         return id == template.getId();
+    }
+
+    public String getLongTitle(){
+        String result = title;
+        result += " - " + Helper.getRecurrenceString(recurrenceType);
+        result += " " + getOnDaysString();
+        return result;
+    }
+
+    private String getOnDaysString(){
+        List<String> days = new ArrayList<>();
+        if (isMonday) days.add("Mo");
+        if (isTuesday) days.add("Di");
+        if (isWednesday) days.add("Mi");
+        if (isThursday) days.add("Do");
+        if (isFriday) days.add("Fr");
+        if (isSaturday) days.add("Sa");
+        if (isSunday) days.add("So");
+        if (days.size() == 0)
+            return "";
+
+        String result = "(";
+        String daysString = days.stream()
+                .reduce((r,day) -> r+day+",")
+                .orElse("").trim();
+        result += daysString.substring(daysString.length() -1);
+        result += ")";
+        return result;
     }
 
 

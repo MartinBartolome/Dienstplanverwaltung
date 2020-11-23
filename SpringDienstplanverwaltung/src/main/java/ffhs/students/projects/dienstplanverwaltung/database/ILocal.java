@@ -1,8 +1,5 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
-
-import ffhs.students.projects.dienstplanverwaltung.database.sql.ServiceRoleEntity;
-
 import java.util.List;
 
 public interface ILocal {
@@ -14,4 +11,5 @@ public interface ILocal {
     boolean isGranted();
     boolean isActive();
     List<IEmployee> getEmployees();
+    List<IShiftTemplate> getShiftTemplates();
 }

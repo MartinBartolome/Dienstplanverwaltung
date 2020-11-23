@@ -14,4 +14,8 @@ public interface ISlot extends ISaveable {
     void assignEmployee(IEmployee employee);
     void unApplyEmployee(IEmployee employee);
     void unAssignEmployee(IEmployee employee);
+
+    default String getSlotStringWithNeededEmpl(){
+        return getSlotType().getTitle() + " (" + getNumberOfEmployeesNeeded() + ")";
+    }
 }
