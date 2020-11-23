@@ -1,5 +1,9 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
+import ffhs.students.projects.dienstplanverwaltung.Helper;
+import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotData;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -226,6 +230,45 @@ public class SqlDatabaseManager implements IDatabaseManager {
     public Optional<IUser> getUser(String nickName){
         return userRepository.findByNickname(nickName);
     }
+
+    public Optional<IShiftTemplate> updateShiftTemplate(ShiftTemplateConfig shiftTemplateConfig){
+        Optional<IShiftTemplate> shiftTemplate = shiftTemplateRepository.findById( shiftTemplateConfig.getId() );
+        if (!shiftTemplate.isPresent())
+            return Optional.empty();
+
+        //Daten für Aktualisierung aufbauen/transformieren
+        String recurrenceString = shiftTemplateConfig.getRecurrenceOptions().getSelectedItem().getTitle();
+        List<String> weekDaysStrings = shiftTemplateConfig.getDays().getItems().stream()
+                .map(ListItem::getTitle)
+                .collect(Collectors.toList());
+        List<DayOfWeek> weekDays = weekDaysStrings.stream().map(Helper::getWeekDay).collect(Collectors.toList());
+        List<SlotEntity> newSlots = shiftTemplateConfig.getSlotInfos().stream()
+                .map(this::getForSlotInfo)
+                .collect(Collectors.toList());
+
+        //Daten aktualisieren
+        ShiftTemplateEntity shiftTemplateEntity = ((ShiftTemplateEntity)shiftTemplate.get());
+        shiftTemplateEntity.setFromDate(Helper.dateFromString(shiftTemplateConfig.getFromDate()));
+        shiftTemplateEntity.setToDate(Helper.dateFromString(shiftTemplateConfig.getToDate()));
+        shiftTemplateEntity.setRecurrenceType(Helper.getRecurrenceType(recurrenceString));
+        shiftTemplateEntity.setWeekdays(weekDays);
+        shiftTemplateEntity.updateSlots(newSlots,slotRepository);
+        shiftTemplateEntity.save(shiftTemplateRepository);
+        return Optional.of(shiftTemplateEntity);
+    }
+
+    private SlotEntity getForSlotInfo(SlotData info){
+        long id = info.getId();
+        int numberOfEmployeesNeeded = info.getNumberOfEmployeesNeeded();
+        SlotTypeEntity slotType = slotTypedRepository.findByTitle(info.getSlotType()).orElse(null);
+        List<ServiceRoleEntity> serviceRoles = info.getServiceRolesIds().stream()
+                .map(srId -> serviceRoleRepository.findById(srId))
+                .flatMap(Optional::stream)
+                .map(ServiceRoleEntity.class::cast)
+                .collect(Collectors.toList());
+        return new SlotEntity(id,serviceRoles,slotType,numberOfEmployeesNeeded);
+    }
+
 
     @Autowired
     private ServiceRoleRepository serviceRoleRepository;

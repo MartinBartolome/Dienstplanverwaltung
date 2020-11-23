@@ -1,5 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -28,4 +30,5 @@ public interface IDatabaseManager {
     Optional<ILocal> updateLocal(long localId, String title, boolean isActive);
     List<ILocal> getAllLocals();
     Optional<ILocal> localSetState(long localId, boolean isGranted, boolean isActive);
+    Optional<IShiftTemplate> updateShiftTemplate(ShiftTemplateConfig shiftTemplateConfig);
 }

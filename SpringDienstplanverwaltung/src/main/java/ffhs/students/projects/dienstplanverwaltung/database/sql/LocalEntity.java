@@ -53,6 +53,12 @@ class LocalEntity implements ILocal, ISaveable {
     @OneToMany(mappedBy = "local")
     private List<EmployeeEntity> employees;
 
+    public List<IShiftTemplate> getShiftTemplates() {
+        return shiftTemplates.stream()
+                .map(IShiftTemplate.class::cast)
+                .collect(Collectors.toList());
+    }
+
     @OneToMany(mappedBy = "local")
     private List<ShiftTemplateEntity> shiftTemplates;
 

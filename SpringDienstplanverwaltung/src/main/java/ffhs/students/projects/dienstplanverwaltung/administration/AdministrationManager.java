@@ -1,10 +1,9 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
-import ffhs.students.projects.dienstplanverwaltung.database.IDatabaseManager;
-import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
-import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
-import ffhs.students.projects.dienstplanverwaltung.database.IUser;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
+import ffhs.students.projects.dienstplanverwaltung.database.*;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 
 import java.util.List;
@@ -87,5 +86,21 @@ public class AdministrationManager {
         return local
                 .map(EmployeesConfig::new)
                 .orElseGet(EmployeesConfig::new);
+    }
+
+    public static ShiftPlanConfig getShiftPlanConfig(long localId){
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        return local
+                .map(ShiftPlanConfig::new)
+                .orElseGet(ShiftPlanConfig::new);
+    }
+
+    public static ShiftTemplateConfig updateShiftTemplateConfig(ShiftTemplateConfig shiftTemplateConfig){
+        Optional<IShiftTemplate> shiftTemplate = databaseManager.updateShiftTemplate(shiftTemplateConfig);
+        if (!shiftTemplate.isPresent())
+            return new ShiftTemplateConfig();
+
+        ILocal local = shiftTemplate.get().getLocal();
+        return new ShiftTemplateConfig(shiftTemplate.get(),local.getServiceRoles());
     }
 }
