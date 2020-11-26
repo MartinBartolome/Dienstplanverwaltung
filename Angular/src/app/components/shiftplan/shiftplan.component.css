@@ -1,0 +1,29 @@
+#calendar {
+  background: #CCC;
+  z-index: -1;
+  position: absolute;
+}
+table {
+  border:solid black;
+  border-collapse: collapse;
+  border-width:0.1em 0.1em 0 0;
+}
+table th, table td {
+  border:solid black;
+  border-width:0 0 0.1em 0.1em;
+}
+
+.date{
+  float:right;
+}
+
+.DetailedDay{
+  z-index: 5;
+  position:fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -9em; /*set to a negative number 1/2 of your height*/
+  margin-left: -15em; /*set to a negative number 1/2 of your width*/
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+}

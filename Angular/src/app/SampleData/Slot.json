@@ -1,0 +1,18 @@
+{
+  "id": "20201016_1_1",
+  "type": "Slot",
+  "title": "Bar",
+  "assigned": [
+    {
+      "name": "Martin"
+    }
+  ],
+  "applied": [
+    {
+      "name": "Martin"
+    },
+    {
+      "name": "Celine"
+    }
+  ]
+}

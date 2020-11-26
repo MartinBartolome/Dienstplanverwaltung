@@ -1,0 +1,16 @@
+th{
+  border: 0.1em solid black;
+  padding: 0.25em 0.5em;
+}
+td{
+  padding: 0.25em 0.5em;
+}
+table{
+  border-collapse: collapse;
+  border: 0.1em solid black;
+}
+.Hightlight{
+  background: lightblue;
+  width: 100%;
+  display:block;
+}

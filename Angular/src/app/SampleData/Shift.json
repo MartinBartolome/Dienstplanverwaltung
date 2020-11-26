@@ -1,0 +1,42 @@
+{
+  "id": "20201016_1",
+  "type": "Shift",
+  "title": "Abend",
+  "from": "18:00",
+  "to": "20:00",
+  "isCanceled": false,
+  "slots": [
+    {
+      "id": "20201016_1_1",
+      "type": "Slot",
+      "title": "Bar",
+      "assigned": [
+        {
+          "name": "Martin"
+        }
+      ],
+      "applied": [
+        {
+          "name": "Martin"
+        },
+        {
+          "name": "Celine"
+        }
+      ]
+    },
+    {
+      "id": "20201016_1_2",
+      "type": "Slot",
+      "title": "Service",
+      "assigned": [],
+      "applied": [
+        {
+          "name": "Matthias"
+        },
+        {
+          "name": "Celine"
+        }
+      ]
+    }
+  ]
+}
