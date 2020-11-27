@@ -1,3 +1,13 @@
 <div>
-  <app-shiftplan></app-shiftplan>
+  <mat-tab-group mat-stretch-tabs class="tabcontainer">
+    <mat-tab label="Schichtplanverwaltung" >
+      <ng-template matTabContent>
+        <app-shiftplan></app-shiftplan>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Mitarbeiterverwaltung"> Content 2 </mat-tab>
+    <mat-tab label="Lohnbuchhaltung"> Content 3 </mat-tab>
+  </mat-tab-group>
 </div>
+
+

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {ShiftDays} from '../../models/ShiftDays';
+import {ShiftDays} from './models/ShiftDays';
 import {environment} from '../../../environments/environment';
+import {GlobalConstants} from '../../common/GlobalConstants';
 
 @Component({
   selector: 'app-shiftplan',
@@ -9,7 +10,7 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./shiftplan.component.css']
 })
 export class ShiftplanComponent implements OnInit {
-  url = environment.Backendserver + '/shiftPlan';
+  url = GlobalConstants.Backendserver + '/shiftPlan';
   public data: any;
   public showDetail = false;
   public selectedDay: ShiftDays;

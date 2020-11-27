@@ -1,3 +1,6 @@
+section{
+  height:55em;
+}
 #calendar {
   background: #CCC;
   z-index: -1;

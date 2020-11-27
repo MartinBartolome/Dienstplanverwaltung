@@ -1,6 +1,6 @@
-import {Table} from './Table';
+import {Table} from '../../../models/Table';
 import {Employee} from './Employee';
-import {ListItem} from './ListItem';
+import {ListItem} from '../../../models/ListItem';
 
 export class Employees {
   type: string;

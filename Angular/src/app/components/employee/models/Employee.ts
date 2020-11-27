@@ -1,4 +1,4 @@
-import {Table} from './Table';
+import {Table} from '../../../models/Table';
 
 export class Employee {
   employeeEmail: string;

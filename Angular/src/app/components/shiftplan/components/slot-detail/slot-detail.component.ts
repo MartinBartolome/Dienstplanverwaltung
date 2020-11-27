@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Slot} from '../../models/Slot';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../../environments/environment';
+import {GlobalConstants} from '../../../../common/GlobalConstants';
 
 @Component({
   selector: 'app-slot-detail',
@@ -32,7 +33,7 @@ export class SlotDetailComponent implements OnInit {
   }
 
   private sendData(url): void{
-    this.api.get(environment.Backendserver + url).subscribe((data: any) => {
+    this.api.get(GlobalConstants.Backendserver + url).subscribe((data: any) => {
         this.slot.assigned = data.shifts[0].slots[0].assigned;
         this.slot.applied = data.shifts[0].slots[0].applied;
         this.slot.title = data.shifts[0].slots[0].title;

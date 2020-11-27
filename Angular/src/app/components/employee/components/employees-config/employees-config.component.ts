@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import {Employees} from '../../models/Employees';
-import employeesimport from '../../SampleData/Employees.json';
-import {ListItem} from '../../models/ListItem';
+import employeesimport from '../../../../SampleData/Employees.json';
+import {ListItem} from '../../../../models/ListItem';
 import {Employee} from '../../models/Employee';
 
 @Component({
