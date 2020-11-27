@@ -1,51 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ShiftDays} from './models/ShiftDays';
-import {environment} from '../../../environments/environment';
 import {ShiftPlan} from './models/ShiftPlan';
-import {DataService} from '../../common/DataService';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-shiftplan',
   templateUrl: './shiftplan.component.html',
   styleUrls: ['./shiftplan.component.css']
 })
-export class ShiftplanComponent implements OnInit {
-  public data: ShiftPlan;
+export class ShiftplanComponent implements OnInit, OnChanges {
+  @Input() data: ShiftPlan;
+  @Output() DateChange = new EventEmitter<Date>();
   public showDetail = false;
   public selectedDay: ShiftDays;
-  private selecteddate: Date;
-  public DateTitle: string;
+  @Input() DateTitle: string;
 
-  constructor(private api: DataService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.selecteddate = new Date();
-    this.LoadData();
   }
 
-  private LoadData(): void{
-    this.DateTitle = this.selecteddate.toLocaleString('default', { month: 'long', year: 'numeric'});
-    const combinedurl =  '/shiftPlan?month='
-      + this.selecteddate.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
-      + '.' + (this.selecteddate.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
-      + '.' + this.selecteddate.getFullYear();
-    this.api.sendGetRequest(combinedurl).subscribe((data: ShiftPlan) => {
-        console.log(data);
-        this.data = data;
-      });
+  ngOnChanges(changes: SimpleChanges): void
+  {
+    this.DateTitle = this.stringToUSDate(this.data.month).toLocaleString('default', { month: 'long', year: 'numeric'});
   }
 
-  NextMonth(): void{
-    this.selecteddate.setMonth(this.selecteddate.getMonth() + 1);
-    this.LoadData();
+  ChangeMonth(value: number): void
+  {
+    this.data.month = this.DateToString(new Date(
+      this.stringToUSDate(this.data.month).setMonth(this.stringToUSDate(this.data.month).getMonth() + value)));
+    this.DateChange.emit(this.stringToUSDate(this.data.month));
   }
-  PrevMonth(): void{
-    this.selecteddate.setMonth(this.selecteddate.getMonth() - 1);
-    this.LoadData();
-  }
+
   clickOpenDetail(Shiftdays): void{
+    alert();
     this.showDetail = !this.showDetail;
     this.selectedDay = Shiftdays;
+  }
+  DateToString(date: Date): string
+  {
+    return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+  }
+  stringToUSDate(datestring: string): Date
+  {
+    return new Date(datestring.split('.', 3)[1].toString() + '-' +
+      datestring.split('.', 3)[0].toString() + '-' +
+      datestring.split('.', 3)[2].toString());
   }
 }

@@ -2,7 +2,7 @@
   <tr class="headerrow">
     <th>{{ table.title }}</th>
   </tr>
-  <div class="subrows"*ngFor="let item of table.items">
+  <div class="subrows" *ngFor="let item of table.items">
     <tr [ngClass]="{'Hightlight': item.selected, 'normal': !item.selected}" (click)="item.selected = !item.selected">
       <td>
         <label>

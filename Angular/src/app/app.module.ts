@@ -14,7 +14,8 @@ import { ShiftDayComponent } from './components/shiftplan/components/shift-day/s
 import { SlotComponent } from './components/shiftplan/components/slot/slot.component';
 import { ShiftComponent } from './components/shiftplan/components/shift/shift.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule} from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
 
@@ -38,7 +39,8 @@ import { PayrollaccountingComponent } from './components/payrollaccounting/payro
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

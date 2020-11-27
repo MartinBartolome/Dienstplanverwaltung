@@ -1,9 +1,6 @@
 import {ShiftDays} from './ShiftDays';
 
 export class ShiftPlan {
-  id: string;
-  type: string;
-  date: string;
-  comment: string;
+  month: string;
   shiftDays: ShiftDays[];
 }
