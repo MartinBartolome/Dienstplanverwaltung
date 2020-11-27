@@ -16,7 +16,6 @@ header{
   border-width:0.1em;
   display: inline-block;
   flex-grow: 1;
-  height: 100px;
   width: calc(100% * (1/8) - 1px);
 }
 #Navigation{
