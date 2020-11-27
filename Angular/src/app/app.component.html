@@ -1,13 +1,18 @@
 <div>
   <mat-tab-group mat-stretch-tabs class="tabcontainer">
-    <mat-tab label="Schichtplanverwaltung" >
+    <mat-tab label="Schichtplan" >
       <ng-template matTabContent>
         <app-shiftplan [data]="ShiftPlanData" (DateChange)="loadShiftPlanData($event)"></app-shiftplan>
       </ng-template>
     </mat-tab>
+    <mat-tab label="Schichtverwaltung" >
+      <ng-template matTabContent>
+        <app-shift-configuration></app-shift-configuration>
+      </ng-template>
+    </mat-tab>
     <mat-tab label="Mitarbeiterverwaltung">
       <ng-template matTabContent>
-        <app-employee-configuration [data]="EmployeeData"></app-employee-configuration>
+        <app-employee-configuration [employees]="EmployeeData"></app-employee-configuration>
       </ng-template>
     </mat-tab>
     <mat-tab label="Lohnbuchhaltung">

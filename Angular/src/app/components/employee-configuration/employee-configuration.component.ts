@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EmployeesConfig} from './models/EmployeesConfig';
+import {EmployeeInviteComponent} from './components/employee-invite/employee-invite.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-configuration',
@@ -7,11 +9,13 @@ import {EmployeesConfig} from './models/EmployeesConfig';
   styleUrls: ['./employee-configuration.component.css']
 })
 export class EmployeeConfigurationComponent implements OnInit {
-  @Input() data: EmployeesConfig;
+  @Input() employees: EmployeesConfig;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
-
+  inviteemployee(): void{
+    const dialogRef = this.dialog.open(EmployeeInviteComponent);
+  }
 }

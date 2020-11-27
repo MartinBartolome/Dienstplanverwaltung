@@ -7,7 +7,6 @@ import { ShiftDetailComponent } from './components/shiftplan/components/shift-de
 import { ShiftDayDetailComponent } from './components/shiftplan/components/shift-day-detail/shift-day-detail.component';
 import { TableComponent } from './components/table/table.component';
 import { EmployeeConfigComponent } from './components/employee-configuration/components/employee-config/employee-config.component';
-import { EmployeesConfigComponent } from './components/employee-configuration/components/employees-config/employees-config.component';
 import { ShiftplanComponent } from './components/shiftplan/shiftplan.component';
 import { HttpClientModule} from '@angular/common/http';
 import { ShiftDayComponent } from './components/shiftplan/components/shift-day/shift-day.component';
@@ -22,6 +21,8 @@ import { PayrollaccountingComponent } from './components/payrollaccounting/payro
 import { EmployeeConfigurationComponent } from './components/employee-configuration/employee-configuration.component';
 import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ShiftConfigurationComponent } from './components/shift-configuration/shift-configuration.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +32,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ShiftDayDetailComponent,
     TableComponent,
     EmployeeConfigComponent,
-    EmployeesConfigComponent,
     ShiftplanComponent,
     ShiftDayComponent,
     SlotComponent,
     ShiftComponent,
     PayrollaccountingComponent,
     EmployeeConfigurationComponent,
-    EmployeeInviteComponent
+    EmployeeInviteComponent,
+    ShiftConfigurationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

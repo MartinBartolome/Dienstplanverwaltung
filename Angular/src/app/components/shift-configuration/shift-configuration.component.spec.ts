@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmployeesConfigComponent } from './employees-config.component';
+import { ShiftConfigurationComponent } from './shift-configuration.component';
 
-describe('EmployeesConfigComponent', () => {
-  let component: EmployeesConfigComponent;
-  let fixture: ComponentFixture<EmployeesConfigComponent>;
+describe('ShiftConfigurationComponent', () => {
+  let component: ShiftConfigurationComponent;
+  let fixture: ComponentFixture<ShiftConfigurationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EmployeesConfigComponent ]
+      declarations: [ ShiftConfigurationComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmployeesConfigComponent);
+    fixture = TestBed.createComponent(ShiftConfigurationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
