@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ShiftDays} from './models/ShiftDays';
 import {ShiftPlan} from './models/ShiftPlan';
-import { MatButtonModule } from '@angular/material/button';
+import {MatDialog} from '@angular/material/dialog';
+import {ShiftDayDetailComponent} from './components/shift-day-detail/shift-day-detail.component';
 
 @Component({
   selector: 'app-shiftplan',
@@ -11,11 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 export class ShiftplanComponent implements OnInit, OnChanges {
   @Input() data: ShiftPlan;
   @Output() DateChange = new EventEmitter<Date>();
-  public showDetail = false;
-  public selectedDay: ShiftDays;
   @Input() DateTitle: string;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -33,9 +32,9 @@ export class ShiftplanComponent implements OnInit, OnChanges {
   }
 
   clickOpenDetail(Shiftdays): void{
-    alert();
-    this.showDetail = !this.showDetail;
-    this.selectedDay = Shiftdays;
+    const dialogRef = this.dialog.open(ShiftDayDetailComponent, {
+      data: Shiftdays
+    });
   }
   DateToString(date: Date): string
   {

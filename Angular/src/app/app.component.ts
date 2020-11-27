@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
-import {EmployeesConfig} from './components/employee/models/EmployeesConfig';
+import {EmployeesConfig} from './components/employee-configuration/models/EmployeesConfig';
 import {DataService} from './common/DataService';
 import {ShiftPlan} from './components/shiftplan/models/ShiftPlan';
 

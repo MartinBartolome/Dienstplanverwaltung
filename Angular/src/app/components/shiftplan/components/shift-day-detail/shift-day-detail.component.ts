@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {ShiftDays} from '../../models/ShiftDays';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-shift-day-detail',
@@ -9,7 +10,11 @@ import {ShiftDays} from '../../models/ShiftDays';
 export class ShiftDayDetailComponent implements OnInit {
   @Input() shiftdays: ShiftDays;
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<ShiftDayDetailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ShiftDays) {
+    this.shiftdays = data;
+  }
 
   ngOnInit(): void {
   }

@@ -14,7 +14,10 @@ header{
   border:solid black;
   border-collapse: collapse;
   border-width:0.1em;
-  flex-basis: 14.1%;
+  display: inline-block;
+  flex-grow: 1;
+  height: 100px;
+  width: calc(100% * (1/8) - 1px);
 }
 #Navigation{
   display: flex;
@@ -26,16 +29,5 @@ header{
   float:right;
   padding-top: 0.5em;
   padding-right: 0.5em;
-}
-
-.DetailedDay{
-  z-index: 5;
-  position:fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -9em; /*set to a negative number 1/2 of your height*/
-  margin-left: -15em; /*set to a negative number 1/2 of your width*/
-  border: 1px solid #ccc;
-  background-color: #f3f3f3;
 }
 
