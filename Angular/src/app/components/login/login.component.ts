@@ -1,5 +1,10 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {ChooselocalComponent} from '../chooselocal/chooselocal.component';
+import {DataService} from '../../common/DataService';
+import {Table} from '../../models/Table';
+import {ListItem} from '../../models/ListItem';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +22,12 @@ export class LoginComponent{
 
   submit(): void{
     if (this.form.valid) {
-      this.submitEM.emit(true);
+      const dialogRef = this.dialog.open(ChooselocalComponent, { data: this.form.get('username').value});
+      dialogRef.afterClosed().subscribe(result => {
+        this.submitEM.emit(result.id);
+      });
     }
   }
-  constructor() { }
+
+  constructor(public dialog: MatDialog) { }
 }

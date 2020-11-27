@@ -1,3 +1,4 @@
+@import "";
 th{
   border: 0.1em solid black;
   padding: 0.25em 0.5em;
@@ -10,7 +11,8 @@ table{
   border: 0.1em solid black;
 }
 .Hightlight{
-  background: lightblue;
+  background: #3F51B5;
+  color: white;
   width: 100%;
   display:block;
 }

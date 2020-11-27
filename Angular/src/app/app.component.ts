@@ -13,15 +13,14 @@ export class AppComponent{
   title = 'Dienstplanverwaltung';
   EmployeeData: EmployeesConfig;
   ShiftPlanData: ShiftPlan;
+  LocalID: number;
   loginsuccess = false;
 
   constructor(private api: DataService) {
-    this.loadEmployeeData();
-    this.loadShiftPlanData(new Date());
   }
 
   public loadEmployeeData(): void{
-    this.api.sendGetRequest('/getEmployeesConfig?localId=1').subscribe((data: any) => {
+    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.LocalID).subscribe((data: any) => {
       this.EmployeeData = data;
       console.log(data);
     });
@@ -37,8 +36,11 @@ export class AppComponent{
     });
   }
 
-  public Login(loginsuccess: boolean): void
+  public Login(LocalID: number): void
   {
-    this.loginsuccess = loginsuccess;
+    this.loginsuccess = true;
+    this.LocalID = LocalID;
+    this.loadEmployeeData();
+    this.loadShiftPlanData(new Date());
   }
 }

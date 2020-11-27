@@ -18,12 +18,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
 import { EmployeeConfigurationComponent } from './components/employee-configuration/employee-configuration.component';
 import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ShiftConfigurationComponent } from './components/shift-configuration/shift-configuration.component';
 import { LoginComponent } from './components/login/login.component';
+import { ChooselocalComponent } from './components/chooselocal/chooselocal.component';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,8 @@ import { LoginComponent } from './components/login/login.component';
     EmployeeConfigurationComponent,
     EmployeeInviteComponent,
     ShiftConfigurationComponent,
-    LoginComponent
+    LoginComponent,
+    ChooselocalComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,10 @@ import { LoginComponent } from './components/login/login.component';
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
