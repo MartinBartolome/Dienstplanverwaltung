@@ -13,6 +13,7 @@ export class AppComponent{
   title = 'Dienstplanverwaltung';
   EmployeeData: EmployeesConfig;
   ShiftPlanData: ShiftPlan;
+  loginsuccess = false;
 
   constructor(private api: DataService) {
     this.loadEmployeeData();
@@ -34,6 +35,10 @@ export class AppComponent{
       console.log(data);
       this.ShiftPlanData = data;
     });
+  }
 
+  public Login(loginsuccess: boolean): void
+  {
+    this.loginsuccess = loginsuccess;
   }
 }

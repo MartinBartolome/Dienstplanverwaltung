@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent{
+  @Input() error: string | null;
+  @Output() submitEM = new EventEmitter();
 
-  constructor() { }
+  form: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
 
-  ngOnInit(): void {
+  submit(): void{
+    if (this.form.valid) {
+      this.submitEM.emit(true);
+    }
   }
-
+  constructor() { }
 }

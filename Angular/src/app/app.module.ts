@@ -17,10 +17,11 @@ import { MatTabsModule} from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule} from '@angular/material/card';
 import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
 import { EmployeeConfigurationComponent } from './components/employee-configuration/employee-configuration.component';
 import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ShiftConfigurationComponent } from './components/shift-configuration/shift-configuration.component';
 import { LoginComponent } from './components/login/login.component';
 
@@ -51,7 +52,8 @@ import { LoginComponent } from './components/login/login.component';
     MatDialogModule,
     MatInputModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
