@@ -21,8 +21,7 @@ header{
 #Navigation{
   display: flex;
   justify-content: space-between;
-  margin-top: 1em;
-  margin-bottom: 2em;
+  margin: 1em;
 }
 .date{
   float:right;

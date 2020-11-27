@@ -5,6 +5,13 @@
     <button mat-raised-button  type="button" (click)="ChangeMonth(+1)">></button>
   </div>
   <div id="calendar">
+    <div class="DayBox" align="center">Mo</div>
+    <div class="DayBox" align="center">Di</div>
+    <div class="DayBox" align="center">Mi</div>
+    <div class="DayBox" align="center">Do</div>
+    <div class="DayBox" align="center">Fr</div>
+    <div class="DayBox" align="center">Sa</div>
+    <div class="DayBox" align="center">So</div>
     <div class="DayBox" *ngFor="let shiftdays of data.shiftDays">
       <div class="date">{{shiftdays.day.slice(0,2)}}</div>
       <app-shift-day [shiftdays]="shiftdays" (click)="clickOpenDetail(shiftdays)"></app-shift-day>

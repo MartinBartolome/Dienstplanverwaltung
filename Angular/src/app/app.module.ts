@@ -17,8 +17,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule} from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
 import { EmployeeConfigurationComponent } from './components/employee-configuration/employee-configuration.component';
+import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { EmployeeConfigurationComponent } from './components/employee-configurat
     SlotComponent,
     ShiftComponent,
     PayrollaccountingComponent,
-    EmployeeConfigurationComponent
+    EmployeeConfigurationComponent,
+    EmployeeInviteComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,10 @@ import { EmployeeConfigurationComponent } from './components/employee-configurat
     BrowserAnimationsModule,
     MatTabsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

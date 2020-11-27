@@ -1,19 +1,17 @@
 <section>
-  <label class="header">{{ employee.nickName }}</label>
-  <div class="inputwrapper"><input type="checkbox" id="isActive" name="isActive" value="{{employee.active}}" [checked]="employee.active">Inaktiv</div>
-  <div class="settingscontainer">
+  <div class="employee">
+    <header>{{ employee.nickName }}</header>
     <div class="Roles">
       <app-table [table]="employee.serviceRoles"></app-table>
     </div>
-    <form>
-      <div class="hourlyRate">
-        <label class="formlabel" for="hourlyRate">Stundensatz</label>
-        <input class="forminput" type="text" id="hourlyRate" name="hourlyRate" value="{{employee.hourlyRate}}"> {{employee.currency}}
-      </div>
-      <div class="monthlyContingent">
-        <label class="formlabel" for="monthlyContingent">Monatskontingent</label>
-        <input class="forminput" type="text" id="monthlyContingent" name="hourlyRate" value="{{employee.monthlyContigent}}"> Stunden
-      </div>
-    </form>
+  </div>
+  <div class="settings">
+    <div> </div>
+    <label class="formlabel">Deaktivieren</label>
+    <input class="forminput" type="checkbox" id="isActive" name="isActive" value="{{employee.active}}" [checked]="employee.active">
+      <label class="formlabel" for="hourlyRate">Stundensatz</label>
+      <input class="forminput" type="text" id="hourlyRate" name="hourlyRate" value="{{employee.hourlyRate}}"> {{employee.currency}}
+      <label class="formlabel" for="monthlyContingent">Monatskontingent</label>
+      <input class="forminput" type="text" id="monthlyContingent" name="hourlyRate" value="{{employee.monthlyContigent}}">
   </div>
 </section>
