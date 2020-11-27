@@ -15,6 +15,8 @@ import { SlotComponent } from './components/shiftplan/components/slot/slot.compo
 import { ShiftComponent } from './components/shiftplan/components/shift/shift.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     ShiftplanComponent,
     ShiftDayComponent,
     SlotComponent,
-    ShiftComponent
+    ShiftComponent,
+    EmployeeComponent,
+    PayrollaccountingComponent
   ],
   imports: [
     BrowserModule,

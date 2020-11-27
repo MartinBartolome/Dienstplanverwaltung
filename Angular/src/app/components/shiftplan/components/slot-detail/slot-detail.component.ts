@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Slot} from '../../models/Slot';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {environment} from '../../../../../environments/environment';
-import {GlobalConstants} from '../../../../common/GlobalConstants';
+import {DataService} from '../../../../common/DataService';
 
 @Component({
   selector: 'app-slot-detail',
@@ -12,7 +11,7 @@ import {GlobalConstants} from '../../../../common/GlobalConstants';
 export class SlotDetailComponent implements OnInit {
   @Input() slot: Slot;
 
-  constructor(private api: HttpClient) { }
+  constructor(private api: DataService) { }
 
   ngOnInit(): void {
   }
@@ -33,18 +32,11 @@ export class SlotDetailComponent implements OnInit {
   }
 
   private sendData(url): void{
-    this.api.get(GlobalConstants.Backendserver + url).subscribe((data: any) => {
+    this.api.sendGetRequest(url).subscribe((data: any) => {
         this.slot.assigned = data.shifts[0].slots[0].assigned;
         this.slot.applied = data.shifts[0].slots[0].applied;
         this.slot.title = data.shifts[0].slots[0].title;
         console.log(data);
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('Client-side error occured.');
-        } else {
-          console.log('Server-side error occured.');
-        }
       });
   }
 }

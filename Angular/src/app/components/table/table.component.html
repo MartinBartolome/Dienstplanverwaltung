@@ -2,11 +2,11 @@
   <tr class="headerrow">
     <th>{{ table.title }}</th>
   </tr>
-  <div class="subrows"*ngFor="let a of table.listItems">
-    <tr [ngClass]="{'Hightlight': a.isSelected, 'normal': !a.isSelected}" (click)="SelectRow($event, a)">
+  <div class="subrows"*ngFor="let item of table.items">
+    <tr [ngClass]="{'Hightlight': item.selected, 'normal': !item.selected}" (click)="item.selected = !item.selected">
       <td>
         <label>
-          {{ a.title }}
+          {{ item.title }}
         </label>
       </td>
     </tr>

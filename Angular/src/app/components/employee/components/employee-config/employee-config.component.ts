@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Employee} from '../../models/Employee';
+import {EmployeeConfig} from '../../models/EmployeeConfig';
 
 @Component({
   selector: 'app-employee-config',
@@ -7,7 +7,7 @@ import {Employee} from '../../models/Employee';
   styleUrls: ['./employee-config.component.css']
 })
 export class EmployeeConfigComponent implements OnInit {
-  @Input() employee: Employee;
+  @Input() employee: EmployeeConfig;
 
   constructor() { }
 

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Table} from '../../models/Table';
+import {ListItem} from '../../models/ListItem';
 
 @Component({
   selector: 'app-table',
@@ -12,9 +13,5 @@ export class TableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  SelectRow(event, item): void{
-    item.isSelected = !item.isSelected;
   }
 }

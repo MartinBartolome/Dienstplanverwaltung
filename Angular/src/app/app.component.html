@@ -5,8 +5,15 @@
         <app-shiftplan></app-shiftplan>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Mitarbeiterverwaltung"> Content 2 </mat-tab>
-    <mat-tab label="Lohnbuchhaltung"> Content 3 </mat-tab>
+    <mat-tab label="Mitarbeiterverwaltung">
+      <ng-template matTabContent>
+        <app-employee [data]="EmployeeData"></app-employee>
+      </ng-template></mat-tab>
+    <mat-tab label="Lohnbuchhaltung">
+      <ng-template matTabContent>
+        <app-payrollaccounting></app-payrollaccounting>
+      </ng-template>
+    </mat-tab>
   </mat-tab-group>
 </div>
 

@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {Employees} from '../../models/Employees';
-import employeesimport from '../../../../SampleData/Employees.json';
 import {ListItem} from '../../../../models/ListItem';
-import {Employee} from '../../models/Employee';
+import {EmployeesConfig} from '../../models/EmployeesConfig';
+import {EmployeeConfig} from '../../models/EmployeeConfig';
 
 @Component({
   selector: 'app-employees-config',
@@ -11,18 +10,10 @@ import {Employee} from '../../models/Employee';
   styleUrls: ['./employees-config.component.css']
 })
 export class EmployeesConfigComponent implements OnInit {
-  /*
-    austauschen, wenn es die Daten von wo anders kommen
-    @Input() employees: Employees;
-  */
-  employees: Employees = employeesimport;
+  @Input() employees: EmployeesConfig;
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  getEmployeeConfig(emp: ListItem): Employee{
-    return this.employees.employeesConfigs.find(x => x.employeeEmail = emp.title);
   }
 }

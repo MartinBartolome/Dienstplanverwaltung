@@ -1,10 +1,10 @@
 <section>
   <div class="Employeetable">
-    <app-table [table]="employees.employeesTable"></app-table>
+    <app-table [table]="employees.employees"></app-table>
   </div>
-  <div class="Employee" *ngFor="let emp of employees.employeesTable.listItems">
-    <div *ngIf="emp.isSelected">
-      <app-employee-config [employee]="getEmployeeConfig(emp)"></app-employee-config>
+  <div class="Employee" *ngFor="let emp of employees.employees.items">
+    <div *ngIf="emp.selected">
+      <app-employee-config [employee]="employees.employeeConfigs[employees.employees.items.indexOf(emp)]"></app-employee-config>
     </div>
   </div>
 </section>
