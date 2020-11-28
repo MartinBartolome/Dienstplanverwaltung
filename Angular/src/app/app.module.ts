@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
 import { EmployeeConfigurationComponent } from './components/employee-configuration/employee-configuration.component';
 import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
@@ -28,6 +29,9 @@ import { ShiftConfigurationComponent } from './components/shift-configuration/sh
 import { LoginComponent } from './components/login/login.component';
 import { ChooselocalComponent } from './components/chooselocal/chooselocal.component';
 import { MatOptionModule } from '@angular/material/core';
+import { ShiftEditComponent } from './components/shift-configuration/components/shift-edit/shift-edit.component';
+import { SlotEditComponent } from './components/shift-configuration/components/slot-edit/slot-edit.component';
+import { ServiceRoleEditComponent } from './components/shift-configuration/components/service-role-edit/service-role-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { MatOptionModule } from '@angular/material/core';
     EmployeeInviteComponent,
     ShiftConfigurationComponent,
     LoginComponent,
-    ChooselocalComponent
+    ChooselocalComponent,
+    ShiftEditComponent,
+    SlotEditComponent,
+    ServiceRoleEditComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +68,8 @@ import { MatOptionModule } from '@angular/material/core';
     MatCardModule,
     MatOptionModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

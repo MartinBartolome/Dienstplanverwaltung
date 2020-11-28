@@ -5,6 +5,7 @@ import {DataService} from './common/DataService';
 import {ShiftPlan} from './components/shiftplan/models/ShiftPlan';
 import {ShiftTemplateConfigs} from './components/shift-configuration/models/ShiftTemplateConfigs';
 import {ShiftConfiguration} from './components/shift-configuration/models/ShiftConfiguration';
+import {SharedService} from './common/SharedService';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +17,14 @@ export class AppComponent{
   EmployeeData: EmployeesConfig;
   ShiftConfiguration: ShiftConfiguration;
   ShiftPlanData: ShiftPlan;
-  LocalID: number;
   loginsuccess = false;
 
-  constructor(private api: DataService) {
+  constructor(private api: DataService, public globalvariables: SharedService) {
+    this.Login(1);
   }
 
   public loadEmployeeData(): void{
-    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.LocalID).subscribe((data: any) => {
+    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalvariables.getLocalID()).subscribe((data: any) => {
       this.EmployeeData = data;
       console.log(data);
     });
@@ -40,7 +41,7 @@ export class AppComponent{
   }
 
   public loadShiftConfiguration(): void{
-    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.LocalID).subscribe((data: any) => {
+    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalvariables.getLocalID()).subscribe((data: any) => {
       this.ShiftConfiguration = data;
       console.log(data);
     });
@@ -49,7 +50,7 @@ export class AppComponent{
   public Login(LocalID: number): void
   {
     this.loginsuccess = true;
-    this.LocalID = LocalID;
+    this.globalvariables.setLocalID(LocalID);
     this.loadEmployeeData();
     this.loadShiftPlanData(new Date());
     this.loadShiftConfiguration();

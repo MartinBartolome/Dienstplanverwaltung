@@ -1,0 +1,11 @@
+<section>
+  <div class="textinput">
+    <label class="formlabel" for="rate">Takt</label>
+    <select name="rate" id="rate" class="forminput">
+      <option *ngFor="let item of slotinfos"
+              [value]="" [selected]="item.selected">{{ item.title }}
+      </option>
+    </select>
+  </div>
+  <app-table [table]="ServiceRoles" (ItemSelectedEvent)="editServiceRole($event)" (AddEvent)="newServiceRole()"></app-table>
+</section>

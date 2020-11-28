@@ -10,5 +10,5 @@ export class ShiftTemplateConfigs {
     toDate: string;
     title: string;
     id: number;
-    slotInfos: SlotInfos;
+    slotInfos: SlotInfos[];
 }

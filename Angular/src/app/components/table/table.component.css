@@ -1,17 +1,31 @@
-th{
-  border: 0.1em solid black;
-  padding: 0.25em 0.5em;
-}
-td{
-  padding: 0.25em 0.5em;
-}
-table{
+section{
+  display: flex;
+  flex-direction: column;
+  border:solid black;
   border-collapse: collapse;
-  border: 0.1em solid black;
+  border-width:0.1em;
 }
+
+.headerrow{
+  border-bottom:solid black;
+  border-collapse: collapse;
+  border-width:0.1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.subrows{
+  cursor: pointer;
+}
+header{
+  font-size: 1.25em;
+}
+
 .Hightlight{
   background: #3F51B5;
   color: white;
-  width: 100%;
-  display:block;
+}
+mat-icon{
+  cursor: pointer;
 }

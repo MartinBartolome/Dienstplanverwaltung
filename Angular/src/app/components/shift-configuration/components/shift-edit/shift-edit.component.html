@@ -1,0 +1,27 @@
+<form>
+  <div class="leftside textinput">
+    <label class="formlabel" for="title">Titel</label>
+    <input class="forminput" type="text" id="title" name="title" value="{{ template.title}}">
+  </div>
+  <div class="rightside textinput">
+    <label class="formlabel" for="rate">Takt</label>
+    <select name="rate" id="rate" class="forminput">
+      <option *ngFor="let item of template.recurrenceOptions.dropDownOptions"
+              [value]="template.recurrenceOptions.selectedItem" [selected]="item.selected">{{ item.title }}
+      </option>
+    </select>
+  </div>
+  <app-table [table]="template.days" class="leftside"></app-table>
+  <app-table [table]="template.slots" class="rightside" (ItemSelectedEvent)="editSlot($event)" (AddEvent)="newSlot()"></app-table>
+  <div class="leftside">
+    <label>Gültigkeit</label>
+    <div class="textinput">
+      <label class="formlabel" for="fromDate">von:</label>
+      <input class="forminput" type="text" id="fromDate" name="fromDate" value="{{ template.fromDate}}">
+    </div>
+    <div class="textinput">
+      <label class="formlabel" for="toDate">bis:</label>
+      <input class="forminput" type="text" id="toDate" name="toDate" value="{{ template.toDate}}">
+    </div>
+  </div>
+</form>

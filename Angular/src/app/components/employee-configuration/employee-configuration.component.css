@@ -27,3 +27,6 @@ button{
   width: 10em;
   line-height: 1.2em;
 }
+app-table{
+  width: 40%;
+}

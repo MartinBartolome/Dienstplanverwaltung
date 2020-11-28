@@ -2,7 +2,7 @@
   <div class="employee">
     <header>{{ employee.nickName }}</header>
     <div class="Roles">
-      <app-table [table]="employee.serviceRoles"></app-table>
+      <app-table [table]="employee.serviceRoles" (AddEvent)="newServiceRole()" (ItemSelectedEvent)="editServiceRole($event)"></app-table>
     </div>
   </div>
   <div class="settings">

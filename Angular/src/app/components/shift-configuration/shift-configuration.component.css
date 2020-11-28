@@ -6,9 +6,10 @@ section{
   width: 40%;
 }
 button{
-  width:25%;
+  width:15em;
   margin: 1em;
 }
 app-table{
+  width: 100%;
   margin: 1em;
 }
