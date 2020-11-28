@@ -1,0 +1,14 @@
+section{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin:auto;
+  width: 40%;
+}
+button{
+  width:25%;
+  margin: 1em;
+}
+app-table{
+  margin: 1em;
+}

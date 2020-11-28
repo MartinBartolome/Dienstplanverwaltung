@@ -3,6 +3,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {EmployeesConfig} from './components/employee-configuration/models/EmployeesConfig';
 import {DataService} from './common/DataService';
 import {ShiftPlan} from './components/shiftplan/models/ShiftPlan';
+import {ShiftTemplateConfigs} from './components/shift-configuration/models/ShiftTemplateConfigs';
+import {ShiftConfiguration} from './components/shift-configuration/models/ShiftConfiguration';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +14,7 @@ import {ShiftPlan} from './components/shiftplan/models/ShiftPlan';
 export class AppComponent{
   title = 'Dienstplanverwaltung';
   EmployeeData: EmployeesConfig;
+  ShiftConfiguration: ShiftConfiguration;
   ShiftPlanData: ShiftPlan;
   LocalID: number;
   loginsuccess = false;
@@ -36,11 +39,19 @@ export class AppComponent{
     });
   }
 
+  public loadShiftConfiguration(): void{
+    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.LocalID).subscribe((data: any) => {
+      this.ShiftConfiguration = data;
+      console.log(data);
+    });
+  }
+
   public Login(LocalID: number): void
   {
     this.loginsuccess = true;
     this.LocalID = LocalID;
     this.loadEmployeeData();
     this.loadShiftPlanData(new Date());
+    this.loadShiftConfiguration();
   }
 }
