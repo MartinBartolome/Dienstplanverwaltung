@@ -6,6 +6,7 @@ import {ShiftPlan} from './components/shiftplan/models/ShiftPlan';
 import {ShiftTemplateConfigs} from './components/shift-configuration/models/ShiftTemplateConfigs';
 import {ShiftConfiguration} from './components/shift-configuration/models/ShiftConfiguration';
 import {SharedService} from './common/SharedService';
+import {Local} from 'protractor/built/driverProviders';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,6 @@ export class AppComponent{
   loginsuccess = false;
 
   constructor(private api: DataService, public globalvariables: SharedService) {
-    this.Login(1);
   }
 
   public loadEmployeeData(): void{
