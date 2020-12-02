@@ -17,8 +17,8 @@
     <div class="user">
       <label>gemeldet:</label>
       <ul *ngFor="let a of slot.applied ; last as isLast">
-        <li *ngIf="isLast == false" (click)="clickOnApplied($event, a)">{{ a }},</li>
-        <li *ngIf="isLast == true" (click)="clickOnApplied($event, a)">{{ a }}</li>
+        <li *ngIf="isLast == false" [ngClass]="{'Hightlight': slot.assigned.indexOf(a)>=0}" (click)="clickOnApplied($event, a)">{{ a }},</li>
+        <li *ngIf="isLast == true" [ngClass]="{'Hightlight': slot.assigned.indexOf(a)>=0}" (click)="clickOnApplied($event, a)">{{ a }}</li>
       </ul>
     </div>
 

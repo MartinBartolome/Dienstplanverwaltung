@@ -25,17 +25,11 @@ export class SlotDetailComponent implements OnInit {
   }
 
   clickOnAssigned(event, item): void{
-    let url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'false';
-    this.sendData(url);
-    url = '/applyEmployeeToSlot?localId=1&employeeName=' + item
-      + '&slotIdString=' + this.slot.id + '&isApplied=' + 'true';
+    const url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'false';
     this.sendData(url);
   }
   clickOnApplied(event, item): void{
-    let url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'true';
-    this.sendData(url);
-    url = '/applyEmployeeToSlot?localId=1&employeeName=' + item
-      + '&slotIdString=' + this.slot.id + '&isApplied=' + 'false';
+    const url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'true';
     this.sendData(url);
   }
 
