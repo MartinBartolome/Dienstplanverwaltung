@@ -19,6 +19,7 @@ export class AppComponent{
   ShiftConfiguration: ShiftConfiguration;
   ShiftPlanData: ShiftPlan;
   loginsuccess = false;
+  localselected = false;
 
   constructor(private api: DataService, public globalvariables: SharedService) {
   }
@@ -47,10 +48,8 @@ export class AppComponent{
     });
   }
 
-  public Login(LocalID: number): void
+  public Login(): void
   {
-    this.loginsuccess = true;
-    this.globalvariables.setLocalID(LocalID);
     this.loadEmployeeData();
     this.loadShiftPlanData(new Date());
     this.loadShiftConfiguration();

@@ -1,12 +1,16 @@
-<h1 mat-dialog-title>Bitte Lokal wählen</h1>
-<div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Lokal</mat-label>
-    <mat-select [(value)]="selected">
-      <mat-option *ngFor="let item of Locals.items" [value]="item">{{item.title}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-raised-button color="primary" [mat-dialog-close]="selected" cdkFocusInitial>Ok</button>
-</div>
+<mat-card>
+  <mat-card-title>Bitte Lokal wählen</mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field>
+        <mat-label>Lokal</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option *ngFor="let item of Locals.items" [value]="item">{{item.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="button">
+        <button mat-raised-button color="primary" (click)="SelectLocal()" cdkFocusInitial>Ok</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

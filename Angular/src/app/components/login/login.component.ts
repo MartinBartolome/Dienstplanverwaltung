@@ -23,13 +23,10 @@ export class LoginComponent{
 
   submit(): void{
     if (this.form.valid) {
-      const dialogRef = this.dialog.open(ChooselocalComponent, { data: this.form.get('username').value});
-      dialogRef.afterClosed().subscribe(result => {
-        this.globalvariables.setNickName(this.form.get('username').value);
-        this.submitEM.emit(result.id);
-      });
+      this.globalvariables.setNickName(this.form.get('username').value);
+      this.submitEM.emit(true);
     }
   }
 
-  constructor(public dialog: MatDialog, public globalvariables: SharedService) { }
+  constructor(public globalvariables: SharedService) { }
 }
