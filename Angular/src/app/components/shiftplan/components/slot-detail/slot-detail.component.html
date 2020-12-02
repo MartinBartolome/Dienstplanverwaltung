@@ -1,5 +1,11 @@
 <section>
-  <header>{{ slot.title }}</header>
+  <header>
+    <label>
+      {{ slot.title }}
+    </label>
+    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalvariables.getNickName())>=0" (click)="Apply(false)">Abmelden</button>
+    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalvariables.getNickName())<0" (click)="Apply(true)">Melden</button>
+  </header>
   <div class="usercontainer">
     <div class="user">
       <label>zugewiesen:</label>

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@an
 import {Slot} from '../../models/Slot';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {DataService} from '../../../../common/DataService';
+import {SharedService} from '../../../../common/SharedService';
 
 @Component({
   selector: 'app-slot-detail',
@@ -11,9 +12,16 @@ import {DataService} from '../../../../common/DataService';
 export class SlotDetailComponent implements OnInit {
   @Input() slot: Slot;
 
-  constructor(private api: DataService) { }
+  constructor(private api: DataService, public globalvariables: SharedService) { }
 
   ngOnInit(): void {
+  }
+
+  Apply(value): void
+  {
+    const url = '/applyEmployeeToSlot?localId=' + this.globalvariables.getLocalID() + '&employeeName=' +
+      this.globalvariables.getNickName() + '&slotIdString=' + this.slot.id + '&isApplied=' + value;
+    this.sendData(url);
   }
 
   clickOnAssigned(event, item): void{

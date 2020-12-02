@@ -6,6 +6,7 @@ import {Injectable} from '@angular/core';
 
 export class SharedService{
   private LocalID: number;
+  private Nickname: string;
 
   setLocalID(setID: number): void{
     this.LocalID = setID;
@@ -13,5 +14,12 @@ export class SharedService{
 
   getLocalID(): number{
     return this.LocalID;
+  }
+
+  setNickName(setNick: string): void{
+    this.Nickname = setNick;
+  }
+  getNickName(): string{
+    return this.Nickname;
   }
 }
