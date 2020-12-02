@@ -26,3 +26,9 @@ mat-card-content {
   display: flex;
   justify-content: flex-end;
 }
+
+.MyLocals{
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+}

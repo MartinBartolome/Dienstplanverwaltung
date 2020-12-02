@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { SlotDetailComponent } from './components/shiftplan/components/slot-detail/slot-detail.component';
 import { ShiftDetailComponent } from './components/shiftplan/components/shift-detail/shift-detail.component';
 import { ShiftDayDetailComponent } from './components/shiftplan/components/shift-day-detail/shift-day-detail.component';
-import { TableComponent } from './components/table/table.component';
+import { TableComponent } from './components/general/table/table.component';
 import { EmployeeConfigComponent } from './components/employee-configuration/components/employee-config/employee-config.component';
 import { ShiftplanComponent } from './components/shiftplan/shiftplan.component';
 import { HttpClientModule} from '@angular/common/http';
@@ -26,12 +26,14 @@ import { EmployeeConfigurationComponent } from './components/employee-configurat
 import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ShiftConfigurationComponent } from './components/shift-configuration/shift-configuration.component';
-import { LoginComponent } from './components/login/login.component';
-import { ChooselocalComponent } from './components/chooselocal/chooselocal.component';
+import { LoginComponent } from './components/general/login/login.component';
+import { ChooselocalComponent } from './components/general/local-management/chooselocal/chooselocal.component';
 import { MatOptionModule } from '@angular/material/core';
 import { ShiftEditComponent } from './components/shift-configuration/components/shift-edit/shift-edit.component';
 import { SlotEditComponent } from './components/shift-configuration/components/slot-edit/slot-edit.component';
 import { ServiceRoleEditComponent } from './components/shift-configuration/components/service-role-edit/service-role-edit.component';
+import { LocalConfigurationComponent } from './components/general/local-management/local-configuration/local-configuration.component';
+import { LocalEditComponent } from './components/general/local-management/local-edit/local-edit.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { ServiceRoleEditComponent } from './components/shift-configuration/compo
     ChooselocalComponent,
     ShiftEditComponent,
     SlotEditComponent,
-    ServiceRoleEditComponent
+    ServiceRoleEditComponent,
+    LocalConfigurationComponent,
+    LocalEditComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ import {ListItem} from '../../models/ListItem';
 import {EmployeeInviteComponent} from '../employee-configuration/components/employee-invite/employee-invite.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ShiftEditComponent} from './components/shift-edit/shift-edit.component';
-import {ChooselocalComponent} from '../chooselocal/chooselocal.component';
+import {ChooselocalComponent} from '../general/local-management/chooselocal/chooselocal.component';
 import {ShiftTemplateConfigs} from './models/ShiftTemplateConfigs';
 
 @Component({
