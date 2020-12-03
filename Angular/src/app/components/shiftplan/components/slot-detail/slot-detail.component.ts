@@ -22,13 +22,20 @@ export class SlotDetailComponent implements OnInit {
     const url = '/applyEmployeeToSlot?localId=' + this.globalvariables.getLocalID() + '&employeeName=' +
       this.globalvariables.getNickName() + '&slotIdString=' + this.slot.id + '&isApplied=' + value;
     this.sendData(url);
+    if (value === false)
+    {
+      if (this.slot.assigned.indexOf(this.globalvariables.getNickName()) >= 0)
+      {
+        this.clickOnAssigned(this.globalvariables.getNickName());
+      }
+    }
   }
 
-  clickOnAssigned(event, item): void{
+  clickOnAssigned(item): void{
     const url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'false';
     this.sendData(url);
   }
-  clickOnApplied(event, item): void{
+  clickOnApplied(item): void{
     const url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'true';
     this.sendData(url);
   }
