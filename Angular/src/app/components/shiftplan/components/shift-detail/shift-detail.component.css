@@ -1,5 +1,5 @@
 section{
-  border: 0.1em solid black;
+  border: 0.1em solid #e4e4e4;
 }
 section:after{
   content: ".";
