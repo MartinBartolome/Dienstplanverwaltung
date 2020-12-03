@@ -37,7 +37,7 @@ export class SlotEditComponent implements OnInit {
         .subscribe((data: any) => {
         this.ServiceRoles = data;
         console.log(data);
-      });;
+      });
     });
   }
 

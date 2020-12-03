@@ -1,8 +1,8 @@
 <form>
   <p>
-    <app-table [table]="Locals"></app-table>
+    <app-table [table]="Locals" (ItemSelectedEvent)="Edit($event)" (AddEvent)="Add()"></app-table>
   </p>
   <div class="button">
-    <button mat-raised-button color="primary" cdkFocusInitial>Neues Lokal beantragen</button>
+    <button mat-raised-button color="primary" (click)="Add()" cdkFocusInitial>Neues Lokal beantragen</button>
   </div>
 </form>
