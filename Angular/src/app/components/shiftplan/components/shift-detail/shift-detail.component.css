@@ -13,7 +13,7 @@ label{
   margin: 0.5em;
   float:left;
 }
-.inputwrapper
+mat-checkbox
 {
   margin: 0.5em;
   float: right;

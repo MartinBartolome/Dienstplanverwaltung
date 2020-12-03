@@ -21,6 +21,7 @@ import { MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
 import { EmployeeConfigurationComponent } from './components/employee-configuration/employee-configuration.component';
 import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
@@ -73,7 +74,8 @@ import { LocalEditComponent } from './components/general/local-management/local-
     MatOptionModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

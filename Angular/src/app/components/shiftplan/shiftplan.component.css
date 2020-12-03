@@ -11,7 +11,7 @@ header{
 }
 
 .DayBox{
-  border:solid black;
+  border:solid #e4e4e4;
   border-collapse: collapse;
   border-width:0.1em;
   display: inline-block;

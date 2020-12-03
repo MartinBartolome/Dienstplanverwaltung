@@ -1,13 +1,13 @@
 section{
   display: flex;
   flex-direction: column;
-  border:solid black;
+  border:solid #e4e4e4;
   border-collapse: collapse;
   border-width:0.1em;
 }
 
 .headerrow{
-  border-bottom:solid black;
+  border-bottom:solid #e4e4e4;
   border-collapse: collapse;
   border-width:0.1em;
   display: flex;

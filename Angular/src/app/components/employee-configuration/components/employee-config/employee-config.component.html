@@ -1,17 +1,20 @@
 <section>
+  <header>{{ employee.nickName }}</header>
   <div class="employee">
-    <header>{{ employee.nickName }}</header>
     <div class="Roles">
       <app-table [table]="employee.serviceRoles" (AddEvent)="newServiceRole()"></app-table>
     </div>
+    <div class="settings">
+      <mat-checkbox [(ngModel)]="employee.active" color="primary">Deaktivieren</mat-checkbox>
+      <mat-form-field appearance="outline">
+        <mat-label>Stundensatz in {{ employee.currency }}</mat-label>
+        <input matInput placeholder="Stundensatz" [(ngModel)]="employee.hourlyRate">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Monatskontingent</mat-label>
+        <input matInput placeholder="Monatskontingent" [(ngModel)]="employee.monthlyContigent">
+      </mat-form-field>
+    </div>
   </div>
-  <div class="settings">
-    <div> </div>
-    <label class="formlabel">Deaktivieren</label>
-    <input class="forminput" type="checkbox" id="isActive" name="isActive" value="{{employee.active}}" [checked]="employee.active">
-      <label class="formlabel" for="hourlyRate">Stundensatz</label>
-      <input class="forminput" type="text" id="hourlyRate" name="hourlyRate" value="{{employee.hourlyRate}}"> {{employee.currency}}
-      <label class="formlabel" for="monthlyContingent">Monatskontingent</label>
-      <input class="forminput" type="text" id="monthlyContingent" name="hourlyRate" value="{{employee.monthlyContigent}}">
-  </div>
+
 </section>

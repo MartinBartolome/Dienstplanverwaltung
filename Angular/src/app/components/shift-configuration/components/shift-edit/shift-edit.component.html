@@ -1,27 +1,32 @@
 <form>
   <div class="leftside textinput">
-    <label class="formlabel" for="title">Titel</label>
-    <input class="forminput" type="text" id="title" name="title" value="{{ template.title}}">
+    <mat-form-field appearance="outline">
+      <mat-label>Titel</mat-label>
+      <input matInput placeholder="Titel" [value]="template.title">
+    </mat-form-field>
   </div>
   <div class="rightside textinput">
-    <label class="formlabel" for="rate">Takt</label>
-    <select name="rate" id="rate" class="forminput">
-      <option *ngFor="let item of template.recurrenceOptions.dropDownOptions"
-              [value]="template.recurrenceOptions.selectedItem" [selected]="item.selected">{{ item.title }}
-      </option>
-    </select>
+    <mat-form-field appearance="outline">
+      <mat-label>Takt</mat-label>
+      <mat-select [(value)]="template.recurrenceOptions.selectedItem">
+        <mat-option value="option"
+                    *ngFor="let item of template.recurrenceOptions.dropDownOptions">{{ item.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <app-table [table]="template.days" class="leftside"></app-table>
   <app-table [table]="template.slots" class="rightside" (ItemSelectedEvent)="editSlot($event)" (AddEvent)="newSlot()"></app-table>
   <div class="leftside">
-    <label>Gültigkeit</label>
-    <div class="textinput">
-      <label class="formlabel" for="fromDate">von:</label>
-      <input class="forminput" type="text" id="fromDate" name="fromDate" value="{{ template.fromDate}}">
-    </div>
-    <div class="textinput">
-      <label class="formlabel" for="toDate">bis:</label>
-      <input class="forminput" type="text" id="toDate" name="toDate" value="{{ template.toDate}}">
-    </div>
+    <p>
+      <label>Gültigkeit</label>
+    </p>
+    <mat-form-field appearance="outline">
+      <mat-label>Von</mat-label>
+      <input matInput placeholder="Von" [value]="template.fromDate">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Bis</mat-label>
+      <input matInput placeholder="Bis" [value]="template.toDate">
+    </mat-form-field>
   </div>
 </form>
