@@ -38,6 +38,7 @@ export class ChooselocalComponent implements OnInit {
   public ManageLocals(): void{
     const dialogRef = this.dialog.open(LocalConfigurationComponent, {});
     dialogRef.afterClosed().subscribe(result => {
+      this.GetLocals();
     });
   }
 }

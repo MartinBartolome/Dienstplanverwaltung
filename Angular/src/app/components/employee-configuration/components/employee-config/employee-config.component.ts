@@ -29,7 +29,7 @@ export class EmployeeConfigComponent implements OnInit {
         });;
     });
   }
-
+  // würde ich in der ansicht nicht verwenden
   public editServiceRole(ServiceRole: ListItem): void{
     ServiceRole.selected = false;
     const dialogRef = this.dialog.open(ServiceRoleEditComponent,
