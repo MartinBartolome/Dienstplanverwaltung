@@ -2,14 +2,17 @@ package ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.administration.DropDownData;
+import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
+import ffhs.students.projects.dienstplanverwaltung.database.RecurrenceType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ShiftTemplateConfig {
     private final DropDownData recurrenceOptions;
@@ -29,22 +32,16 @@ public class ShiftTemplateConfig {
         toDate = Helper.stringFromDate( shiftTemplate.getTo() );
         title = shiftTemplate.getTitle();
         id = shiftTemplate.getId();
-        /*
-        slotServiceRoles = shiftTemplate.getSlots().stream()
-                .map(slot -> TableViewData.getForServiceRoles(localServiceRoles,slot.getServiceRoles()))
-                .collect(Collectors.toList());
-         */
         slotInfos = generateSlotInfos(shiftTemplate.getSlots(),localServiceRoles);
     }
     public ShiftTemplateConfig(){
-        recurrenceOptions = new DropDownData();
-        days = new TableViewData();
-        slots = new TableViewData();
+        recurrenceOptions = DropDownData.getForRecurrences();
+        days = TableViewData.getWeekDayTable();
+        slots = new TableViewData("Slots");
         fromDate = "";
         toDate = "";
         title = "";
         id = -1;
-        //slotServiceRoles = new ArrayList<>();
     }
     public DropDownData getRecurrenceOptions() {  return recurrenceOptions;  }
     public TableViewData getDays() { return days;  }
