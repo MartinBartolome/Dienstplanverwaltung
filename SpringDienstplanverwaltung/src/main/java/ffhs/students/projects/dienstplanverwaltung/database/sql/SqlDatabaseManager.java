@@ -3,13 +3,11 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
-import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotData;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.swing.text.html.Option;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -239,6 +237,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         //Daten für Aktualisierung aufbauen/transformieren
         String recurrenceString = shiftTemplateConfig.getRecurrenceOptions().getSelectedItem().getTitle();
         List<String> weekDaysStrings = shiftTemplateConfig.getDays().getItems().stream()
+                .filter(ListItem::getSelected)
                 .map(ListItem::getTitle)
                 .collect(Collectors.toList());
         List<DayOfWeek> weekDays = weekDaysStrings.stream().map(Helper::getWeekDay).collect(Collectors.toList());
@@ -254,19 +253,22 @@ public class SqlDatabaseManager implements IDatabaseManager {
         shiftTemplateEntity.setWeekdays(weekDays);
         shiftTemplateEntity.updateSlots(newSlots,slotRepository);
         shiftTemplateEntity.save(shiftTemplateRepository);
+
         return Optional.of(shiftTemplateEntity);
     }
 
-    private SlotEntity getForSlotInfo(SlotData info){
+    private SlotEntity getForSlotInfo(SlotConfig info){
         long id = info.getId();
         int numberOfEmployeesNeeded = info.getNumberOfEmployeesNeeded();
         SlotTypeEntity slotType = slotTypedRepository.findByTitle(info.getSlotType()).orElse(null);
-        List<ServiceRoleEntity> serviceRoles = info.getServiceRolesIds().stream()
+        List<ServiceRoleEntity> slectedServiceRoles = info.getServiceRoleTable().getItems().stream()
+                .filter(item -> item.getSelected())
+                .map(ListItem::getId)
                 .map(srId -> serviceRoleRepository.findById(srId))
                 .flatMap(Optional::stream)
                 .map(ServiceRoleEntity.class::cast)
                 .collect(Collectors.toList());
-        return new SlotEntity(id,serviceRoles,slotType,numberOfEmployeesNeeded);
+        return new SlotEntity(id,slectedServiceRoles,slotType,numberOfEmployeesNeeded);
     }
 
 

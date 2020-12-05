@@ -11,9 +11,12 @@ public class ListItem {
     private DisplayType displayType;
     private String title;
     private long id;
+
+    public void setSelected(boolean selected) { isSelected = selected;  }
+
     private boolean isSelected;
 
-    public boolean isSelected() { return isSelected;  }
+    public boolean getSelected() { return isSelected;  }
 
     public ListItem(){
 
@@ -34,6 +37,12 @@ public class ListItem {
         this.displayType = DisplayType.Default;
         this.title = title;
         this.isSelected = isSelected;
+    }
+    public ListItem( String title, boolean isSelected,long id) {
+        this.displayType = DisplayType.Default;
+        this.title = title;
+        this.isSelected = isSelected;
+        this.id = id;
     }
     public ListItem(DisplayType displayType, String title) {
         this.displayType = displayType;

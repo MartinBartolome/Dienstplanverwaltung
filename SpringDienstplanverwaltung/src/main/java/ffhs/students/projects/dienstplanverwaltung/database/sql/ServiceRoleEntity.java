@@ -61,4 +61,11 @@ public class ServiceRoleEntity implements IServiceRole, ISaveable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public void addSlot(SlotEntity slot){
+        slots.add(slot);
+    }
+    public void removeSlot(SlotEntity slot){
+        slots.remove(slot);
+    }
 }

@@ -1,13 +1,10 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
-import ffhs.students.projects.dienstplanverwaltung.Helper;
-import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotData;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ISlotDisplay;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Entity
@@ -72,8 +69,32 @@ class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
     public void update(SlotEntity newSlot,SlotRepository repo){
         slotType = newSlot.slotType;
         numberOfEmployeesNeeded = newSlot.numberOfEmployeesNeeded;
-        serviceRoles = newSlot.serviceRoles;
+        updateServiceRoles(newSlot.serviceRoles);
         save(repo);
+    }
+
+    private void updateServiceRoles(List<ServiceRoleEntity> newServiceRoles){
+        List<ServiceRoleEntity> toRemove = this.serviceRoles.stream()
+                .filter(sr -> !newServiceRoles.contains(sr)).collect(Collectors.toList());
+
+        List<ServiceRoleEntity> toAdd = newServiceRoles.stream()
+                .filter(nsr -> !serviceRoles.contains(nsr))
+                .collect(Collectors.toList());
+
+        toRemove.forEach(this::removeServiceRole);
+        toAdd.forEach(this::addServiceRole);
+    }
+    private void addServiceRole(ServiceRoleEntity serviceRole){
+        if (serviceRoles.stream().anyMatch(sr -> sr.getId() == serviceRole.getId()))
+            return;
+        serviceRole.addSlot(this);
+        serviceRoles.add(serviceRole);
+    }
+    private void removeServiceRole(ServiceRoleEntity serviceRole){
+        if (serviceRoles.stream().anyMatch(sr -> sr.getId() == serviceRole.getId())){
+            serviceRole.removeSlot(this);
+            serviceRoles.remove(serviceRole);
+        }
     }
 
     private int numberOfEmployeesNeeded;
