@@ -1,17 +1,18 @@
 package ffhs.students.projects.dienstplanverwaltung;
 
 //import ffhs.students.projects.dienstplanverwaltung.database.sql.UserRepository;
-import ffhs.students.projects.dienstplanverwaltung.administration.AdminstrationManager;
+import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
+import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenantConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
+import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDay;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftPlanManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.Shiftplan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -63,13 +64,121 @@ public class ShiftplanController {
     public TableViewData getChooseLocal(
             @RequestParam(value = "userNickName") String userNickName){
 
-        AdminstrationManager.databaseManager = dbManager;
-        return AdminstrationManager.getChooseLocal(userNickName);
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getChooseLocal(userNickName);
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getServiceRoles")
+    public TableViewData getServiceRoles(
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getServiceRoles(localId);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/addServiceRole")
+    public TableViewData addServiceRole(
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "title") String title){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.addServiceRole(localId,title);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/updateServiceRole")
+    public TableViewData updateServiceRole(
+            @RequestParam(value = "serviceRoleId") long serviceRoleId,
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "isActive") boolean isActive){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.updateServiceRole(serviceRoleId,title,isActive);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getOwnedLocals")
+    public TableViewData getOwnedLocals(
+            @RequestParam(value = "userNickName") String userNickName){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getOwnedLocals(userNickName);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/requestNewLocal")
+    public TableViewData requestNewLocal(
+            @RequestParam(value = "userNickName") String userNickName,
+            @RequestParam(value = "title") String title){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.requestNewLocal(userNickName,title);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/updateLocal")
+    public TableViewData updateLocal(
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "isActive") boolean isActive){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.updateLocal(localId,title,isActive);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getSysAdminTenantConfig")
+    public SysAdminTenantConfig getSysAdminTenantConfig(){
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getSysAdminTenantConfig();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/localSetState")
+    public SysAdminTenantConfig localSetState(
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "isGranted") boolean isGranted,
+            @RequestParam(value = "isActive") boolean isActive){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.localSetState(localId,isGranted,isActive);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getEmployeesConfig")
+    public EmployeesConfig getEmployeesConfig(
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getEmployeesConfig(localId);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/getShiftPlanConfig")
+    public ShiftPlanConfig getShiftPlanConfig(
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.getShiftPlanConfig(localId);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/updateShiftTemplateConfig")
+    public ShiftTemplateConfig updateShiftTemplateConfig(
+            @RequestBody ShiftTemplateConfig shiftTemplateConfig){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.updateShiftTemplateConfig(shiftTemplateConfig);
+    }
+
+
 
 
     @Autowired
     public SqlDatabaseManager dbManager;
+
 
     @GetMapping("/createFakeData")
     public void test(){

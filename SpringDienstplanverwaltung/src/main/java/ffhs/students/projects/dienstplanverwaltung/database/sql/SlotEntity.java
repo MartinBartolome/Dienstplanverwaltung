@@ -10,10 +10,13 @@ import java.util.stream.Collectors;
 @Entity
 @Table
 public
-class SlotEntity implements ISlot, ISlotDisplay {
+class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+
+
     @Override
     public long getSlotId() { return id;  }
 
@@ -23,6 +26,9 @@ class SlotEntity implements ISlot, ISlotDisplay {
     @ManyToMany(cascade = CascadeType.DETACH)
     private List<EmployeeEntity> applied;
 
+    @ManyToMany(mappedBy ="slots")
+    private List<ServiceRoleEntity> serviceRoles;
+
     @ManyToOne
     @JoinColumn()
     private SlotTypeEntity slotType;
@@ -30,6 +36,10 @@ class SlotEntity implements ISlot, ISlotDisplay {
     @ManyToOne
     @JoinColumn()
     private ShiftEntity shift;
+
+    public void setShiftTemplate(ShiftTemplateEntity shiftTemplate) {
+        this.shiftTemplate = shiftTemplate;
+    }
 
     @ManyToOne
     @JoinColumn()
@@ -56,6 +66,36 @@ class SlotEntity implements ISlot, ISlotDisplay {
                 .collect(Collectors.toList());
     }
 
+    public void update(SlotEntity newSlot,SlotRepository repo){
+        slotType = newSlot.slotType;
+        numberOfEmployeesNeeded = newSlot.numberOfEmployeesNeeded;
+        updateServiceRoles(newSlot.serviceRoles);
+        save(repo);
+    }
+
+    private void updateServiceRoles(List<ServiceRoleEntity> newServiceRoles){
+        List<ServiceRoleEntity> toRemove = this.serviceRoles.stream()
+                .filter(sr -> !newServiceRoles.contains(sr)).collect(Collectors.toList());
+
+        List<ServiceRoleEntity> toAdd = newServiceRoles.stream()
+                .filter(nsr -> !serviceRoles.contains(nsr))
+                .collect(Collectors.toList());
+
+        toRemove.forEach(this::removeServiceRole);
+        toAdd.forEach(this::addServiceRole);
+    }
+    private void addServiceRole(ServiceRoleEntity serviceRole){
+        if (serviceRoles.stream().anyMatch(sr -> sr.getId() == serviceRole.getId()))
+            return;
+        serviceRole.addSlot(this);
+        serviceRoles.add(serviceRole);
+    }
+    private void removeServiceRole(ServiceRoleEntity serviceRole){
+        if (serviceRoles.stream().anyMatch(sr -> sr.getId() == serviceRole.getId())){
+            serviceRole.removeSlot(this);
+            serviceRoles.remove(serviceRole);
+        }
+    }
 
     private int numberOfEmployeesNeeded;
     @Override
@@ -103,15 +143,21 @@ class SlotEntity implements ISlot, ISlotDisplay {
     public SlotEntity(SlotEntity slotTemplate,ShiftEntity shift,SlotRepository repo){
         this.slotType = slotTemplate.slotType;
         this.numberOfEmployeesNeeded = slotTemplate.numberOfEmployeesNeeded;
-        this.applied = applied;
-        this.assigned = assigned;
         this.shift = shift;
         this.save(repo);
     }
-
     public void addToShiftTemplate(ShiftTemplateEntity shiftTemplate){
         this.shiftTemplate = shiftTemplate;
     }
-
-
+    public List<IServiceRole> getServiceRoles() {
+        return serviceRoles.stream()
+                .map(IServiceRole.class::cast)
+                .collect(Collectors.toList());
+    }
+    public SlotEntity(long id, List<ServiceRoleEntity> serviceRoles, SlotTypeEntity slotType, int numberOfEmployeesNeeded) {
+        this.id = id;
+        this.serviceRoles = serviceRoles;
+        this.slotType = slotType;
+        this.numberOfEmployeesNeeded = numberOfEmployeesNeeded;
+    }
 }

@@ -20,6 +20,7 @@ public interface IShiftTemplate {
     LocalTime getFromTime();
     LocalTime getToTime();
     boolean equals(IShiftTemplate template);
+    String getLongTitle();
 
     default boolean isOnDay(LocalDate day){
         if (getRecurrence() == RecurrenceType.Single){
@@ -38,7 +39,6 @@ public interface IShiftTemplate {
         if (getRecurrence() == RecurrenceType.BiWeekly){
             return Helper.isDayInWeekInBiWeeklyRecurrence(day,getFrom());
         }
-
         return false;
     }
 }
