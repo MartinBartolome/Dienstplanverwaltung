@@ -2,12 +2,10 @@ package ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.administration.DropDownData;
-import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
-import ffhs.students.projects.dienstplanverwaltung.database.ISlotType;
-import org.springframework.util.StreamUtils;
+import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,7 @@ public class ShiftTemplateConfig {
     private final String toDate;
     private final String title;
     private final long id;
-    private final List<TableViewData> slotServiceRoles;
+    //private final List<TableViewData> slotServiceRoles;
 
     public ShiftTemplateConfig(IShiftTemplate shiftTemplate,List<IServiceRole> localServiceRoles ){
         recurrenceOptions = new DropDownData(shiftTemplate);
@@ -31,9 +29,12 @@ public class ShiftTemplateConfig {
         toDate = Helper.stringFromDate( shiftTemplate.getTo() );
         title = shiftTemplate.getTitle();
         id = shiftTemplate.getId();
+        /*
         slotServiceRoles = shiftTemplate.getSlots().stream()
                 .map(slot -> TableViewData.getForServiceRoles(localServiceRoles,slot.getServiceRoles()))
                 .collect(Collectors.toList());
+         */
+        slotInfos = generateSlotInfos(shiftTemplate.getSlots(),localServiceRoles);
     }
     public ShiftTemplateConfig(){
         recurrenceOptions = new DropDownData();
@@ -43,7 +44,7 @@ public class ShiftTemplateConfig {
         toDate = "";
         title = "";
         id = -1;
-        slotServiceRoles = new ArrayList<>();
+        //slotServiceRoles = new ArrayList<>();
     }
     public DropDownData getRecurrenceOptions() {  return recurrenceOptions;  }
     public TableViewData getDays() { return days;  }
@@ -53,15 +54,31 @@ public class ShiftTemplateConfig {
     public String getTitle() { return title; }
     public long getId() { return id; }
 
-    public List<SlotData> getSlotInfos(){
-        List<SlotData> result = slots.getItems().stream()
-                .map(listItem -> new SlotData(listItem.getId(),(listItem.getTitle())))
+
+    private List<SlotConfig> slotInfos;
+    public void setSlotInfos(List<SlotConfig> slotInfos) {
+        this.slotInfos = slotInfos;
+    }
+    public List<SlotConfig> getSlotInfos(){
+        return slotInfos;
+    }
+
+    private List<SlotConfig> generateSlotInfos(List<ISlot> slots,List<IServiceRole> localServiceRoles){
+        return slots.stream()
+                .map(slot -> new SlotConfig(slot,localServiceRoles))
+                .collect(Collectors.toList());
+    }
+
+    /*
+    private List<SlotConfig> generate(){
+        List<SlotConfig> result = slots.getItems().stream()
+                .map(listItem -> new SlotConfig(listItem.getId(),(listItem.getTitle())))
                 .collect(Collectors.toList());
 
         // pro Slot Liste von selektierten ServiceRoles beziehen
         List<List<Long>> serviceRoleIds = slotServiceRoles.stream()
                 .map(roles -> roles.getItems().stream()
-                        .filter(ListItem::isSelected)
+                        .filter(ListItem::getSelected)
                         .collect(Collectors.toList()))
                 .map(listItems -> listItems.stream()
                         .map(ListItem::getId)
@@ -74,7 +91,9 @@ public class ShiftTemplateConfig {
             else
                 result.get(i).setServiceRolesIds(new ArrayList<>());
         }
-
         return result;
     }
+     */
+
+
 }

@@ -46,11 +46,13 @@ public class TableViewData {
                 .collect(Collectors.toList());
     }
 
+
+
     public static TableViewData getForServiceRoles(List<IServiceRole> localRoles, List<IServiceRole> slotRoles){
         String title = "Slots";
         boolean showsAddButton = true;
         List<ListItem> items = localRoles.stream()
-                .map(localRole -> new ListItem(localRole.getName(),slotRoles.contains(localRole)))
+                .map(localRole -> new ListItem(localRole.getName(),slotRoles.contains(localRole),localRole.getId()))
                 .collect(Collectors.toList());
         return new TableViewData(title,showsAddButton,items);
     }

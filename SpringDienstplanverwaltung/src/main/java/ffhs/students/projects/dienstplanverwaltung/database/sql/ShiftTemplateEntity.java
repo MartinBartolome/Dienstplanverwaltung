@@ -1,11 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
-import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
-import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotData;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
-import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDisplay;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
