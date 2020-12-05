@@ -1,0 +1,125 @@
+{
+  "type": "EmployeesConfig",
+  "employeesTable": {
+    "title": "Mitarbeiter",
+    "type": "TableData",
+    "listItems": [
+      {
+        "type": "ListItem",
+        "title": "matthias@ffhs.ch",
+        "setting": "default",
+        "isSelected": false
+      },
+      {
+        "type": "ListItem",
+        "title": "celine@ffhs.ch",
+        "setting": "default",
+        "isSelected": false
+      },
+      {
+        "type": "ListItem",
+        "title": "martin@ffhs.ch",
+        "setting": "default",
+        "isSelected": false
+      }
+    ]
+  },
+  "employeesConfigs": [
+    {
+      "employeeEmail":"matthias@ffhs.ch",
+      "type": "EmployeeConfig",
+      "serviceRolesTable": {
+        "title": "Dienstrollen",
+        "type": "TableData",
+        "listItems": [
+          {
+            "type": "ListItem",
+            "title": "Barkeeper",
+            "setting": "default",
+            "isSelected": true
+          },
+          {
+            "type": "ListItem",
+            "title": "Service",
+            "setting": "default",
+            "isSelected": false
+          }
+        ]
+      },
+      "isActive": true,
+      "hourlyRate" : "9",
+      "currency":"CHF",
+      "monthlyContingent": "35",
+      "employee":{
+        "type": "Employee",
+        "isActive":true,
+        "hourlyRate":"25",
+        "monthlyContingent":"40"
+      }
+    },
+    {
+      "employeeEmail":"celine@ffhs.ch",
+      "type": "EmployeeConfig",
+      "serviceRolesTable": {
+        "title": "Dienstrollen",
+        "type": "TableData",
+        "listItems": [
+          {
+            "type": "ListItem",
+            "title": "Barkeeper",
+            "setting": "default",
+            "isSelected": true
+          },
+          {
+            "type": "ListItem",
+            "title": "Service",
+            "setting": "default",
+            "isSelected": true
+          }
+        ]
+      },
+      "isActive": true,
+      "hourlyRate" : "15",
+      "currency":"CHF",
+      "monthlyContingent": "30",
+      "employee":{
+        "type": "Employee",
+        "isActive":true,
+        "hourlyRate":"25",
+        "monthlyContingent":"50"
+      }
+    },
+    {
+      "employeeEmail":"martin@ffhs.ch",
+      "type": "EmployeeConfig",
+      "serviceRolesTable": {
+        "title": "Dienstrollen",
+        "type": "TableData",
+        "listItems": [
+          {
+            "type": "ListItem",
+            "title": "Barkeeper",
+            "setting": "default",
+            "isSelected": false
+          },
+          {
+            "type": "ListItem",
+            "title": "Service",
+            "setting": "default",
+            "isSelected": true
+          }
+        ]
+      },
+      "isActive": true,
+      "hourlyRate" : "25",
+      "currency":"CHF",
+      "monthlyContingent": "40",
+      "employee":{
+        "type": "Employee",
+        "isActive":true,
+        "hourlyRate":"25",
+        "monthlyContingent":"30"
+      }
+    }
+  ]
+}

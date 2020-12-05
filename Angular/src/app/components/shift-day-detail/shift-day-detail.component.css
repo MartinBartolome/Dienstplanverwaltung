@@ -1,0 +1,20 @@
+section{
+  width: 25em;
+  border: 0.1em solid black;
+}
+
+header{
+  text-align: center;
+  margin-top:0.3em;
+  margin-bottom: 1em;
+}
+
+.ShiftContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.Shift{
+  margin: 0 0.5em 0.5em 0.5em;
+}
