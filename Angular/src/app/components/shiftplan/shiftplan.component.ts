@@ -1,57 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {ShiftDays} from '../../models/ShiftDays';
-import {environment} from '../../../environments/environment';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {ShiftDays} from './models/ShiftDays';
+import {ShiftPlan} from './models/ShiftPlan';
+import {MatDialog} from '@angular/material/dialog';
+import {ShiftDayDetailComponent} from './components/shift-day-detail/shift-day-detail.component';
 
 @Component({
   selector: 'app-shiftplan',
   templateUrl: './shiftplan.component.html',
   styleUrls: ['./shiftplan.component.css']
 })
-export class ShiftplanComponent implements OnInit {
-  url = environment.Backendserver + '/shiftPlan';
-  public data: any;
-  public showDetail = false;
-  public selectedDay: ShiftDays;
-  private selecteddate: Date;
-  public DateTitle: string;
+export class ShiftplanComponent implements OnInit, OnChanges {
+  @Input() data: ShiftPlan;
+  @Output() DateChange = new EventEmitter<Date>();
+  @Input() DateTitle: string;
 
-  constructor(private api: HttpClient) { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.selecteddate = new Date();
-    this.LoadData();
   }
 
-  private LoadData(): void{
-    this.DateTitle = this.selecteddate.toLocaleString('default', { month: 'long', year: 'numeric'});
-    const combinedurl =  this.url + '?month='
-      + this.selecteddate.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
-      + '.' + (this.selecteddate.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
-      + '.' + this.selecteddate.getFullYear();
-    this.api.get(combinedurl).subscribe(data => {
-        this.data = data;
-        console.log(data);
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('Client-side error occured.');
-        } else {
-          console.log('Server-side error occured.');
-        }
-      });
+  ngOnChanges(changes: SimpleChanges): void
+  {
+    this.DateTitle = this.stringToUSDate(this.data.month).toLocaleString('default', { month: 'long', year: 'numeric'});
   }
 
-  NextMonth(): void{
-    this.selecteddate.setMonth(this.selecteddate.getMonth() + 1);
-    this.LoadData();
+  ChangeMonth(value: number): void
+  {
+    this.data.month = this.DateToString(new Date(
+      this.stringToUSDate(this.data.month).setMonth(this.stringToUSDate(this.data.month).getMonth() + value)));
+    this.DateChange.emit(this.stringToUSDate(this.data.month));
   }
-  PrevMonth(): void{
-    this.selecteddate.setMonth(this.selecteddate.getMonth() - 1);
-    this.LoadData();
-  }
+
   clickOpenDetail(Shiftdays): void{
-    this.showDetail = !this.showDetail;
-    this.selectedDay = Shiftdays;
+    const dialogRef = this.dialog.open(ShiftDayDetailComponent, {
+      data: Shiftdays
+    });
+  }
+  DateToString(date: Date): string
+  {
+    return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+  }
+  stringToUSDate(datestring: string): Date
+  {
+    return new Date(datestring.split('.', 3)[1].toString() + '-' +
+      datestring.split('.', 3)[0].toString() + '-' +
+      datestring.split('.', 3)[2].toString());
   }
 }

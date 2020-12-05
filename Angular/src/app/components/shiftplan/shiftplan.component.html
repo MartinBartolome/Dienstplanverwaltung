@@ -1,46 +1,20 @@
 <section>
-  <div>
-    <button type="button" (click)="PrevMonth()"><</button>
-    <label> {{ this.DateTitle }}</label>
-    <button type="button" (click)="NextMonth()">></button>
+  <div id="Navigation">
+    <button mat-raised-button color="primary" type="button" (click)="ChangeMonth(-1)"><</button>
+    <header> {{ this.DateTitle }}</header>
+    <button mat-raised-button color="primary" type="button" (click)="ChangeMonth(+1)">></button>
   </div>
-  <table id="calendar">
-    <tbody>
-    <tr>
-      <td *ngFor="let numb of data.shiftDays | slice: 0:7">
-        <div class="date">{{numb.day.slice(0,2)}}</div>
-        <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
-    </tr>
-    <tr>
-      <td *ngFor="let numb of data.shiftDays | slice: 7:14">
-        <div class="date">{{numb.day.slice(0,2)}}</div>
-        <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
-    </tr>
-    <tr>
-      <td *ngFor="let numb of data.shiftDays | slice: 14:21">
-        <div class="date">{{numb.day.slice(0,2)}}</div>
-        <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
-    </tr>
-    <tr>
-      <td *ngFor="let numb of data.shiftDays | slice: 21:28">
-        <div class="date">{{numb.day.slice(0,2)}}</div>
-        <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
-    </tr>
-    <tr>
-      <td *ngFor="let numb of data.shiftDays | slice: 28:35">
-        <div class="date">{{numb.day.slice(0,2)}}</div>
-        <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
-    </tr>
-    <tr>
-      <td *ngFor="let numb of data.shiftDays | slice: 35:42">
-        <div class="date">{{numb.day.slice(0,2)}}</div>
-        <app-shift-day [shiftdays]="numb" (click)="clickOpenDetail(numb)"></app-shift-day></td>
-    </tr>
-    </tbody>
-  </table>
-  <ng-container *ngIf="showDetail">
-    <div class="DetailedDay">
-      <app-shift-day-detail [shiftdays]="selectedDay"></app-shift-day-detail>
+  <div id="calendar">
+    <div class="DayBox" align="center">Mo</div>
+    <div class="DayBox" align="center">Di</div>
+    <div class="DayBox" align="center">Mi</div>
+    <div class="DayBox" align="center">Do</div>
+    <div class="DayBox" align="center">Fr</div>
+    <div class="DayBox" align="center">Sa</div>
+    <div class="DayBox" align="center">So</div>
+    <div class="DayBox" *ngFor="let shiftdays of data.shiftDays">
+      <div class="date">{{shiftdays.day.slice(0,2)}}</div>
+      <app-shift-day [shiftdays]="shiftdays" (click)="clickOpenDetail(shiftdays)"></app-shift-day>
     </div>
-  </ng-container>
+  </div>
 </section>

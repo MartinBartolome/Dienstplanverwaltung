@@ -1,0 +1,26 @@
+<section>
+  <header>
+    <label>
+      {{ slot.title }}
+    </label>
+    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalvariables.getNickName())>=0" (click)="Apply(false)">Abmelden</button>
+    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalvariables.getNickName())<0" (click)="Apply(true)">Melden</button>
+  </header>
+  <div class="usercontainer">
+    <div class="user">
+      <label>zugewiesen:</label>
+      <ul *ngFor="let a of slot.assigned ; last as isLast">
+        <li *ngIf="isLast == false" (click)="clickOnAssigned(a)">{{ a }},</li>
+        <li *ngIf="isLast == true" (click)="clickOnAssigned(a)">{{ a }}</li>
+      </ul>
+    </div>
+    <div class="user">
+      <label>gemeldet:</label>
+      <ul *ngFor="let a of slot.applied ; last as isLast">
+        <li *ngIf="isLast == false" [ngClass]="{'Hightlight': slot.assigned.indexOf(a)>=0}" (click)="clickOnApplied(a)">{{ a }},</li>
+        <li *ngIf="isLast == true" [ngClass]="{'Hightlight': slot.assigned.indexOf(a)>=0}" (click)="clickOnApplied(a)">{{ a }}</li>
+      </ul>
+    </div>
+
+  </div>
+</section>

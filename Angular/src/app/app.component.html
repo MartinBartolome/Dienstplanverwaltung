@@ -1,3 +1,28 @@
-<div>
-  <app-shiftplan></app-shiftplan>
+<app-login *ngIf="!loginsuccess" (submitEM)="loginsuccess = true"></app-login>
+<app-chooselocal *ngIf="loginsuccess && !localselected" (submitEM)="localselected = true; Login()" ></app-chooselocal>
+<div *ngIf="loginsuccess && localselected">
+  <mat-tab-group mat-stretch-tabs class="tabcontainer">
+    <mat-tab label="Schichtplan" >
+      <ng-template matTabContent>
+        <app-shiftplan [data]="ShiftPlanData" (DateChange)="loadShiftPlanData($event)"></app-shiftplan>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Schichtverwaltung" >
+      <ng-template matTabContent>
+        <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration"></app-shift-configuration>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Mitarbeiterverwaltung">
+      <ng-template matTabContent>
+        <app-employee-configuration [employees]="EmployeeData"></app-employee-configuration>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Lohnbuchhaltung">
+      <ng-template matTabContent>
+        <app-payrollaccounting></app-payrollaccounting>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
 </div>
+
+

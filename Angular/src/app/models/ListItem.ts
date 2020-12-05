@@ -1,6 +1,6 @@
 export class ListItem {
-  type: string;
+  displayType: string;
   title: string;
-  setting: string;
-  isSelected: boolean;
+  id: number;
+  selected: boolean;
 }

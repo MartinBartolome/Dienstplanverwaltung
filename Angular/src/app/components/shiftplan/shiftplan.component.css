@@ -1,29 +1,31 @@
+section{
+  padding-left:5em;
+  padding-right:5em;
+}
+header{
+  font-size: 2em;
+}
 #calendar {
-  background: #CCC;
-  z-index: -1;
-  position: absolute;
-}
-table {
-  border:solid black;
-  border-collapse: collapse;
-  border-width:0.1em 0.1em 0 0;
-}
-table th, table td {
-  border:solid black;
-  border-width:0 0 0.1em 0.1em;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.DayBox{
+  border:solid #e4e4e4;
+  border-collapse: collapse;
+  border-width:0.1em;
+  display: inline-block;
+  flex-grow: 1;
+  width: calc(100% * (1/8) - 1px);
+}
+#Navigation{
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+}
 .date{
   float:right;
+  padding-top: 0.5em;
+  padding-right: 0.5em;
 }
 
-.DetailedDay{
-  z-index: 5;
-  position:fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -9em; /*set to a negative number 1/2 of your height*/
-  margin-left: -15em; /*set to a negative number 1/2 of your width*/
-  border: 1px solid #ccc;
-  background-color: #f3f3f3;
-}

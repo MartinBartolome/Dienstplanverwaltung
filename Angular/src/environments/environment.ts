@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  Backendserver: 'http://192.168.178.20:8080'
 };
 
 /*
