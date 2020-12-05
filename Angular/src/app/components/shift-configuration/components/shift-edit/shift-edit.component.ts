@@ -1,10 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ListItem} from '../../../../models/ListItem';
 import {ShiftTemplateConfigs} from '../../models/ShiftTemplateConfigs';
-import {Table} from '../../../../models/Table';
 import {SlotEditComponent} from '../slot-edit/slot-edit.component';
-
 
 @Component({
   selector: 'app-shift-edit',
@@ -14,7 +12,8 @@ import {SlotEditComponent} from '../slot-edit/slot-edit.component';
 export class ShiftEditComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ShiftEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public template: ShiftTemplateConfigs, public dialog: MatDialog) { }
+              @Inject(MAT_DIALOG_DATA) public template: ShiftTemplateConfigs, public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
   }

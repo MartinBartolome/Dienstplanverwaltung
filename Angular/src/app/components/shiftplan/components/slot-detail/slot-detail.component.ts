@@ -41,7 +41,7 @@ export class SlotDetailComponent implements OnInit {
   }
 
   private sendData(url): void{
-    this.api.sendSetRequest(url).subscribe((data: any) => {
+    this.api.sendGetRequest(url).subscribe((data: any) => {
         this.slot.assigned = data.shifts[0].slots[0].assigned;
         this.slot.applied = data.shifts[0].slots[0].applied;
         this.slot.title = data.shifts[0].slots[0].title;

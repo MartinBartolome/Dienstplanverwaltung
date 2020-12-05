@@ -2,7 +2,7 @@
   <div class="leftside textinput">
     <mat-form-field appearance="outline">
       <mat-label>Titel</mat-label>
-      <input matInput placeholder="Titel" [value]="template.title">
+      <input matInput type="text" [name]="template.title" placeholder="Titel" [(ngModel)]="template.title">
     </mat-form-field>
   </div>
   <div class="rightside textinput">
@@ -22,11 +22,11 @@
     </p>
     <mat-form-field appearance="outline">
       <mat-label>Von</mat-label>
-      <input matInput placeholder="Von" [value]="template.fromDate">
+      <input matInput placeholder="Von" [name]="template.fromDate" [(ngModel)]="template.fromDate">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Bis</mat-label>
-      <input matInput placeholder="Bis" [value]="template.toDate">
+      <input matInput placeholder="Bis" [name]="template.toDate" [(ngModel)]="template.toDate">
     </mat-form-field>
   </div>
 </form>
