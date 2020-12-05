@@ -10,8 +10,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DropDownData {
-    private final List<ListItem>dropDownOptions;
+    private List<ListItem>dropDownOptions;
     private final ListItem selectedItem;
+
+    public static DropDownData getForRecurrences(){
+        DropDownData result = new DropDownData();
+        result.dropDownOptions = Stream.of(RecurrenceType.values())
+                .map(Helper::getRecurrenceString).map(optionString -> new ListItem(optionString,-1))
+                .collect(Collectors.toList());
+        return result;
+    }
 
     public DropDownData(IShiftTemplate shiftTemplate){
         dropDownOptions = Stream.of(RecurrenceType.values())

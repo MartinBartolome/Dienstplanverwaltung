@@ -82,7 +82,14 @@ public class TableViewData {
                 .collect(Collectors.toList());
         return new TableViewData(title,showsAddButton,items);
     }
-
+    public static TableViewData getWeekDayTable(){
+        String title = "Tage";
+        boolean showsAddButton = false;
+        List<ListItem> items = Helper.weekDayList().stream()
+                .map(day -> new ListItem(Helper.getDayString(day),false))
+                .collect(Collectors.toList());
+        return new TableViewData(title,showsAddButton,items);
+    }
 
     public static TableViewData getForEmployees(List<IEmployee> employees) {
         String title = "Mitarbeiter";
@@ -99,6 +106,11 @@ public class TableViewData {
     public TableViewData() {
         this.title = "DataError";
         this.showsAddButton = true;
+        this.items = new ArrayList<>();
+    }
+    public TableViewData(String title) {
+        this.title = title;
+        this.showsAddButton = false;
         this.items = new ArrayList<>();
     }
     public String getTitle() {
