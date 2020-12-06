@@ -1,0 +1,31 @@
+section{
+  display: flex;
+  flex-direction: column;
+  border:solid #e4e4e4;
+  border-collapse: collapse;
+  border-width:0.1em;
+}
+
+.headerrow{
+  border-bottom:solid #e4e4e4;
+  border-collapse: collapse;
+  border-width:0.1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.subrows{
+  cursor: pointer;
+}
+header{
+  font-size: 1.25em;
+}
+
+.Hightlight{
+  background: #3F51B5;
+  color: white;
+}
+mat-icon{
+  cursor: pointer;
+}
