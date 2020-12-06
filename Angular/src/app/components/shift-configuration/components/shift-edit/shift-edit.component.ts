@@ -26,7 +26,7 @@ export class ShiftEditComponent implements OnInit {
   }
 
   public editSlot(slot: ListItem): void{
-    slot.selected = false;
+    slot.selected = !slot.selected;
     const dialogRef = this.dialog.open(SlotEditComponent,
       { data: this.template.slotInfos[this.template.slots.items.indexOf(slot)]});
     dialogRef.afterClosed().subscribe(result => {

@@ -1,4 +1,4 @@
 <section>
   <button mat-raised-button color="primary" (click)="newTemplate()">Neues Template</button>
-  <app-table [table]="ShiftConfiguration.shiftTemplatesTable" (ItemSelectedEvent)="editTemplate($event)"></app-table>
+  <app-table [table]="ShiftConfiguration.shiftTemplatesTable" (EditItemEvent)="editTemplate($event)" [AllowSelection]="false"></app-table>
 </section>

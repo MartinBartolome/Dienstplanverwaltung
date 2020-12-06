@@ -1,13 +1,8 @@
 <section>
   <div class="wrapper">
     <div class="Employeetable">
-      <app-table [table]="employees.employees"></app-table>
+      <app-table [table]="employees.employees" [AllowSelection]="false" (EditItemEvent)="EditEmployee($event)"></app-table>
       <button mat-raised-button color="primary" (click)="inviteemployee()">Mitarbeiter<br />einladen</button>
-    </div>
-    <div class="Employee" *ngFor="let emp of employees.employees.items">
-      <div *ngIf="emp.selected">
-        <app-employee-config [employee]="employees.employeeConfigs[employees.employees.items.indexOf(emp)]"></app-employee-config>
-      </div>
     </div>
   </div>
 </section>

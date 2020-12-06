@@ -1,10 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {EmployeeConfig} from '../../models/EmployeeConfig';
 import {ServiceRoleEditComponent} from '../../../shift-configuration/components/service-role-edit/service-role-edit.component';
 import {ListItem} from '../../../../models/ListItem';
 import {DataService} from '../../../../common/DataService';
 import {SharedService} from '../../../../common/SharedService';
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {ShiftTemplateConfigs} from '../../../shift-configuration/models/ShiftTemplateConfigs';
 
 @Component({
   selector: 'app-employee-config',
@@ -12,9 +13,9 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./employee-config.component.css']
 })
 export class EmployeeConfigComponent implements OnInit {
-  @Input() employee: EmployeeConfig;
-
-  constructor(private api: DataService, public globalvariables: SharedService, public dialog: MatDialog) { }
+  constructor(private api: DataService, public globalvariables: SharedService, public dialog: MatDialog,
+              public dialogRef: MatDialogRef<EmployeeConfigComponent>,
+              @Inject(MAT_DIALOG_DATA) public employee: EmployeeConfig) { }
 
   ngOnInit(): void {
   }
@@ -28,9 +29,9 @@ export class EmployeeConfigComponent implements OnInit {
         });
     });
   }
-  // würde ich in der ansicht nicht verwenden
+
   public editServiceRole(ServiceRole: ListItem): void{
-    ServiceRole.selected = false;
+    ServiceRole.selected = !ServiceRole.selected;
     const dialogRef = this.dialog.open(ServiceRoleEditComponent,
       { data: ServiceRole });
     dialogRef.afterClosed().subscribe(result => {

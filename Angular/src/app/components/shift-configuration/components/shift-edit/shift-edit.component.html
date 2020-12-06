@@ -6,7 +6,7 @@
         <input matInput type="text" [name]="template.title" placeholder="Titel" [(ngModel)]="template.title">
       </mat-form-field>
     </div>
-    <app-table [table]="template.days"></app-table>
+    <app-table [table]="template.days" [AllowSelection]="true"></app-table>
     <div>
       <p>
         <label>Gültigkeit</label>
@@ -31,7 +31,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <app-table [table]="template.slots" (ItemSelectedEvent)="editSlot($event)" (AddEvent)="newSlot()"></app-table>
+    <app-table [table]="template.slots" (EditItemEvent)="editSlot($event)" (AddEvent)="newSlot()"></app-table>
     <div mat-dialog-actions class="ButtonNav">
       <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="template">Speichern</button>
       <button mat-raised-button color="primary" (click)="dialogRef.close()">Abbrechen</button>

@@ -2,7 +2,7 @@
   <header>{{ employee.nickName }}</header>
   <div class="employee">
     <div class="Roles">
-      <app-table [table]="employee.serviceRoles" (AddEvent)="newServiceRole()"></app-table>
+      <app-table [table]="employee.serviceRoles" (AddEvent)="newServiceRole()" [AllowSelection]="true" (EditItemEvent)="editServiceRole($event)"></app-table>
     </div>
     <div class="settings">
       <mat-checkbox [(ngModel)]="employee.active" color="primary">Deaktivieren</mat-checkbox>

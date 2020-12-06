@@ -9,20 +9,24 @@ import {ListItem} from '../../../models/ListItem';
 })
 export class TableComponent implements OnInit {
   @Input() table: Table;
-  @Output() ItemSelectedEvent = new EventEmitter<ListItem>();
+  @Input() AllowSelection: boolean;
+  @Output() EditItemEvent = new EventEmitter<ListItem>();
   @Output() AddEvent = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  ItemSelected(item: ListItem): void  {
-    if (item.selected)
-    {
-      this.ItemSelectedEvent.emit(item);
-    }
+  ItemEdit(item: ListItem): void  {
+    this.EditItemEvent.emit(item);
   }
   AddNew(): void{
     this.AddEvent.emit();
+  }
+  ItemSelected(item: ListItem): void{
+    if (!this.AllowSelection)
+    {
+      item.selected = false;
+    }
   }
 }

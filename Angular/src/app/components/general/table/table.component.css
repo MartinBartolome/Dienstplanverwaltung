@@ -17,6 +17,9 @@ section{
 }
 .subrows{
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 header{
   font-size: 1.25em;
