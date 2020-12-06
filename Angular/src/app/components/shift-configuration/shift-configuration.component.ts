@@ -36,7 +36,8 @@ export class ShiftConfigurationComponent implements OnInit {
           this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)]});
     dialogRef.afterClosed().subscribe(result => {
       this.api.sendSetRequest('/updateShiftTemplateConfig', result).subscribe((data: any) => {
-        this.ShiftConfiguration = data;
+        this.ShiftConfiguration.shiftTemplateConfigs[
+          this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)] = data;
         console.log(data);
       });
     });

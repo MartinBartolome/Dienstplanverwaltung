@@ -1,32 +1,40 @@
 <form>
-  <div class="leftside textinput">
-    <mat-form-field appearance="outline">
-      <mat-label>Titel</mat-label>
-      <input matInput type="text" [name]="template.title" placeholder="Titel" [(ngModel)]="template.title">
-    </mat-form-field>
-  </div>
-  <div class="rightside textinput">
-    <mat-form-field appearance="outline">
-      <mat-label>Takt</mat-label>
-      <mat-select [(value)]="template.recurrenceOptions.selectedItem">
-        <mat-option value="option"
-                    *ngFor="let item of template.recurrenceOptions.dropDownOptions">{{ item.title }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <app-table [table]="template.days" class="leftside"></app-table>
-  <app-table [table]="template.slots" class="rightside" (ItemSelectedEvent)="editSlot($event)" (AddEvent)="newSlot()"></app-table>
   <div class="leftside">
-    <p>
-      <label>Gültigkeit</label>
-    </p>
-    <mat-form-field appearance="outline">
-      <mat-label>Von</mat-label>
-      <input matInput placeholder="Von" [name]="template.fromDate" [(ngModel)]="template.fromDate">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Bis</mat-label>
-      <input matInput placeholder="Bis" [name]="template.toDate" [(ngModel)]="template.toDate">
-    </mat-form-field>
+    <div class="textinput">
+      <mat-form-field appearance="outline">
+        <mat-label>Titel</mat-label>
+        <input matInput type="text" [name]="template.title" placeholder="Titel" [(ngModel)]="template.title">
+      </mat-form-field>
+    </div>
+    <app-table [table]="template.days"></app-table>
+    <div>
+      <p>
+        <label>Gültigkeit</label>
+      </p>
+      <mat-form-field appearance="outline">
+        <mat-label>Von</mat-label>
+        <input matInput placeholder="Von" [name]="template.fromDate" [(ngModel)]="template.fromDate">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Bis</mat-label>
+        <input matInput placeholder="Bis" [name]="template.toDate" [(ngModel)]="template.toDate">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="rightside">
+    <div class="textinput">
+      <mat-form-field appearance="outline">
+        <mat-label>Takt</mat-label>
+        <mat-select [name]="template.recurrenceOptions.selectedItem" [(ngModel)]="template.recurrenceOptions.selectedItem">
+          <mat-option [value]="item.id"
+                      *ngFor="let item of template.recurrenceOptions.dropDownOptions">{{item.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <app-table [table]="template.slots" (ItemSelectedEvent)="editSlot($event)" (AddEvent)="newSlot()"></app-table>
+    <div class="ButtonNav">
+      <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="template">Speichern</button>
+      <button mat-raised-button color="primary" type="reset" (click)="dialogRef.close()">Abbrechen</button>
+    </div>
   </div>
 </form>
