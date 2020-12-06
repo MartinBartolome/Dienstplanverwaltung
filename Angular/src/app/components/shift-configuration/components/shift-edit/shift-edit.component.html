@@ -25,8 +25,8 @@
     <div class="textinput">
       <mat-form-field appearance="outline">
         <mat-label>Takt</mat-label>
-        <mat-select [name]="template.recurrenceOptions.selectedItem" [(ngModel)]="template.recurrenceOptions.selectedItem">
-          <mat-option [value]="item.id"
+        <mat-select [(value)]="template.recurrenceOptions.selectedItem.title">
+          <mat-option [value]="item.title"
                       *ngFor="let item of template.recurrenceOptions.dropDownOptions">{{item.title}}</mat-option>
         </mat-select>
       </mat-form-field>

@@ -35,11 +35,11 @@ export class ShiftConfigurationComponent implements OnInit {
     const dialogRef = this.dialog.open(ShiftEditComponent,
       { data: this.ShiftConfiguration.shiftTemplateConfigs[
           this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)]});
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: ShiftTemplateConfigs)  => {
+      alert(result.fromDate);
       if (result)
       {
-        alert(result);
-        this.api.sendSetRequest('/updateShiftTemplateConfig', result).subscribe((data: any) => {
+        this.api.sendSetRequest('/updateShiftTemplateConfig', result).subscribe((data: ShiftTemplateConfigs) => {
           this.ShiftConfiguration.shiftTemplateConfigs[
             this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)] = data;
           console.log(data);

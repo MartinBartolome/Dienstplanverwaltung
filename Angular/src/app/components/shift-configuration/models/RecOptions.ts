@@ -1,6 +1,6 @@
-import {Item} from './Item';
+import {ListItem} from '../../../models/ListItem';
 
 export class RecOptions {
-  dropDownOptions: Item[];
-  selectedItem: Item[];
+  dropDownOptions: ListItem[];
+  selectedItem: ListItem;
 }
