@@ -21,7 +21,9 @@ import { MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatCheckboxModule} from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
 import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
 import { EmployeeConfigurationComponent } from './components/employee-configuration/employee-configuration.component';
 import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
@@ -75,7 +77,9 @@ import { LocalEditComponent } from './components/general/local-management/local-
     MatFormFieldModule,
     MatSelectModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

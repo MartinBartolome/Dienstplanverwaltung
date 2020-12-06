@@ -18,7 +18,6 @@ export class EmployeeConfigComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  /*DOPPELTER CODE!*/
   newServiceRole(): void{
     const dialogRef = this.dialog.open(ServiceRoleEditComponent, { data: new ListItem()});
     dialogRef.afterClosed().subscribe(result => {
@@ -26,7 +25,7 @@ export class EmployeeConfigComponent implements OnInit {
         .subscribe((data: any) => {
           this.employee.serviceRoles = data;
           console.log(data);
-        });;
+        });
     });
   }
   // würde ich in der ansicht nicht verwenden

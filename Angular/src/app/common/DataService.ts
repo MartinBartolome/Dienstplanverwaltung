@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
 import {  throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import {ShiftTemplateConfigs} from '../components/shift-configuration/models/ShiftTemplateConfigs';
+import {stringify} from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +27,15 @@ export class DataService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
-
   public sendGetRequest(specific: string): any {
     return this.httpClient.get(this.REST_API_SERVER + specific).pipe(retry(3), catchError(this.handleError));
   }
-  public sendSetRequest(specific: string): any {
-    return this.httpClient.get(this.REST_API_SERVER + specific).pipe(retry(3), catchError(this.handleError));
+  public sendSetRequest(specific: string, data: any): any {
+    const header = {   headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      }) };
+    const body = JSON.stringify(data);
+    return this.httpClient.post(this.REST_API_SERVER + specific, body, header).pipe(retry(3),
+      catchError(this.handleError));
   }
 }

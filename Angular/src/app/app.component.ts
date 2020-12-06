@@ -48,7 +48,7 @@ export class AppComponent{
     });
   }
 
-  public Login(): void
+  public Reload(): void
   {
     this.loadEmployeeData();
     this.loadShiftPlanData(new Date());

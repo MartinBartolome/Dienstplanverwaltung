@@ -1,7 +1,8 @@
 form{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: space-around;
 }
 
 .textinput{
@@ -15,11 +16,23 @@ form{
   width: calc(100% * (1/2) - 2em);
 }
 .leftside{
-  margin: 1em;
-  width: calc(100% * (1/2) - 2em);
+  display: flex;
+  flex-direction: column;
 }
 
 .rightside{
-  width: calc(100% * (1/2) - 2em);
+  margin-left: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+button{
   margin:1em;
+}
+.ButtonNav{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
