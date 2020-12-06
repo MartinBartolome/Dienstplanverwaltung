@@ -1,8 +1,7 @@
 import {ListItem} from './ListItem';
+import {Table} from './Table';
 
 export class SysAdminTableData {
-  title1: string;
-  title2: string;
-  items1: ListItem[];
-  items2: ListItem[];
+  table1: Table;
+  table2: Table;
 }
