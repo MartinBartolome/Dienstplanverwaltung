@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ShiftConfiguration} from './models/ShiftConfiguration';
 import {ListItem} from '../../models/ListItem';
 import {EmployeeInviteComponent} from '../employee-configuration/components/employee-invite/employee-invite.component';
@@ -16,6 +16,7 @@ import {SharedService} from '../../common/SharedService';
 })
 export class ShiftConfigurationComponent implements OnInit {
   @Input() ShiftConfiguration: ShiftConfiguration;
+  @Output() ShiftConfigChanged = new EventEmitter();
 
   constructor(public dialog: MatDialog, private api: DataService, public globalvariables: SharedService) { }
 
@@ -35,11 +36,16 @@ export class ShiftConfigurationComponent implements OnInit {
       { data: this.ShiftConfiguration.shiftTemplateConfigs[
           this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)]});
     dialogRef.afterClosed().subscribe(result => {
-      this.api.sendSetRequest('/updateShiftTemplateConfig', result).subscribe((data: any) => {
-        this.ShiftConfiguration.shiftTemplateConfigs[
-          this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)] = data;
-        console.log(data);
-      });
+      if (result)
+      {
+        alert(result);
+        this.api.sendSetRequest('/updateShiftTemplateConfig', result).subscribe((data: any) => {
+          this.ShiftConfiguration.shiftTemplateConfigs[
+            this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)] = data;
+          console.log(data);
+          this.ShiftConfigChanged.emit(true);
+        });
+      }
     });
   }
 }

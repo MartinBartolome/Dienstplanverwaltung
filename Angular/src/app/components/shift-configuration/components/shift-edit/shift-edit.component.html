@@ -32,9 +32,9 @@
       </mat-form-field>
     </div>
     <app-table [table]="template.slots" (ItemSelectedEvent)="editSlot($event)" (AddEvent)="newSlot()"></app-table>
-    <div class="ButtonNav">
+    <div mat-dialog-actions class="ButtonNav">
       <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="template">Speichern</button>
-      <button mat-raised-button color="primary" type="reset" (click)="dialogRef.close()">Abbrechen</button>
+      <button mat-raised-button color="primary" (click)="dialogRef.close()">Abbrechen</button>
     </div>
   </div>
 </form>
