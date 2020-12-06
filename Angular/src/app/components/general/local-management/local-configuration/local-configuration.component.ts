@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {Table} from '../../../../models/Table';
+import {Table} from '../../models/Table';
 import {DataService} from '../../../../common/DataService';
 import {SharedService} from '../../../../common/SharedService';
 import {ShiftEditComponent} from '../../../shift-configuration/components/shift-edit/shift-edit.component';
 import {ShiftTemplateConfigs} from '../../../shift-configuration/models/ShiftTemplateConfigs';
 import {MatDialog} from '@angular/material/dialog';
 import {LocalEditComponent} from '../local-edit/local-edit.component';
-import {ListItem} from '../../../../models/ListItem';
+import {ListItem} from '../../models/ListItem';
 
 @Component({
   selector: 'app-local-configuration',

@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {EmployeeConfig} from '../../models/EmployeeConfig';
 import {ServiceRoleEditComponent} from '../../../shift-configuration/components/service-role-edit/service-role-edit.component';
-import {ListItem} from '../../../../models/ListItem';
+import {ListItem} from '../../../general/models/ListItem';
 import {DataService} from '../../../../common/DataService';
 import {SharedService} from '../../../../common/SharedService';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';

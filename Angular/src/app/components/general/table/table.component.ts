@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Table} from '../../../models/Table';
-import {ListItem} from '../../../models/ListItem';
+import {Table} from '../models/Table';
+import {ListItem} from '../models/ListItem';
 
 @Component({
   selector: 'app-table',

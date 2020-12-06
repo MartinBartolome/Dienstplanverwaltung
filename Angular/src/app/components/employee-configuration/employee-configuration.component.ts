@@ -4,7 +4,7 @@ import {EmployeeInviteComponent} from './components/employee-invite/employee-inv
 import {MatDialog} from '@angular/material/dialog';
 import {ShiftEditComponent} from '../shift-configuration/components/shift-edit/shift-edit.component';
 import {ShiftTemplateConfigs} from '../shift-configuration/models/ShiftTemplateConfigs';
-import {ListItem} from '../../models/ListItem';
+import {ListItem} from '../general/models/ListItem';
 import {EmployeeConfig} from './models/EmployeeConfig';
 import {EmployeeConfigComponent} from './components/employee-config/employee-config.component';
 

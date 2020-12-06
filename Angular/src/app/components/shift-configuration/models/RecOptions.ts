@@ -1,4 +1,4 @@
-import {ListItem} from '../../../models/ListItem';
+import {ListItem} from '../../general/models/ListItem';
 
 export class RecOptions {
   dropDownOptions: ListItem[];

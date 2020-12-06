@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ShiftConfiguration} from './models/ShiftConfiguration';
-import {ListItem} from '../../models/ListItem';
+import {ListItem} from '../general/models/ListItem';
 import {EmployeeInviteComponent} from '../employee-configuration/components/employee-invite/employee-invite.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ShiftEditComponent} from './components/shift-edit/shift-edit.component';

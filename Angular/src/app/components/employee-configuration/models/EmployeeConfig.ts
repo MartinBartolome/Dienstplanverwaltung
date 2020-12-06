@@ -1,4 +1,4 @@
-import {Table} from '../../../models/Table';
+import {Table} from '../../general/models/Table';
 
 export class EmployeeConfig {
   nickName: string;

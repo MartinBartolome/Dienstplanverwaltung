@@ -1,4 +1,4 @@
-import {Table} from '../../../models/Table';
+import {Table} from '../../general/models/Table';
 import {RecOptions} from './RecOptions';
 import {SlotInfos} from './SlotInfos';
 

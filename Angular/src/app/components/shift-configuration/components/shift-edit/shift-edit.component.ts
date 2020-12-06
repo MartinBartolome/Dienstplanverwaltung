@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ListItem} from '../../../../models/ListItem';
+import {ListItem} from '../../../general/models/ListItem';
 import {ShiftTemplateConfigs} from '../../models/ShiftTemplateConfigs';
 import {SlotEditComponent} from '../slot-edit/slot-edit.component';
 

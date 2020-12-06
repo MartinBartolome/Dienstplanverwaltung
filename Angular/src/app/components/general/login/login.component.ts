@@ -3,8 +3,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {ChooselocalComponent} from '../local-management/chooselocal/chooselocal.component';
 import {DataService} from '../../../common/DataService';
-import {Table} from '../../../models/Table';
-import {ListItem} from '../../../models/ListItem';
+import {Table} from '../models/Table';
+import {ListItem} from '../models/ListItem';
 import {SharedService} from '../../../common/SharedService';
 
 @Component({

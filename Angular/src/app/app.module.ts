@@ -37,6 +37,7 @@ import { SlotEditComponent } from './components/shift-configuration/components/s
 import { ServiceRoleEditComponent } from './components/shift-configuration/components/service-role-edit/service-role-edit.component';
 import { LocalConfigurationComponent } from './components/general/local-management/local-configuration/local-configuration.component';
 import { LocalEditComponent } from './components/general/local-management/local-edit/local-edit.component';
+import { TenantconfigComponent } from './components/general/sysadmin/tenantconfig/tenantconfig.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LocalEditComponent } from './components/general/local-management/local-
     SlotEditComponent,
     ServiceRoleEditComponent,
     LocalConfigurationComponent,
-    LocalEditComponent
+    LocalEditComponent,
+    TenantconfigComponent
   ],
   imports: [
     BrowserModule,

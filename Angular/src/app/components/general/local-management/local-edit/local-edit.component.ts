@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ListItem} from '../../../../models/ListItem';
+import {ListItem} from '../../models/ListItem';
 
 @Component({
   selector: 'app-local-edit',

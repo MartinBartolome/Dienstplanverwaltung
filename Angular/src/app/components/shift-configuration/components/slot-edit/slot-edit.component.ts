@@ -3,9 +3,9 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {ShiftTemplateConfigs} from '../../models/ShiftTemplateConfigs';
 import {SlotInfos} from '../../models/SlotInfos';
 import {DataService} from '../../../../common/DataService';
-import {Table} from '../../../../models/Table';
+import {Table} from '../../../general/models/Table';
 import {SharedService} from '../../../../common/SharedService';
-import {ListItem} from '../../../../models/ListItem';
+import {ListItem} from '../../../general/models/ListItem';
 import {ServiceRoleEditComponent} from '../service-role-edit/service-role-edit.component';
 
 @Component({

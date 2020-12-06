@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SlotInfos} from '../../models/SlotInfos';
-import {ListItem} from '../../../../models/ListItem';
+import {ListItem} from '../../../general/models/ListItem';
 
 @Component({
   selector: 'app-service-role-edit',

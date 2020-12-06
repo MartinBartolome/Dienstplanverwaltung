@@ -32,3 +32,8 @@ mat-card-content {
   bottom: 2em;
   right: 2em;
 }
+.Sysadmin{
+   position: absolute;
+   bottom: 2em;
+   right: 12em;
+ }
