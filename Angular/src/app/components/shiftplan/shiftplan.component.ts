@@ -21,7 +21,7 @@ export class ShiftplanComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void
   {
-    this.DateTitle = this.stringToUSDate(this.data.month).toLocaleString('default', { month: 'long', year: 'numeric'});
+    this.DateTitle = this.stringToUSDate(this.data.month).toLocaleString('de-de', { month: 'long', year: 'numeric'});
   }
 
   ChangeMonth(value: number): void
@@ -42,8 +42,8 @@ export class ShiftplanComponent implements OnInit, OnChanges {
   }
   stringToUSDate(datestring: string): Date
   {
-    return new Date(datestring.split('.', 3)[1].toString() + '-' +
-      datestring.split('.', 3)[0].toString() + '-' +
+    return new Date(datestring.split('.', 3)[1].toString() + '/' +
+      datestring.split('.', 3)[0].toString() + '/' +
       datestring.split('.', 3)[2].toString());
   }
 }
