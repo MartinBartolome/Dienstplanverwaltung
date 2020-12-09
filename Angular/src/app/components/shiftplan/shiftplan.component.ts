@@ -1,15 +1,14 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {ShiftDays} from './models/ShiftDays';
-import {ShiftPlan} from './models/ShiftPlan';
+import {ShiftPlan} from './Models/ShiftPlan';
 import {MatDialog} from '@angular/material/dialog';
-import {ShiftDayDetailComponent} from './components/shift-day-detail/shift-day-detail.component';
+import {ShiftDayDetailComponent} from './Components/ShiftDayDetail/ShiftDayDetail.component';
 
 @Component({
   selector: 'app-shiftplan',
-  templateUrl: './shiftplan.component.html',
-  styleUrls: ['./shiftplan.component.css']
+  templateUrl: './ShiftPlan.component.html',
+  styleUrls: ['./ShiftPlan.component.css']
 })
-export class ShiftplanComponent implements OnInit, OnChanges {
+export class ShiftPlanComponent implements OnInit, OnChanges {
   @Input() data: ShiftPlan;
   @Output() DateChange = new EventEmitter<Date>();
   @Input() DateTitle: string;
@@ -31,19 +30,19 @@ export class ShiftplanComponent implements OnInit, OnChanges {
     this.DateChange.emit(this.stringToUSDate(this.data.month));
   }
 
-  clickOpenDetail(Shiftdays): void{
-    const dialogRef = this.dialog.open(ShiftDayDetailComponent, {
-      data: Shiftdays
+  clickOpenDetail(SiftDays): void{
+    this.dialog.open(ShiftDayDetailComponent, {
+      data: SiftDays
     });
   }
   DateToString(date: Date): string
   {
     return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
   }
-  stringToUSDate(datestring: string): Date
+  stringToUSDate(DateString: string): Date
   {
-    return new Date(datestring.split('.', 3)[1].toString() + '/' +
-      datestring.split('.', 3)[0].toString() + '/' +
-      datestring.split('.', 3)[2].toString());
+    return new Date(DateString.split('.', 3)[1].toString() + '/' +
+      DateString.split('.', 3)[0].toString() + '/' +
+      DateString.split('.', 3)[2].toString());
   }
 }

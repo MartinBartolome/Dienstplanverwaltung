@@ -1,4 +1,3 @@
-import {ListItem} from './ListItem';
 import {Table} from './Table';
 
 export class SysAdminTableData {

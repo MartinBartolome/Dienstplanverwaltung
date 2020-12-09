@@ -12,7 +12,7 @@ label{
   margin-top:0.1em;
   float:left;
 }
-.inputwrapper
+.InputWrapper
 {
   margin: 0.5em;
   float: right;
@@ -27,5 +27,5 @@ label{
 }
 
 .Slot{
-  margin: 0 0.5em 0.5em 0em;
+  margin: 0 0.5em 0.5em 0;
 }

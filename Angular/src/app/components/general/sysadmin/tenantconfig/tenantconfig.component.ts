@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {SysAdminTenantConfig} from '../../models/SysAdminTenantConfig';
-import {DataService} from '../../../../common/DataService';
-import {SharedService} from '../../../../common/SharedService';
+import {SysAdminTenantConfig} from '../../Models/SysAdminTenantConfig';
+import {DataService} from '../../../../Common/DataService';
 
 @Component({
   selector: 'app-tenantconfig',
-  templateUrl: './tenantconfig.component.html',
-  styleUrls: ['./tenantconfig.component.css']
+  templateUrl: './TenantConfig.component.html',
+  styleUrls: ['./TenantConfig.component.css']
 })
-export class TenantconfigComponent implements OnInit {
+export class TenantConfigComponent implements OnInit {
   SysadminData: SysAdminTenantConfig;
 
-  constructor(private api: DataService, public globalvariables: SharedService) {
+  constructor(private api: DataService) {
     this.api.sendGetRequest('/getSysAdminTenantConfig').subscribe((data: SysAdminTenantConfig) => {
       this.SysadminData = data;
       console.log(data);

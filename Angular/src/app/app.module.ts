@@ -2,16 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { SlotDetailComponent } from './components/shiftplan/components/slot-detail/slot-detail.component';
-import { ShiftDetailComponent } from './components/shiftplan/components/shift-detail/shift-detail.component';
-import { ShiftDayDetailComponent } from './components/shiftplan/components/shift-day-detail/shift-day-detail.component';
-import { TableComponent } from './components/general/table/table.component';
-import { EmployeeConfigComponent } from './components/employee-configuration/components/employee-config/employee-config.component';
-import { ShiftplanComponent } from './components/shiftplan/shiftplan.component';
+import { SlotDetailComponent } from './Components/ShiftPlan/Components/SlotDetail/SlotDetail.component';
+import { ShiftDetailComponent } from './Components/ShiftPlan/Components/ShiftDetail/ShiftDetail.component';
+import { ShiftDayDetailComponent } from './Components/ShiftPlan/Components/ShiftDayDetail/ShiftDayDetail.component';
+import { TableComponent } from './Components/General/Table/Table.component';
+import { EmployeeConfigComponent } from './Components/EmployeeConfiguration/Components/EmployeeConfig/EmployeeConfig.component';
+import { ShiftPlanComponent } from './Components/ShiftPlan/ShiftPlan.component';
 import { HttpClientModule} from '@angular/common/http';
-import { ShiftDayComponent } from './components/shiftplan/components/shift-day/shift-day.component';
-import { SlotComponent } from './components/shiftplan/components/slot/slot.component';
-import { ShiftComponent } from './components/shiftplan/components/shift/shift.component';
+import { ShiftDayComponent } from './Components/ShiftPlan/Components/ShiftDay/ShiftDay.component';
+import { SlotComponent } from './Components/ShiftPlan/Components/Slot/Slot.component';
+import { ShiftComponent } from './Components/ShiftPlan/Components/Shift/Shift.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule} from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,20 +24,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
-import { PayrollaccountingComponent } from './components/payrollaccounting/payrollaccounting.component';
-import { EmployeeConfigurationComponent } from './components/employee-configuration/employee-configuration.component';
-import { EmployeeInviteComponent } from './components/employee-configuration/components/employee-invite/employee-invite.component';
+import { PayrollAccountingComponent } from './Components/PayrollAccounting/PayrollAccounting.component';
+import { EmployeeConfigurationComponent } from './Components/EmployeeConfiguration/EmployeeConfiguration.component';
+import { EmployeeInviteComponent } from './Components/EmployeeConfiguration/Components/EmployeeInvite/EmployeeInvite.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ShiftConfigurationComponent } from './components/shift-configuration/shift-configuration.component';
-import { LoginComponent } from './components/general/login/login.component';
-import { ChooselocalComponent } from './components/general/local-management/chooselocal/chooselocal.component';
+import { ShiftConfigurationComponent } from './Components/ShiftConfiguration/ShiftConfiguration.component';
+import { LoginComponent } from './Components/General/Login/Login.component';
+import { ChooselocalComponent } from './Components/General/LocalManagement/ChooseLocal/ChooseLocal.component';
 import { MatOptionModule } from '@angular/material/core';
-import { ShiftEditComponent } from './components/shift-configuration/components/shift-edit/shift-edit.component';
-import { SlotEditComponent } from './components/shift-configuration/components/slot-edit/slot-edit.component';
-import { ServiceRoleEditComponent } from './components/shift-configuration/components/service-role-edit/service-role-edit.component';
-import { LocalConfigurationComponent } from './components/general/local-management/local-configuration/local-configuration.component';
-import { LocalEditComponent } from './components/general/local-management/local-edit/local-edit.component';
-import { TenantconfigComponent } from './components/general/sysadmin/tenantconfig/tenantconfig.component';
+import { ShiftEditComponent } from './Components/ShiftConfiguration/Components/ShiftEdit/ShiftEdit.component';
+import { SlotEditComponent } from './Components/ShiftConfiguration/Components/SlotEdit/SlotEdit.component';
+import { ServiceRoleEditComponent } from './Components/ShiftConfiguration/Components/ServiceRoleEdit/ServiceRoleEdit.component';
+import { LocalConfigurationComponent } from './Components/General/LocalManagement/LocalConfiguration/LocalConfiguration.component';
+import { LocalEditComponent } from './Components/General/LocalManagement/LocalEdit/LocalEdit.component';
+import { TenantConfigComponent } from './Components/General/SysAdmin/TenantConfig/TenantConfig.component';
 
 @NgModule({
   declarations: [
@@ -47,11 +47,11 @@ import { TenantconfigComponent } from './components/general/sysadmin/tenantconfi
     ShiftDayDetailComponent,
     TableComponent,
     EmployeeConfigComponent,
-    ShiftplanComponent,
+    ShiftPlanComponent,
     ShiftDayComponent,
     SlotComponent,
     ShiftComponent,
-    PayrollaccountingComponent,
+    PayrollAccountingComponent,
     EmployeeConfigurationComponent,
     EmployeeInviteComponent,
     ShiftConfigurationComponent,
@@ -62,7 +62,7 @@ import { TenantconfigComponent } from './components/general/sysadmin/tenantconfi
     ServiceRoleEditComponent,
     LocalConfigurationComponent,
     LocalEditComponent,
-    TenantconfigComponent
+    TenantConfigComponent
   ],
   imports: [
     BrowserModule,

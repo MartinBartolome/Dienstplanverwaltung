@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Table} from '../models/Table';
-import {ListItem} from '../models/ListItem';
+import {Table} from '../Models/Table';
+import {ListItem} from '../Models/ListItem';
 
 @Component({
   selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  templateUrl: './Table.component.html',
+  styleUrls: ['./Table.component.css']
 })
 export class TableComponent implements OnInit {
   @Input() table: Table;

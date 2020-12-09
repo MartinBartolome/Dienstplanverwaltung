@@ -3,8 +3,6 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
 import {  throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import {ShiftTemplateConfigs} from '../components/shift-configuration/models/ShiftTemplateConfigs';
-import {stringify} from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +14,7 @@ export class DataService {
   constructor(private httpClient: HttpClient) { }
 
   handleError(error: HttpErrorResponse): any{
-    let errorMessage = 'Unknown error!';
+    let errorMessage;
     if (error.error instanceof ErrorEvent) {
       // Client-side errors
       errorMessage = `Error: ${error.error.message}`;

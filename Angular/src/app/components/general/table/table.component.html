@@ -1,5 +1,5 @@
 <section>
-  <div class="headerrow">
+  <div class="HeaderRow">
     <header>{{ table.title }}</header>
     <mat-icon *ngIf="table.showsAddButton"
               aria-hidden="false"
@@ -8,8 +8,8 @@
               (click)="AddNew()">add_circle
     </mat-icon>
   </div>
-  <div class="subrows" *ngFor="let item of table.items"
-       [ngClass]="{'Hightlight': item.selected, 'normal': !item.selected}"
+  <div class="SubRows" *ngFor="let item of table.items"
+       [ngClass]="{'Highlight': item.selected, 'normal': !item.selected}"
        (click)="item.selected = !item.selected; ItemSelected(item)">
     <mat-label>{{ item.title }}</mat-label>
     <mat-icon *ngIf="table.showsAddButton"

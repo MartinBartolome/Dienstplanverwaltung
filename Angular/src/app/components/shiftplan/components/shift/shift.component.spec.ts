@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShiftComponent } from './shift.component';
+import { ShiftComponent } from './Shift.component';
 
 describe('ShiftComponent', () => {
   let component: ShiftComponent;
