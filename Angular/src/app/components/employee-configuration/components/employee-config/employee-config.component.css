@@ -1,6 +1,6 @@
 section{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border:solid #e4e4e4;
   border-collapse: collapse;
   border-width:0.1em;
@@ -12,19 +12,11 @@ header{
   width: 100%;
 }
 
-.employee{
+.settings{
   display: flex;
-  align-content: space-around;
-  flex-direction: row;
+  flex-direction: column;
 }
 
-.Roles{
-  width: calc(100% * (1/3));
-}
-.settings{
-  width: calc(100% * (2/3));
-  display: flex;
-  align-content: space-around;
-  flex-wrap: wrap;
-  padding-left: 2em;
+form{
+  margin-left:2em;
 }

@@ -5,6 +5,6 @@ export class EmployeeConfig {
   serviceRoles: Table;
   hourlyRate: number;
   currency: string;
-  monthlyContigent: number;
+  monthlyContingent: number;
   active: boolean;
 }
