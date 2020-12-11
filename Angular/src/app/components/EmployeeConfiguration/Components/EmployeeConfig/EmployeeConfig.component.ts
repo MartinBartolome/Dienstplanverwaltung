@@ -5,6 +5,7 @@ import {ListItem} from '../../../General/Models/ListItem';
 import {DataService} from '../../../../Common/DataService';
 import {SharedService} from '../../../../Common/SharedService';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Table} from '../../../General/Models/Table';
 
 @Component({
   selector: 'app-employee-config',
@@ -20,11 +21,10 @@ export class EmployeeConfigComponent implements OnInit {
   }
   newServiceRole(): void{
     const dialogRef = this.dialog.open(ServiceRoleEditComponent, { data: new ListItem()});
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: ListItem ) => {
       this.api.sendGetRequest('/addServiceRole?localId=' + this.globalVariables.getLocalID() + '&title=' + result.title)
-        .subscribe((data: any) => {
+        .subscribe((data: Table) => {
           this.employee.serviceRoles = data;
-          console.log(data);
         });
     });
   }
@@ -33,11 +33,10 @@ export class EmployeeConfigComponent implements OnInit {
     ServiceRole.selected = !ServiceRole.selected;
     const dialogRef = this.dialog.open(ServiceRoleEditComponent,
       { data: ServiceRole });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: ListItem ) => {
       this.api.sendGetRequest('/updateServiceRole?serviceRoleId=' + ServiceRole.id + '&title=' + result.title + '&isActive=true')
-        .subscribe((data: any) => {
+        .subscribe((data: Table) => {
           this.employee.serviceRoles = data;
-          console.log(data);
         });
     });
   }

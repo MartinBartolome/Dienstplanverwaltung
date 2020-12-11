@@ -37,7 +37,6 @@ export class ShiftConfigurationComponent implements OnInit {
         this.api.sendSetRequest('/updateShiftTemplateConfig', result).subscribe((data: ShiftTemplateConfigs) => {
           this.ShiftConfiguration.shiftTemplateConfigs[
             this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)] = data;
-          console.log(data);
           this.ShiftConfigChanged.emit(true);
         });
       }

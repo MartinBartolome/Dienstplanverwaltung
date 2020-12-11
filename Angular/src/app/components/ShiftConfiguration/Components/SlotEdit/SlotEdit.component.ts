@@ -24,18 +24,16 @@ export class SlotEditComponent implements OnInit {
   }
 
   public loadServiceRoles(): void{
-    this.api.sendGetRequest('/getServiceRoles?localId=' + this.globalVariables.getLocalID()).subscribe((data: any) => {
+    this.api.sendGetRequest('/getServiceRoles?localId=' + this.globalVariables.getLocalID()).subscribe((data: Table) => {
       this.ServiceRoles = data;
-      console.log(data);
     });
   }
   newServiceRole(): void{
     const dialogRef = this.dialog.open(ServiceRoleEditComponent, { data: new ListItem()});
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: ListItem) => {
       this.api.sendGetRequest('/addServiceRole?localId=' + this.globalVariables.getLocalID() + '&title=' + result.title)
-        .subscribe((data: any) => {
+        .subscribe((data: Table) => {
         this.ServiceRoles = data;
-        console.log(data);
       });
     });
   }
@@ -44,11 +42,10 @@ export class SlotEditComponent implements OnInit {
     ServiceRole.selected = false;
     const dialogRef = this.dialog.open(ServiceRoleEditComponent,
       { data: ServiceRole });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: ListItem) => {
       this.api.sendGetRequest('/updateServiceRole?serviceRoleId=' + ServiceRole.id + '&title=' + result.title + '&isActive=true')
-        .subscribe((data: any) => {
+        .subscribe((data: Table) => {
           this.ServiceRoles = data;
-          console.log(data);
         });
     });
   }

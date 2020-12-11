@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Slot} from '../../Models/Slot';
 import {DataService} from '../../../../Common/DataService';
 import {SharedService} from '../../../../Common/SharedService';
+import {ShiftDays} from '../../Models/ShiftDays';
 
 @Component({
   selector: 'app-slot-detail',
@@ -40,11 +41,10 @@ export class SlotDetailComponent implements OnInit {
   }
 
   private sendData(url): void{
-    this.api.sendGetRequest(url).subscribe((data: any) => {
+    this.api.sendGetRequest(url).subscribe((data: ShiftDays) => {
         this.slot.assigned = data.shifts[0].slots[0].assigned;
         this.slot.applied = data.shifts[0].slots[0].applied;
         this.slot.title = data.shifts[0].slots[0].title;
-        console.log(data);
       });
   }
 }

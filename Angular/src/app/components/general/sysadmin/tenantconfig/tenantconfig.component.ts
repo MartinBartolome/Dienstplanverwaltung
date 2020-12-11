@@ -13,7 +13,6 @@ export class TenantConfigComponent implements OnInit {
   constructor(private api: DataService) {
     this.api.sendGetRequest('/getSysAdminTenantConfig').subscribe((data: SysAdminTenantConfig) => {
       this.SysadminData = data;
-      console.log(data);
     });
   }
 

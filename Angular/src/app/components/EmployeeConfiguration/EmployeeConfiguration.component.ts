@@ -25,7 +25,6 @@ export class EmployeeConfigurationComponent implements OnInit {
     const dialogRef = this.dialog.open(EmployeeConfigComponent,
       { data: this.employees.employeeConfigs[this.employees.employees.items.indexOf(item)]});
     dialogRef.afterClosed().subscribe((result: EmployeeConfig)  => {
-      alert(result.nickName);
       if (result)
       {
       }

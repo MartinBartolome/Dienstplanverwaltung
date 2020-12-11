@@ -22,9 +22,8 @@ export class AppComponent{
   }
 
   public loadEmployeeData(): void{
-    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: any) => {
+    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: EmployeesConfig) => {
       this.EmployeeData = data;
-      console.log(data);
     });
   }
   public loadShiftPlanData(SelectedDate: Date): void{
@@ -33,15 +32,13 @@ export class AppComponent{
       + '.' + (SelectedDate.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
       + '.' + SelectedDate.getFullYear();
     this.api.sendGetRequest(CombinedURL).subscribe((data: ShiftPlan) => {
-      console.log(data);
       this.ShiftPlanData = data;
     });
   }
 
   public loadShiftConfiguration(): void{
-    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: any) => {
+    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: ShiftConfiguration) => {
       this.ShiftConfiguration = data;
-      console.log(data);
     });
   }
 

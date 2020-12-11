@@ -28,11 +28,10 @@ export class LocalConfigurationComponent implements OnInit {
   {
     selected.selected = false;
     const dialogRef = this.dialog.open(LocalEditComponent, { data: selected});
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: ListItem) => {
       this.api.sendGetRequest('/updateLocal?localId=' + result.id + '&title=' + result.title + '&isActive=true')
-        .subscribe((data: any) => {
+        .subscribe((data: Table) => {
           this.Locals = data;
-          console.log(data);
         });
     });
   }
@@ -40,11 +39,10 @@ export class LocalConfigurationComponent implements OnInit {
   public Add(): void{
 
     const dialogRef = this.dialog.open(LocalEditComponent, { data: new ListItem()});
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: ListItem) => {
       this.api.sendGetRequest('/requestNewLocal?userNickName=' + this.globalVariables.getNickName() + '&title=' + result.title)
-        .subscribe((data: any) => {
+        .subscribe((data: Table) => {
           this.Locals = data;
-          console.log(data);
         });
     });
   }
