@@ -20,8 +20,8 @@ public class SlotConfig {
     public SlotConfig(ISlot slot,List<IServiceRole> localServiceRoles){
         numberOfEmployeesNeeded = slot.getNumberOfEmployeesNeeded();
         id = slot.getSlotId();
-        slotTypeString = slot.getSlotType().getTitle();
-        title = slot.getSlotType().getTitle();
+        //slotTypeString = slot.getSlotType().getTitle();
+        title = slot.getTitle();
         serviceRoleTable = TableViewData.getForServiceRoles(localServiceRoles,slot.getServiceRoles());
     }
 
@@ -35,9 +35,9 @@ public class SlotConfig {
 
 
 
-    private String slotTypeString;
-    public void setSlotType(String slotType) {  this.slotTypeString = slotType; }
-    public String getSlotType() {  return slotTypeString;  }
+    //private String slotTypeString;
+    //public void setSlotType(String slotType) {  this.slotTypeString = slotType; }
+    // public String getSlotType() {  return slotTypeString;  }
 
 
     public int getNumberOfEmployeesNeeded() { return numberOfEmployeesNeeded;  }

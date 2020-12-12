@@ -35,7 +35,7 @@ public abstract class Helper {
 
     public static String generateSlotId(ISlot slot, IShift shift){
         long shiftTemplateId = shift.getShiftTemplate().isPresent() ? shift.getShiftTemplate().get().getId() : -1;
-        return stringFromDate(shift.getDay()) + slotIdDevider + shiftTemplateId  + slotIdDevider + slot.getSlotType().getTitle();
+        return stringFromDate(shift.getDay()) + slotIdDevider + shiftTemplateId  + slotIdDevider + slot.getSlotId();//.getSlotType().getTitle();
     }
     public static String getRecurrenceString(RecurrenceType recurrenceType){
         switch (recurrenceType){
@@ -99,8 +99,10 @@ public abstract class Helper {
         String shiftTemplateId = slotId.split(slotIdDevider)[1];
         return Integer.parseInt(shiftTemplateId);
     }
-    public static String getSlotTypeTitleFromSlotId(String slotId){
-        return slotId.split(slotIdDevider)[2];
+
+
+    public static int getSlotIdFromSlotIdString(String slotIdString){
+        return Integer.parseInt(slotIdString.split(slotIdDevider)[2]);
     }
 
     public static String stringFromTime(LocalTime fromTime) {

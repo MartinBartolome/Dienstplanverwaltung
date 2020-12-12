@@ -64,14 +64,7 @@ class LocalEntity implements ILocal, ISaveable {
 
     @OneToMany(mappedBy = "local")
     private List<ShiftEntity> shifts;
-
-    @OneToMany(mappedBy = "local")
-    private List<SlotTypeEntity> slotTypes;
-    public List<ISlotType> getSlotTypes(){
-        return slotTypes.stream()
-                .map(ISlotType.class::cast)
-                .collect(Collectors.toList());
-    }
+    
 
     public List<IServiceRole> getServiceRoles() {
         return serviceRoles.stream()
