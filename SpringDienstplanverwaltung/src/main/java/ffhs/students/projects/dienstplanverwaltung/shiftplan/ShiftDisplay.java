@@ -46,6 +46,9 @@ public class ShiftDisplay implements IShift {
     public LocalTime getFromTime() { return fromTime; }
     @Override
     public LocalTime getToTime() { return toTime; }
+
+
+
     //für Anzeige - ohne DB-Eintrag
     public ShiftDisplay(IShiftTemplate template, LocalDate day){
         this.id = -1;

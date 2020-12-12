@@ -38,7 +38,6 @@ public class SqlDatabaseManager implements IDatabaseManager {
         EmployeeEntity eMatthias = employeeRepository.save(new EmployeeEntity(matthias,local));
         EmployeeEntity eMatthias2 = employeeRepository.save(new EmployeeEntity(matthias,local2));
 
-        SlotTypeEntity bar = slotTypedRepository.save(new SlotTypeEntity("bar",local));
 
 
         List<DayOfWeek> days = new ArrayList<>(Arrays.asList( DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,
@@ -52,7 +51,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
         //List<EmployeeEntity> assigned = new ArrayList<>(Arrays.asList(eCeline));
         //List<EmployeeEntity> applied = new ArrayList<>(Arrays.asList(eMatthias,eMartin));
-        SlotEntity slot = new SlotEntity(bar,null,2, new ArrayList<>(), new ArrayList<>());
+        SlotEntity slot = new SlotEntity(null,2, new ArrayList<>(), new ArrayList<>());
         slot.addToShiftTemplate(shiftTemplate);
 
         shiftTemplateRepository.save(shiftTemplate);
@@ -92,24 +91,6 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
         return shift;
     }
-
-    @Override
-    public Optional<ISlotType> getSlotType(ILocal local, String title) {
-        return local.getSlotTypes()
-                .stream()
-                .filter(st-> st.getTitle().equals(title))
-                .findFirst();
-    }
-
-    @Override
-    public Optional<ISlot> getSlotForShiftAndType(IShift shift, ISlotType slotType) {
-         return shift.getSlots()
-                 .stream()
-                .filter(st -> st.getSlotType() == slotType )
-                .findFirst();
-    }
-
-
 
     @Override
     public Optional<IEmployee> getEmployeeForName(ILocal local, String userName) {
@@ -166,6 +147,12 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return localRepository
                 .findById(localID);
     }
+
+    public Optional<ISlot> getSlotById(long slotId) {
+        return slotRepository
+                .findById(slotId);
+    }
+
 
     @Override
     public Optional<IShiftTemplate> getShiftTemplateById(long shiftTemplateId) {
@@ -266,7 +253,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
     private SlotEntity getForSlotInfo(SlotConfig info){
         long id = info.getId();
         int numberOfEmployeesNeeded = info.getNumberOfEmployeesNeeded();
-        SlotTypeEntity slotType = slotTypedRepository.findByTitle(info.getSlotType()).orElse(null);
+        //SlotTypeEntity slotType = slotTypedRepository.findByTitle(info.getSlotType()).orElse(null);
         List<ServiceRoleEntity> slectedServiceRoles = info.getServiceRoleTable().getItems().stream()
                 .filter(ListItem::getSelected)
                 .map(ListItem::getId)
@@ -274,8 +261,17 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .flatMap(Optional::stream)
                 .map(ServiceRoleEntity.class::cast)
                 .collect(Collectors.toList());
-        return new SlotEntity(id,slectedServiceRoles,slotType,numberOfEmployeesNeeded);
+        return new SlotEntity(id,slectedServiceRoles,numberOfEmployeesNeeded);
     }
+
+    // Finde Slot anhand von ID, oder wenn nicht vorhanden für Template
+    public Optional<ISlot> getSlotForSlotIdAndShift(long slotId,IShift shift){
+        Optional<ISlot> slot = shift.getSlots().stream().filter(sl -> sl.getSlotId() == slotId).findFirst();
+        if (!slot.isPresent())
+            slot = shift.getSlots().stream().filter(sl -> sl.getTemplateSlotId() == slotId).findFirst();
+        return slot;
+    }
+
 
 
     @Autowired
@@ -286,8 +282,6 @@ public class SqlDatabaseManager implements IDatabaseManager {
     private UserRepository userRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
-    @Autowired
-    private SlotTypeRepository slotTypedRepository;
     @Autowired
     private SlotRepository slotRepository;
     @Autowired

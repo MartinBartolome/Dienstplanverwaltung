@@ -3,6 +3,7 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -74,5 +75,9 @@ class ShiftEntity implements IShift {
         toTime = template.getToTime();
         slots = new ArrayList<>();
         local = (LocalEntity) template.getLocal(); //todo
+    }
+
+    public void addSlot(SlotEntity slot){
+        slots.add(slot);
     }
 }

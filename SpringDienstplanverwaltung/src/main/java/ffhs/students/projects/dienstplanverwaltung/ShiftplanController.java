@@ -183,6 +183,7 @@ public class ShiftplanController {
 
     @GetMapping("/createFakeData")
     public void test(){
+
         dbManager.createFakeDate();
     }
 

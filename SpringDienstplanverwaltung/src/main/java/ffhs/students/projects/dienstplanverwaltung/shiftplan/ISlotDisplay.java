@@ -16,7 +16,7 @@ public interface ISlotDisplay extends ISlot {
         return getDetailTitle() + ": " + applied;
     }
     default String getDetailTitle(){
-        String title = getSlotType().getTitle();
+        String title = getTitle();
         String numbers = "(" + getApplied().size() + "/" + getNumberOfEmployeesNeeded() + ")";
         return title + numbers;
     }

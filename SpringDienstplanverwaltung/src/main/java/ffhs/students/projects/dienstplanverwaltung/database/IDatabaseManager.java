@@ -13,8 +13,9 @@ public interface IDatabaseManager {
     Optional<IShift> getShift(ILocal local, LocalDate day, Optional<IShiftTemplate> shiftTemplate);
 
     IShift createShift(IShiftTemplate shiftTemplate, LocalDate day);
-    Optional<ISlotType> getSlotType(ILocal local, String title);
-    Optional<ISlot> getSlotForShiftAndType(IShift shift,ISlotType slotType);
+    Optional<ISlot> getSlotById(long slotId);
+    //Optional<ISlotType> getSlotType(ILocal local, String title);
+    // Optional<ISlot> getSlotForShiftAndType(IShift shift,ISlotType slotType);
     void assignEmployeeToSlot(IEmployee employee, ISlot slot, boolean isAssigned);
     Optional<IEmployee> getEmployeeForName(ILocal local,String employeeName);
     void applyEmployeeToSlot(IEmployee employee, ISlot slot, boolean isApplied);
@@ -31,4 +32,5 @@ public interface IDatabaseManager {
     List<ILocal> getAllLocals();
     Optional<ILocal> localSetState(long localId, boolean isGranted, boolean isActive);
     Optional<IShiftTemplate> createOrUpdateShiftTemplate(ILocal local,ShiftTemplateConfig shiftTemplateConfig);
+    Optional<ISlot> getSlotForSlotIdAndShift(long slotId,IShift shift);
 }

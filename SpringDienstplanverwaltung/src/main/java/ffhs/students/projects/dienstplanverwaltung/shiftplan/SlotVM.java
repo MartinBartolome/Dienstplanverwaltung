@@ -12,16 +12,15 @@ class SlotVM {
     private final String detailTitle;
     private final List<String> assigned;
     private final List<String> applied;
-    private final String slotType;
+    //private final String slotType;
 
 
     public SlotVM(ISlot slot, IShift shift){
         id = Helper.generateSlotId(slot,shift);
-        title = ((ISlotDisplay) slot).getTitle();
+        title = slot.getTitle();
         detailTitle = ((ISlotDisplay) slot).getDetailTitle();
         assigned = ((ISlotDisplay) slot).getAssignedStrings();
         applied = ((ISlotDisplay) slot).getAppliedStrings();
-        slotType = slot.getSlotType().getTitle();
     }
 
     public String getId() { return id; }
@@ -29,5 +28,5 @@ class SlotVM {
     public String getDetailTitle() {return detailTitle; }
     public List<String> getAssigned() {  return assigned; }
     public List<String> getApplied() {  return applied; }
-    public String getSlotType() { return slotType; }
+    //public String getSlotType() { return slotType; }
 }

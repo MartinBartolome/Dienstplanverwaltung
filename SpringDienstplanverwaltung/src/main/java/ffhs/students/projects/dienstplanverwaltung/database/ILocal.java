@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface ILocal {
     long getId();
-    List<ISlotType> getSlotTypes();
     IUser getOwner();
     String getTitle();
     List<IServiceRole> getServiceRoles();

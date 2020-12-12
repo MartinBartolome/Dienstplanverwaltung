@@ -70,13 +70,9 @@ public class ShiftPlanManager {
         //erstelle DB Schicht falls noch kein Eintrag vorhanden
         IShift dbShift = existingShift.orElseGet(() -> databaseManager.createShift(shiftTemplate.get(), day));
 
-        //SlotType finden
-        String slotTypeTitle = Helper.getSlotTypeTitleFromSlotId(slotIdString);
-        Optional<ISlotType> slotType = databaseManager.getSlotType(local,slotTypeTitle);
-        if (!slotType.isPresent())
-            return Optional.empty();
-
-        return databaseManager.getSlotForShiftAndType(dbShift,slotType.get());
+        //Slot finden
+        long slotId = Helper.getSlotIdFromSlotIdString(slotIdString);
+        return databaseManager.getSlotForSlotIdAndShift(slotId,dbShift);
     }
 
 
