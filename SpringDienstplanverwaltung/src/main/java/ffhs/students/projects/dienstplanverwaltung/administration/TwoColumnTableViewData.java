@@ -17,7 +17,7 @@ public class TwoColumnTableViewData {
                 .collect(Collectors.toList());
         table1 = new TableViewData(title1,false,items1);
 
-        String title2 =  "Besitzer";
+        String title2 = "Besitzer";
         List<ListItem> items2 = locals.stream().map(ILocal::getOwner)
                 .map(ListItem::new)
                 .collect(Collectors.toList());

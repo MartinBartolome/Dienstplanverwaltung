@@ -167,10 +167,11 @@ public class ShiftplanController {
     @CrossOrigin(origins = "*")
     @PostMapping("/updateShiftTemplateConfig")
     public ShiftTemplateConfig updateShiftTemplateConfig(
+            @RequestParam(value = "localId") long localId,
             @RequestBody ShiftTemplateConfig shiftTemplateConfig){
 
         AdministrationManager.databaseManager = dbManager;
-        return AdministrationManager.updateShiftTemplateConfig(shiftTemplateConfig);
+        return AdministrationManager.updateShiftTemplateConfig(localId,shiftTemplateConfig);
     }
 
 
