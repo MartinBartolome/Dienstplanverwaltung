@@ -1,8 +1,0 @@
-.Tab{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-app-table{
-  width: 50%;
-}
