@@ -29,3 +29,9 @@ header{
   padding-right: 0.5em;
 }
 
+.GrayedBox{
+  background-color: lightgrey;
+}
+.NormalBox{
+  background-color: white;
+}

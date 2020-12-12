@@ -42,7 +42,6 @@ export class ShiftConfigurationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: ShiftTemplateConfigs)  => {
       if (result)
       {
-        alert(result.fromDate);
         this.api.sendPostRequest('/updateShiftTemplateConfig?localId=' + this.globalVariables.getLocalID(), result)
           .subscribe((data: ShiftTemplateConfigs) => {
           this.ShiftConfiguration.shiftTemplateConfigs[
