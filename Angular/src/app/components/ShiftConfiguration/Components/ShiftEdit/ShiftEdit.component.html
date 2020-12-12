@@ -4,7 +4,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Titel</mat-label>
         <label>
-          <input matInput type="text" [name]="template.title" placeholder="Titel" [(ngModel)]="template.title">
+          <input matInput type="text" name="Title" placeholder="Titel" [(ngModel)]="template.title">
         </label>
       </mat-form-field>
     </div>
@@ -16,13 +16,13 @@
       <mat-form-field appearance="outline">
         <mat-label>Von</mat-label>
         <label>
-          <input matInput placeholder="Von" [name]="template.fromDate" [(ngModel)]="template.fromDate">
+          <input matInput placeholder="Von" name="FromDate" [(ngModel)]="template.fromDate">
         </label>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Bis</mat-label>
         <label>
-          <input matInput placeholder="Bis" [name]="template.toDate" [(ngModel)]="template.toDate">
+          <input matInput placeholder="Bis" name="ToDate" [(ngModel)]="template.toDate">
         </label>
       </mat-form-field>
     </div>

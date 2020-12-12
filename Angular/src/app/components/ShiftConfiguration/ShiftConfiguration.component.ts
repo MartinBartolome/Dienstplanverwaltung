@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ShiftEditComponent} from './Components/ShiftEdit/ShiftEdit.component';
 import {ShiftTemplateConfigs} from './Models/ShiftTemplateConfigs';
 import {DataService} from '../../Common/DataService';
+import {SharedService} from '../../Common/SharedService';
 
 @Component({
   selector: 'app-shift-configuration',
@@ -15,15 +16,22 @@ export class ShiftConfigurationComponent implements OnInit {
   @Input() ShiftConfiguration: ShiftConfiguration;
   @Output() ShiftConfigChanged = new EventEmitter();
 
-  constructor(public dialog: MatDialog, private api: DataService) { }
+  constructor(public dialog: MatDialog, private api: DataService, public globalVariables: SharedService) { }
 
   ngOnInit(): void {
   }
 
   newTemplate(): void{
     const dialogRef = this.dialog.open(ShiftEditComponent, { data: this.ShiftConfiguration.emptyShiftTemplateConfig });
-    dialogRef.afterClosed().subscribe(() => {
-      alert('Now do the Edit!');
+    dialogRef.afterClosed().subscribe((result: ShiftTemplateConfigs) => {
+      if (result)
+      {
+        this.api.sendPostRequest('/updateShiftTemplateConfig?localId=' + this.globalVariables.getLocalID(), result)
+          .subscribe((data: ShiftTemplateConfigs) => {
+            this.ShiftConfiguration.shiftTemplateConfigs.push(data);
+            this.ShiftConfigChanged.emit(true);
+          });
+      }
     });
   }
 
@@ -34,7 +42,9 @@ export class ShiftConfigurationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: ShiftTemplateConfigs)  => {
       if (result)
       {
-        this.api.sendPostRequest('/updateShiftTemplateConfig', result).subscribe((data: ShiftTemplateConfigs) => {
+        alert(result.fromDate);
+        this.api.sendPostRequest('/updateShiftTemplateConfig?localId=' + this.globalVariables.getLocalID(), result)
+          .subscribe((data: ShiftTemplateConfigs) => {
           this.ShiftConfiguration.shiftTemplateConfigs[
             this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)] = data;
           this.ShiftConfigChanged.emit(true);
