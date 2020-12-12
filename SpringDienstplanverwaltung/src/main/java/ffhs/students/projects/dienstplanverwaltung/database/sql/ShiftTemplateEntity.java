@@ -155,7 +155,13 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
     }
 
 
+    public void setFromTime(LocalTime fromTime) {
+        this.fromTime = fromTime;
+    }
 
+    public void setToTime(LocalTime toTime) {
+        this.toTime = toTime;
+    }
 
     private LocalTime fromTime;
     @Override

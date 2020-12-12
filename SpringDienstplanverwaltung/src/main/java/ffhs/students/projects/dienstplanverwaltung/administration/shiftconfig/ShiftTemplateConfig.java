@@ -23,7 +23,11 @@ public class ShiftTemplateConfig {
     private final String title;
     private final long id;
     private List<SlotConfig> slotInfos;
-    //private final List<TableViewData> slotServiceRoles;
+
+
+
+    private final String startTime;
+    private final String endTime;
 
     public ShiftTemplateConfig(IShiftTemplate shiftTemplate,List<IServiceRole> localServiceRoles ){
         recurrenceOptions = new DropDownData(shiftTemplate);
@@ -33,6 +37,8 @@ public class ShiftTemplateConfig {
         toDate = Helper.stringFromDate( shiftTemplate.getTo() );
         title = shiftTemplate.getTitle();
         id = shiftTemplate.getId();
+        startTime = Helper.stringFromTime(shiftTemplate.getFromTime());
+        endTime =  Helper.stringFromTime(shiftTemplate.getToTime());
         slotInfos = generateSlotInfos(shiftTemplate.getSlots(),localServiceRoles);
     }
     public ShiftTemplateConfig(){
@@ -43,6 +49,8 @@ public class ShiftTemplateConfig {
         toDate = "";
         title = "";
         id = -1;
+        startTime = "";
+        endTime ="";
         slotInfos = new ArrayList<>();
     }
     public DropDownData getRecurrenceOptions() {  return recurrenceOptions;  }
@@ -52,8 +60,8 @@ public class ShiftTemplateConfig {
     public String getToDate() { return toDate;  }
     public String getTitle() { return title; }
     public long getId() { return id; }
-
-
+    public String getStartTime() {  return startTime; }
+    public String getEndTime() {  return endTime;  }
 
     public void setSlotInfos(List<SlotConfig> slotInfos) {
         this.slotInfos = slotInfos;

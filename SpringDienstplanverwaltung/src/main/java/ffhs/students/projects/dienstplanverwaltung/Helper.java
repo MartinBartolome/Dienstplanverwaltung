@@ -6,6 +6,7 @@ import ffhs.students.projects.dienstplanverwaltung.database.RecurrenceType;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -100,5 +101,17 @@ public abstract class Helper {
     }
     public static String getSlotTypeTitleFromSlotId(String slotId){
         return slotId.split(slotIdDevider)[2];
+    }
+
+    public static String stringFromTime(LocalTime fromTime) {
+        return fromTime == null
+                ? ""
+                : fromTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    public static LocalTime timeFromString(String startTime) {
+        if (startTime.isEmpty())
+            return LocalTime.now();
+        return LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm"));
     }
 }

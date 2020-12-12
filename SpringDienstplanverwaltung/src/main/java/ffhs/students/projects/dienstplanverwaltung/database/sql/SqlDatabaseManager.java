@@ -257,8 +257,9 @@ public class SqlDatabaseManager implements IDatabaseManager {
         shiftTemplateEntity.setWeekdays(weekDays);
         shiftTemplateEntity.updateSlots(newSlots,slotRepository);
         shiftTemplateEntity.setTitle(shiftTemplate.get().getTitle());
+        shiftTemplateEntity.setToTime(Helper.timeFromString(shiftTemplateConfig.getEndTime()));
+        shiftTemplateEntity.setFromTime(Helper.timeFromString(shiftTemplateConfig.getStartTime()));
         shiftTemplateEntity.save(shiftTemplateRepository);
-
         return Optional.of(shiftTemplateEntity);
     }
 
