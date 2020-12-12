@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {EmployeesConfig} from './Components/EmployeeConfiguration/Models/EmployeesConfig';
 import {DataService} from './Common/DataService';
-import {ShiftPlan} from './Components/ShiftPlan/Models/ShiftPlan';
+import {ShiftPlan} from './Components/Shiftplan/Models/ShiftPlan';
 import {ShiftConfiguration} from './Components/ShiftConfiguration/Models/ShiftConfiguration';
 import {SharedService} from './Common/SharedService';
 
