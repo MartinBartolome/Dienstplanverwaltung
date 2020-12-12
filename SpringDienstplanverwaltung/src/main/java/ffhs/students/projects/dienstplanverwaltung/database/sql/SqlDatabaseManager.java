@@ -256,9 +256,10 @@ public class SqlDatabaseManager implements IDatabaseManager {
         shiftTemplateEntity.setRecurrenceType(Helper.getRecurrenceType(recurrenceString));
         shiftTemplateEntity.setWeekdays(weekDays);
         shiftTemplateEntity.updateSlots(newSlots,slotRepository);
-        shiftTemplateEntity.setTitle(shiftTemplate.get().getTitle());
+        shiftTemplateEntity.setTitle(shiftTemplateConfig.getTitle());
+        shiftTemplateEntity.setToTime(Helper.timeFromString(shiftTemplateConfig.getEndTime()));
+        shiftTemplateEntity.setFromTime(Helper.timeFromString(shiftTemplateConfig.getStartTime()));
         shiftTemplateEntity.save(shiftTemplateRepository);
-
         return Optional.of(shiftTemplateEntity);
     }
 

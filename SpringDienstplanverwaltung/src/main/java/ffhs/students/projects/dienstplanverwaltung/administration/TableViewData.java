@@ -49,7 +49,7 @@ public class TableViewData {
 
 
     public static TableViewData getForServiceRoles(List<IServiceRole> localRoles, List<IServiceRole> slotRoles){
-        String title = "Slots";
+        String title = "Dienstrollen";
         boolean showsAddButton = true;
         List<ListItem> items = localRoles.stream()
                 .map(localRole -> new ListItem(localRole.getName(),slotRoles.contains(localRole),localRole.getId()))

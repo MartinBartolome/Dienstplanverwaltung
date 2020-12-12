@@ -107,8 +107,10 @@ public class ShiftPlanManager {
         List<IShift> dbShifts = databaseManager.getShifts(local,from,to);
         List<IShiftTemplate> shiftTemplates = databaseManager.getShiftTemplates(local);
 
-        List<ShiftDayData> dbShiftDayDataList = getDbShiftDayDataList(dbShifts);
-        return getShiftDayDataList(days,dbShiftDayDataList,shiftTemplates);
+        List<ShiftDayData> dbShiftDayDataList = getDbShiftDayDataList(dbShifts); //db Einträge
+        List<ShiftDayData> result = getShiftDayDataList(days,dbShiftDayDataList,shiftTemplates); //db Einträge + template generiert
+        setIsInMonthFlag(result,month);
+        return result;
     }
     private static List<ShiftDayData> getShiftDayDataList(List<LocalDate> days, List<ShiftDayData> dbShiftDayDataList, List<IShiftTemplate> shiftTemplates) {
         return days.stream()
@@ -122,6 +124,10 @@ public class ShiftPlanManager {
                 .collect(toList());
         return new ShiftDayData(day,shiftsOnDay);
     }
+    private static void setIsInMonthFlag(List<ShiftDayData> days, LocalDate month){
+        days.forEach(day -> day.setInMonth(Helper.isDayInMonth(day.getDay(),month)));
+    }
+
 
     /**
      * Findet eine Datenbank Schicht in der übergeben Liste von DatenBank Schichten
