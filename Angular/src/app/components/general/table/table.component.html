@@ -12,12 +12,21 @@
        [ngClass]="{'Highlight': item.selected, 'normal': !item.selected}"
        (click)="item.selected = !item.selected; ItemSelected(item)">
     <mat-label>{{ item.title }}</mat-label>
-    <mat-icon *ngIf="table.showsAddButton"
-              aria-hidden="false"
-              aria-label="Editieren"
-              color="primary"
-              [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
-              (click)="ItemEdit(item)">build_circle
-    </mat-icon>
+    <div>
+      <mat-icon *ngIf="table.showsAddButton"
+                aria-hidden="false"
+                aria-label="Editieren"
+                color="primary"
+                [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
+                (click)="ItemEdit(item)">build_circle
+      </mat-icon>
+      <mat-icon *ngIf="table.showsAddButton"
+                aria-hidden="false"
+                aria-label="Editieren"
+                color="primary"
+                [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
+                (click)="ItemDelete(item)">delete
+      </mat-icon>
+    </div>
   </div>
 </section>
