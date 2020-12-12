@@ -1,12 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {MatTabsModule} from '@angular/material/tabs';
-import {EmployeesConfig} from './components/employee-configuration/models/EmployeesConfig';
-import {DataService} from './common/DataService';
-import {ShiftPlan} from './components/shiftplan/models/ShiftPlan';
-import {ShiftTemplateConfigs} from './components/shift-configuration/models/ShiftTemplateConfigs';
-import {ShiftConfiguration} from './components/shift-configuration/models/ShiftConfiguration';
-import {SharedService} from './common/SharedService';
-import {Local} from 'protractor/built/driverProviders';
+import {Component} from '@angular/core';
+import {EmployeesConfig} from './Components/EmployeeConfiguration/Models/EmployeesConfig';
+import {DataService} from './Common/DataService';
+import {ShiftPlan} from './Components/ShiftPlan/Models/ShiftPlan';
+import {ShiftConfiguration} from './Components/ShiftConfiguration/Models/ShiftConfiguration';
+import {SharedService} from './Common/SharedService';
 
 @Component({
   selector: 'app-root',
@@ -18,37 +15,34 @@ export class AppComponent{
   EmployeeData: EmployeesConfig;
   ShiftConfiguration: ShiftConfiguration;
   ShiftPlanData: ShiftPlan;
-  loginsuccess = false;
-  localselected = false;
+  LoginSuccess = false;
+  LocalSelected = false;
 
-  constructor(private api: DataService, public globalvariables: SharedService) {
+  constructor(private api: DataService, public globalVariables: SharedService) {
   }
 
   public loadEmployeeData(): void{
-    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalvariables.getLocalID()).subscribe((data: any) => {
+    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: EmployeesConfig) => {
       this.EmployeeData = data;
-      console.log(data);
     });
   }
-  public loadShiftPlanData(selecteddate: Date): void{
-    const combinedurl =  '/shiftPlan?month='
-      + selecteddate.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
-      + '.' + (selecteddate.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
-      + '.' + selecteddate.getFullYear();
-    this.api.sendGetRequest(combinedurl).subscribe((data: ShiftPlan) => {
-      console.log(data);
+  public loadShiftPlanData(SelectedDate: Date): void{
+    const CombinedURL =  '/shiftPlan?month='
+      + SelectedDate.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
+      + '.' + (SelectedDate.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
+      + '.' + SelectedDate.getFullYear();
+    this.api.sendGetRequest(CombinedURL).subscribe((data: ShiftPlan) => {
       this.ShiftPlanData = data;
     });
   }
 
   public loadShiftConfiguration(): void{
-    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalvariables.getLocalID()).subscribe((data: any) => {
+    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: ShiftConfiguration) => {
       this.ShiftConfiguration = data;
-      console.log(data);
     });
   }
 
-  public Login(): void
+  public Reload(): void
   {
     this.loadEmployeeData();
     this.loadShiftPlanData(new Date());

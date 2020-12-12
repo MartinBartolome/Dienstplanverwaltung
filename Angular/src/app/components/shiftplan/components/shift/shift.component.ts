@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Shift} from '../../models/Shift';
+import {Shift} from '../../Models/Shift';
 
 @Component({
   selector: 'app-shift',
-  templateUrl: './shift.component.html',
-  styleUrls: ['./shift.component.css']
+  templateUrl: './Shift.component.html',
+  styleUrls: ['./Shift.component.css']
 })
 export class ShiftComponent implements OnInit {
   @Input()  shift: Shift;

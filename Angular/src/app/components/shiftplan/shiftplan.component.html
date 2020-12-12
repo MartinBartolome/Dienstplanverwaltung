@@ -5,16 +5,16 @@
     <button mat-raised-button color="primary" type="button" (click)="ChangeMonth(+1)">></button>
   </div>
   <div id="calendar">
-    <div class="DayBox" align="center">Mo</div>
-    <div class="DayBox" align="center">Di</div>
-    <div class="DayBox" align="center">Mi</div>
-    <div class="DayBox" align="center">Do</div>
-    <div class="DayBox" align="center">Fr</div>
-    <div class="DayBox" align="center">Sa</div>
-    <div class="DayBox" align="center">So</div>
-    <div class="DayBox" *ngFor="let shiftdays of data.shiftDays">
-      <div class="date">{{shiftdays.day.slice(0,2)}}</div>
-      <app-shift-day [shiftdays]="shiftdays" (click)="clickOpenDetail(shiftdays)"></app-shift-day>
+    <div class="DayBox">Mo</div>
+    <div class="DayBox">Di</div>
+    <div class="DayBox">Mi</div>
+    <div class="DayBox">Do</div>
+    <div class="DayBox">Fr</div>
+    <div class="DayBox">Sa</div>
+    <div class="DayBox">So</div>
+    <div class="DayBox" *ngFor="let ShiftDays of data.shiftDays" [ngClass]="{'GrayedBox': !ShiftDays.inMonth, 'NormalBox': ShiftDays.inMonth}">
+      <div class="date">{{ShiftDays.day.slice(0,2)}}</div>
+      <app-shift-day [ShiftDays]="ShiftDays" (click)="clickOpenDetail(ShiftDays)"></app-shift-day>
     </div>
   </div>
 </section>

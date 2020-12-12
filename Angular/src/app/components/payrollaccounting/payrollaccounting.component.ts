@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-payrollaccounting',
-  templateUrl: './payrollaccounting.component.html',
-  styleUrls: ['./payrollaccounting.component.css']
+  templateUrl: './PayrollAccounting.component.html',
+  styleUrls: ['./PayrollAccounting.component.css']
 })
-export class PayrollaccountingComponent implements OnInit {
+export class PayrollAccountingComponent implements OnInit {
 
   constructor() { }
 

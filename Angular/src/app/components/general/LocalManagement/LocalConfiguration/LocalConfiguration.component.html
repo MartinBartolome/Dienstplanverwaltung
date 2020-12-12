@@ -1,0 +1,8 @@
+<form>
+  <p>
+    <app-table [table]="Locals" (EditItemEvent)="Edit($event)" (AddEvent)="Add()" [AllowSelection]="false"></app-table>
+  </p>
+  <div class="button">
+    <button mat-raised-button color="primary" (click)="Add()" cdkFocusInitial>Neues Lokal beantragen</button>
+  </div>
+</form>

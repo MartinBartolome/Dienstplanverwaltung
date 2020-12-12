@@ -11,12 +11,12 @@ header{
 }
 
 .DayBox{
-  border:solid #e4e4e4;
   border-collapse: collapse;
-  border-width:0.1em;
+  border: 0.1em solid #e4e4e4;
   display: inline-block;
   flex-grow: 1;
   width: calc(100% * (1/8) - 1px);
+  text-align: center;
 }
 #Navigation{
   display: flex;
@@ -29,3 +29,9 @@ header{
   padding-right: 0.5em;
 }
 
+.GrayedBox{
+  background-color: lightgrey;
+}
+.NormalBox{
+  background-color: white;
+}

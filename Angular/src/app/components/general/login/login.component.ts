@@ -1,16 +1,11 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
-import {ChooselocalComponent} from '../local-management/chooselocal/chooselocal.component';
-import {DataService} from '../../../common/DataService';
-import {Table} from '../../../models/Table';
-import {ListItem} from '../../../models/ListItem';
-import {SharedService} from '../../../common/SharedService';
+import {SharedService} from '../../../Common/SharedService';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './Login.component.html',
+  styleUrls: ['./Login.component.css']
 })
 export class LoginComponent{
   @Input() error: string | null;
@@ -23,10 +18,10 @@ export class LoginComponent{
 
   submit(): void{
     if (this.form.valid) {
-      this.globalvariables.setNickName(this.form.get('username').value);
+      this.globalVariables.setNickName(this.form.get('username').value);
       this.submitEM.emit(true);
     }
   }
 
-  constructor(public globalvariables: SharedService) { }
+  constructor(public globalVariables: SharedService) { }
 }

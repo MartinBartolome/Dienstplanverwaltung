@@ -6,8 +6,7 @@ label{
 ul {
   list-style: none;
   float:left;
-  margin:0;
-  margin-left: 0.2em;
+  margin: 0 0 0 0.2em;
   padding:0;
 }
 li {
@@ -17,7 +16,7 @@ section{
   width: auto;
 }
 
-.user{
+.User{
   display: flex;
   padding: 0;
   margin: 0;

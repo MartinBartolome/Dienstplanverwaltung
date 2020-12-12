@@ -1,9 +1,0 @@
-<section>
-  <div class="textinput">
-    <mat-label>Slottyp</mat-label>
-    <mat-select>
-      <mat-option value="option" *ngFor="let item of slotinfos">{{ item.title }}</mat-option>
-    </mat-select>
-  </div>
-  <app-table [table]="ServiceRoles" (ItemSelectedEvent)="editServiceRole($event)" (AddEvent)="newServiceRole()"></app-table>
-</section>

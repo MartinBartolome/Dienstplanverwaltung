@@ -1,6 +1,6 @@
-<app-login *ngIf="!loginsuccess" (submitEM)="loginsuccess = true"></app-login>
-<app-chooselocal *ngIf="loginsuccess && !localselected" (submitEM)="localselected = true; Login()" ></app-chooselocal>
-<div *ngIf="loginsuccess && localselected">
+<app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = true"></app-login>
+<app-chooselocal *ngIf="LoginSuccess && !LocalSelected" (submitEM)="LocalSelected = true; Reload()" ></app-chooselocal>
+<div *ngIf="LoginSuccess && LocalSelected">
   <mat-tab-group mat-stretch-tabs class="tabcontainer">
     <mat-tab label="Schichtplan" >
       <ng-template matTabContent>
@@ -9,7 +9,7 @@
     </mat-tab>
     <mat-tab label="Schichtverwaltung" >
       <ng-template matTabContent>
-        <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration"></app-shift-configuration>
+        <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration" (ShiftConfigChanged)="Reload()"></app-shift-configuration>
       </ng-template>
     </mat-tab>
     <mat-tab label="Mitarbeiterverwaltung">

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShiftplanComponent } from './shiftplan.component';
+import { ShiftPlanComponent } from './ShiftPlan.component';
 
 describe('ShiftplanComponent', () => {
-  let component: ShiftplanComponent;
-  let fixture: ComponentFixture<ShiftplanComponent>;
+  let component: ShiftPlanComponent;
+  let fixture: ComponentFixture<ShiftPlanComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShiftplanComponent ]
+      declarations: [ ShiftPlanComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShiftplanComponent);
+    fixture = TestBed.createComponent(ShiftPlanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

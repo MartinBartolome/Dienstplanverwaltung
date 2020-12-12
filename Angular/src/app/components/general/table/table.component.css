@@ -1,12 +1,11 @@
 section{
   display: flex;
   flex-direction: column;
-  border:solid #e4e4e4;
   border-collapse: collapse;
-  border-width:0.1em;
+  border: 0.1em solid #e4e4e4;
 }
 
-.headerrow{
+.HeaderRow{
   border-bottom:solid #e4e4e4;
   border-collapse: collapse;
   border-width:0.1em;
@@ -15,14 +14,17 @@ section{
   flex-wrap: nowrap;
   justify-content: space-between;
 }
-.subrows{
+.SubRows{
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 header{
   font-size: 1.25em;
 }
 
-.Hightlight{
+.Highlight{
   background: #3F51B5;
   color: white;
 }
