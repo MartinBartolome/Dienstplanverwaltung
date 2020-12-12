@@ -17,6 +17,9 @@ public abstract class Helper {
     public static boolean isDayInWeekInBiWeeklyRecurrence(LocalDate day, LocalDate startOfBiWeeklyRecurrence){
         return true; // todo
     }
+    public static boolean isDayInMonth(LocalDate day,LocalDate month){
+        return day.getMonth() == month.getMonth() && day.getYear() == month.getYear();
+    }
 
     public static String stringFromDate(LocalDate date){
         if (date == null)

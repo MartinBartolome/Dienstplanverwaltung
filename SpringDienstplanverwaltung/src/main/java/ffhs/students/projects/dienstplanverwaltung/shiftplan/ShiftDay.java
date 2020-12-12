@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 public class ShiftDay {
     private final String day;
     private final List<ShiftVM> shiftVMs;
+    private final boolean isInMonth;
 
     public ShiftDay(ShiftDayData dayData) {
+        this.isInMonth = dayData.isInMonth();
         this.day = Helper.stringFromDate(dayData.getDay());
         this.shiftVMs = dayData.getShifts().stream()
                 .map(ShiftVM::new)
@@ -21,4 +23,5 @@ public class ShiftDay {
         return day;
     }
     public List<ShiftVM> getShifts() {  return shiftVMs; }
+    public boolean isInMonth() { return isInMonth;   }
 }

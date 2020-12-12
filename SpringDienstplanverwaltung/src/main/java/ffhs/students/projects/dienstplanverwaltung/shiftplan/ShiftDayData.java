@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ShiftDayData {
     private final LocalDate day;
     private final List<ShiftDisplay> shifts;
-
+    private boolean isInMonth;
     public ShiftDayData(LocalDate day, List<IShift> shifts) {
         this.day = day;
         this.shifts = shifts.stream().map(ShiftDisplay::new).collect(Collectors.toList());
@@ -20,7 +20,8 @@ public class ShiftDayData {
         return day;
     }
     public List<ShiftDisplay> getShifts() { return shifts; }
-
+    public boolean isInMonth() { return isInMonth; }
+    public void setInMonth(boolean inMonth) { isInMonth = inMonth;  }
     /**
      * Findet in der Liste von Datenbank Schicht-Tagen für ein Template an einem Tag einen Eintrag, falls dieser existiert.
      * @param day Tag an dem die Schicht gesucht wirde
