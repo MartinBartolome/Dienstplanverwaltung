@@ -13,16 +13,30 @@
       <p>
         <label>Gültigkeit</label>
       </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Von</mat-label>
+          <label>
+            <input matInput placeholder="Von" name="FromDate" [(ngModel)]="template.fromDate">
+          </label>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Bis</mat-label>
+          <label>
+            <input matInput placeholder="Bis" name="ToDate" [(ngModel)]="template.toDate">
+          </label>
+        </mat-form-field>
+      </p>
       <mat-form-field appearance="outline">
-        <mat-label>Von</mat-label>
+        <mat-label>Von Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Von" name="FromDate" [(ngModel)]="template.fromDate">
+          <input matInput placeholder="Von" name="FromTime" [(ngModel)]="template.startTime">
         </label>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Bis</mat-label>
+        <mat-label>Bis Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Bis" name="ToDate" [(ngModel)]="template.toDate">
+          <input matInput placeholder="Bis" name="ToTime" [(ngModel)]="template.endTime">
         </label>
       </mat-form-field>
     </div>
