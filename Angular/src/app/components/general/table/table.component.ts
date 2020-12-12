@@ -11,6 +11,7 @@ export class TableComponent implements OnInit {
   @Input() table: Table;
   @Input() AllowSelection: boolean;
   @Output() EditItemEvent = new EventEmitter<ListItem>();
+  @Output() DeleteItemEvent = new EventEmitter<ListItem>();
   @Output() AddEvent = new EventEmitter();
 
   constructor() { }
@@ -19,6 +20,9 @@ export class TableComponent implements OnInit {
   }
   ItemEdit(item: ListItem): void  {
     this.EditItemEvent.emit(item);
+  }
+  ItemDelete(item: ListItem): void  {
+    this.DeleteItemEvent.emit(item);
   }
   AddNew(): void{
     this.AddEvent.emit();

@@ -2,16 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { SlotDetailComponent } from './Components/ShiftPlan/Components/SlotDetail/SlotDetail.component';
-import { ShiftDetailComponent } from './Components/ShiftPlan/Components/ShiftDetail/ShiftDetail.component';
-import { ShiftDayDetailComponent } from './Components/ShiftPlan/Components/ShiftDayDetail/ShiftDayDetail.component';
+import { SlotDetailComponent } from './Components/Shiftplan/Components/SlotDetail/SlotDetail.component';
+import { ShiftDetailComponent } from './Components/Shiftplan/Components/ShiftDetail/ShiftDetail.component';
+import { ShiftDayDetailComponent } from './Components/Shiftplan/Components/ShiftDayDetail/ShiftDayDetail.component';
 import { TableComponent } from './Components/General/Table/Table.component';
 import { EmployeeConfigComponent } from './Components/EmployeeConfiguration/Components/EmployeeConfig/EmployeeConfig.component';
-import { ShiftPlanComponent } from './Components/ShiftPlan/ShiftPlan.component';
+import { ShiftplanComponent } from './Components/Shiftplan/Shiftplan.component';
 import { HttpClientModule} from '@angular/common/http';
-import { ShiftDayComponent } from './Components/ShiftPlan/Components/ShiftDay/ShiftDay.component';
-import { SlotComponent } from './Components/ShiftPlan/Components/Slot/Slot.component';
-import { ShiftComponent } from './Components/ShiftPlan/Components/Shift/Shift.component';
+import { ShiftDayComponent } from './Components/Shiftplan/Components/ShiftDay/ShiftDay.component';
+import { SlotComponent } from './Components/Shiftplan/Components/Slot/Slot.component';
+import { ShiftComponent } from './Components/Shiftplan/Components/Shift/Shift.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule} from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +24,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
-import { PayrollAccountingComponent } from './Components/PayrollAccounting/PayrollAccounting.component';
 import { EmployeeConfigurationComponent } from './Components/EmployeeConfiguration/EmployeeConfiguration.component';
 import { EmployeeInviteComponent } from './Components/EmployeeConfiguration/Components/EmployeeInvite/EmployeeInvite.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -47,11 +46,10 @@ import { TenantConfigComponent } from './Components/General/SysAdmin/TenantConfi
     ShiftDayDetailComponent,
     TableComponent,
     EmployeeConfigComponent,
-    ShiftPlanComponent,
+    ShiftplanComponent,
     ShiftDayComponent,
     SlotComponent,
     ShiftComponent,
-    PayrollAccountingComponent,
     EmployeeConfigurationComponent,
     EmployeeInviteComponent,
     ShiftConfigurationComponent,
