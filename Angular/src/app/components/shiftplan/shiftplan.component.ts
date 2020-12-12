@@ -5,10 +5,10 @@ import {ShiftDayDetailComponent} from './Components/ShiftDayDetail/ShiftDayDetai
 
 @Component({
   selector: 'app-shiftplan',
-  templateUrl: './ShiftPlan.component.html',
-  styleUrls: ['./ShiftPlan.component.css']
+  templateUrl: './Shiftplan.component.html',
+  styleUrls: ['./Shiftplan.component.css']
 })
-export class ShiftPlanComponent implements OnInit, OnChanges {
+export class ShiftplanComponent implements OnInit, OnChanges {
   @Input() data: ShiftPlan;
   @Output() DateChange = new EventEmitter<Date>();
   @Input() DateTitle: string;
