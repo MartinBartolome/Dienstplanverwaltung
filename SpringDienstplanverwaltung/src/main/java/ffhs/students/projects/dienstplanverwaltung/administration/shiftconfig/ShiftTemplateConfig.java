@@ -22,6 +22,7 @@ public class ShiftTemplateConfig {
     private final String toDate;
     private final String title;
     private final long id;
+    private List<SlotConfig> slotInfos;
     //private final List<TableViewData> slotServiceRoles;
 
     public ShiftTemplateConfig(IShiftTemplate shiftTemplate,List<IServiceRole> localServiceRoles ){
@@ -42,6 +43,7 @@ public class ShiftTemplateConfig {
         toDate = "";
         title = "";
         id = -1;
+        slotInfos = new ArrayList<>();
     }
     public DropDownData getRecurrenceOptions() {  return recurrenceOptions;  }
     public TableViewData getDays() { return days;  }
@@ -52,14 +54,13 @@ public class ShiftTemplateConfig {
     public long getId() { return id; }
 
 
-    private List<SlotConfig> slotInfos;
+
     public void setSlotInfos(List<SlotConfig> slotInfos) {
         this.slotInfos = slotInfos;
     }
     public List<SlotConfig> getSlotInfos(){
         return slotInfos;
     }
-
     private List<SlotConfig> generateSlotInfos(List<ISlot> slots,List<IServiceRole> localServiceRoles){
         return slots.stream()
                 .map(slot -> new SlotConfig(slot,localServiceRoles))
