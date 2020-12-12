@@ -9,11 +9,10 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class DataService {
 
-<<<<<<< HEAD
-  private REST_API_SERVER = 'http://192.168.178.20:8080';
-=======
+
+
   private REST_API_SERVER = 'http://localhost:8080';
->>>>>>> SpringFeatures
+
 
   constructor(private httpClient: HttpClient) { }
 
