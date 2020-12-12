@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {ListItem} from '../../../General/Models/ListItem';
 import {ShiftTemplateConfigs} from '../../Models/ShiftTemplateConfigs';
 import {SlotEditComponent} from '../SlotEdit/SlotEdit.component';
+import {SlotInfo} from '../../Models/SlotInfo';
 
 @Component({
   selector: 'app-shift-edit',
@@ -19,9 +20,13 @@ export class ShiftEditComponent implements OnInit {
   }
 
   newSlot(): void{
-    const dialogRef = this.dialog.open(SlotEditComponent, { data: new ShiftTemplateConfigs()});
-    dialogRef.afterClosed().subscribe(() => {
-      alert('Now do the Edit!');
+    const dialogRef = this.dialog.open(SlotEditComponent, { data: new SlotInfo()});
+    dialogRef.afterClosed().subscribe((result: SlotInfo) => {
+      if (result)
+      {
+        this.template.slotInfos.push(result);
+        this.template.slots.items.push(new ListItem());
+      }
     });
   }
 
@@ -29,8 +34,11 @@ export class ShiftEditComponent implements OnInit {
     slot.selected = !slot.selected;
     const dialogRef = this.dialog.open(SlotEditComponent,
       { data: this.template.slotInfos[this.template.slots.items.indexOf(slot)]});
-    dialogRef.afterClosed().subscribe(() => {
-      alert('Now do the Edit!');
+    dialogRef.afterClosed().subscribe((result: SlotInfo) => {
+      if (result)
+      {
+        this.template.slotInfos[this.template.slots.items.indexOf(slot)] = result;
+      }
     });
   }
 }
