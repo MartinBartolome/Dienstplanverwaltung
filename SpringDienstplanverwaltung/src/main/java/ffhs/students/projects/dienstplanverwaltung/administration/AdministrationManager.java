@@ -95,12 +95,14 @@ public class AdministrationManager {
                 .orElseGet(ShiftPlanConfig::new);
     }
 
-    public static ShiftTemplateConfig updateShiftTemplateConfig(ShiftTemplateConfig shiftTemplateConfig){
-        Optional<IShiftTemplate> shiftTemplate = databaseManager.updateShiftTemplate(shiftTemplateConfig);
-        if (!shiftTemplate.isPresent())
+    public static ShiftTemplateConfig updateShiftTemplateConfig(long localId, ShiftTemplateConfig shiftTemplateConfig){
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
             return new ShiftTemplateConfig();
 
-        ILocal local = shiftTemplate.get().getLocal();
-        return new ShiftTemplateConfig(shiftTemplate.get(),local.getServiceRoles());
+        Optional<IShiftTemplate> shiftTemplate = databaseManager.createOrUpdateShiftTemplate(local.get(),shiftTemplateConfig);
+        return shiftTemplate
+                .map(iShiftTemplate -> new ShiftTemplateConfig(iShiftTemplate, local.get().getServiceRoles()))
+                .orElseGet(ShiftTemplateConfig::new);
     }
 }

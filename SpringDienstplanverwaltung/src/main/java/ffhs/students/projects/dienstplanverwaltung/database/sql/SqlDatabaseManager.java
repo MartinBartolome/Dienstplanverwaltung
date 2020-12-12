@@ -229,8 +229,12 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return userRepository.findByNickname(nickName);
     }
 
-    public Optional<IShiftTemplate> updateShiftTemplate(ShiftTemplateConfig shiftTemplateConfig){
-        Optional<IShiftTemplate> shiftTemplate = shiftTemplateRepository.findById( shiftTemplateConfig.getId() );
+    public Optional<IShiftTemplate> createOrUpdateShiftTemplate(ILocal local,ShiftTemplateConfig shiftTemplateConfig){
+        Optional<IShiftTemplate> shiftTemplate;
+        if (shiftTemplateConfig.getId() == -1) //create
+            shiftTemplate = Optional.of(shiftTemplateRepository.save(new ShiftTemplateEntity(local)));
+        else // update
+            shiftTemplate = shiftTemplateRepository.findById( shiftTemplateConfig.getId() );
         if (!shiftTemplate.isPresent())
             return Optional.empty();
 
@@ -252,6 +256,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         shiftTemplateEntity.setRecurrenceType(Helper.getRecurrenceType(recurrenceString));
         shiftTemplateEntity.setWeekdays(weekDays);
         shiftTemplateEntity.updateSlots(newSlots,slotRepository);
+        shiftTemplateEntity.setTitle(shiftTemplate.get().getTitle());
         shiftTemplateEntity.save(shiftTemplateRepository);
 
         return Optional.of(shiftTemplateEntity);
@@ -262,7 +267,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         int numberOfEmployeesNeeded = info.getNumberOfEmployeesNeeded();
         SlotTypeEntity slotType = slotTypedRepository.findByTitle(info.getSlotType()).orElse(null);
         List<ServiceRoleEntity> slectedServiceRoles = info.getServiceRoleTable().getItems().stream()
-                .filter(item -> item.getSelected())
+                .filter(ListItem::getSelected)
                 .map(ListItem::getId)
                 .map(srId -> serviceRoleRepository.findById(srId))
                 .flatMap(Optional::stream)

@@ -30,5 +30,5 @@ public interface IDatabaseManager {
     Optional<ILocal> updateLocal(long localId, String title, boolean isActive);
     List<ILocal> getAllLocals();
     Optional<ILocal> localSetState(long localId, boolean isGranted, boolean isActive);
-    Optional<IShiftTemplate> updateShiftTemplate(ShiftTemplateConfig shiftTemplateConfig);
+    Optional<IShiftTemplate> createOrUpdateShiftTemplate(ILocal local,ShiftTemplateConfig shiftTemplateConfig);
 }

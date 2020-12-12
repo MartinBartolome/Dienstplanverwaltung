@@ -27,8 +27,16 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
     @OneToMany(mappedBy = "shiftTemplate")
     private List<SlotEntity> slots;
 
-    public ShiftTemplateEntity() { }
-
+    public ShiftTemplateEntity() {
+        slots = new ArrayList<>();
+        shifts = new ArrayList<>();
+    }
+    public ShiftTemplateEntity(ILocal local) {
+        slots = new ArrayList<>();
+        shifts = new ArrayList<>();
+        if (local instanceof LocalEntity)
+            this.local = (LocalEntity)local;
+    }
     @Override
     public long getId() {
         return id;
