@@ -1,6 +1,8 @@
+import {Table} from '../../General/Models/Table';
+
 export class SlotInfos{
   id: number;
-  serviceRolesIds: any;
+  title: string;
   numberOfEmployeesNeeded: number;
-  slotType: string;
+  serviceRoleTable: Table;
 }

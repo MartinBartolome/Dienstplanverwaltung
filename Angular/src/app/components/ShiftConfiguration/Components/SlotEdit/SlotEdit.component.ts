@@ -19,6 +19,7 @@ export class SlotEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadServiceRoles();
+    this.slotInfos.id = -1;
   }
 
   public loadServiceRoles(): void{
