@@ -5,6 +5,7 @@ import ffhs.students.projects.dienstplanverwaltung.database.*;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -83,5 +84,29 @@ class EmployeeEntity implements IEmployee, ISaveable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+
+
+    @Override
+    public SlotUserInteraction getAllowedSlotInteraction(ISlot slot) {
+        boolean isAdmin = this.isAdmin();
+        boolean isApplicable = allowsApplicationForSlot(slot);
+
+        if (isAdmin && isApplicable) return SlotUserInteraction.ApplyAndAssign;
+        if (isAdmin) return SlotUserInteraction.Assign;
+        if (isApplicable) return SlotUserInteraction.Apply;
+        return SlotUserInteraction.None;
+    }
+    private boolean isAdmin(){
+        return serviceRoles
+                .stream()
+                .anyMatch(ServiceRoleEntity::isAdminRole);
+    }
+    private boolean allowsApplicationForSlot(ISlot slot){
+        Set<Long> neededServiceRolesIDs = slot.getServiceRoles().stream().map(IServiceRole::getId).collect(Collectors.toSet());
+        Set<Long> employeeServiceRolesIDs = serviceRoles.stream().map(IServiceRole::getId).collect(Collectors.toSet());
+        neededServiceRolesIDs.retainAll(employeeServiceRolesIDs);
+        return !neededServiceRolesIDs.isEmpty();
     }
 }

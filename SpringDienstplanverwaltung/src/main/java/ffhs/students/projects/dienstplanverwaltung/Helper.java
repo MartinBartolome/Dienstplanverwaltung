@@ -8,6 +8,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -115,5 +116,25 @@ public abstract class Helper {
         if (startTime.isEmpty())
             return LocalTime.now();
         return LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    /**
+     * Erstellt die 42 Tage (6 Wochen), die im Kalender angezeigt werden
+     * @param month - Monat der im Kalender angezeigt wird
+     * @return Liste der Tage, die angezeigt werden
+     */
+    public static List<LocalDate> getDaysForMonthView(LocalDate month) {
+        LocalDate firstInMonth = month.withDayOfMonth(1);
+        int firstDayWeekDay = firstInMonth.getDayOfWeek().getValue();
+        int numberOfDaysBeforeFirstDayInMonth = firstDayWeekDay - 1;
+        LocalDate firstDayInView = firstInMonth.minusDays(numberOfDaysBeforeFirstDayInMonth);
+
+        List<LocalDate> result = new ArrayList<>();
+        LocalDate iDay = firstDayInView;
+        for (int i = 0;i<42;i++){
+            result.add(iDay);
+            iDay = iDay.plusDays(1);
+        }
+        return result;
     }
 }

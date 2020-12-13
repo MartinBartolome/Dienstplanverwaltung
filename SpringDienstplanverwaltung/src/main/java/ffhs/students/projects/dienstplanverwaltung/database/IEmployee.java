@@ -13,4 +13,5 @@ public interface IEmployee {
     double getHourlyRate();
     String getCurrency();
     int getMonthlyContingent();
+    SlotUserInteraction getAllowedSlotInteraction(ISlot slot);
 }
