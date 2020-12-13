@@ -11,8 +11,6 @@ import java.util.Objects;
 @Entity
 @Table
 public class ServiceRoleEntity implements IServiceRole, ISaveable {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,6 +19,9 @@ public class ServiceRoleEntity implements IServiceRole, ISaveable {
         if (!name.isEmpty())
             this.name = name;
     }
+
+    private boolean isAdminRole;
+    public boolean isAdminRole() {  return isAdminRole;  }
 
     @ManyToMany()
     private List<SlotEntity> slots;

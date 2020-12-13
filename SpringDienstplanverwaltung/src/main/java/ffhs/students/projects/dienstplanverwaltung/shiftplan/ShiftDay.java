@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.shiftplan;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
+import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,11 +12,11 @@ public class ShiftDay {
     private final List<ShiftVM> shiftVMs;
     private final boolean isInMonth;
 
-    public ShiftDay(ShiftDayData dayData) {
+    public ShiftDay(ShiftDayData dayData, IEmployee employee) {
         this.isInMonth = dayData.isInMonth();
         this.day = Helper.stringFromDate(dayData.getDay());
         this.shiftVMs = dayData.getShifts().stream()
-                .map(ShiftVM::new)
+                .map(shift -> new ShiftVM(shift,employee))
                 .collect(Collectors.toList());
     }
 
