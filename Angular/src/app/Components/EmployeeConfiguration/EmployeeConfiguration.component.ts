@@ -5,9 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {ListItem} from '../General/Models/ListItem';
 import {EmployeeConfig} from './Models/EmployeeConfig';
 import {EmployeeConfigComponent} from './Components/EmployeeConfig/EmployeeConfig.component';
-import {ShiftTemplateConfigs} from "../ShiftConfiguration/Models/ShiftTemplateConfigs";
-import {DataService} from "../../Common/DataService";
-import {SharedService} from "../../Common/SharedService";
+import {DataService} from '../../Common/DataService';
+import {SharedService} from '../../Common/SharedService';
 
 @Component({
   selector: 'app-employee-configuration',
@@ -22,7 +21,13 @@ export class EmployeeConfigurationComponent implements OnInit {
   ngOnInit(): void {
   }
   InviteEmployee(): void{
-    this.dialog.open(EmployeeInviteComponent);
+    const dialogRef = this.dialog.open(EmployeeInviteComponent);
+    dialogRef.afterClosed().subscribe((result: string)  => {
+      if (result)
+      {
+        this.api.sendGetRequest('/inviteUser?userNickName=' + result + '&localId=' + this.globalVariables.getLocalID());
+      }
+    });
   }
   EditEmployee(item: ListItem): void{
     const dialogRef = this.dialog.open(EmployeeConfigComponent,
