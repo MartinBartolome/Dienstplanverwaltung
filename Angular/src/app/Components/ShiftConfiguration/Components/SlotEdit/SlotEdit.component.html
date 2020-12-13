@@ -1,9 +1,19 @@
 <section>
-  <div class="TextInput">
-    <mat-label>Slottyp</mat-label>
-    <mat-select>
-      <mat-option value="option" *ngFor="let item of slotInfos">{{ item.title }}</mat-option>
-    </mat-select>
+  <mat-form-field appearance="outline">
+    <mat-label>Titel</mat-label>
+    <label>
+      <input matInput placeholder="Titel" name="Title" [(ngModel)]="slotInfos.title">
+    </label>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Anzahl Mitarbeiter</mat-label>
+    <label>
+      <input matInput placeholder="Anzahl Mitarbeiter" name="CountEmployee" [(ngModel)]="slotInfos.numberOfEmployeesNeeded">
+    </label>
+  </mat-form-field>
+  <app-table [table]="slotInfos.serviceRoleTable" (EditItemEvent)="editServiceRole($event)" (AddEvent)="newServiceRole()" [AllowSelection]="true"></app-table>
+  <div mat-dialog-actions class="ButtonNav">
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="slotInfos">Speichern</button>
+    <button mat-raised-button color="primary" (click)="dialogRef.close()">Abbrechen</button>
   </div>
-  <app-table [table]="ServiceRoles" (EditItemEvent)="editServiceRole($event)" (AddEvent)="newServiceRole()"></app-table>
 </section>

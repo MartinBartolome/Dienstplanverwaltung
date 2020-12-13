@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {SlotInfos} from '../../Models/SlotInfos';
+import {SlotInfo} from '../../Models/SlotInfo';
 import {DataService} from '../../../../Common/DataService';
 import {Table} from '../../../General/Models/Table';
 import {SharedService} from '../../../../Common/SharedService';
@@ -13,19 +13,24 @@ import {ServiceRoleEditComponent} from '../ServiceRoleEdit/ServiceRoleEdit.compo
   styleUrls: ['./SlotEdit.component.css']
 })
 export class SlotEditComponent implements OnInit {
-  ServiceRoles: Table;
-
   constructor(public dialogRef: MatDialogRef<SlotEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public slotInfos: SlotInfos,
+              @Inject(MAT_DIALOG_DATA) public slotInfos: SlotInfo,
               private api: DataService, public globalVariables: SharedService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.loadServiceRoles();
+
+    if (this.slotInfos.serviceRoleTable === null) {
+      this.loadServiceRoles();
+    }
+    if (this.slotInfos.id === null)
+    {
+      this.slotInfos.id = -1;
+    }
   }
 
   public loadServiceRoles(): void{
     this.api.sendGetRequest('/getServiceRoles?localId=' + this.globalVariables.getLocalID()).subscribe((data: Table) => {
-      this.ServiceRoles = data;
+      this.slotInfos.serviceRoleTable = data;
     });
   }
   newServiceRole(): void{
@@ -33,7 +38,7 @@ export class SlotEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: ListItem) => {
       this.api.sendGetRequest('/addServiceRole?localId=' + this.globalVariables.getLocalID() + '&title=' + result.title)
         .subscribe((data: Table) => {
-        this.ServiceRoles = data;
+          this.slotInfos.serviceRoleTable = data;
       });
     });
   }
@@ -45,7 +50,7 @@ export class SlotEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: ListItem) => {
       this.api.sendGetRequest('/updateServiceRole?serviceRoleId=' + ServiceRole.id + '&title=' + result.title + '&isActive=true')
         .subscribe((data: Table) => {
-          this.ServiceRoles = data;
+          this.slotInfos.serviceRoleTable = data;
         });
     });
   }

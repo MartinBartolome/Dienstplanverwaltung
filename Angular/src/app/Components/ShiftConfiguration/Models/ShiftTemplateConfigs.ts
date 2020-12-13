@@ -1,6 +1,6 @@
 import {Table} from '../../General/Models/Table';
 import {RecOptions} from './RecOptions';
-import {SlotInfos} from './SlotInfos';
+import {SlotInfo} from './SlotInfo';
 
 export class ShiftTemplateConfigs {
     recurrenceOptions: RecOptions;
@@ -10,7 +10,7 @@ export class ShiftTemplateConfigs {
     toDate: string;
     title: string;
     id: number;
-    slotInfos: SlotInfos[];
+    slotInfos: SlotInfo[];
     startTime: string;
     endTime: string;
 }
