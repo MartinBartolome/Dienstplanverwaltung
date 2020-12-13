@@ -1,10 +1,12 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -17,6 +19,7 @@ class EmployeeEntity implements IEmployee, ISaveable {
     private double hourlyRate;
     private String currency;
     private int monthlyContingent;
+
 
     public boolean isActive() { return isActive; }
     public double getHourlyRate() {  return hourlyRate;  }
@@ -83,5 +86,89 @@ class EmployeeEntity implements IEmployee, ISaveable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+
+
+    @Override
+    public SlotUserInteraction getAllowedSlotInteraction(ISlot slot) {
+        boolean isAdmin = this.isAdmin();
+        boolean isApplicable = allowsApplicationForSlot(slot);
+
+        if (isAdmin && isApplicable) return SlotUserInteraction.ApplyAndAssign;
+        if (isAdmin) return SlotUserInteraction.Assign;
+        if (isApplicable) return SlotUserInteraction.Apply;
+        return SlotUserInteraction.None;
+    }
+    private boolean isAdmin(){
+        return serviceRoles
+                .stream()
+                .anyMatch(ServiceRoleEntity::isAdminRole);
+    }
+    private boolean allowsApplicationForSlot(ISlot slot){
+        Set<Long> neededServiceRolesIDs = slot.getServiceRoles().stream().map(IServiceRole::getId).collect(Collectors.toSet());
+        Set<Long> employeeServiceRolesIDs = serviceRoles.stream().map(IServiceRole::getId).collect(Collectors.toSet());
+        neededServiceRolesIDs.retainAll(employeeServiceRolesIDs);
+        return !neededServiceRolesIDs.isEmpty();
+    }
+
+
+    // Aktualisierung
+    public void updateWithConfig(EmployeeConfig employeeConfig, EmployeeRepository repo) {
+        isActive = employeeConfig.getIsActive();
+        currency = employeeConfig.getCurrency();
+        hourlyRate = employeeConfig.getHourlyRate();
+        monthlyContingent = employeeConfig.getMonthlyContingent();
+
+        Set<Long> newServiceRoleIds = employeeConfig.getServiceRoles()
+                .getItems().stream()
+                .filter(ListItem::getSelected)
+                .map(ListItem::getId)
+                .collect(Collectors.toSet());
+        updateServiceRoles(newServiceRoleIds,repo);
+        save(repo);
+    }
+    private void updateServiceRoles(Set<Long> newServiceRoles, EmployeeRepository repo){
+        Set<Long> employeeRoleIds = getServiceRoles().stream()
+                .map(IServiceRole::getId)
+                .collect(Collectors.toSet());
+
+        Set<Long> toRemove = new HashSet<>(employeeRoleIds);
+        toRemove.removeAll(newServiceRoles);
+
+        Set<Long> toAdd = new HashSet<>(newServiceRoles);
+        toAdd.removeAll(employeeRoleIds);
+
+        toRemove.forEach(this::removeServiceRole);
+        toAdd.forEach(this::addServiceRole);
+
+        save(repo);
+    }
+    private void addServiceRole(Long serviceRoleId){
+        Optional<ServiceRoleEntity> serviceRole = helperGetLocalServiceRoleForId(serviceRoleId);
+        if (!serviceRole.isPresent())
+            return;
+
+        serviceRoles.add(serviceRole.get());
+        serviceRole.get().addEmployee(this);
+    }
+    private void removeServiceRole(Long serviceRoleId){
+        Optional<ServiceRoleEntity> serviceRole = helperGetLocalServiceRoleForId(serviceRoleId);
+        if (!serviceRole.isPresent())
+            return;
+
+        serviceRoles.remove(serviceRole.get());
+        serviceRole.get().removeEmployee(this);
+    }
+
+    private Optional<ServiceRoleEntity> helperGetLocalServiceRoleForId(Long serviceRoleId){
+        Optional<IServiceRole> serviceRole =  local
+                .getServiceRoles().stream()
+                .filter(sr -> sr.getId() == serviceRoleId)
+                .findFirst();
+        if (!serviceRole.isPresent() || !(serviceRole.get() instanceof ServiceRoleEntity))
+            return Optional.empty();
+
+        return Optional.of((ServiceRoleEntity) serviceRole.get());
     }
 }

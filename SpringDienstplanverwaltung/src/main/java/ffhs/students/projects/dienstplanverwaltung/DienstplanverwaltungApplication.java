@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DienstplanverwaltungApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(DienstplanverwaltungApplication.class, args);
 	}
 

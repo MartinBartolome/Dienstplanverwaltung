@@ -8,8 +8,20 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DataService {
+<<<<<<< Updated upstream:Angular/src/app/common/DataService.ts
 
-  private REST_API_SERVER = 'http://192.168.178.20:8080';
+<<<<<<< HEAD:Angular/src/app/Common/DataService.ts
+
+
+=======
+<<<<<<< Updated upstream:Angular/src/app/common/DataService.ts
+=======
+>>>>>>> Stashed changes:Angular/src/app/Common/DataService.ts
+=======
+>>>>>>> Stashed changes:Angular/src/app/Common/DataService.ts
+>>>>>>> SpringFeatures:Angular/src/app/common/DataService.ts
+  private REST_API_SERVER = 'http://localhost:8080';
+
 
   constructor(private httpClient: HttpClient) { }
 

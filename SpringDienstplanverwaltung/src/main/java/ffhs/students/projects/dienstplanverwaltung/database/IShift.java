@@ -1,5 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
+import ffhs.students.projects.dienstplanverwaltung.database.sql.SlotEntity;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;

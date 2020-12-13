@@ -27,8 +27,16 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
     @OneToMany(mappedBy = "shiftTemplate")
     private List<SlotEntity> slots;
 
-    public ShiftTemplateEntity() { }
-
+    public ShiftTemplateEntity() {
+        slots = new ArrayList<>();
+        shifts = new ArrayList<>();
+    }
+    public ShiftTemplateEntity(ILocal local) {
+        slots = new ArrayList<>();
+        shifts = new ArrayList<>();
+        if (local instanceof LocalEntity)
+            this.local = (LocalEntity)local;
+    }
     @Override
     public long getId() {
         return id;
@@ -147,7 +155,13 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
     }
 
 
+    public void setFromTime(LocalTime fromTime) {
+        this.fromTime = fromTime;
+    }
 
+    public void setToTime(LocalTime toTime) {
+        this.toTime = toTime;
+    }
 
     private LocalTime fromTime;
     @Override
@@ -187,9 +201,9 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
 
         String result = "(";
         String daysString = days.stream()
-                .reduce((r,day) -> r+day+",")
+                .reduce((r,day) -> r + ","+day)
                 .orElse("").trim();
-        result += daysString.substring(daysString.length() -1);
+        result += daysString;//.substring(0,daysString.length() -1);
         result += ")";
         return result;
     }

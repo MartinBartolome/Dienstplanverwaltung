@@ -21,8 +21,12 @@ public interface IShiftTemplate {
     LocalTime getToTime();
     boolean equals(IShiftTemplate template);
     String getLongTitle();
-
     default boolean isOnDay(LocalDate day){
+        if (!day.isAfter(getFrom()))
+            return false;
+        if (getFrom() != null && !day.isBefore(getTo().plusDays(1)))
+            return false;
+
         if (getRecurrence() == RecurrenceType.Single){
             return false; //todo
         }

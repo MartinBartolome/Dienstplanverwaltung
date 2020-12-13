@@ -1,11 +1,13 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
-import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
+import ffhs.students.projects.dienstplanverwaltung.database.sql.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,11 +83,22 @@ public class AdministrationManager {
         return getSysAdminTenantConfig();
     }
 
+    // Employees
     public static EmployeesConfig getEmployeesConfig(long localId){
         Optional<ILocal> local = databaseManager.getLocalById(localId);
         return local
                 .map(EmployeesConfig::new)
                 .orElseGet(EmployeesConfig::new);
+    }
+    public static EmployeeConfig updateEmployee(EmployeeConfig employeeConfig,long localId){
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
+            return new EmployeeConfig();
+
+        Optional<IEmployee> employee = databaseManager.createOrUpdateEmployee(employeeConfig,local.get());
+        return employee
+                .map(EmployeeConfig::new)
+                .orElseGet(EmployeeConfig::new);
     }
 
     public static ShiftPlanConfig getShiftPlanConfig(long localId){
@@ -95,12 +108,31 @@ public class AdministrationManager {
                 .orElseGet(ShiftPlanConfig::new);
     }
 
-    public static ShiftTemplateConfig updateShiftTemplateConfig(ShiftTemplateConfig shiftTemplateConfig){
-        Optional<IShiftTemplate> shiftTemplate = databaseManager.updateShiftTemplate(shiftTemplateConfig);
-        if (!shiftTemplate.isPresent())
+    public static ShiftTemplateConfig updateShiftTemplateConfig(long localId, ShiftTemplateConfig shiftTemplateConfig){
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
             return new ShiftTemplateConfig();
 
-        ILocal local = shiftTemplate.get().getLocal();
-        return new ShiftTemplateConfig(shiftTemplate.get(),local.getServiceRoles());
+        Optional<IShiftTemplate> shiftTemplate = databaseManager.createOrUpdateShiftTemplate(local.get(),shiftTemplateConfig);
+        return shiftTemplate
+                .map(iShiftTemplate -> new ShiftTemplateConfig(iShiftTemplate, local.get().getServiceRoles()))
+                .orElseGet(ShiftTemplateConfig::new);
+    }
+
+    public static boolean invitateUser(String userNickName, long localId) {
+
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
+            return false;
+
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),userNickName);
+        if (employee.isPresent())
+            return false; // User ist bereits Mitarbeiter
+
+        Optional<IUser> user = databaseManager.getUser(userNickName);
+        if (!user.isPresent())
+            return false;
+
+        return databaseManager.createEmployeeInLocal(user.get(),local.get());
     }
 }

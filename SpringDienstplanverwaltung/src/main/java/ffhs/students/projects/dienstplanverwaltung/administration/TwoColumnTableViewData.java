@@ -7,24 +7,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TwoColumnTableViewData {
-    private String title1;
-    private String title2;
-    private List<ListItem> items1;
-    private List<ListItem> items2;
+    private TableViewData table1;
+    private TableViewData table2;
 
     public TwoColumnTableViewData(List<ILocal> locals){
-        title1 = "Lokal";
-        title2 =  "Besitzer";
-        items1 = locals.stream()
+        String title1 = "Lokal";
+        List<ListItem> items1 = locals.stream()
                 .map(ListItem::new)
                 .collect(Collectors.toList());
-        items2 = locals.stream().map(ILocal::getOwner)
+        table1 = new TableViewData(title1,false,items1);
+
+        String title2 = "Besitzer";
+        List<ListItem> items2 = locals.stream().map(ILocal::getOwner)
                 .map(ListItem::new)
                 .collect(Collectors.toList());
+        table2 = new TableViewData(title2,false,items2);
     }
 
-    public String getTitle1() { return title1;  }
-    public String getTitle2() { return title2; }
-    public List<ListItem> getItems1() { return items1; }
-    public List<ListItem> getItems2() { return items2; }
+    public TableViewData getTable2() { return table2; }
+    public TableViewData getTable1() { return table1; }
 }

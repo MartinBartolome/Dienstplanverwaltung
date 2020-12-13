@@ -6,4 +6,5 @@ public interface IServiceRole {
     boolean isActive();
     ILocal getLocal();
     long getId();
+    boolean isAdminRole();
 }
