@@ -5,7 +5,10 @@ import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfi
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
-import java.util.*;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Entity
@@ -18,6 +21,7 @@ class EmployeeEntity implements IEmployee, ISaveable {
     private double hourlyRate;
     private String currency;
     private int monthlyContingent;
+
 
     public boolean isActive() { return isActive; }
     public double getHourlyRate() {  return hourlyRate;  }

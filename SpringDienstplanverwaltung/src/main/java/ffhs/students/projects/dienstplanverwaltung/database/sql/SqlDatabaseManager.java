@@ -251,6 +251,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return Optional.of(shiftTemplateEntity);
     }
 
+
     private SlotEntity getForSlotInfo(SlotConfig info){
         long id = info.getId();
         int numberOfEmployeesNeeded = info.getNumberOfEmployeesNeeded();
@@ -282,6 +283,17 @@ public class SqlDatabaseManager implements IDatabaseManager {
         ((EmployeeEntity) employee.get()).updateWithConfig( employeeConfig, employeeRepository);
         return employee;
     }
+
+    @Override
+    public boolean createEmployeeInLocal(IUser user, ILocal local){
+        if (!(user instanceof UserEntity) || !(local instanceof LocalEntity))
+            return false;
+
+        EmployeeEntity newEmployee = new EmployeeEntity((UserEntity)user, (LocalEntity) local);
+        newEmployee.save(employeeRepository);
+        return true;
+    }
+
 
 
     @Autowired

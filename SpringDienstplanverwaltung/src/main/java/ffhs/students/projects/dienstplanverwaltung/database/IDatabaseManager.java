@@ -35,4 +35,7 @@ public interface IDatabaseManager {
     Optional<ILocal> localSetState(long localId, boolean isGranted, boolean isActive);
     Optional<IShiftTemplate> createOrUpdateShiftTemplate(ILocal local,ShiftTemplateConfig shiftTemplateConfig);
     Optional<ISlot> getSlotForSlotIdAndShift(long slotId,IShift shift);
+    Optional<IShiftTemplate> updateShiftTemplate(ShiftTemplateConfig shiftTemplateConfig);
+
+    boolean createEmployeeInLocal(IUser user, ILocal local);
 }

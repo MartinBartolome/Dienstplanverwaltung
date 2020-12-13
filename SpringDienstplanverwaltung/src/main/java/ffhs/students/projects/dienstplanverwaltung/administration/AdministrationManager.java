@@ -5,8 +5,9 @@ import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfi
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
-import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
+import ffhs.students.projects.dienstplanverwaltung.database.sql.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -116,5 +117,22 @@ public class AdministrationManager {
         return shiftTemplate
                 .map(iShiftTemplate -> new ShiftTemplateConfig(iShiftTemplate, local.get().getServiceRoles()))
                 .orElseGet(ShiftTemplateConfig::new);
+    }
+
+    public static boolean invitateUser(String userNickName, long localId) {
+
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
+            return false;
+
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),userNickName);
+        if (employee.isPresent())
+            return false; // User ist bereits Mitarbeiter
+
+        Optional<IUser> user = databaseManager.getUser(userNickName);
+        if (!user.isPresent() || user.get() instanceof UserEntity)
+            return false;
+
+        return databaseManager.createEmployeeInLocal(user.get(),local.get());
     }
 }

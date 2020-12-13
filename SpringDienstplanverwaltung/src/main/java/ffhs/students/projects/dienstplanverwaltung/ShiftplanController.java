@@ -185,6 +185,16 @@ public class ShiftplanController {
         return AdministrationManager.updateShiftTemplateConfig(localId,shiftTemplateConfig);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/invitateUser")
+    public boolean invitateUser(
+            @RequestParam(value = "userNickName") String userNickName,
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.invitateUser(userNickName,localId);
+    }
+
 
 
 
