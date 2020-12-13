@@ -45,7 +45,6 @@ public class ShiftPlanManager {
      * @return
      */
     private static List<ShiftDayData> generateShiftDayDatas(LocalDate month,ILocal local){
-
         List<LocalDate> days = Helper.getDaysForMonthView(month);
         LocalDate from = days.get(0);
         LocalDate to = days.get(days.size() -1);
