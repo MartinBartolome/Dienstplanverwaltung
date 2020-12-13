@@ -1,4 +1,4 @@
-import {Table} from '../../general/models/Table';
+import {Table} from '../../General/Models/Table';
 
 export class SlotInfo {
   id: number;
