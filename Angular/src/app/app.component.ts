@@ -27,7 +27,8 @@ export class AppComponent{
     });
   }
   public loadShiftPlanData(SelectedDate: Date): void{
-    const CombinedURL =  '/shiftPlan?month='
+    const CombinedURL =  '/shiftPlan?localId=' + this.globalVariables.getLocalID() + '&employeeName='
+      + this.globalVariables.getNickName() + '&month='
       + SelectedDate.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
       + '.' + (SelectedDate.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
       + '.' + SelectedDate.getFullYear();
