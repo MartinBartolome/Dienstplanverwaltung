@@ -5,6 +5,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {ListItem} from '../General/Models/ListItem';
 import {EmployeeConfig} from './Models/EmployeeConfig';
 import {EmployeeConfigComponent} from './Components/EmployeeConfig/EmployeeConfig.component';
+import {ShiftTemplateConfigs} from "../ShiftConfiguration/Models/ShiftTemplateConfigs";
+import {DataService} from "../../Common/DataService";
+import {SharedService} from "../../Common/SharedService";
 
 @Component({
   selector: 'app-employee-configuration',
@@ -14,7 +17,7 @@ import {EmployeeConfigComponent} from './Components/EmployeeConfig/EmployeeConfi
 export class EmployeeConfigurationComponent implements OnInit {
   @Input() employees: EmployeesConfig;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private api: DataService, public globalVariables: SharedService) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +30,10 @@ export class EmployeeConfigurationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: EmployeeConfig)  => {
       if (result)
       {
+        this.api.sendPostRequest('/updateEmployeeConfig?localId=' + this.globalVariables.getLocalID(), result)
+          .subscribe((data: EmployeeConfig) => {
+            this.employees.employeeConfigs[this.employees.employees.items.indexOf(item)] = data;
+          });
       }
     });
   }

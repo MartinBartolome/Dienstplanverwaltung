@@ -6,5 +6,5 @@ export class EmployeeConfig {
   hourlyRate: number;
   currency: string;
   monthlyContingent: number;
-  active: boolean;
+  isActive: boolean;
 }
