@@ -2,6 +2,7 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
@@ -272,6 +273,14 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return slot;
     }
 
+    public Optional<IEmployee> createOrUpdateEmployee(EmployeeConfig employeeConfig,ILocal local){
+        Optional<IEmployee> employee = getEmployeeForName(local,employeeConfig.getNickName());
+        if (!employee.isPresent() || !(employee.get() instanceof EmployeeEntity))
+            return Optional.empty();
+
+        ((EmployeeEntity) employee.get()).updateWithConfig( employeeConfig, employeeRepository);
+        return employee;
+    }
 
 
     @Autowired
