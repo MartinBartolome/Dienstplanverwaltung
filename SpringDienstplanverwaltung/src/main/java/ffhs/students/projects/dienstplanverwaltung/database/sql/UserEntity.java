@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table
+public
 class UserEntity implements IUser {
     @Id
     @Column(length = 64)

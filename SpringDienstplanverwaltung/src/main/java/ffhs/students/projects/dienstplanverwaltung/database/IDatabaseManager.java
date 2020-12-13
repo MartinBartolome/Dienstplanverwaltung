@@ -1,5 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ public interface IDatabaseManager {
     List<IShift> getShifts(ILocal local, LocalDate from, LocalDate to);
     List<IShiftTemplate> getShiftTemplates(ILocal local);
     List<IEmployee> getEmployees(int localId);
+    Optional<IEmployee> createOrUpdateEmployee(EmployeeConfig employeeConfig, ILocal local);
     Optional<IShift> getShift(ILocal local, LocalDate day, Optional<IShiftTemplate> shiftTemplate);
 
     IShift createShift(IShiftTemplate shiftTemplate, LocalDate day);
@@ -33,4 +35,7 @@ public interface IDatabaseManager {
     Optional<ILocal> localSetState(long localId, boolean isGranted, boolean isActive);
     Optional<IShiftTemplate> createOrUpdateShiftTemplate(ILocal local,ShiftTemplateConfig shiftTemplateConfig);
     Optional<ISlot> getSlotForSlotIdAndShift(long slotId,IShift shift);
+    //Optional<IShiftTemplate> updateShiftTemplate(ShiftTemplateConfig shiftTemplateConfig);
+
+    boolean createEmployeeInLocal(IUser user, ILocal local);
 }

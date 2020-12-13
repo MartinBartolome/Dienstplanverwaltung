@@ -69,4 +69,12 @@ public class ServiceRoleEntity implements IServiceRole, ISaveable {
     public void removeSlot(SlotEntity slot){
         slots.remove(slot);
     }
+
+    public void addEmployee(EmployeeEntity employee) {
+        employees.add(employee);
+    }
+
+    public void removeEmployee(EmployeeEntity employeeEntity) {
+        employees.remove(employeeEntity);
+    }
 }

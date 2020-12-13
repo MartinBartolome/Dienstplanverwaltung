@@ -4,23 +4,16 @@ package ffhs.students.projects.dienstplanverwaltung.administration;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 public class ListItem {
-
-
     public enum DisplayType{ Default,Highlighted, Weakend ,Inactiv  } // Wie wird es angezeigt?
 
     private DisplayType displayType;
     private String title;
     private long id;
-
-    public void setSelected(boolean selected) { isSelected = selected;  }
-
     private boolean isSelected;
+    private boolean isEditable;
+    private boolean isDeleteable;
 
-    public boolean getSelected() { return isSelected;  }
-
-    public ListItem(){
-
-    }
+    public ListItem(){  }
     public ListItem(ISlot slot) {
         this.displayType = DisplayType.Default;
         this.title = slot.getSlotStringWithNeededEmpl();
@@ -64,6 +57,8 @@ public class ListItem {
         this.displayType = serviceRole.isActive() ? DisplayType.Default : DisplayType.Inactiv;
         this.title = serviceRole.getName();
         this.id = serviceRole.getId();
+        this.isDeleteable = !serviceRole.isAdminRole();
+        this.isEditable = !serviceRole.isAdminRole();
     }
     public ListItem(IUser user){
         this.displayType = DisplayType.Default;
@@ -88,7 +83,14 @@ public class ListItem {
         this.isSelected = isSelected;
     }
 
+    //get
     public DisplayType getDisplayType() {  return displayType; }
     public String getTitle() {   return title;  }
     public long getId() { return id;  }
+    public boolean getSelected() { return isSelected;  }
+    public boolean getIsEditable() { return isEditable; }
+    public boolean getIsDeleteable() { return isDeleteable; }
+
+    //set
+    public void setSelected(boolean selected) { isSelected = selected;  }
 }

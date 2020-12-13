@@ -4,7 +4,7 @@ import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 
-class EmployeeConfig {
+public class EmployeeConfig {
     private final String nickName;
     private final TableViewData serviceRoles;
     private final boolean isActive;
@@ -14,7 +14,7 @@ class EmployeeConfig {
 
     public String getNickName() {  return nickName;  }
     public TableViewData getServiceRoles() { return serviceRoles; }
-    public boolean isActive() {  return isActive; }
+    public boolean getIsActive() {  return isActive; }
     public double getHourlyRate() { return hourlyRate; }
     public String getCurrency() {  return currency;   }
     public int getMonthlyContingent() {  return monthlyContingent;  }
@@ -27,5 +27,13 @@ class EmployeeConfig {
         hourlyRate = employee.getHourlyRate();
         currency = employee.getCurrency();
         monthlyContingent = employee.getMonthlyContingent();
+    }
+    public EmployeeConfig(){
+        nickName = "";
+        serviceRoles = new TableViewData();
+        isActive = false;
+        hourlyRate = 0.0;
+        currency = "CHF";
+        monthlyContingent = 0;
     }
 }

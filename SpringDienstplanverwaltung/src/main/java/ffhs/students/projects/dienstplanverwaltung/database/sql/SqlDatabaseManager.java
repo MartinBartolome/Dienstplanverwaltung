@@ -2,6 +2,7 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
@@ -250,9 +251,11 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return Optional.of(shiftTemplateEntity);
     }
 
+
     private SlotEntity getForSlotInfo(SlotConfig info){
         long id = info.getId();
         int numberOfEmployeesNeeded = info.getNumberOfEmployeesNeeded();
+        String title = info.getTitle();
         //SlotTypeEntity slotType = slotTypedRepository.findByTitle(info.getSlotType()).orElse(null);
         List<ServiceRoleEntity> slectedServiceRoles = info.getServiceRoleTable().getItems().stream()
                 .filter(ListItem::getSelected)
@@ -261,7 +264,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .flatMap(Optional::stream)
                 .map(ServiceRoleEntity.class::cast)
                 .collect(Collectors.toList());
-        return new SlotEntity(id,slectedServiceRoles,numberOfEmployeesNeeded);
+        return new SlotEntity(id,slectedServiceRoles,numberOfEmployeesNeeded,title);
     }
 
     // Finde Slot anhand von ID, oder wenn nicht vorhanden für Template
@@ -270,6 +273,25 @@ public class SqlDatabaseManager implements IDatabaseManager {
         if (!slot.isPresent())
             slot = shift.getSlots().stream().filter(sl -> sl.getTemplateSlotId() == slotId).findFirst();
         return slot;
+    }
+
+    public Optional<IEmployee> createOrUpdateEmployee(EmployeeConfig employeeConfig,ILocal local){
+        Optional<IEmployee> employee = getEmployeeForName(local,employeeConfig.getNickName());
+        if (!employee.isPresent() || !(employee.get() instanceof EmployeeEntity))
+            return Optional.empty();
+
+        ((EmployeeEntity) employee.get()).updateWithConfig( employeeConfig, employeeRepository);
+        return employee;
+    }
+
+    @Override
+    public boolean createEmployeeInLocal(IUser user, ILocal local){
+        if (!(user instanceof UserEntity) || !(local instanceof LocalEntity))
+            return false;
+
+        EmployeeEntity newEmployee = new EmployeeEntity((UserEntity)user, (LocalEntity) local);
+        newEmployee.save(employeeRepository);
+        return true;
     }
 
 

@@ -4,6 +4,7 @@ package ffhs.students.projects.dienstplanverwaltung;
 import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
 import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenantConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
@@ -154,6 +155,16 @@ public class ShiftplanController {
         AdministrationManager.databaseManager = dbManager;
         return AdministrationManager.getEmployeesConfig(localId);
     }
+    @CrossOrigin(origins = "*")
+    @PostMapping("/updateEmployeeConfig")
+    public EmployeeConfig updateEmployeeConfig(
+            @RequestParam(value = "localId") long localId,
+            @RequestBody EmployeeConfig employeeConfig){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.updateEmployee(employeeConfig,localId);
+    }
+
 
     @CrossOrigin(origins = "*")
     @GetMapping("/getShiftPlanConfig")
@@ -172,6 +183,16 @@ public class ShiftplanController {
 
         AdministrationManager.databaseManager = dbManager;
         return AdministrationManager.updateShiftTemplateConfig(localId,shiftTemplateConfig);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/invitateUser")
+    public boolean invitateUser(
+            @RequestParam(value = "userNickName") String userNickName,
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.invitateUser(userNickName,localId);
     }
 
 
