@@ -1,0 +1,11 @@
+section{
+  display: flex;
+  flex-direction: column;
+}
+.ButtonNav{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}

@@ -1,0 +1,13 @@
+<form>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Lokalname:</mat-label>
+      <label for="title">
+        <input matInput placeholder="Lokal" type="text" id="title" name="title" [(ngModel)]="Local.title">
+      </label>
+    </mat-form-field>
+  </p>
+  <div class="button">
+    <button mat-raised-button color="primary" [mat-dialog-close]="Local"  cdkFocusInitial>Ok</button>
+  </div>
+</form>

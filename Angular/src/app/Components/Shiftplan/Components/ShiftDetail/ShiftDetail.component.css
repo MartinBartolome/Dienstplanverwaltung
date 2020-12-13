@@ -1,0 +1,33 @@
+section{
+  border: 0.1em solid #e4e4e4;
+}
+section:after{
+  content: ".";
+  display:block;
+  height:0;
+  clear:both;
+  visibility:hidden;
+}
+
+label{
+  margin: 0.5em;
+  float:left;
+}
+mat-checkbox
+{
+  margin: 0.5em;
+  float: right;
+}
+
+.SlotContainer{
+  width:95%;
+  float:left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 0.5em;
+}
+
+.Slot{
+  margin: 0 0.5em 0.5em 0.5em;
+}
