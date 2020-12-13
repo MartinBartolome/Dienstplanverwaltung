@@ -69,7 +69,7 @@ class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
     }
 
     public void update(SlotEntity newSlot,SlotRepository repo){
-        //slotType = newSlot.slotType;
+        title = newSlot.title;
         numberOfEmployeesNeeded = newSlot.numberOfEmployeesNeeded;
         updateServiceRoles(newSlot.serviceRoles);
         save(repo);
@@ -155,9 +155,10 @@ class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
                 .map(IServiceRole.class::cast)
                 .collect(Collectors.toList());
     }
-    public SlotEntity(long id, List<ServiceRoleEntity> serviceRoles,  int numberOfEmployeesNeeded) {
+    public SlotEntity(long id, List<ServiceRoleEntity> serviceRoles,  int numberOfEmployeesNeeded,String title) {
         this.id = id;
         this.serviceRoles = serviceRoles;
         this.numberOfEmployeesNeeded = numberOfEmployeesNeeded;
+        this.title = title;
     }
 }

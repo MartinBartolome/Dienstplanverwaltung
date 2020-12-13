@@ -254,6 +254,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
     private SlotEntity getForSlotInfo(SlotConfig info){
         long id = info.getId();
         int numberOfEmployeesNeeded = info.getNumberOfEmployeesNeeded();
+        String title = info.getTitle();
         //SlotTypeEntity slotType = slotTypedRepository.findByTitle(info.getSlotType()).orElse(null);
         List<ServiceRoleEntity> slectedServiceRoles = info.getServiceRoleTable().getItems().stream()
                 .filter(ListItem::getSelected)
@@ -262,7 +263,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .flatMap(Optional::stream)
                 .map(ServiceRoleEntity.class::cast)
                 .collect(Collectors.toList());
-        return new SlotEntity(id,slectedServiceRoles,numberOfEmployeesNeeded);
+        return new SlotEntity(id,slectedServiceRoles,numberOfEmployeesNeeded,title);
     }
 
     // Finde Slot anhand von ID, oder wenn nicht vorhanden für Template
