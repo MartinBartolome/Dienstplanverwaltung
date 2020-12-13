@@ -4,5 +4,5 @@ export class Slot {
   detailTitle: string;
   assigned: string[];
   applied: string[];
-  slotType: string;
+  allowedUserInteraction: string;
 }
