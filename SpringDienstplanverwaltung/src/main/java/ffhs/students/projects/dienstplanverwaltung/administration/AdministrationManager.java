@@ -130,7 +130,7 @@ public class AdministrationManager {
             return false; // User ist bereits Mitarbeiter
 
         Optional<IUser> user = databaseManager.getUser(userNickName);
-        if (!user.isPresent() || user.get() instanceof UserEntity)
+        if (!user.isPresent())
             return false;
 
         return databaseManager.createEmployeeInLocal(user.get(),local.get());

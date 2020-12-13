@@ -6,9 +6,7 @@ import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -130,7 +128,7 @@ class EmployeeEntity implements IEmployee, ISaveable {
         updateServiceRoles(newServiceRoleIds,repo);
         save(repo);
     }
-    private void updateServiceRoles(Set<Long>  newServiceRoles, EmployeeRepository repo){
+    private void updateServiceRoles(Set<Long> newServiceRoles, EmployeeRepository repo){
         Set<Long> employeeRoleIds = getServiceRoles().stream()
                 .map(IServiceRole::getId)
                 .collect(Collectors.toSet());
