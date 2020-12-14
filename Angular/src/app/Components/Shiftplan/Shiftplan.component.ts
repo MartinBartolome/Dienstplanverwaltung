@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {ShiftPlan} from './Models/ShiftPlan';
 import {MatDialog} from '@angular/material/dialog';
 import {ShiftDayDetailComponent} from './Components/ShiftDayDetail/ShiftDayDetail.component';
+import {ShiftTemplateConfigs} from "../ShiftConfiguration/Models/ShiftTemplateConfigs";
 
 @Component({
   selector: 'app-shiftplan',
@@ -11,6 +12,7 @@ import {ShiftDayDetailComponent} from './Components/ShiftDayDetail/ShiftDayDetai
 export class ShiftplanComponent implements OnInit, OnChanges {
   @Input() data: ShiftPlan;
   @Output() DateChange = new EventEmitter<Date>();
+  @Output() ReloadChange = new EventEmitter<Date>();
   @Input() DateTitle: string;
 
   constructor(public dialog: MatDialog) { }
@@ -31,8 +33,11 @@ export class ShiftplanComponent implements OnInit, OnChanges {
   }
 
   clickOpenDetail(SiftDays): void{
-    this.dialog.open(ShiftDayDetailComponent, {
+    const dialogRef = this.dialog.open(ShiftDayDetailComponent, {
       data: SiftDays
+    });
+    dialogRef.afterClosed().subscribe(() => {
+        this.ReloadChange.emit(this.stringToUSDate(this.data.month));
     });
   }
   DateToString(date: Date): string
