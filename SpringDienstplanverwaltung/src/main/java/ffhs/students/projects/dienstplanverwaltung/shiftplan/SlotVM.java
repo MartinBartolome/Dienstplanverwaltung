@@ -8,7 +8,7 @@ import ffhs.students.projects.dienstplanverwaltung.database.SlotUserInteraction;
 
 import java.util.List;
 
-class SlotVM {
+public class SlotVM {
     private final String id;
     private final String title;
     private final String detailTitle;

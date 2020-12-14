@@ -297,7 +297,13 @@ public class SqlDatabaseManager implements IDatabaseManager {
         newEmployee.save(employeeRepository);
         return true;
     }
+    public void setIsCanceledForShift(IShift dbShift, boolean isCanceled){
+        if (!(dbShift instanceof ShiftEntity))
+            return;
 
+        ((ShiftEntity) dbShift).setIsCanceled(isCanceled);
+        dbShift.save(shiftRepository);
+    }
 
 
     @Autowired

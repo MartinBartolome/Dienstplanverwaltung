@@ -156,6 +156,8 @@ class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
         shift.addSlot(this);
         assigned = new ArrayList<>();
         applied = new ArrayList<>();
+        serviceRoles = new ArrayList<>();
+        slotTemplate.serviceRoles.forEach(this::addServiceRole);
         this.save(repo);
     }
     public void addToShiftTemplate(ShiftTemplateEntity shiftTemplate){

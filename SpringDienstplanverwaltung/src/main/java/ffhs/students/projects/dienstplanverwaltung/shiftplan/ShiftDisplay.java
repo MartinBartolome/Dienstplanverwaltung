@@ -60,6 +60,21 @@ public class ShiftDisplay implements IShift {
         toTime = template.getToTime();
         shiftTemplate = Optional.of(template);
     }
+
+    public ShiftDisplay(IShift shift){
+        this.id = -1;
+        this.day = shift.getDay();
+        title = shift.getTitle();
+        isCanceled = shift.getIsCanceled();
+        slots = shift.getSlots().stream()
+                .map(ISlot.class::cast)
+                .collect(Collectors.toList());
+        fromTime = shift.getFromTime();
+        toTime = shift.getToTime();
+        shiftTemplate = shift.getShiftTemplate();
+    }
+
+
     //für DB create (Slots werden seperat erstellt)
     public ShiftDisplay(IShiftTemplate template, LocalDate day, List<ISlot> slots, int id){
         this.id = id;
@@ -71,16 +86,4 @@ public class ShiftDisplay implements IShift {
         toTime = template.getToTime();
         shiftTemplate = Optional.of(template);
     }
-
-    public ShiftDisplay(IShift shift){
-        this.id = -1;
-        this.day = shift.getDay();
-        title = shift.getTitle();
-        isCanceled = false;
-        slots = shift.getSlots().stream().map(ISlot.class::cast).collect(Collectors.toList());
-        fromTime = shift.getFromTime();
-        toTime = shift.getToTime();
-        shiftTemplate = shift.getShiftTemplate();
-    }
-
 }

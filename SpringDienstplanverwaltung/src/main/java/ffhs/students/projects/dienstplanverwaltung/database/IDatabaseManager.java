@@ -38,4 +38,5 @@ public interface IDatabaseManager {
     //Optional<IShiftTemplate> updateShiftTemplate(ShiftTemplateConfig shiftTemplateConfig);
 
     boolean createEmployeeInLocal(IUser user, ILocal local);
+    void setIsCanceledForShift(IShift dbShift, boolean isCanceled);
 }
