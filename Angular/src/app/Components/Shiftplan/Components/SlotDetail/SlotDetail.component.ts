@@ -46,10 +46,8 @@ export class SlotDetailComponent implements OnInit {
   }
 
   private sendData(url): void{
-    this.api.sendGetRequest(url).subscribe((data: ShiftDays) => {
-        this.slot.assigned = data.shifts[0].slots[0].assigned;
-        this.slot.applied = data.shifts[0].slots[0].applied;
-        this.slot.title = data.shifts[0].slots[0].title;
+    this.api.sendGetRequest(url).subscribe((data: Slot) => {
+        this.slot = data;
       });
   }
 }
