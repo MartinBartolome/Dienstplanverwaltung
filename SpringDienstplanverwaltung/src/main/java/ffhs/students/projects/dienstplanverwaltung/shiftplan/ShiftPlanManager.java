@@ -4,6 +4,7 @@ import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.hibernate.internal.HEMLogging;
 
 import java.security.InvalidParameterException;
 import java.sql.SQLClientInfoException;
@@ -18,6 +19,8 @@ import java.util.Optional;
 import static java.util.stream.Collectors.*;
 
 public class ShiftPlanManager {
+
+
     public enum AddingType {apply, assign}
     public enum AddOrRemove {add, remove}
     static public IDatabaseManager databaseManager = new SqlDatabaseManager();
@@ -152,5 +155,31 @@ public class ShiftPlanManager {
         List<IShiftTemplate> shiftTemplates = databaseManager.getShiftTemplates(local);
         ShiftDayData shiftDayData = getShiftDayData(day,dbShiftDayDataList,shiftTemplates);
         return new ShiftDay(shiftDayData,employee);
+    }
+
+
+    public static ShiftVM setIsCanceled(String shiftId, long localId, String employeeName, boolean isCanceled) {
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
+            return null; // todo
+
+        //Employee
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),employeeName);
+        if (!employee.isPresent())
+            return null; // todo
+
+        LocalDate day = Helper.getDateFromSlotId(shiftId);
+        int shiftTemplateId = Helper.getShiftTemplateIdFromSlotId(shiftId);
+        Optional<IShiftTemplate> shiftTemplate = databaseManager.getShiftTemplateById(shiftTemplateId);
+        if(!shiftTemplate.isPresent())
+            return null; // todo
+
+        Optional<IShift> existingShift = databaseManager.getShift(local.get(),day,shiftTemplate);
+
+        //erstelle DB Schicht falls noch kein Eintrag vorhanden
+        IShift dbShift = existingShift.orElseGet(() -> databaseManager.createShift(shiftTemplate.get(), day));
+
+        databaseManager.setIsCanceledForShift(dbShift,isCanceled);
+        return new ShiftVM(dbShift,employee.get());
     }
 }

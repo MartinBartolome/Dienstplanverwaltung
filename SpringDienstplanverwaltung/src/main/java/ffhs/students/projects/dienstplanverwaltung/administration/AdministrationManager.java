@@ -119,7 +119,7 @@ public class AdministrationManager {
                 .orElseGet(ShiftTemplateConfig::new);
     }
 
-    public static boolean invitateUser(String userNickName, long localId) {
+    public static boolean inviteUser(String userNickName, long localId) {
 
         Optional<ILocal> local = databaseManager.getLocalById(localId);
         if (!local.isPresent())

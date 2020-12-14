@@ -46,7 +46,7 @@ class ShiftEntity implements IShift {
     private boolean isCanceled;
     @Override
     public boolean getIsCanceled() { return isCanceled; }
-
+    public void setIsCanceled(boolean canceled) { isCanceled = canceled; }
 
     @OneToMany(mappedBy = "shift")
     private List<SlotEntity> slots;

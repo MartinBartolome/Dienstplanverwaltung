@@ -11,6 +11,7 @@ import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.Sh
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDay;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftPlanManager;
+import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftVM;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.Shiftplan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -186,16 +187,26 @@ public class ShiftplanController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/invitateUser")
-    public boolean invitateUser(
+    @GetMapping("/inviteUser")
+    public boolean inviteUser(
             @RequestParam(value = "userNickName") String userNickName,
             @RequestParam(value = "localId") long localId){
 
         AdministrationManager.databaseManager = dbManager;
-        return AdministrationManager.invitateUser(userNickName,localId);
+        return AdministrationManager.inviteUser(userNickName,localId);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/shiftSetIsCanceled")
+    public ShiftVM shiftSetIsCanceled(
+            @RequestParam(value = "shiftId") String shiftId,
+            @RequestParam(value = "localId") long localId,
+            @RequestParam(value = "employeeName") String employeeName,
+            @RequestParam(value = "isCanceled") boolean isCanceled){
 
+        ShiftPlanManager.databaseManager = dbManager;
+        return ShiftPlanManager.setIsCanceled(shiftId,localId,employeeName,isCanceled);
+    }
 
 
     @Autowired

@@ -23,7 +23,6 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
     private List<ShiftEntity> shifts;
 
 
-
     @OneToMany(mappedBy = "shiftTemplate")
     private List<SlotEntity> slots;
 
@@ -231,4 +230,6 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
 
     public void addSlot(SlotEntity slot){
         slots.add(slot); }
+
+
 }

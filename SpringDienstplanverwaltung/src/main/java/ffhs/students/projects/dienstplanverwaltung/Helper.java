@@ -32,11 +32,12 @@ public abstract class Helper {
             return LocalDate.now();
         return LocalDate.parse(dateString,dateFormatter);
     }
-
-
-    public static String generateSlotId(ISlot slot, IShift shift){
+    public static String generateShiftId(IShift shift){
         long shiftTemplateId = shift.getShiftTemplate().isPresent() ? shift.getShiftTemplate().get().getId() : -1;
-        return stringFromDate(shift.getDay()) + slotIdDevider + shiftTemplateId  + slotIdDevider + slot.getSlotId();//.getSlotType().getTitle();
+        return stringFromDate(shift.getDay()) + slotIdDevider + shiftTemplateId ;
+    }
+    public static String generateSlotId(ISlot slot, IShift shift){
+        return generateShiftId(shift) + slotIdDevider + + slot.getSlotId();
     }
     public static String getRecurrenceString(RecurrenceType recurrenceType){
         switch (recurrenceType){
