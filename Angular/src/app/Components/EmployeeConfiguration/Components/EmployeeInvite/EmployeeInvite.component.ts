@@ -13,11 +13,6 @@ export class EmployeeInviteComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  sendMail(): void{
-    alert('Mail to:' + this.email);
-    this.dialogRef.close();
-  }
   onNoClick(): void {
     this.dialogRef.close();
   }

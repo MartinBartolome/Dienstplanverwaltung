@@ -18,8 +18,7 @@ export class SlotEditComponent implements OnInit {
               private api: DataService, public globalVariables: SharedService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-
-    if (this.slotInfos.serviceRoleTable === null) {
+    if (this.slotInfos.serviceRoleTable === undefined) {
       this.loadServiceRoles();
     }
     if (this.slotInfos.id === null)
