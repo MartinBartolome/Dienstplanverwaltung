@@ -53,10 +53,14 @@ public class SqlDatabaseManager implements IDatabaseManager {
         //List<EmployeeEntity> assigned = new ArrayList<>(Arrays.asList(eCeline));
         //List<EmployeeEntity> applied = new ArrayList<>(Arrays.asList(eMatthias,eMartin));
         SlotEntity slot = new SlotEntity(null,2, new ArrayList<>(), new ArrayList<>());
+        slot.setTitle("Bar");
         slot.addToShiftTemplate(shiftTemplate);
 
         shiftTemplateRepository.save(shiftTemplate);
         slotRepository.save(slot);
+
+        createManagerRole(local.getId());
+        createManagerRole(local2.getId());
     }
 
 
@@ -301,6 +305,20 @@ public class SqlDatabaseManager implements IDatabaseManager {
         dbShift.save(shiftRepository);
     }
 
+    public void createManagerRole(long localId){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return;
+
+        Optional<IServiceRole> adminRole = local.get().getServiceRoles()
+                .stream().filter(IServiceRole::isAdminRole)
+                .findFirst();
+
+        if (adminRole.isPresent())
+            return;
+
+        ServiceRoleEntity.createManagerRole((LocalEntity)local.get()).save(serviceRoleRepository);
+    }
 
     @Autowired
     private ServiceRoleRepository serviceRoleRepository;

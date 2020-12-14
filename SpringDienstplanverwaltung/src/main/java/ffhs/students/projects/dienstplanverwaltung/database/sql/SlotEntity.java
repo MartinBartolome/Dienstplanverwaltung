@@ -174,4 +174,8 @@ class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
         this.numberOfEmployeesNeeded = numberOfEmployeesNeeded;
         this.title = title;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

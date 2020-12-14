@@ -71,6 +71,7 @@ class EmployeeEntity implements IEmployee, ISaveable {
     public EmployeeEntity(UserEntity user, LocalEntity local){
         this.user = user;
         this.local = local;
+        local.addEmployee(this);
     }
 
     public long getId() {  return id; }

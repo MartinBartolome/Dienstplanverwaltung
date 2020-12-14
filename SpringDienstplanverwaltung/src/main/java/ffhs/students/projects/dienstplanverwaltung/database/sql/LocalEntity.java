@@ -3,6 +3,7 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,7 +81,16 @@ class LocalEntity implements ILocal, ISaveable {
         if (owner instanceof UserEntity)
             this.owner = (UserEntity)owner;
         isActive = true;
+        serviceRoles = new ArrayList<>();
+        employees = new ArrayList<>();
+        shifts = new ArrayList<>();
+        shiftTemplates = new ArrayList<>();
     }
 
-
+    public void addServiceRole(ServiceRoleEntity serviceRole){
+        serviceRoles.add(serviceRole);
+    }
+    public void addEmployee(EmployeeEntity employee){
+        employees.add(employee);
+    }
 }
