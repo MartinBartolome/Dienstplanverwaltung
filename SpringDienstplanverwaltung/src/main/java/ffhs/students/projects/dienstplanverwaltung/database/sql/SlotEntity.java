@@ -129,7 +129,18 @@ class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
         assigned.remove(employee);
     }
 
-
+    public SlotEntity getCopyForTemplate(ShiftTemplateEntity template, SlotRepository repo){
+        SlotEntity copy = new SlotEntity();
+        copy.title = this.title;
+        copy.shiftTemplate = template;
+        copy.numberOfEmployeesNeeded = this.numberOfEmployeesNeeded;
+        template.addSlot(copy);
+        copy.assigned = new ArrayList<>();
+        copy.applied = new ArrayList<>();
+        copy.serviceRoles = new ArrayList<>();
+        copy.save(repo);
+        return copy;
+    }
     public SlotEntity(){}
     public SlotEntity(ShiftEntity shift,int numberOfEmployeesNeeded,List<EmployeeEntity> assigned, List<EmployeeEntity> applied){
         this.shift = shift;

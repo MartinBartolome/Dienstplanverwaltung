@@ -87,23 +87,23 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
                 .filter(slot -> slotIds.contains(slot.getSlotId()))
                 .collect(Collectors.toList());
 
-
         // delete
-        slotsToDelete.stream()
-                .map(this::getSlotWithId)
-                .flatMap(Optional::stream)
-                .forEach(slot -> slot.delete(repo));
+        slotsToDelete.forEach(slot -> deleteSlot(slot,repo));
         //create
-        slotsToCreate.forEach(slot-> slot.setShiftTemplate(this));
-        slots.addAll(slotsToCreate);
-        slotsToCreate.forEach(slotEntity -> slotEntity.save(repo));
+        slotsToCreate.forEach(slot-> slot.getCopyForTemplate(this,repo));
         //update
         slotsForUpdate.forEach(newSlot -> {
                     Optional<SlotEntity> slotForUpdate = getSlotWithId(newSlot.getSlotId());
                     slotForUpdate.ifPresent(slot -> slot.update(newSlot,repo));
         });
     }
-
+    private void deleteSlot(Long slotId, SlotRepository repo){
+        Optional<SlotEntity> slot = getSlotWithId(slotId);
+        if(!slot.isPresent())
+            return;
+        slots.remove(slot.get());
+        slot.get().delete(repo);
+    }
     private Optional<SlotEntity> getSlotWithId(long id){
         return slots.stream()
                 .filter(slot-> slot.getSlotId() == id)
