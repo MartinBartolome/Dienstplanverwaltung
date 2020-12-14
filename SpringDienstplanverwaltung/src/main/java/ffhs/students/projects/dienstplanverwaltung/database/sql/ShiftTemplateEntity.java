@@ -95,6 +95,7 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
                 .forEach(slot -> slot.delete(repo));
         //create
         slotsToCreate.forEach(slot-> slot.setShiftTemplate(this));
+        slots.addAll(slotsToCreate);
         slotsToCreate.forEach(slotEntity -> slotEntity.save(repo));
         //update
         slotsForUpdate.forEach(newSlot -> {
