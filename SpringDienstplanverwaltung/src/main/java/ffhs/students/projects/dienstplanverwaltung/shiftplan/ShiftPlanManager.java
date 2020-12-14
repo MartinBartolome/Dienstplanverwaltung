@@ -107,7 +107,7 @@ public class ShiftPlanManager {
 
 
     // Employees assign / apply
-    public static ShiftDay addEmployeeToSlot(int localId,String employeeName,String slotIdString, AddOrRemove addOrRemove, AddingType addingType) {
+    public static SlotVM addEmployeeToSlot(int localId,String employeeName,String slotIdString, AddOrRemove addOrRemove, AddingType addingType) {
         LocalDate day = Helper.getDateFromSlotId(slotIdString);
 
         //Local
@@ -123,7 +123,7 @@ public class ShiftPlanManager {
         //Slot
         Optional<ISlot> slot = getSlotAndCreateShiftIfNeeded(databaseManager,day,slotIdString,local.get());
         if (!slot.isPresent())
-            return GetShiftDay(day,local.get(),employee.get());
+            return null; // todo GetShiftDay(day,local.get(),employee.get());
 
 
         if (addingType == AddingType.assign)
@@ -131,7 +131,7 @@ public class ShiftPlanManager {
         if (addingType == AddingType.apply)
             databaseManager.applyEmployeeToSlot(employee.get(),slot.get(),addOrRemove == AddOrRemove.add);
 
-        return GetShiftDay(day,local.get(),employee.get());
+        return new SlotVM(slot.get(),slot.get().getShift(),employee.get());//GetShiftDay(day,local.get(),employee.get());
     }
     private static Optional<ISlot> getSlotAndCreateShiftIfNeeded(IDatabaseManager databaseManager, LocalDate day, String slotIdString, ILocal local) {
         int shiftTemplateId = Helper.getShiftTemplateIdFromSlotId(slotIdString);

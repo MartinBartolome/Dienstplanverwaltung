@@ -9,10 +9,7 @@ import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfi
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
-import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftDay;
-import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftPlanManager;
-import ffhs.students.projects.dienstplanverwaltung.shiftplan.ShiftVM;
-import ffhs.students.projects.dienstplanverwaltung.shiftplan.Shiftplan;
+import ffhs.students.projects.dienstplanverwaltung.shiftplan.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +32,7 @@ public class ShiftplanController {
     
     @CrossOrigin(origins = "*")
     @GetMapping("/assignEmployeeToSlot")
-    public ShiftDay assignEmployeeToSlot(
+    public SlotVM assignEmployeeToSlot(
             @RequestParam(value = "localId", defaultValue = "1") int localId,
             @RequestParam(value = "employeeName") String employeeName,
             @RequestParam(value = "slotIdString") String slotIdString,
@@ -49,7 +46,7 @@ public class ShiftplanController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/applyEmployeeToSlot")
-    public ShiftDay applyEmployeeToSlot(
+    public SlotVM applyEmployeeToSlot(
             @RequestParam(value = "localId") int localId,
             @RequestParam(value = "employeeName") String employeeName,
             @RequestParam(value = "slotIdString") String slotIdString,
