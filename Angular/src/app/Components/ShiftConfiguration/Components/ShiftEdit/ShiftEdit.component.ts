@@ -28,7 +28,7 @@ export class ShiftEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: SlotInfo) => {
       if (result) {
         this.template.slotInfos.push(result);
-        this.reloadShift();
+        this.updateSlotData();
       }
     });
   }
@@ -40,11 +40,11 @@ export class ShiftEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: SlotInfo) => {
       if (result) {
         this.template.slotInfos[this.template.slots.items.indexOf(slot)] = result;
-        this.reloadShift();
+        this.updateSlotData();
       }
     });
   }
-  private reloadShift(): void {
+  private updateSlotData(): void {
     this.api.sendPostRequest('/updateShiftTemplateConfig?localId=' + this.globalVariables.getLocalID(), this.template)
       .subscribe((data: ShiftTemplateConfigs) => {
         this.template = data;

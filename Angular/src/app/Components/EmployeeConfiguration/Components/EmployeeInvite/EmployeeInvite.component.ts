@@ -13,7 +13,8 @@ export class EmployeeInviteComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onNoClick(): void {
+  Cancel(): void {
     this.dialogRef.close();
   }
 }
+
