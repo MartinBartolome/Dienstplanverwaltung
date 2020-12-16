@@ -16,15 +16,15 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Von</mat-label>
-          <label>
-            <input matInput placeholder="Von" name="FromDate" [(ngModel)]="template.fromDate">
-          </label>
+          <input matInput name= "FromDate" [matDatepicker]="dpfromDate" [(ngModel)]="this.fromdate">
+          <mat-datepicker-toggle matSuffix [for]="dpfromDate"></mat-datepicker-toggle>
+          <mat-datepicker #dpfromDate></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Bis</mat-label>
-          <label>
-            <input matInput placeholder="Bis" name="ToDate" [(ngModel)]="template.toDate">
-          </label>
+          <mat-label>Von</mat-label>
+          <input matInput name= "ToDate" [matDatepicker]="dptoDate" [(ngModel)]="this.todate">
+          <mat-datepicker-toggle matSuffix [for]="dptoDate"></mat-datepicker-toggle>
+          <mat-datepicker #dptoDate></mat-datepicker>
         </mat-form-field>
       </p>
       <mat-form-field appearance="outline">
@@ -53,7 +53,7 @@
     </div>
     <app-table [table]="template.slots" (EditItemEvent)="editSlot($event)" (AddEvent)="newSlot()"></app-table>
     <div mat-dialog-actions class="ButtonNav">
-      <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="template">Speichern</button>
+      <button mat-raised-button color="primary" type="submit" (click)="submit()">Speichern</button>
       <button mat-raised-button color="primary" (click)="dialogRef.close()">Abbrechen</button>
     </div>
   </div>

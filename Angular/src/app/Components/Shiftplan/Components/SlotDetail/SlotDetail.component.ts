@@ -21,7 +21,7 @@ export class SlotDetailComponent implements OnInit {
   {
     const url = '/applyEmployeeToSlot?localId=' + this.globalVariables.getLocalID() + '&employeeName=' +
       this.globalVariables.getNickName() + '&slotIdString=' + this.slot.id + '&isApplied=' + value;
-    this.sendData(url);
+    this.ChangeState(url);
     if (value === false)
     {
       if (this.slot.assigned.indexOf(this.globalVariables.getNickName()) >= 0)
@@ -35,17 +35,17 @@ export class SlotDetailComponent implements OnInit {
     if (this.slot.allowedUserInteraction.includes('Assign'))
     {
       const url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'false';
-      this.sendData(url);
+      this.ChangeState(url);
     }
   }
   clickOnApplied(item): void{
     if (this.slot.allowedUserInteraction.includes('Assign')) {
       const url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'true';
-      this.sendData(url);
+      this.ChangeState(url);
     }
   }
 
-  private sendData(url): void{
+  private ChangeState(url): void{
     this.api.sendGetRequest(url).subscribe((data: Slot) => {
         this.slot = data;
       });

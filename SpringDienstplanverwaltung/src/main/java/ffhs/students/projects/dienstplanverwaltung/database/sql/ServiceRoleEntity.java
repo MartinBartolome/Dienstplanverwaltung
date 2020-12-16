@@ -41,6 +41,17 @@ public class ServiceRoleEntity implements IServiceRole, ISaveable {
         this.name = name;
         this.local = local;
         this.isActive = isActive;
+        local.addServiceRole(this);
+    }
+
+    public static ServiceRoleEntity createManagerRole(LocalEntity local){
+        ServiceRoleEntity managerRole = new ServiceRoleEntity();
+        managerRole.name = "Manager";
+        managerRole.local = local;
+        managerRole.isActive = true;
+        managerRole.isAdminRole = true;
+        local.addServiceRole(managerRole);
+        return managerRole;
     }
 
     public ServiceRoleEntity() {  }

@@ -15,7 +15,7 @@ export class ShiftDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cancel(): void{
+  toggleCancel(): void{
     this.api.sendGetRequest('/shiftSetIsCanceled?shiftId=' + this.shift.id + '&localId='
       + this.globalVariables.getLocalID() + '&employeeName='
       + this.globalVariables.getNickName() + '&isCanceled=' + !this.shift.canceled).subscribe((data: Shift) => {

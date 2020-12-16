@@ -53,10 +53,14 @@ public class SqlDatabaseManager implements IDatabaseManager {
         //List<EmployeeEntity> assigned = new ArrayList<>(Arrays.asList(eCeline));
         //List<EmployeeEntity> applied = new ArrayList<>(Arrays.asList(eMatthias,eMartin));
         SlotEntity slot = new SlotEntity(null,2, new ArrayList<>(), new ArrayList<>());
+        slot.setTitle("Bar");
         slot.addToShiftTemplate(shiftTemplate);
 
         shiftTemplateRepository.save(shiftTemplate);
         slotRepository.save(slot);
+
+        createManagerRole(local.getId());
+        createManagerRole(local2.getId());
     }
 
 
@@ -256,15 +260,19 @@ public class SqlDatabaseManager implements IDatabaseManager {
         long id = info.getId();
         int numberOfEmployeesNeeded = info.getNumberOfEmployeesNeeded();
         String title = info.getTitle();
-        //SlotTypeEntity slotType = slotTypedRepository.findByTitle(info.getSlotType()).orElse(null);
-        List<ServiceRoleEntity> slectedServiceRoles = info.getServiceRoleTable().getItems().stream()
+        List<ServiceRoleEntity> selectedServiceRoles = getSelectedServiceRole(info);
+        return new SlotEntity(id,selectedServiceRoles,numberOfEmployeesNeeded,title);
+    }
+    private List<ServiceRoleEntity> getSelectedServiceRole(SlotConfig info){
+        if (info.getServiceRoleTable() == null)
+            return new ArrayList<>();
+        return info.getServiceRoleTable().getItems().stream()
                 .filter(ListItem::getSelected)
                 .map(ListItem::getId)
                 .map(srId -> serviceRoleRepository.findById(srId))
                 .flatMap(Optional::stream)
                 .map(ServiceRoleEntity.class::cast)
                 .collect(Collectors.toList());
-        return new SlotEntity(id,slectedServiceRoles,numberOfEmployeesNeeded,title);
     }
 
     // Finde Slot anhand von ID, oder wenn nicht vorhanden für Template
@@ -293,8 +301,28 @@ public class SqlDatabaseManager implements IDatabaseManager {
         newEmployee.save(employeeRepository);
         return true;
     }
+    public void setIsCanceledForShift(IShift dbShift, boolean isCanceled){
+        if (!(dbShift instanceof ShiftEntity))
+            return;
 
+        ((ShiftEntity) dbShift).setIsCanceled(isCanceled);
+        dbShift.save(shiftRepository);
+    }
 
+    public void createManagerRole(long localId){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return;
+
+        Optional<IServiceRole> adminRole = local.get().getServiceRoles()
+                .stream().filter(IServiceRole::isAdminRole)
+                .findFirst();
+
+        if (adminRole.isPresent())
+            return;
+
+        ServiceRoleEntity.createManagerRole((LocalEntity)local.get()).save(serviceRoleRepository);
+    }
 
     @Autowired
     private ServiceRoleRepository serviceRoleRepository;
