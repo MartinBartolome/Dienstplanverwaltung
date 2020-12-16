@@ -23,7 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatCheckboxModule} from '@angular/material/checkbox';
-import { MatNativeDateModule } from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import { EmployeeConfigurationComponent } from './Components/EmployeeConfiguration/EmployeeConfiguration.component';
 import { EmployeeInviteComponent } from './Components/EmployeeConfiguration/Components/EmployeeInvite/EmployeeInvite.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -81,7 +81,9 @@ import { TenantConfigComponent } from './Components/General/SysAdmin/TenantConfi
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'de-de'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
