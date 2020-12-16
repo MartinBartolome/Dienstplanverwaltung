@@ -30,13 +30,13 @@
       <mat-form-field appearance="outline">
         <mat-label>Von Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Von" name="FromTime" [(ngModel)]="template.startTime">
+          <input matInput placeholder="Von" name="FromTime" type="time" [(ngModel)]="template.startTime">
         </label>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Bis Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Bis" name="ToTime" [(ngModel)]="template.endTime">
+          <input matInput placeholder="Bis" name="ToTime" type="time" [(ngModel)]="template.endTime">
         </label>
       </mat-form-field>
     </div>
