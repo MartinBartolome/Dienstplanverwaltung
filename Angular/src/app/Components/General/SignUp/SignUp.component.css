@@ -8,9 +8,6 @@
   min-width: 300px;
 }
 
-mat-card{
-  margin: 100px 0;
-}
 
 mat-card-title,
 mat-card-content {
@@ -28,7 +25,4 @@ mat-card-content {
 .button {
   display: flex;
   justify-content: flex-end;
-}
-button{
-  margin-left: 0.5em;
 }

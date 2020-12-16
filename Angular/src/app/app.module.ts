@@ -37,6 +37,7 @@ import { ServiceRoleEditComponent } from './Components/ShiftConfiguration/Compon
 import { LocalConfigurationComponent } from './Components/General/LocalManagement/LocalConfiguration/LocalConfiguration.component';
 import { LocalEditComponent } from './Components/General/LocalManagement/LocalEdit/LocalEdit.component';
 import { TenantConfigComponent } from './Components/General/SysAdmin/TenantConfig/TenantConfig.component';
+import { SignUpComponent } from './Components/General/SignUp/SignUp.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { TenantConfigComponent } from './Components/General/SysAdmin/TenantConfi
     ServiceRoleEditComponent,
     LocalConfigurationComponent,
     LocalEditComponent,
-    TenantConfigComponent
+    TenantConfigComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
