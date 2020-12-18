@@ -101,7 +101,7 @@ class EmployeeEntity implements IEmployee, ISaveable {
         if (isApplicable) return SlotUserInteraction.Apply;
         return SlotUserInteraction.None;
     }
-    private boolean isAdmin(){
+    public boolean isAdmin(){
         return serviceRoles
                 .stream()
                 .anyMatch(ServiceRoleEntity::isAdminRole);

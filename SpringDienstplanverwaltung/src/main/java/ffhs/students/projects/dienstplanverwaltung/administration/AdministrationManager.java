@@ -84,11 +84,16 @@ public class AdministrationManager {
     }
 
     // Employees
-    public static EmployeesConfig getEmployeesConfig(long localId){
+    public static EmployeesConfig getEmployeesConfig(long localId, String employeeName){
         Optional<ILocal> local = databaseManager.getLocalById(localId);
-        return local
-                .map(EmployeesConfig::new)
-                .orElseGet(EmployeesConfig::new);
+        if (!local.isPresent())
+            return new EmployeesConfig();
+
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),employeeName);
+        if (!employee.isPresent() || !employee.get().isAdmin())
+            return new EmployeesConfig();
+
+        return new EmployeesConfig(local.get());
     }
     public static EmployeeConfig updateEmployee(EmployeeConfig employeeConfig,long localId){
         Optional<ILocal> local = databaseManager.getLocalById(localId);

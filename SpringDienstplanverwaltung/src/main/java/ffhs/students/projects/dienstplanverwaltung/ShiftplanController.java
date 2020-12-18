@@ -149,10 +149,11 @@ public class ShiftplanController {
     @CrossOrigin(origins = "*")
     @GetMapping("/getEmployeesConfig")
     public EmployeesConfig getEmployeesConfig(
+            @RequestParam(value = "employeeName") String employeeName,
             @RequestParam(value = "localId") long localId){
 
         AdministrationManager.databaseManager = dbManager;
-        return AdministrationManager.getEmployeesConfig(localId);
+        return AdministrationManager.getEmployeesConfig(localId,employeeName);
     }
     @CrossOrigin(origins = "*")
     @PostMapping("/updateEmployeeConfig")
