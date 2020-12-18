@@ -2,6 +2,7 @@ package ffhs.students.projects.dienstplanverwaltung;
 
 //import ffhs.students.projects.dienstplanverwaltung.database.sql.UserRepository;
 import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
+import ffhs.students.projects.dienstplanverwaltung.administration.ResponseInfo;
 import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenantConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
@@ -205,6 +206,17 @@ public class ShiftplanController {
         return ShiftPlanManager.setIsCanceled(shiftId,localId,employeeName,isCanceled);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/registerUser")
+    public ResponseInfo registerUser(
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "password") String password){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.registerUser(username,password);
+    }
+
+
 
     @Autowired
     public SqlDatabaseManager dbManager;
@@ -215,6 +227,7 @@ public class ShiftplanController {
 
         dbManager.createFakeDate();
     }
+
 
 
 

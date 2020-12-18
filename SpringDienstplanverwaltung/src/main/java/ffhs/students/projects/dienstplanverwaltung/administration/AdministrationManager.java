@@ -135,4 +135,11 @@ public class AdministrationManager {
 
         return databaseManager.createEmployeeInLocal(user.get(),local.get());
     }
+
+    public static ResponseInfo registerUser(String userName,String password){
+        boolean newUserCreated = databaseManager.createUserIfNotExist(userName,password);
+        if (newUserCreated)
+            return new ResponseInfo(true,"User wurde erfolgreich registriert");
+        return new ResponseInfo(false, "Der Username wird bereits verwendet");
+    }
 }

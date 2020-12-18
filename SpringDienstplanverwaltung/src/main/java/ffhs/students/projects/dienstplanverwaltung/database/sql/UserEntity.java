@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
+import ffhs.students.projects.dienstplanverwaltung.database.ISaveable;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 
 import javax.persistence.*;
@@ -9,10 +10,17 @@ import java.util.List;
 @Entity
 @Table
 public
-class UserEntity implements IUser {
+class UserEntity implements IUser, ISaveable {
     @Id
     @Column(length = 64)
     private String nickname;
+
+    private String password;
+
+    public UserEntity(String nickname, String password) {
+        this.nickname = nickname;
+        this.password =password;
+    }
 
 
     public String getNickname() {

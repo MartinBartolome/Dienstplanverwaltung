@@ -320,6 +320,16 @@ public class SqlDatabaseManager implements IDatabaseManager {
         ServiceRoleEntity.createManagerRole((LocalEntity)local.get()).save(serviceRoleRepository);
     }
 
+    public boolean createUserIfNotExist(String username, String password){
+        Optional<IUser> existingUser = getUser(username);
+        if (existingUser.isPresent())
+            return false;
+
+        UserEntity newUser = new UserEntity(username,password);
+        newUser.save(userRepository);
+        return true;
+    }
+
     @Autowired
     private ServiceRoleRepository serviceRoleRepository;
     @Autowired
