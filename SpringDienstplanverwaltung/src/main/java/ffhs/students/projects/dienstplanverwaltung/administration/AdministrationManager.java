@@ -21,7 +21,7 @@ public class AdministrationManager {
         if (!user.isPresent())
             return new TableViewData();
 
-        List<ILocal> locals = databaseManager.getLocalsForUser(user.get());
+        List<ILocal> locals = databaseManager.getGrantedLocalsForUser(user.get());
         return new TableViewData(locals,user.get());
     }
 

@@ -166,12 +166,13 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .findById(shiftTemplateId);
     }
 
-    public List<ILocal> getLocalsForUser(IUser user){
+    public List<ILocal> getGrantedLocalsForUser(IUser user){
         if (!(user instanceof UserEntity))
             return new ArrayList<>();
 
         return ((UserEntity)user).getEmployees().stream()
                 .map(EmployeeEntity::getLocal)
+                .filter(ILocal::isGranted)
                 .collect(Collectors.toList());
     }
 
