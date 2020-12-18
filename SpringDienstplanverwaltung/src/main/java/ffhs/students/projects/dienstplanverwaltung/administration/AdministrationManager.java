@@ -106,11 +106,16 @@ public class AdministrationManager {
                 .orElseGet(EmployeeConfig::new);
     }
 
-    public static ShiftPlanConfig getShiftPlanConfig(long localId){
+    public static ShiftPlanConfig getShiftPlanConfig(long localId, String employeeName){
         Optional<ILocal> local = databaseManager.getLocalById(localId);
-        return local
-                .map(ShiftPlanConfig::new)
-                .orElseGet(ShiftPlanConfig::new);
+        if (!local.isPresent())
+            return new ShiftPlanConfig();
+
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),employeeName);
+        if (!employee.isPresent() || !employee.get().isAdmin())
+            return new ShiftPlanConfig();
+
+        return new ShiftPlanConfig(local.get());
     }
 
     public static ShiftTemplateConfig updateShiftTemplateConfig(long localId, ShiftTemplateConfig shiftTemplateConfig){
