@@ -321,6 +321,9 @@ public class SqlDatabaseManager implements IDatabaseManager {
     }
 
     public boolean createUserIfNotExist(String username, String password){
+        if (username == null || password ==  null)
+            return false;
+
         Optional<IUser> existingUser = getUser(username);
         if (existingUser.isPresent())
             return false;
@@ -328,6 +331,14 @@ public class SqlDatabaseManager implements IDatabaseManager {
         UserEntity newUser = new UserEntity(username,password);
         newUser.save(userRepository);
         return true;
+    }
+
+    public boolean doesUserForNicknameAndPasswordExists(String username, String password){
+        if (username == null || password ==  null)
+            return false;
+
+        Optional<IUser> userWithPassword = userRepository.findByNicknameAndAndPassword(username,password);
+        return  userWithPassword.isPresent();
     }
 
     @Autowired

@@ -216,7 +216,15 @@ public class ShiftplanController {
         return AdministrationManager.registerUser(username,password);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/loginUser")
+    public ResponseInfo loginUser(
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "password") String password){
 
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.loginUser(username,password);
+    }
 
     @Autowired
     public SqlDatabaseManager dbManager;

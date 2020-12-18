@@ -142,4 +142,11 @@ public class AdministrationManager {
             return new ResponseInfo(true,"User wurde erfolgreich registriert");
         return new ResponseInfo(false, "Der Username wird bereits verwendet");
     }
+
+    public static ResponseInfo loginUser(String username, String password) {
+        boolean userWithPasswordExists = databaseManager.doesUserForNicknameAndPasswordExists(username,password);
+        if (userWithPasswordExists)
+            return new ResponseInfo(true,"User und Passwort sind korrekt.");
+        return new ResponseInfo(false,"Es konnte kein User mit Username und Passwort gefunden werden.");
+    }
 }
