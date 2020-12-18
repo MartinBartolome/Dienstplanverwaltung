@@ -144,9 +144,9 @@ public class AdministrationManager {
     }
 
     public static ResponseInfo loginUser(String username, String password) {
-        boolean userWithPasswordExists = databaseManager.doesUserForNicknameAndPasswordExists(username,password);
-        if (userWithPasswordExists)
-            return new ResponseInfo(true,"User und Passwort sind korrekt.");
-        return new ResponseInfo(false,"Es konnte kein User mit Username und Passwort gefunden werden.");
+        Optional<IUser> userWithPassword = databaseManager.getUserForNicknameAndPassword(username,password);
+        return userWithPassword
+                .map(iUser -> new ResponseInfo(true, "User und Passwort sind korrekt.", iUser.isSysadmin()))
+                .orElseGet(() -> new ResponseInfo(false, "Es konnte kein User mit Username und Passwort gefunden werden."));
     }
 }

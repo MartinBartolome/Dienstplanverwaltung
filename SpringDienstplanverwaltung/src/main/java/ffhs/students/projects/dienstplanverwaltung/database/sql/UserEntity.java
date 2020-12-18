@@ -23,11 +23,21 @@ class UserEntity implements IUser, ISaveable {
     }
 
 
+
+    private boolean isSysadmin;
+    public UserEntity(String nickname, String password, boolean isSysadmin){
+        this.nickname = nickname;
+        this.password = password;
+        this.isSysadmin = isSysadmin;
+    }
+    public boolean isSysadmin() {  return isSysadmin; }
+
     public String getNickname() {
         return nickname;
     }
     public UserEntity(String nickname){this.nickname = nickname;}
     public UserEntity() { }
+
 
 
     public List<EmployeeEntity> getEmployees() {  return employees;  }

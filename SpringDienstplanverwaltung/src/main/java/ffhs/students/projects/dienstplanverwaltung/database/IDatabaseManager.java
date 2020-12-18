@@ -40,5 +40,5 @@ public interface IDatabaseManager {
     boolean createEmployeeInLocal(IUser user, ILocal local);
     void setIsCanceledForShift(IShift dbShift, boolean isCanceled);
     boolean createUserIfNotExist(String username, String password);
-    boolean doesUserForNicknameAndPasswordExists(String username, String password);
+    Optional<IUser> getUserForNicknameAndPassword(String username, String password);
 }

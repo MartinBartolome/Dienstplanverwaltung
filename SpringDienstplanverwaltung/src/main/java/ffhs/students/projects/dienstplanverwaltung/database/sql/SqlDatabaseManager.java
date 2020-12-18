@@ -23,6 +23,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
     public void createFakeDate(){
 
 
+        createSysAdminIfNotExists();
         UserEntity martin = userRepository.save(new UserEntity("Martin"));
         UserEntity celine = userRepository.save(new UserEntity("Celine"));
         UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
@@ -333,13 +334,24 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return true;
     }
 
-    public boolean doesUserForNicknameAndPasswordExists(String username, String password){
+    public Optional<IUser> getUserForNicknameAndPassword(String username, String password){
         if (username == null || password ==  null)
-            return false;
+            return Optional.empty();
 
-        Optional<IUser> userWithPassword = userRepository.findByNicknameAndAndPassword(username,password);
-        return  userWithPassword.isPresent();
+        return userRepository.findByNicknameAndAndPassword(username,password);
     }
+
+    public void createSysAdminIfNotExists(){
+        String sysAdminName = "Sysadmin";
+        Optional<IUser> exitingSysAdmin = getUser(sysAdminName);
+        if (exitingSysAdmin.isPresent())
+            return;
+
+        String sysAdminPassword = "password";
+        UserEntity sysAdmin = new UserEntity(sysAdminName,sysAdminPassword,true);
+        sysAdmin.save(userRepository);
+    }
+
 
     @Autowired
     private ServiceRoleRepository serviceRoleRepository;
