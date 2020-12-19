@@ -22,7 +22,8 @@ export class AppComponent{
   }
 
   public loadEmployeeData(): void{
-    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: EmployeesConfig) => {
+    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalVariables.getLocalID()
+      + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: EmployeesConfig) => {
       this.EmployeeData = data;
     });
   }
@@ -38,7 +39,8 @@ export class AppComponent{
   }
 
   public loadShiftConfiguration(): void{
-    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: ShiftConfiguration) => {
+    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalVariables.getLocalID()
+      + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: ShiftConfiguration) => {
       this.ShiftConfiguration = data;
     });
   }

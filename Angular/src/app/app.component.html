@@ -1,5 +1,5 @@
-<app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = true"></app-login>
-<app-chooselocal *ngIf="LoginSuccess && !LocalSelected" (submitEM)="LocalSelected = true; Reload()" ></app-chooselocal>
+<app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = $event"></app-login>
+<app-chooselocal *ngIf="LoginSuccess && !LocalSelected" (submitEM)="LocalSelected = $event; Reload()" ></app-chooselocal>
 <div *ngIf="LoginSuccess && LocalSelected">
   <mat-tab-group mat-stretch-tabs class="tabcontainer">
     <mat-tab label="Schichtplan" >
