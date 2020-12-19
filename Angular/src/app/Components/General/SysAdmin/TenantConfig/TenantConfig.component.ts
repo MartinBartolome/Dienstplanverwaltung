@@ -24,7 +24,7 @@ export class TenantConfigComponent implements OnInit {
     for (const o of this.SysadminData.table1Data.table1.items) {
       if (o.selected) {
         this.api.sendGetRequest('/localSetState?localId=' + o.id
-          + '&isGranted=true&isActive=false').subscribe((data: SysAdminTenantConfig) => {
+          + '&isActive=false').subscribe((data: SysAdminTenantConfig) => {
           this.SysadminData = data;
         });
       }
@@ -33,8 +33,7 @@ export class TenantConfigComponent implements OnInit {
   Bewilligen(): void{
     for (const o of this.SysadminData.table2Data.table1.items) {
       if (o.selected) {
-        this.api.sendGetRequest('/localSetState?localId=' + o.id
-          + '&isGranted=true&isActive=true').subscribe((data: SysAdminTenantConfig) => {
+        this.api.sendGetRequest('/grantLocal?localId=' + o.id).subscribe((data: SysAdminTenantConfig) => {
           this.SysadminData = data;
         });
       }
@@ -44,7 +43,7 @@ export class TenantConfigComponent implements OnInit {
     for (const o of this.SysadminData.table3Data.table1.items) {
       if (o.selected) {
         this.api.sendGetRequest('/localSetState?localId=' + o.id
-          + '&isGranted=true&isActive=true').subscribe((data: SysAdminTenantConfig) => {
+          + '&isActive=true').subscribe((data: SysAdminTenantConfig) => {
           this.SysadminData = data;
         });
       }
