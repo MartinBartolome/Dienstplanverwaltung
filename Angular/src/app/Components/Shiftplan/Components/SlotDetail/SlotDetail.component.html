@@ -1,7 +1,7 @@
 <section>
   <header>
     <label>
-      {{ slot.title }}
+      {{ slot.detailTitle }}
     </label>
     <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())>=0 && this.slot.allowedUserInteraction.includes('Apply')" (click)="Apply(false)">Abmelden</button>
     <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())<0 && this.slot.allowedUserInteraction.includes('Apply')" (click)="Apply(true)">Melden</button>
