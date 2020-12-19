@@ -21,7 +21,7 @@ public class AdministrationManager {
         if (!user.isPresent())
             return new TableViewData();
 
-        List<ILocal> locals = databaseManager.getLocalsForUser(user.get());
+        List<ILocal> locals = databaseManager.getGrantedLocalsForUser(user.get());
         return new TableViewData(locals,user.get());
     }
 
@@ -84,11 +84,16 @@ public class AdministrationManager {
     }
 
     // Employees
-    public static EmployeesConfig getEmployeesConfig(long localId){
+    public static EmployeesConfig getEmployeesConfig(long localId, String employeeName){
         Optional<ILocal> local = databaseManager.getLocalById(localId);
-        return local
-                .map(EmployeesConfig::new)
-                .orElseGet(EmployeesConfig::new);
+        if (!local.isPresent())
+            return new EmployeesConfig();
+
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),employeeName);
+        if (!employee.isPresent() || !employee.get().isAdmin())
+            return new EmployeesConfig();
+
+        return new EmployeesConfig(local.get());
     }
     public static EmployeeConfig updateEmployee(EmployeeConfig employeeConfig,long localId){
         Optional<ILocal> local = databaseManager.getLocalById(localId);
@@ -101,11 +106,16 @@ public class AdministrationManager {
                 .orElseGet(EmployeeConfig::new);
     }
 
-    public static ShiftPlanConfig getShiftPlanConfig(long localId){
+    public static ShiftPlanConfig getShiftPlanConfig(long localId, String employeeName){
         Optional<ILocal> local = databaseManager.getLocalById(localId);
-        return local
-                .map(ShiftPlanConfig::new)
-                .orElseGet(ShiftPlanConfig::new);
+        if (!local.isPresent())
+            return new ShiftPlanConfig();
+
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),employeeName);
+        if (!employee.isPresent() || !employee.get().isAdmin())
+            return new ShiftPlanConfig();
+
+        return new ShiftPlanConfig(local.get());
     }
 
     public static ShiftTemplateConfig updateShiftTemplateConfig(long localId, ShiftTemplateConfig shiftTemplateConfig){
@@ -134,5 +144,19 @@ public class AdministrationManager {
             return false;
 
         return databaseManager.createEmployeeInLocal(user.get(),local.get());
+    }
+
+    public static ResponseInfo registerUser(String userName,String password){
+        boolean newUserCreated = databaseManager.createUserIfNotExist(userName,password);
+        if (newUserCreated)
+            return new ResponseInfo(true,"User wurde erfolgreich registriert");
+        return new ResponseInfo(false, "Der Username wird bereits verwendet");
+    }
+
+    public static ResponseInfo loginUser(String username, String password) {
+        Optional<IUser> userWithPassword = databaseManager.getUserForNicknameAndPassword(username,password);
+        return userWithPassword
+                .map(iUser -> new ResponseInfo(true, "User und Passwort sind korrekt.", iUser.isSysadmin()))
+                .orElseGet(() -> new ResponseInfo(false, "Es konnte kein User mit Username und Passwort gefunden werden."));
     }
 }
