@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table
-public class ServiceRoleEntity implements IServiceRole, ISaveable {
+class ServiceRoleEntity implements IServiceRole, ISaveable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

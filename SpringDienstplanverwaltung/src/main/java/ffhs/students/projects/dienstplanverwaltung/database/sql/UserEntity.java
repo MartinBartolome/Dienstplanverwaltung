@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table
-public
 class UserEntity implements IUser, ISaveable {
     @Id
     @Column(length = 64)

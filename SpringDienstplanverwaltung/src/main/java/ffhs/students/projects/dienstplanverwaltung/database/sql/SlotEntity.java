@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table
-public
 class SlotEntity implements ISlot, ISlotDisplay,IDeleteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
