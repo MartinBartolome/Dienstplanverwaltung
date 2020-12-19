@@ -1,18 +1,15 @@
 package ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
-import ffhs.students.projects.dienstplanverwaltung.administration.DropDownData;
-import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
-import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.DropDownData;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
-import ffhs.students.projects.dienstplanverwaltung.database.RecurrenceType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ShiftTemplateConfig {
     private final DropDownData recurrenceOptions;

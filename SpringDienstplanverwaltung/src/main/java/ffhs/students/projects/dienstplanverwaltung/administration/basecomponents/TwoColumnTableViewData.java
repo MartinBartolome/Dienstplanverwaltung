@@ -1,7 +1,8 @@
-package ffhs.students.projects.dienstplanverwaltung.administration;
+package ffhs.students.projects.dienstplanverwaltung.administration.basecomponents;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.ListItem;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
-import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 
 import java.util.List;
 import java.util.stream.Collectors;

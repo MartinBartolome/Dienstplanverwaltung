@@ -3,7 +3,6 @@ package ffhs.students.projects.dienstplanverwaltung.database.sql;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
-import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table
-class ShiftEntity implements IShift {
+class ShiftEntity implements IShift, ISaveable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

@@ -1,7 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
-import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.ListItem;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.SlotConfig;
@@ -25,11 +25,8 @@ public class SqlDatabaseManager implements IDatabaseManager {
     @Override public List<IShiftTemplate> getShiftTemplates(ILocal local) {
         return shiftTemplateRepository.findByLocalId(local.getId());
     }
-    @Override public Optional<IShift> getShift(ILocal local, LocalDate day, Optional<IShiftTemplate> shiftTemplate) {
-        if (!shiftTemplate.isPresent())
-            return Optional.empty();
-
-        return shiftRepository.findFirstByDayIsAndShiftTemplateIsAndLocalIs(day, shiftTemplate.get(), local);
+    @Override public Optional<IShift> getShift(ILocal local, LocalDate day, IShiftTemplate shiftTemplate) {
+        return shiftRepository.findFirstByDayIsAndShiftTemplateIsAndLocalIs(day, shiftTemplate, local);
     }
     @Override  public IShift createShift(IShiftTemplate shiftTemplate, LocalDate day) {
         ShiftEntity shift = shiftRepository.save(new ShiftEntity((ShiftTemplateEntity) shiftTemplate,day)); //todo ??
@@ -51,19 +48,26 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
     @Override
     public void assignEmployeeToSlot(IEmployee employee, ISlot slot, boolean isAssigned) {
+        if (!(slot instanceof SlotEntity))
+            return;
+
         if (isAssigned)
             slot.assignEmployee(employee);
         else
             slot.unAssignEmployee(employee);
-        slot.save(slotRepository);
+
+        ((SlotEntity)slot).save(slotRepository);
     }
     @Override
     public void applyEmployeeToSlot(IEmployee employee, ISlot slot, boolean isApplied) {
+        if (!(slot instanceof SlotEntity))
+            return;
+
         if (isApplied)
             slot.applyEmployee(employee);
         else
             slot.unApplyEmployee(employee);
-        slot.save(slotRepository);
+        ((SlotEntity)slot).save(slotRepository);
     }
 
 
@@ -125,15 +129,16 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return localRepository.findAllByOwner(user);
     }
 
-    public ILocal requestNewLocal(IUser user,String localName){
+    public void requestNewLocal(IUser user, String localName){
         Optional<ILocal> localWithName = getOwnedLocalsForUser(user).stream().filter(loc -> loc.getTitle().equals(localName)).findFirst();
-        if (localWithName.isPresent())
-            return localWithName.get();
+        if (localWithName.isPresent()) {
+            localWithName.get();
+            return;
+        }
 
         LocalEntity local = new LocalEntity(localName,user);
         local.setGranted(false);
         local.save(localRepository);
-        return local;
     }
 
     public Optional<ILocal> updateLocal(long localId, String title, boolean isActive){
@@ -151,15 +156,14 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .map(ILocal.class::cast)
                 .collect(Collectors.toList());
     }
-    public Optional<ILocal> localSetState(long localId, boolean isGranted, boolean isActive){
+    public void localSetState(long localId, boolean isGranted, boolean isActive){
         Optional<ILocal> local = localRepository.findById(localId);
         if (!local.isPresent())
-            return Optional.empty();
+            return;
 
         ((LocalEntity)local.get()).setGranted(isGranted);
         ((LocalEntity)local.get()).setActive(isActive);
         ((LocalEntity)local.get()).save(localRepository);
-        return local;
     }
     public Optional<IUser> getUser(String nickName){
         return userRepository.findByNickname(nickName);
@@ -246,7 +250,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
             return;
 
         ((ShiftEntity) dbShift).setIsCanceled(isCanceled);
-        dbShift.save(shiftRepository);
+        ((ShiftEntity) dbShift).save(shiftRepository);
     }
 
     public void createManagerRole(long localId){

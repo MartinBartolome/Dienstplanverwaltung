@@ -1,7 +1,5 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
-import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
-import ffhs.students.projects.dienstplanverwaltung.database.ISaveable;
 import ffhs.students.projects.dienstplanverwaltung.database.IUser;
 
 import javax.persistence.*;

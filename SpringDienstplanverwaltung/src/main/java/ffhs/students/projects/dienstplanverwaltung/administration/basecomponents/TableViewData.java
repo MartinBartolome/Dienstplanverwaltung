@@ -1,9 +1,7 @@
-package ffhs.students.projects.dienstplanverwaltung.administration;
+package ffhs.students.projects.dienstplanverwaltung.administration.basecomponents;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
-import ffhs.students.projects.dienstplanverwaltung.database.sql.ServiceRoleEntity;
-import javassist.compiler.ast.Pair;
 
 import java.util.ArrayList;
 import java.util.List;

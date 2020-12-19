@@ -1,13 +1,11 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
-import ffhs.students.projects.dienstplanverwaltung.database.sql.SlotEntity;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
-public interface IShift extends ISaveable{
+public interface IShift {
     long getId();
     LocalDate getDay();
     String getTitle();

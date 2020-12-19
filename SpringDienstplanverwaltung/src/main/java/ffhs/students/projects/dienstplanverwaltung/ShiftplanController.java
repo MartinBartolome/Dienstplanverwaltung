@@ -2,9 +2,9 @@ package ffhs.students.projects.dienstplanverwaltung;
 
 //import ffhs.students.projects.dienstplanverwaltung.database.sql.UserRepository;
 import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
-import ffhs.students.projects.dienstplanverwaltung.administration.ResponseInfo;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.ResponseInfo;
 import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenantConfig;
-import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;

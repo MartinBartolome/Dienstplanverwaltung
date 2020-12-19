@@ -1,8 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
-import ffhs.students.projects.dienstplanverwaltung.database.ISaveable;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
-import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
 import javax.persistence.*;
 import java.util.List;

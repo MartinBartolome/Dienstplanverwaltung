@@ -1,12 +1,11 @@
 package ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig;
 
-import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class SlotConfig {
     private long id; //SlotId

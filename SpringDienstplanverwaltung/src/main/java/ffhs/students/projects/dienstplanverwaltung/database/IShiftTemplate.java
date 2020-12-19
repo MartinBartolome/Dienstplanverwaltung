@@ -1,7 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
-import ffhs.students.projects.dienstplanverwaltung.database.sql.SlotEntity;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

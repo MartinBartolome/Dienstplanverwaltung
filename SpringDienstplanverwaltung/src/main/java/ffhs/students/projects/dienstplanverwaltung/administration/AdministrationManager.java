@@ -1,5 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.ResponseInfo;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
@@ -7,7 +9,6 @@ import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.Sh
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,7 +147,7 @@ public class AdministrationManager {
         return databaseManager.createEmployeeInLocal(user.get(),local.get());
     }
 
-    public static ResponseInfo registerUser(String userName,String password){
+    public static ResponseInfo registerUser(String userName, String password){
         boolean newUserCreated = databaseManager.createUserIfNotExist(userName,password);
         if (newUserCreated)
             return new ResponseInfo(true,"User wurde erfolgreich registriert");

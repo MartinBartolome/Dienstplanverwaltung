@@ -1,11 +1,10 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
-import ffhs.students.projects.dienstplanverwaltung.administration.ListItem;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.ListItem;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 
 import javax.persistence.*;
-import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
