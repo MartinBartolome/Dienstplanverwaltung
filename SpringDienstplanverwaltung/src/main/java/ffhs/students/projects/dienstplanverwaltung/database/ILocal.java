@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ILocal {
     long getId();
@@ -11,4 +12,10 @@ public interface ILocal {
     boolean isActive();
     List<IEmployee> getEmployees();
     List<IShiftTemplate> getShiftTemplates();
+
+    default Optional<IServiceRole> getAdminRole(){
+        return getServiceRoles().stream()
+                .filter(IServiceRole::isAdminRole)
+                .findFirst();
+    }
 }

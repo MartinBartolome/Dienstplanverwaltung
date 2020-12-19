@@ -47,7 +47,7 @@ class EmployeeEntity implements IEmployee, ISaveable {
                 .map(IServiceRole.class::cast)
                 .collect(Collectors.toList());
     }
-    @Override public boolean isAdmin(){  return serviceRoles .stream() .anyMatch(ServiceRoleEntity::isAdminRole); }
+    @Override public boolean isAdmin(){ return serviceRoles.stream().anyMatch(ServiceRoleEntity::isAdminRole); }
     @Override public SlotUserInteraction getAllowedSlotInteraction(ISlot slot) {
         boolean isAdmin = this.isAdmin();
         boolean isApplicable = allowsApplicationForSlot(slot);
@@ -63,15 +63,31 @@ class EmployeeEntity implements IEmployee, ISaveable {
         return !neededServiceRolesIDs.isEmpty();
     }
 
+    //Setter
+
 
     // Konstruktoren
     public EmployeeEntity() { }
     public EmployeeEntity(UserEntity user, LocalEntity local){
         this.user = user;
         this.local = local;
+        this.serviceRoles = new ArrayList<>();
+        this.slotsAssignedTo = new ArrayList<>();
+        this.slotsAppliedTo = new ArrayList<>();
         local.addEmployee(this);
     }
+    public static Optional<EmployeeEntity> createManagerForLocal(IUser user, ILocal local){
+        if (!(user instanceof  UserEntity) ||  !(local instanceof LocalEntity))
+            return Optional.empty();
 
+        Optional<IServiceRole> adminRole =  local.getAdminRole();
+        if (!adminRole.isPresent())
+            return Optional.empty();
+
+        EmployeeEntity manager = new EmployeeEntity((UserEntity) user,(LocalEntity) local);
+        manager.addServiceRole(adminRole.get().getId());
+        return Optional.of(manager);
+    }
     // Aktualisierung
     public void updateWithConfig(EmployeeConfig employeeConfig, EmployeeRepository repo) {
         isActive = employeeConfig.getIsActive();

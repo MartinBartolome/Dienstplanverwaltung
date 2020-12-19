@@ -127,6 +127,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         LocalEntity local = new LocalEntity(localName,user);
         local.setGranted(false);
         local.save(localRepository);
+        createManagerRole(local.getId());
     }
 
     public Optional<ILocal> updateLocal(long localId, String title, boolean isActive){
@@ -157,6 +158,12 @@ public class SqlDatabaseManager implements IDatabaseManager {
         if (!local.isPresent())
             return;
 
+        IUser owner = local.get().getOwner();
+        Optional<EmployeeEntity> manager = EmployeeEntity.createManagerForLocal(owner,local.get());
+        if (!manager.isPresent())
+            return;
+
+        manager.get().save(employeeRepository);
         ((LocalEntity)local.get()).setGranted(true);
         ((LocalEntity)local.get()).save(localRepository);
     }
