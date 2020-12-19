@@ -14,4 +14,5 @@ public interface IEmployee {
     String getCurrency();
     int getMonthlyContingent();
     SlotUserInteraction getAllowedSlotInteraction(ISlot slot);
+    boolean isAdmin();
 }

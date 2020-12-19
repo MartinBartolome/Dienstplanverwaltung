@@ -2,6 +2,7 @@ package ffhs.students.projects.dienstplanverwaltung;
 
 //import ffhs.students.projects.dienstplanverwaltung.database.sql.UserRepository;
 import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
+import ffhs.students.projects.dienstplanverwaltung.administration.ResponseInfo;
 import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenantConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
@@ -22,7 +23,7 @@ public class ShiftplanController {
     @CrossOrigin(origins = "*")
     @GetMapping("/shiftPlan")
     public Shiftplan getShiftplan(
-            @RequestParam(value = "localId", defaultValue = "1") int localId,
+            @RequestParam(value = "localId") int localId,
             @RequestParam(value = "employeeName") String employeeName,
             @RequestParam(value = "month", defaultValue = "11.05.2020") String date) {
         LocalDate month =  LocalDate.parse(date,Helper.dateFormatter);
@@ -148,10 +149,11 @@ public class ShiftplanController {
     @CrossOrigin(origins = "*")
     @GetMapping("/getEmployeesConfig")
     public EmployeesConfig getEmployeesConfig(
+            @RequestParam(value = "employeeName") String employeeName,
             @RequestParam(value = "localId") long localId){
 
         AdministrationManager.databaseManager = dbManager;
-        return AdministrationManager.getEmployeesConfig(localId);
+        return AdministrationManager.getEmployeesConfig(localId,employeeName);
     }
     @CrossOrigin(origins = "*")
     @PostMapping("/updateEmployeeConfig")
@@ -167,10 +169,11 @@ public class ShiftplanController {
     @CrossOrigin(origins = "*")
     @GetMapping("/getShiftPlanConfig")
     public ShiftPlanConfig getShiftPlanConfig(
+            @RequestParam(value = "employeeName") String employeeName,
             @RequestParam(value = "localId") long localId){
 
         AdministrationManager.databaseManager = dbManager;
-        return AdministrationManager.getShiftPlanConfig(localId);
+        return AdministrationManager.getShiftPlanConfig(localId,employeeName);
     }
 
     @CrossOrigin(origins = "*")
@@ -205,6 +208,25 @@ public class ShiftplanController {
         return ShiftPlanManager.setIsCanceled(shiftId,localId,employeeName,isCanceled);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/registerUser")
+    public ResponseInfo registerUser(
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "password") String password){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.registerUser(username,password);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/loginUser")
+    public ResponseInfo loginUser(
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "password") String password){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.loginUser(username,password);
+    }
 
     @Autowired
     public SqlDatabaseManager dbManager;
@@ -215,6 +237,7 @@ public class ShiftplanController {
 
         dbManager.createFakeDate();
     }
+
 
 
 

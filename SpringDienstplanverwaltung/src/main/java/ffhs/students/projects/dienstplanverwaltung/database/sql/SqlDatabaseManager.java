@@ -23,6 +23,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
     public void createFakeDate(){
 
 
+        createSysAdminIfNotExists();
         UserEntity martin = userRepository.save(new UserEntity("Martin"));
         UserEntity celine = userRepository.save(new UserEntity("Celine"));
         UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
@@ -165,12 +166,13 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .findById(shiftTemplateId);
     }
 
-    public List<ILocal> getLocalsForUser(IUser user){
+    public List<ILocal> getGrantedLocalsForUser(IUser user){
         if (!(user instanceof UserEntity))
             return new ArrayList<>();
 
         return ((UserEntity)user).getEmployees().stream()
                 .map(EmployeeEntity::getLocal)
+                .filter(ILocal::isGranted)
                 .collect(Collectors.toList());
     }
 
@@ -323,6 +325,38 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
         ServiceRoleEntity.createManagerRole((LocalEntity)local.get()).save(serviceRoleRepository);
     }
+
+    public boolean createUserIfNotExist(String username, String password){
+        if (username == null || password ==  null)
+            return false;
+
+        Optional<IUser> existingUser = getUser(username);
+        if (existingUser.isPresent())
+            return false;
+
+        UserEntity newUser = new UserEntity(username,password);
+        newUser.save(userRepository);
+        return true;
+    }
+
+    public Optional<IUser> getUserForNicknameAndPassword(String username, String password){
+        if (username == null || password ==  null)
+            return Optional.empty();
+
+        return userRepository.findByNicknameAndAndPassword(username,password);
+    }
+
+    public void createSysAdminIfNotExists(){
+        String sysAdminName = "Sysadmin";
+        Optional<IUser> exitingSysAdmin = getUser(sysAdminName);
+        if (exitingSysAdmin.isPresent())
+            return;
+
+        String sysAdminPassword = "password";
+        UserEntity sysAdmin = new UserEntity(sysAdminName,sysAdminPassword,true);
+        sysAdmin.save(userRepository);
+    }
+
 
     @Autowired
     private ServiceRoleRepository serviceRoleRepository;

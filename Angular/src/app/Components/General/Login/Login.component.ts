@@ -1,6 +1,9 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SharedService} from '../../../Common/SharedService';
+import {EmployeeInviteComponent} from "../../EmployeeConfiguration/Components/EmployeeInvite/EmployeeInvite.component";
+import {MatDialog} from "@angular/material/dialog";
+import {SignUpComponent} from "../SignUp/SignUp.component";
 
 @Component({
   selector: 'app-login',
@@ -23,5 +26,15 @@ export class LoginComponent{
     }
   }
 
-  constructor(public globalVariables: SharedService) { }
+  signup(): void{
+    const dialogRef = this.dialog.open(SignUpComponent);
+    dialogRef.afterClosed().subscribe((result: string)  => {
+      if (result)
+      {
+        this.submitEM.emit(true);
+      }
+    });
+  }
+
+  constructor(public globalVariables: SharedService, public dialog: MatDialog) { }
 }

@@ -24,7 +24,7 @@ public interface IDatabaseManager {
 
     Optional<ILocal> getLocalById(long localID);
     Optional<IShiftTemplate> getShiftTemplateById(long localID);
-    List<ILocal> getLocalsForUser(IUser user);
+    List<ILocal> getGrantedLocalsForUser(IUser user);
     Optional<IUser> getUser(String nickName);
     void addServiceRole(long localId, String title);
     Optional<IServiceRole> updateServiceRole(long serviceRoleId, String title, boolean isActive);
@@ -39,4 +39,6 @@ public interface IDatabaseManager {
 
     boolean createEmployeeInLocal(IUser user, ILocal local);
     void setIsCanceledForShift(IShift dbShift, boolean isCanceled);
+    boolean createUserIfNotExist(String username, String password);
+    Optional<IUser> getUserForNicknameAndPassword(String username, String password);
 }

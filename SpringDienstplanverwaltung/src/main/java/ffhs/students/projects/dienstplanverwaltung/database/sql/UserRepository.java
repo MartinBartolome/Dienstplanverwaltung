@@ -11,6 +11,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Optional<IUser> findByNickname(String nickname);
-
+    Optional<IUser> findByNicknameAndAndPassword(String nickname,String password);
 }
 
