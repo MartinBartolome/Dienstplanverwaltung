@@ -20,7 +20,7 @@
                 [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
                 (click)="ItemEdit(item)">build_circle
       </mat-icon>
-      <mat-icon *ngIf="table.showsAddButton"
+      <mat-icon *ngIf="AllowDelete"
                 aria-hidden="false"
                 aria-label="Editieren"
                 color="primary"
