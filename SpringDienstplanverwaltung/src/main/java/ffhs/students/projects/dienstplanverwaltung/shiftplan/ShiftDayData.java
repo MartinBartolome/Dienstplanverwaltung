@@ -4,6 +4,7 @@ import ffhs.students.projects.dienstplanverwaltung.database.IShift;
 import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,7 +20,11 @@ public class ShiftDayData {
     public LocalDate getDay() {
         return day;
     }
-    public List<ShiftDisplay> getShifts() { return shifts; }
+    public List<ShiftDisplay> getShifts() {
+        return shifts.stream()
+                .sorted(Comparator.comparing(ShiftDisplay::getFromTime))
+                .collect(Collectors.toList());
+    }
     public boolean isInMonth() { return isInMonth; }
     public void setInMonth(boolean inMonth) { isInMonth = inMonth;  }
     /**
