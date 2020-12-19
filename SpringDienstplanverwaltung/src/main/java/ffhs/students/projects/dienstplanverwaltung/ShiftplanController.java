@@ -228,8 +228,17 @@ public class ShiftplanController {
         return AdministrationManager.loginUser(username,password);
     }
 
-    @Autowired
-    public SqlDatabaseManager dbManager;
+    @CrossOrigin(origins = "*")
+    @GetMapping("/isEmployeeManager")
+    public boolean isEmployeeManager(
+            @RequestParam(value = "employeeName") String employeeName,
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.isEmployeeManager(employeeName,localId);
+    }
+
+    @Autowired public SqlDatabaseManager dbManager;
 
 
     @GetMapping("/createFakeData")

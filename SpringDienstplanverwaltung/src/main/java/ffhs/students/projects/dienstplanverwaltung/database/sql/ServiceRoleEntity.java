@@ -14,36 +14,39 @@ class ServiceRoleEntity implements IServiceRole, ISaveable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    public void setName(String name) {
-        if (!name.isEmpty())
-            this.name = name;
-    }
-
     private boolean isAdminRole;
-    public boolean isAdminRole() {  return isAdminRole;  }
-
     @ManyToMany()
     private List<SlotEntity> slots;
-
     @ManyToMany()
     private List<EmployeeEntity> employees;
-
-    public void setActive(boolean active) { isActive = active; }
-
     private String name;
     private boolean isActive;
     @ManyToOne
     @JoinColumn()
     private LocalEntity local;
 
+    // Getter
+    public boolean isAdminRole() {  return isAdminRole;  }
+    public String getName() { return name;  }
+    public boolean isActive() {  return isActive; }
+    public LocalEntity getLocal() {  return local; }
+    public long getId() {  return id; }
+
+    //Setter
+    public void setName(String name) {
+        if (!name.isEmpty()) this.name = name;
+    }
+    public void setActive(boolean active) { isActive = active; }
+
+
+    // Konstruktoren
+    public ServiceRoleEntity() {  }
     public ServiceRoleEntity(String name,LocalEntity local, boolean isActive) {
         this.name = name;
         this.local = local;
         this.isActive = isActive;
         local.addServiceRole(this);
     }
-
     public static ServiceRoleEntity createManagerRole(LocalEntity local){
         ServiceRoleEntity managerRole = new ServiceRoleEntity();
         managerRole.name = "Manager";
@@ -54,12 +57,19 @@ class ServiceRoleEntity implements IServiceRole, ISaveable {
         return managerRole;
     }
 
-    public ServiceRoleEntity() {  }
-
-    public String getName() { return name;  }
-    public boolean isActive() {  return isActive; }
-    public LocalEntity getLocal() {  return local; }
-    public long getId() {  return id; }
+    // Aktualisierungen
+    public void addSlot(SlotEntity slot){
+        slots.add(slot);
+    }
+    public void removeSlot(SlotEntity slot){
+        slots.remove(slot);
+    }
+    public void addEmployee(EmployeeEntity employee) {
+        employees.add(employee);
+    }
+    public void removeEmployee(EmployeeEntity employeeEntity) {
+        employees.remove(employeeEntity);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -68,24 +78,8 @@ class ServiceRoleEntity implements IServiceRole, ISaveable {
         ServiceRoleEntity that = (ServiceRoleEntity) o;
         return id == that.id;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    public void addSlot(SlotEntity slot){
-        slots.add(slot);
-    }
-    public void removeSlot(SlotEntity slot){
-        slots.remove(slot);
-    }
-
-    public void addEmployee(EmployeeEntity employee) {
-        employees.add(employee);
-    }
-
-    public void removeEmployee(EmployeeEntity employeeEntity) {
-        employees.remove(employeeEntity);
     }
 }

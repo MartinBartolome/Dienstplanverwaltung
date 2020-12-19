@@ -14,67 +14,53 @@ class LocalEntity implements ILocal, ISaveable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Override
-    public long getId() { return id; }
-
-    public void setTitle(String title) {
-        if (!title.isEmpty())
-            this.title = title;
-    }
-
     private String title;
-    public String getTitle() { return title; }
-
-    public void setActive(boolean active) { isActive = active; }
-
-    public boolean isActive() { return isActive;  }
-
     private boolean isActive;
-
-    public void setGranted(boolean granted) {  isGranted = granted;  }
-
-    public boolean isGranted() {  return isGranted;  }
     private boolean isGranted;
-
-
     @ManyToOne
     @JoinColumn()
     private UserEntity owner;
-    public UserEntity getOwner() {  return owner; }
-
     @OneToMany(mappedBy = "local")
     private List<ServiceRoleEntity> serviceRoles;
-
-    public List<IEmployee> getEmployees() {
-        return employees.stream()
-            .map(IEmployee.class::cast)
-            .collect(Collectors.toList());
-    }
-
     @OneToMany(mappedBy = "local")
     private List<EmployeeEntity> employees;
+    @OneToMany(mappedBy = "local")
+    private List<ShiftTemplateEntity> shiftTemplates;
+    @OneToMany(mappedBy = "local")
+    private List<ShiftEntity> shifts;
 
+
+    //Getter
+    @Override public long getId() { return id; }
+    public String getTitle() { return title; }
+    public boolean isActive() { return isActive;  }
+    public boolean isGranted() {  return isGranted;  }
+    public UserEntity getOwner() {  return owner; }
+    public List<IEmployee> getEmployees() {
+        return employees.stream()
+                .map(IEmployee.class::cast)
+                .collect(Collectors.toList());
+    }
     public List<IShiftTemplate> getShiftTemplates() {
         return shiftTemplates.stream()
                 .map(IShiftTemplate.class::cast)
                 .collect(Collectors.toList());
     }
-
-    @OneToMany(mappedBy = "local")
-    private List<ShiftTemplateEntity> shiftTemplates;
-
-    @OneToMany(mappedBy = "local")
-    private List<ShiftEntity> shifts;
-    
-
     public List<IServiceRole> getServiceRoles() {
         return serviceRoles.stream()
                 .map(IServiceRole.class::cast)
                 .collect(Collectors.toList());
     }
 
+    // Setter
+    public void setTitle(String title) {
+        if (!title.isEmpty())
+            this.title = title;
+    }
+    public void setActive(boolean active) { isActive = active; }
+    public void setGranted(boolean granted) {  isGranted = granted;  }
 
-
+    //Konstruktoren
     public LocalEntity(){}
     public LocalEntity(String title, IUser owner){
         this.title = title;
@@ -87,6 +73,7 @@ class LocalEntity implements ILocal, ISaveable {
         shiftTemplates = new ArrayList<>();
     }
 
+    // Aktualisierungen
     public void addServiceRole(ServiceRoleEntity serviceRole){
         serviceRoles.add(serviceRole);
     }

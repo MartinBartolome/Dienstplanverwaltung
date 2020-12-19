@@ -159,4 +159,15 @@ public class AdministrationManager {
                 .map(iUser -> new ResponseInfo(true, "User und Passwort sind korrekt.", iUser.isSysadmin()))
                 .orElseGet(() -> new ResponseInfo(false, "Es konnte kein User mit Username und Passwort gefunden werden."));
     }
+
+    public static boolean isEmployeeManager(String employeeName, long localId) {
+        Optional<ILocal> local = databaseManager.getLocalById(localId);
+        if (!local.isPresent())
+            return false;
+
+        Optional<IEmployee> employee = databaseManager.getEmployeeForName(local.get(),employeeName);
+        return employee
+                .map(IEmployee::isAdmin)
+                .orElse(false);
+    }
 }

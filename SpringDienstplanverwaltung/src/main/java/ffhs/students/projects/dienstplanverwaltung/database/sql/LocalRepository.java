@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 interface LocalRepository extends JpaRepository<LocalEntity, Integer> {
-    public Optional<ILocal> findById(long id);
-    public List<ILocal> findAllByOwner(IUser owner);
+     Optional<ILocal> findById(long id);
+     List<ILocal> findAllByOwner(IUser owner);
 }

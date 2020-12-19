@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table
 class EmployeeEntity implements IEmployee, ISaveable {
+    // member
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,92 +20,42 @@ class EmployeeEntity implements IEmployee, ISaveable {
     private double hourlyRate;
     private String currency;
     private int monthlyContingent;
+    @ManyToOne
+    @JoinColumn()
+    private UserEntity user;
+    @ManyToOne
+    @JoinColumn()
+    private LocalEntity local;
+    @ManyToMany (mappedBy ="employees")
+    private List<ServiceRoleEntity> serviceRoles;
+    @ManyToMany (mappedBy ="assigned")
+    private List<SlotEntity> slotsAssignedTo;
+    @ManyToMany (mappedBy ="applied")
+    private List<SlotEntity> slotsAppliedTo;
 
 
+    // getter
+    public long getId() {  return id; }
     public boolean isActive() { return isActive; }
     public double getHourlyRate() {  return hourlyRate;  }
     public String getCurrency() { return currency;  }
     public int getMonthlyContingent() {  return monthlyContingent; }
-
-
-
-
-    @Override
-    public IUser getUser() { return user;  }
-
-    @Override
-    public ILocal getLocal() {
-        return local;
-    }
-
-    @Override
-    public boolean isEqual(IEmployee employee) {
-        return employee.getUser().getNickname() == user.getNickname();
-    }
-
-    //todo - wie kann man den User als zweiten Teil des Keys verwenden?
-    //@EmbeddedId
-    @ManyToOne
-    @JoinColumn()
-    private UserEntity user;
-
-    @ManyToOne
-    @JoinColumn()
-    private LocalEntity local;
-
+    @Override public IUser getUser() { return user;  }
+    @Override public ILocal getLocal() { return local; }
+    @Override public boolean isEqual(IEmployee employee) { return employee.getUser().getNickname().equals(user.getNickname());  }
     public List<IServiceRole> getServiceRoles() {
         return serviceRoles.stream()
                 .map(IServiceRole.class::cast)
                 .collect(Collectors.toList());
     }
-
-    @ManyToMany (mappedBy ="employees")
-    private List<ServiceRoleEntity> serviceRoles;
-
-    @ManyToMany (mappedBy ="assigned")
-    private List<SlotEntity> slotsAssignedTo;
-
-    @ManyToMany (mappedBy ="applied")
-    private List<SlotEntity> slotsAppliedTo;
-
-    public EmployeeEntity() { }
-    public EmployeeEntity(UserEntity user, LocalEntity local){
-        this.user = user;
-        this.local = local;
-        local.addEmployee(this);
-    }
-
-    public long getId() {  return id; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EmployeeEntity that = (EmployeeEntity) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-
-
-    @Override
-    public SlotUserInteraction getAllowedSlotInteraction(ISlot slot) {
+    @Override public boolean isAdmin(){  return serviceRoles .stream() .anyMatch(ServiceRoleEntity::isAdminRole); }
+    @Override public SlotUserInteraction getAllowedSlotInteraction(ISlot slot) {
         boolean isAdmin = this.isAdmin();
         boolean isApplicable = allowsApplicationForSlot(slot);
-
         if (isAdmin && isApplicable) return SlotUserInteraction.ApplyAndAssign;
         if (isAdmin) return SlotUserInteraction.Assign;
         if (isApplicable) return SlotUserInteraction.Apply;
         return SlotUserInteraction.None;
-    }
-    public boolean isAdmin(){
-        return serviceRoles
-                .stream()
-                .anyMatch(ServiceRoleEntity::isAdminRole);
     }
     private boolean allowsApplicationForSlot(ISlot slot){
         Set<Long> neededServiceRolesIDs = slot.getServiceRoles().stream().map(IServiceRole::getId).collect(Collectors.toSet());
@@ -113,6 +64,14 @@ class EmployeeEntity implements IEmployee, ISaveable {
         return !neededServiceRolesIDs.isEmpty();
     }
 
+
+    // Konstruktoren
+    public EmployeeEntity() { }
+    public EmployeeEntity(UserEntity user, LocalEntity local){
+        this.user = user;
+        this.local = local;
+        local.addEmployee(this);
+    }
 
     // Aktualisierung
     public void updateWithConfig(EmployeeConfig employeeConfig, EmployeeRepository repo) {
@@ -136,13 +95,10 @@ class EmployeeEntity implements IEmployee, ISaveable {
 
         Set<Long> toRemove = new HashSet<>(employeeRoleIds);
         toRemove.removeAll(newServiceRoles);
-
         Set<Long> toAdd = new HashSet<>(newServiceRoles);
         toAdd.removeAll(employeeRoleIds);
-
         toRemove.forEach(this::removeServiceRole);
         toAdd.forEach(this::addServiceRole);
-
         save(repo);
     }
     private void addServiceRole(Long serviceRoleId){
@@ -161,7 +117,6 @@ class EmployeeEntity implements IEmployee, ISaveable {
         serviceRoles.remove(serviceRole.get());
         serviceRole.get().removeEmployee(this);
     }
-
     private Optional<ServiceRoleEntity> helperGetLocalServiceRoleForId(Long serviceRoleId){
         Optional<IServiceRole> serviceRole =  local
                 .getServiceRoles().stream()
@@ -169,7 +124,16 @@ class EmployeeEntity implements IEmployee, ISaveable {
                 .findFirst();
         if (!serviceRole.isPresent() || !(serviceRole.get() instanceof ServiceRoleEntity))
             return Optional.empty();
-
         return Optional.of((ServiceRoleEntity) serviceRole.get());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeEntity that = (EmployeeEntity) o;
+        return id == that.id;
+    }
+    @Override
+    public int hashCode() {  return Objects.hash(id); }
 }

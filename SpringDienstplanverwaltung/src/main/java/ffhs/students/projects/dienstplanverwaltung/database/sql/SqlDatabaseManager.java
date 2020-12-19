@@ -8,7 +8,6 @@ import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.Sl
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,76 +19,19 @@ import java.util.stream.Collectors;
 
 @Service
 public class SqlDatabaseManager implements IDatabaseManager {
-    public void createFakeDate(){
-
-
-        createSysAdminIfNotExists();
-        UserEntity martin = userRepository.save(new UserEntity("Martin"));
-        UserEntity celine = userRepository.save(new UserEntity("Celine"));
-        UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
-
-        LocalEntity local = localRepository.save(new LocalEntity("City Cafe",martin));
-        LocalEntity local2 = localRepository.save(new LocalEntity("Staubsauger e.V.",matthias));
-
-        IServiceRole serviceRole1 = serviceRoleRepository.save(new ServiceRoleEntity("Barkeeper",local,true));
-        IServiceRole serviceRole2 = serviceRoleRepository.save(new ServiceRoleEntity("Kellner",local,true));
-
-
-        EmployeeEntity eMartin = employeeRepository.save(new EmployeeEntity(martin,local));
-        EmployeeEntity eCeline = employeeRepository.save(new EmployeeEntity(celine,local));
-        EmployeeEntity eMatthias = employeeRepository.save(new EmployeeEntity(matthias,local));
-        EmployeeEntity eMatthias2 = employeeRepository.save(new EmployeeEntity(matthias,local2));
-
-
-
-        List<DayOfWeek> days = new ArrayList<>(Arrays.asList( DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,
-                DayOfWeek.FRIDAY,DayOfWeek.SATURDAY,DayOfWeek.SUNDAY));
-
-
-        ShiftTemplateEntity shiftTemplate = new ShiftTemplateEntity(local,"Abend",
-                LocalTime.of(18,0), LocalTime.of(23,0),
-                RecurrenceType.Weekly,LocalDate.of(2020,1,1),null,
-                days);
-
-        //List<EmployeeEntity> assigned = new ArrayList<>(Arrays.asList(eCeline));
-        //List<EmployeeEntity> applied = new ArrayList<>(Arrays.asList(eMatthias,eMartin));
-        SlotEntity slot = new SlotEntity(null,2, new ArrayList<>(), new ArrayList<>());
-        slot.setTitle("Bar");
-        slot.addToShiftTemplate(shiftTemplate);
-
-        shiftTemplateRepository.save(shiftTemplate);
-        slotRepository.save(slot);
-
-        createManagerRole(local.getId());
-        createManagerRole(local2.getId());
-    }
-
-
-    @Override
-    public List<IShift> getShifts(ILocal local, LocalDate from, LocalDate to) {
+    @Override public List<IShift> getShifts(ILocal local, LocalDate from, LocalDate to) {
         return shiftRepository.findAllByLocalAndDayBetween(local,from,to);
     }
-
-    @Override
-    public List<IShiftTemplate> getShiftTemplates(ILocal local) {
+    @Override public List<IShiftTemplate> getShiftTemplates(ILocal local) {
         return shiftTemplateRepository.findByLocalId(local.getId());
     }
-
-    @Override
-    public List<IEmployee> getEmployees(int localId) {
-        return null;
-    }
-
-    @Override
-    public Optional<IShift> getShift(ILocal local, LocalDate day, Optional<IShiftTemplate> shiftTemplate) {
+    @Override public Optional<IShift> getShift(ILocal local, LocalDate day, Optional<IShiftTemplate> shiftTemplate) {
         if (!shiftTemplate.isPresent())
             return Optional.empty();
 
         return shiftRepository.findFirstByDayIsAndShiftTemplateIsAndLocalIs(day, shiftTemplate.get(), local);
     }
-
-    @Override
-    public IShift createShift(IShiftTemplate shiftTemplate, LocalDate day) {
+    @Override  public IShift createShift(IShiftTemplate shiftTemplate, LocalDate day) {
         ShiftEntity shift = shiftRepository.save(new ShiftEntity((ShiftTemplateEntity) shiftTemplate,day)); //todo ??
 
         List<SlotEntity> templateSlots = shiftTemplate.getSlots().stream().map(SlotEntity.class::cast).collect(Collectors.toList());
@@ -354,18 +296,55 @@ public class SqlDatabaseManager implements IDatabaseManager {
     }
 
 
-    @Autowired
-    private ServiceRoleRepository serviceRoleRepository;
-    @Autowired
-    private LocalRepository localRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private EmployeeRepository employeeRepository;
-    @Autowired
-    private SlotRepository slotRepository;
-    @Autowired
-    private ShiftTemplateRepository shiftTemplateRepository;
-    @Autowired
-    private ShiftRepository shiftRepository;
+    @Autowired private ServiceRoleRepository serviceRoleRepository;
+    @Autowired private LocalRepository localRepository;
+    @Autowired private UserRepository userRepository;
+    @Autowired private EmployeeRepository employeeRepository;
+    @Autowired private SlotRepository slotRepository;
+    @Autowired private ShiftTemplateRepository shiftTemplateRepository;
+    @Autowired private ShiftRepository shiftRepository;
+
+    public void createFakeDate(){
+
+
+        createSysAdminIfNotExists();
+        UserEntity martin = userRepository.save(new UserEntity("Martin"));
+        UserEntity celine = userRepository.save(new UserEntity("Celine"));
+        UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
+
+        LocalEntity local = localRepository.save(new LocalEntity("City Cafe",martin));
+        LocalEntity local2 = localRepository.save(new LocalEntity("Staubsauger e.V.",matthias));
+
+        IServiceRole serviceRole1 = serviceRoleRepository.save(new ServiceRoleEntity("Barkeeper",local,true));
+        IServiceRole serviceRole2 = serviceRoleRepository.save(new ServiceRoleEntity("Kellner",local,true));
+
+
+        EmployeeEntity eMartin = employeeRepository.save(new EmployeeEntity(martin,local));
+        EmployeeEntity eCeline = employeeRepository.save(new EmployeeEntity(celine,local));
+        EmployeeEntity eMatthias = employeeRepository.save(new EmployeeEntity(matthias,local));
+        EmployeeEntity eMatthias2 = employeeRepository.save(new EmployeeEntity(matthias,local2));
+
+
+
+        List<DayOfWeek> days = new ArrayList<>(Arrays.asList( DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,
+                DayOfWeek.FRIDAY,DayOfWeek.SATURDAY,DayOfWeek.SUNDAY));
+
+
+        ShiftTemplateEntity shiftTemplate = new ShiftTemplateEntity(local,"Abend",
+                LocalTime.of(18,0), LocalTime.of(23,0),
+                RecurrenceType.Weekly,LocalDate.of(2020,1,1),null,
+                days);
+
+        //List<EmployeeEntity> assigned = new ArrayList<>(Arrays.asList(eCeline));
+        //List<EmployeeEntity> applied = new ArrayList<>(Arrays.asList(eMatthias,eMartin));
+        SlotEntity slot = new SlotEntity(null,2, new ArrayList<>(), new ArrayList<>());
+        slot.setTitle("Bar");
+        slot.addToShiftTemplate(shiftTemplate);
+
+        shiftTemplateRepository.save(shiftTemplate);
+        slotRepository.save(slot);
+
+        createManagerRole(local.getId());
+        createManagerRole(local2.getId());
+    }
 }
