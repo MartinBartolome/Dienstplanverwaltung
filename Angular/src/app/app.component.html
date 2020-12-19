@@ -7,12 +7,12 @@
         <app-shiftplan [data]="ShiftPlanData" (DateChange)="loadShiftPlanData($event)" (ReloadChange)="loadShiftPlanData($event)"></app-shiftplan>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Schichtverwaltung" >
+    <mat-tab label="Schichtverwaltung" *ngIf="isManager">
       <ng-template matTabContent>
         <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration" (ShiftConfigChanged)="Reload()"></app-shift-configuration>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Mitarbeiterverwaltung">
+    <mat-tab label="Mitarbeiterverwaltung" *ngIf="isManager">
       <ng-template matTabContent>
         <app-employee-configuration [employees]="EmployeeData"></app-employee-configuration>
       </ng-template>
