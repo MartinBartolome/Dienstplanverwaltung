@@ -131,7 +131,6 @@ public class AdministrationManager {
     }
 
     public static boolean inviteUser(String userNickName, long localId) {
-
         Optional<ILocal> local = databaseManager.getLocalById(localId);
         if (!local.isPresent())
             return false;
@@ -141,10 +140,10 @@ public class AdministrationManager {
             return false; // User ist bereits Mitarbeiter
 
         Optional<IUser> user = databaseManager.getUser(userNickName);
-        if (!user.isPresent())
-            return false;
+        return user
+                .filter(iUser -> databaseManager.createEmployeeInLocal(iUser, local.get()))
+                .isPresent();
 
-        return databaseManager.createEmployeeInLocal(user.get(),local.get());
     }
 
     public static ResponseInfo registerUser(String userName, String password){

@@ -48,52 +48,46 @@ public class TableViewData {
 
     public static TableViewData getForServiceRoles(List<IServiceRole> localRoles, List<IServiceRole> slotRoles){
         String title = "Dienstrollen";
-        boolean showsAddButton = true;
         List<ListItem> items = localRoles.stream()
                 .map(localRole -> new ListItem(localRole.getName(),slotRoles.contains(localRole),localRole.getId()))
                 .collect(Collectors.toList());
-        return new TableViewData(title,showsAddButton,items);
+        return new TableViewData(title,true,items);
     }
     public static TableViewData getForShiftTemplates(List<IShiftTemplate> shiftTemplates){
         String title = "Schichttemplates";
-        boolean showsAddButton = true;
         List<ListItem> items = shiftTemplates.stream()
                 .map(ListItem::new)
                 .collect(Collectors.toList());
-        return new TableViewData(title,showsAddButton,items);
+        return new TableViewData(title,true,items);
     }
     public static TableViewData getForSlots(List<ISlot> slots){
         String title = "Slots";
-        boolean showsAddButton = true;
         List<ListItem> items = slots.stream()
                 .map(ListItem::new)
                 .collect(Collectors.toList());
-        return new TableViewData(title,showsAddButton,items);
+        return new TableViewData(title,true,items);
     }
 
     public static TableViewData getWeekDayTableForShiftTemplate(IShiftTemplate shiftTemplate){
         String title = "Tage";
-        boolean showsAddButton = false;
         List<ListItem> items = Helper.weekDayList().stream()
                 .map(day -> new ListItem(Helper.getDayString(day),
                         shiftTemplate.getWeekDays().contains(day)))
                 .collect(Collectors.toList());
-        return new TableViewData(title,showsAddButton,items);
+        return new TableViewData(title,false,items);
     }
     public static TableViewData getWeekDayTable(){
         String title = "Tage";
-        boolean showsAddButton = false;
         List<ListItem> items = Helper.weekDayList().stream()
                 .map(day -> new ListItem(Helper.getDayString(day),false))
                 .collect(Collectors.toList());
-        return new TableViewData(title,showsAddButton,items);
+        return new TableViewData(title,false,items);
     }
 
     public static TableViewData getForEmployees(List<IEmployee> employees) {
         String title = "Mitarbeiter";
-        boolean showsAddButton = true;
         List<ListItem> items = employees.stream().map(ListItem::new).collect(Collectors.toList());
-        return new TableViewData(title,showsAddButton,items);
+        return new TableViewData(title,true,items);
     }
 
     public TableViewData(String title, boolean showsAddButton, List<ListItem> items) {
@@ -114,11 +108,7 @@ public class TableViewData {
     public String getTitle() {
         return title;
     }
-
-    public boolean isShowsAddButton() {
-        return showsAddButton;
-    }
-
+    public boolean isShowsAddButton() { return showsAddButton; }
     public List<ListItem> getItems() {
         return items;
     }

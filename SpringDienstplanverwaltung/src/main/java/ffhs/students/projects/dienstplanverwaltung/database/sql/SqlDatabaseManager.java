@@ -30,24 +30,19 @@ public class SqlDatabaseManager implements IDatabaseManager {
     }
     @Override  public IShift createShift(IShiftTemplate shiftTemplate, LocalDate day) {
         ShiftEntity shift = shiftRepository.save(new ShiftEntity((ShiftTemplateEntity) shiftTemplate,day)); //todo ??
-
         List<SlotEntity> templateSlots = shiftTemplate.getSlots().stream().map(SlotEntity.class::cast).collect(Collectors.toList());
         templateSlots.forEach(templateSlot -> new SlotEntity(templateSlot,shift,slotRepository));
-
         return shift;
     }
 
-    @Override
-    public Optional<IEmployee> getEmployeeForName(ILocal local, String userName) {
+    @Override public Optional<IEmployee> getEmployeeForName(ILocal local, String userName) {
         Optional<IUser> user = userRepository.findByNickname(userName);
         if (!user.isPresent())
             return Optional.empty();
 
         return employeeRepository.findFirstByUserAndLocal(user.get(),local);
     }
-
-    @Override
-    public void assignEmployeeToSlot(IEmployee employee, ISlot slot, boolean isAssigned) {
+    @Override public void assignEmployeeToSlot(IEmployee employee, ISlot slot, boolean isAssigned) {
         if (!(slot instanceof SlotEntity))
             return;
 
@@ -58,8 +53,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
         ((SlotEntity)slot).save(slotRepository);
     }
-    @Override
-    public void applyEmployeeToSlot(IEmployee employee, ISlot slot, boolean isApplied) {
+    @Override public void applyEmployeeToSlot(IEmployee employee, ISlot slot, boolean isApplied) {
         if (!(slot instanceof SlotEntity))
             return;
 
@@ -100,10 +94,6 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .findById(localID);
     }
 
-    public Optional<ISlot> getSlotById(long slotId) {
-        return slotRepository
-                .findById(slotId);
-    }
 
 
     @Override
@@ -131,10 +121,8 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
     public void requestNewLocal(IUser user, String localName){
         Optional<ILocal> localWithName = getOwnedLocalsForUser(user).stream().filter(loc -> loc.getTitle().equals(localName)).findFirst();
-        if (localWithName.isPresent()) {
-            localWithName.get();
+        if (localWithName.isPresent())
             return;
-        }
 
         LocalEntity local = new LocalEntity(localName,user);
         local.setGranted(false);
