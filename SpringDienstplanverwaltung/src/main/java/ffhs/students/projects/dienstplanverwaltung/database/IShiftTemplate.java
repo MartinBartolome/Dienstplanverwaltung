@@ -18,7 +18,6 @@ public interface IShiftTemplate {
     List<ISlot> getSlots();
     LocalTime getFromTime();
     LocalTime getToTime();
-    boolean equals(IShiftTemplate template);
     String getLongTitle();
     default boolean isOnDay(LocalDate day){
         if (!day.isAfter(getFrom()))

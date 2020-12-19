@@ -79,8 +79,13 @@ public class AdministrationManager {
         return new SysAdminTenantConfig(databaseManager.getAllLocals());
     }
 
-    public static SysAdminTenantConfig localSetState(long localId, boolean isGranted, boolean isActive){
-        databaseManager.localSetState(localId,isGranted,isActive);
+
+    public static SysAdminTenantConfig localSetState(long localId,  boolean isActive){
+        databaseManager.localSetState(localId,isActive);
+        return getSysAdminTenantConfig();
+    }
+    public static SysAdminTenantConfig grantLocal(long localId) {
+        databaseManager.grantLocal(localId);
         return getSysAdminTenantConfig();
     }
 
@@ -170,4 +175,6 @@ public class AdministrationManager {
                 .map(IEmployee::isAdmin)
                 .orElse(false);
     }
+
+
 }

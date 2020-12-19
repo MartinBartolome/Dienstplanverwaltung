@@ -139,12 +139,20 @@ public class ShiftplanController {
     @GetMapping("/localSetState")
     public SysAdminTenantConfig localSetState(
             @RequestParam(value = "localId") long localId,
-            @RequestParam(value = "isGranted") boolean isGranted,
             @RequestParam(value = "isActive") boolean isActive){
 
         AdministrationManager.databaseManager = dbManager;
-        return AdministrationManager.localSetState(localId,isGranted,isActive);
+        return AdministrationManager.localSetState(localId,isActive);
     }
+    @CrossOrigin(origins = "*")
+    @GetMapping("/grantLocal")
+    public SysAdminTenantConfig grantLocal(
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.grantLocal(localId);
+    }
+
 
     @CrossOrigin(origins = "*")
     @GetMapping("/getEmployeesConfig")

@@ -144,13 +144,20 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .map(ILocal.class::cast)
                 .collect(Collectors.toList());
     }
-    public void localSetState(long localId, boolean isGranted, boolean isActive){
+    public void localSetState(long localId, boolean isActive){
         Optional<ILocal> local = localRepository.findById(localId);
         if (!local.isPresent())
             return;
 
-        ((LocalEntity)local.get()).setGranted(isGranted);
         ((LocalEntity)local.get()).setActive(isActive);
+        ((LocalEntity)local.get()).save(localRepository);
+    }
+    public void grantLocal(long localId){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return;
+
+        ((LocalEntity)local.get()).setGranted(true);
         ((LocalEntity)local.get()).save(localRepository);
     }
     public Optional<IUser> getUser(String nickName){

@@ -36,6 +36,7 @@ public interface IDatabaseManager {
     void addServiceRole(long localId, String title);
     Optional<IServiceRole> updateServiceRole(long serviceRoleId, String title, boolean isActive);
     Optional<ILocal> updateLocal(long localId, String title, boolean isActive);
-    void localSetState(long localId, boolean isGranted, boolean isActive);
+    void grantLocal(long localId);
+    void localSetState(long localId, boolean isGranted);
     void setIsCanceledForShift(IShift dbShift, boolean isCanceled);
 }

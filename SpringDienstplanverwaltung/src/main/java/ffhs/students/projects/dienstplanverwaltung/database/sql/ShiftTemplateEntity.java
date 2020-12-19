@@ -198,8 +198,6 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
         result += ")";
         return result;
     }
-
-    @Override
     public boolean equals(IShiftTemplate template) {
         return id == template.getId();
     }
