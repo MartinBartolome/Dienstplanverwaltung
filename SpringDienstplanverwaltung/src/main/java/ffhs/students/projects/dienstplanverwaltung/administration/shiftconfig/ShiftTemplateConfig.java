@@ -38,7 +38,7 @@ public class ShiftTemplateConfig {
     public ShiftTemplateConfig(){
         recurrenceOptions = DropDownData.getForRecurrences();
         days = TableViewData.getWeekDayTable();
-        slots = new TableViewData("Slots");
+        slots = TableViewData.getForSlots(new ArrayList<>());
         fromDate = "";
         toDate = "";
         title = "";
