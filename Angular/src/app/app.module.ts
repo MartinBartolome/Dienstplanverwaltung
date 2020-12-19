@@ -38,6 +38,7 @@ import { LocalConfigurationComponent } from './Components/General/LocalManagemen
 import { LocalEditComponent } from './Components/General/LocalManagement/LocalEdit/LocalEdit.component';
 import { TenantConfigComponent } from './Components/General/SysAdmin/TenantConfig/TenantConfig.component';
 import { SignUpComponent } from './Components/General/SignUp/SignUp.component';
+import { DoubleTableComponent } from './Components/General/DoubleTable/DoubleTable.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,9 @@ import { SignUpComponent } from './Components/General/SignUp/SignUp.component';
     LocalConfigurationComponent,
     LocalEditComponent,
     TenantConfigComponent,
-    SignUpComponent
+    SignUpComponent,
+    DoubleTableComponent,
+    DoubleTableComponent
   ],
   imports: [
     BrowserModule,

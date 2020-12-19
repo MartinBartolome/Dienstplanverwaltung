@@ -16,8 +16,8 @@ export class LoginComponent{
   @Output() submitEM = new EventEmitter();
 
   form: FormGroup = new FormGroup({
-    username: new FormControl('Martin'),
-    password: new FormControl(''),
+    username: new FormControl('Sysadmin'),
+    password: new FormControl('password'),
   });
 
   submit(): void{

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SysAdminTenantConfig} from '../../Models/SysAdminTenantConfig';
 import {DataService} from '../../../../Common/DataService';
+import {ListItem} from "../../Models/ListItem";
+import {EmployeeConfig} from "../../../EmployeeConfiguration/Models/EmployeeConfig";
 
 @Component({
   selector: 'app-tenantconfig',
@@ -18,5 +20,34 @@ export class TenantConfigComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  Stilllegen(): void{
+    for (const o of this.SysadminData.table1Data.table1.items) {
+      if (o.selected) {
+        this.api.sendGetRequest('/localSetState?localId=' + o.id
+          + '&isGranted=true&isActive=false').subscribe((data: SysAdminTenantConfig) => {
+          this.SysadminData = data;
+        });
+      }
+    }
+  }
+  Bewilligen(): void{
+    for (const o of this.SysadminData.table2Data.table1.items) {
+      if (o.selected) {
+        this.api.sendGetRequest('/localSetState?localId=' + o.id
+          + '&isGranted=true&isActive=true').subscribe((data: SysAdminTenantConfig) => {
+          this.SysadminData = data;
+        });
+      }
+    }
+  }
+  Aktivieren(): void{
+    for (const o of this.SysadminData.table3Data.table1.items) {
+      if (o.selected) {
+        this.api.sendGetRequest('/localSetState?localId=' + o.id
+          + '&isGranted=true&isActive=true').subscribe((data: SysAdminTenantConfig) => {
+          this.SysadminData = data;
+        });
+      }
+    }
+  }
 }

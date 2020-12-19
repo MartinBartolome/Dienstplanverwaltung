@@ -1,0 +1,67 @@
+<div class="doubletable">
+  <section>
+    <div class="HeaderRow">
+      <header>{{ tables.table1.title }}</header>
+      <mat-icon *ngIf="tables.table1.showsAddButton"
+                aria-hidden="false"
+                aria-label="Hinzufügen"
+                color="primary"
+                (click)="AddNew()">add_circle
+      </mat-icon>
+    </div>
+    <div class="SubRows" *ngFor="let item of tables.table1.items"
+         [ngClass]="{'Highlight': item.selected, 'normal': !item.selected}"
+         (click)="item.selected = !item.selected; ItemSelectedt1(item)">
+      <mat-label>{{ item.title }}</mat-label>
+      <div>
+        <mat-icon *ngIf="tables.table1.showsAddButton"
+                  aria-hidden="false"
+                  aria-label="Editieren"
+                  color="primary"
+                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
+                  (click)="ItemEdit(item)">build_circle
+        </mat-icon>
+        <mat-icon *ngIf="tables.table1.showsAddButton"
+                  aria-hidden="false"
+                  aria-label="Editieren"
+                  color="primary"
+                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
+                  (click)="ItemDelete(item)">delete
+        </mat-icon>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="HeaderRow">
+      <header>{{ tables.table2.title }}</header>
+      <mat-icon *ngIf="tables.table2.showsAddButton"
+                aria-hidden="false"
+                aria-label="Hinzufügen"
+                color="primary"
+                (click)="AddNew()">add_circle
+      </mat-icon>
+    </div>
+    <div class="SubRows" *ngFor="let item of tables.table2.items"
+         [ngClass]="{'Highlight': item.selected, 'normal': !item.selected}"
+         (click)="item.selected = !item.selected; ItemSelectedt2(item)">
+      <mat-label>{{ item.title }}</mat-label>
+      <div>
+        <mat-icon *ngIf="tables.table2.showsAddButton"
+                  aria-hidden="false"
+                  aria-label="Editieren"
+                  color="primary"
+                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
+                  (click)="ItemEdit(item)">build_circle
+        </mat-icon>
+        <mat-icon *ngIf="tables.table2.showsAddButton"
+                  aria-hidden="false"
+                  aria-label="Editieren"
+                  color="primary"
+                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
+                  (click)="ItemDelete(item)">delete
+        </mat-icon>
+      </div>
+    </div>
+  </section>
+</div>
+

@@ -12,6 +12,7 @@ export class TableComponent implements OnInit {
   @Input() AllowSelection: boolean;
   @Output() EditItemEvent = new EventEmitter<ListItem>();
   @Output() DeleteItemEvent = new EventEmitter<ListItem>();
+  @Output() ItemSelectedEvent = new EventEmitter<ListItem>();
   @Output() AddEvent = new EventEmitter();
 
   constructor() { }
@@ -31,6 +32,7 @@ export class TableComponent implements OnInit {
     if (!this.AllowSelection)
     {
       item.selected = false;
+      this.ItemSelectedEvent.emit(item);
     }
   }
 }
