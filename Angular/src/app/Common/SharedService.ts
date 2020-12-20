@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {UserResponse} from '../Components/General/Models/UserResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,7 @@ import {Injectable} from '@angular/core';
 export class SharedService{
   private LocalID: number;
   private Nickname: string;
+  private User: UserResponse;
 
   setLocalID(setID: number): void{
     this.LocalID = setID;
@@ -21,5 +23,11 @@ export class SharedService{
   }
   getNickName(): string{
     return this.Nickname;
+  }
+  setUser(setNick: UserResponse): void{
+    this.User = setNick;
+  }
+  getUser(): UserResponse{
+    return this.User;
   }
 }

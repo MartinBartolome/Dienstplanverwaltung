@@ -1,5 +1,7 @@
 <section>
-  <label>{{shift.title}}</label>
+  <label [ngClass]="{'Canceled': shift.canceled, 'normal': !shift.canceled}">
+    {{shift.title}}
+  </label>
   <div class="SlotContainer">
     <app-slot *ngFor="let slot of shift.slots" [slot]="slot" class="Slot"></app-slot>
   </div>

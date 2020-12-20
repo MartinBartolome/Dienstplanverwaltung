@@ -1,9 +1,10 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SharedService} from '../../../Common/SharedService';
-import {EmployeeInviteComponent} from "../../EmployeeConfiguration/Components/EmployeeInvite/EmployeeInvite.component";
 import {MatDialog} from "@angular/material/dialog";
 import {SignUpComponent} from "../SignUp/SignUp.component";
+import {UserResponse} from "../Models/UserResponse";
+import {DataService} from "../../../Common/DataService";
 
 @Component({
   selector: 'app-login',
@@ -16,14 +17,25 @@ export class LoginComponent{
 
   form: FormGroup = new FormGroup({
     username: new FormControl('Martin'),
-    password: new FormControl(''),
+    password: new FormControl('1234'),
   });
 
   submit(): void{
-    if (this.form.valid) {
-      this.globalVariables.setNickName(this.form.get('username').value);
-      this.submitEM.emit(true);
-    }
+    this.api.sendGetRequest('/loginUser?username=' +
+      this.form.get('username').value + '&password=' +
+      this.form.get('password').value)
+      .subscribe((data: UserResponse) => {
+        if (data.success)
+        {
+          this.globalVariables.setNickName(this.form.get('username').value);
+          this.globalVariables.setUser(data);
+          this.submitEM.emit(true);
+        }
+        else {
+          alert(data.message);
+          this.submitEM.emit(false);
+        }
+      });
   }
 
   signup(): void{
@@ -36,5 +48,5 @@ export class LoginComponent{
     });
   }
 
-  constructor(public globalVariables: SharedService, public dialog: MatDialog) { }
+  constructor(public globalVariables: SharedService, public dialog: MatDialog,private api: DataService) { }
 }

@@ -31,3 +31,10 @@ mat-checkbox
 .Slot{
   margin: 0 0.5em 0.5em 0.5em;
 }
+
+.Canceled{
+  text-decoration: line-through;
+}
+.normal{
+  text-decoration: none;
+}

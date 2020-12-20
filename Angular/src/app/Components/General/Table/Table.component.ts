@@ -10,8 +10,10 @@ import {ListItem} from '../Models/ListItem';
 export class TableComponent implements OnInit {
   @Input() table: Table;
   @Input() AllowSelection: boolean;
+  @Input() AllowDelete: boolean;
   @Output() EditItemEvent = new EventEmitter<ListItem>();
   @Output() DeleteItemEvent = new EventEmitter<ListItem>();
+  @Output() ItemSelectedEvent = new EventEmitter<ListItem>();
   @Output() AddEvent = new EventEmitter();
 
   constructor() { }
@@ -31,6 +33,7 @@ export class TableComponent implements OnInit {
     if (!this.AllowSelection)
     {
       item.selected = false;
+      this.ItemSelectedEvent.emit(item);
     }
   }
 }

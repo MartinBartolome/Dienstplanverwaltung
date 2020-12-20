@@ -17,4 +17,4 @@
   </mat-card-content>
 </mat-card>
 <button mat-stroked-button color="primary" class="MyLocals" (click)="ManageLocals()">Meine Lokale</button>
-<button mat-stroked-button color="primary" class="Sysadmin" (click)="OpenSysadminSite()">Sysadmin</button>
+<button mat-stroked-button *ngIf="globalVariables.getUser().userIsSysAdmin" color="primary" class="Sysadmin" (click)="OpenSysadminSite()">Sysadmin</button>

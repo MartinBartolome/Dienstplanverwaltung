@@ -4,6 +4,7 @@
     <form [formGroup]="form">
       <p>
         <mat-form-field>
+          <mat-label>Benutzernamen eingeben:</mat-label>
           <label>
             <input type="text" matInput placeholder="Username" formControlName="username">
           </label>
@@ -11,9 +12,29 @@
       </p>
       <p>
         <mat-form-field>
+          <mat-label>Passwort eingeben:</mat-label>
           <label>
-            <input type="password" matInput placeholder="Password" formControlName="password">
+            <input [type]="hide ? 'password' : 'text'" matInput placeholder="Password" formControlName="password"  (input)="onPasswordInput()">
           </label>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Passwort wiederholen:</mat-label>
+          <label>
+            <input [type]="rehide ? 'password' : 'text'" matInput
+                   placeholder="Password Wiederholen"
+                   formControlName="confirmpassword" (input)="onPasswordInput()">
+          </label>
+          <mat-error *ngIf="confirmpassword.invalid && !confirmpassword.hasError('required')">
+            Passwörter stimmen nicht überein!
+          </mat-error>
+          <button mat-icon-button matSuffix (click)="rehide = !rehide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="rehide">
+            <mat-icon>{{rehide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
       </p>
       <div class="button">

@@ -17,12 +17,14 @@ export class AppComponent{
   ShiftPlanData: ShiftPlan;
   LoginSuccess = false;
   LocalSelected = false;
+  isManager = false;
 
   constructor(private api: DataService, public globalVariables: SharedService) {
   }
 
   public loadEmployeeData(): void{
-    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: EmployeesConfig) => {
+    this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalVariables.getLocalID()
+      + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: EmployeesConfig) => {
       this.EmployeeData = data;
     });
   }
@@ -38,15 +40,25 @@ export class AppComponent{
   }
 
   public loadShiftConfiguration(): void{
-    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalVariables.getLocalID()).subscribe((data: ShiftConfiguration) => {
+    this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalVariables.getLocalID()
+      + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: ShiftConfiguration) => {
       this.ShiftConfiguration = data;
     });
   }
 
+  public loadisManager(): void{
+    this.api.sendGetRequest('/isEmployeeManager?localId=' + this.globalVariables.getLocalID()
+      + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: boolean) => {
+      this.isManager = data;
+      if (this.isManager) {
+        this.loadEmployeeData();
+        this.loadShiftConfiguration();
+      }
+    });
+  }
   public Reload(): void
   {
-    this.loadEmployeeData();
+    this.loadisManager();
     this.loadShiftPlanData(new Date());
-    this.loadShiftConfiguration();
   }
 }
