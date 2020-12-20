@@ -20,7 +20,7 @@ public interface IShiftTemplate {
     LocalTime getToTime();
     String getLongTitle();
     default boolean isOnDay(LocalDate day){
-        if (!day.isAfter(getFrom()))
+        if (!day.isAfter(getFrom()) && !day.isEqual(getFrom()))
             return false;
         if (getTo() != null && !day.isBefore(getTo().plusDays(1)))
             return false;

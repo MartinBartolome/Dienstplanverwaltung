@@ -13,14 +13,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public abstract class Helper {
     public static final String slotIdDevider = "-";
     public static final DateTimeFormatter dateFormatter= DateTimeFormatter.ofPattern("dd.MM.yyyy");
     public static boolean isDayInWeekInBiWeeklyRecurrence(LocalDate day, LocalDate startOfBiWeeklyRecurrence){
-        return true; // todo
+        if (day.isEqual(startOfBiWeeklyRecurrence))
+            return true;
+
+        if (day.isBefore(startOfBiWeeklyRecurrence))
+            return false;
+
+        LocalDate iOccurence = getDateOfWeekdayInWeek(day.getDayOfWeek(),startOfBiWeeklyRecurrence);
+        while(iOccurence.isBefore(day)){
+            iOccurence = iOccurence.plusWeeks(2);
+        }
+
+        return iOccurence.isEqual(day);
     }
+    private static LocalDate getDateOfWeekdayInWeek(DayOfWeek day,LocalDate weekDate){
+        int weekDateDay = weekDate.getDayOfWeek().getValue();
+        int difference = weekDateDay - day.getValue();
+        return weekDate.minusDays(difference);
+    }
+
     public static boolean isDayInMonth(LocalDate day,LocalDate month){
         return day.getMonth() == month.getMonth() && day.getYear() == month.getYear();
     }
