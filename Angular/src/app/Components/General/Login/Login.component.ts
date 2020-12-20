@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SharedService} from '../../../Common/SharedService';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
 import {SignUpComponent} from "../SignUp/SignUp.component";
 import {UserResponse} from "../Models/UserResponse";
 import {DataService} from "../../../Common/DataService";
@@ -16,8 +16,8 @@ export class LoginComponent{
   @Output() submitEM = new EventEmitter();
 
   form: FormGroup = new FormGroup({
-    username: new FormControl('Martin'),
-    password: new FormControl('1234'),
+    username: new FormControl('Sysadmin'),
+    password: new FormControl('password'),
   });
 
   submit(): void{

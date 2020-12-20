@@ -1,33 +1,37 @@
-<mat-tab-group mat-stretch-tabs>
-  <mat-tab [label]="SysadminData.tab1Title" >
-    <ng-template matTabContent>
-      <div class="Tab">
-        <app-doubletable [tables]="SysadminData.table1Data" [AllowSelection]="true"></app-doubletable>
-      </div>
-      <div class="button">
-        <button mat-raised-button color="primary" type="submit" (click)="Stilllegen()">Still legen</button>
-      </div>
-    </ng-template>
-  </mat-tab>
-  <mat-tab [label]="SysadminData.tab2Title" >
-    <ng-template matTabContent>
-      <div class="Tab">
-        <app-doubletable [tables]="SysadminData.table2Data" [AllowSelection]="true"></app-doubletable>
-      </div>
-      <div class="button">
-        <button mat-raised-button color="primary" type="submit" (click)="Bewilligen()">Bewilligen</button>
-      </div>
-    </ng-template>
-  </mat-tab>
-  <mat-tab [label]="SysadminData.tab3Title">
-    <ng-template matTabContent>
-      <div class="Tab">
-        <app-doubletable [tables]="SysadminData.table3Data" [AllowSelection]="true"></app-doubletable>
-      </div>
-      <div class="button">
-        <button mat-raised-button color="primary" type="submit" (click)="Aktivieren()">Aktivieren</button>
-      </div>
-    </ng-template>
-  </mat-tab>
-</mat-tab-group>
-
+<mat-card>
+  <mat-card-title>Verwaltung</mat-card-title>
+  <mat-card-content>
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab [label]="SysadminData.tab1Title" >
+        <ng-template matTabContent>
+          <div class="Tab">
+            <app-doubletable [tables]="SysadminData.table1Data" [AllowSelection]="true"></app-doubletable>
+          </div>
+          <div class="button">
+            <button mat-raised-button color="primary" type="submit" (click)="Stilllegen()">Still legen</button>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab [label]="SysadminData.tab2Title" >
+        <ng-template matTabContent>
+          <div class="Tab">
+            <app-doubletable [tables]="SysadminData.table2Data" [AllowSelection]="true"></app-doubletable>
+          </div>
+          <div class="button">
+            <button mat-raised-button color="primary" type="submit" (click)="Bewilligen()">Bewilligen</button>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab [label]="SysadminData.tab3Title">
+        <ng-template matTabContent>
+          <div class="Tab">
+            <app-doubletable [tables]="SysadminData.table3Data" [AllowSelection]="true"></app-doubletable>
+          </div>
+          <div class="button">
+            <button mat-raised-button color="primary" type="submit" (click)="Aktivieren()">Aktivieren</button>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
