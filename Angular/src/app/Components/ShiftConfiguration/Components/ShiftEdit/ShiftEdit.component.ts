@@ -6,6 +6,8 @@ import {SlotEditComponent} from '../SlotEdit/SlotEdit.component';
 import {SlotInfo} from '../../Models/SlotInfo';
 import {DataService} from '../../../../Common/DataService';
 import {SharedService} from '../../../../Common/SharedService';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {passwordMatchValidator} from '../../../General/SignUp/SignUp.component';
 
 @Component({
   selector: 'app-shift-edit',
@@ -13,8 +15,13 @@ import {SharedService} from '../../../../Common/SharedService';
   styleUrls: ['./ShiftEdit.component.css'],
 })
 export class ShiftEditComponent implements OnInit {
-  fromdate: Date;
-  todate: Date;
+  form: FormGroup = new FormGroup({
+    Titel: new FormControl('',[Validators.required]),
+    fromdate: new FormControl('', [Validators.required]),
+    todate: new FormControl('', [ Validators.required ]),
+    fromtime: new FormControl('', [Validators.required]),
+    totime: new FormControl('', [Validators.required]),
+  });
 
   constructor(public dialogRef: MatDialogRef<SlotEditComponent>,
               @Inject(MAT_DIALOG_DATA) public template: ShiftTemplateConfigs,
@@ -22,8 +29,11 @@ export class ShiftEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fromdate = new Date(this.stringToUSDate(this.template.fromDate));
-    this.todate = new Date(this.stringToUSDate(this.template.toDate));
+    this.form.get('Titel').setValue(new Date(this.stringToUSDate(this.template.title)));
+    this.form.get('fromdate').setValue(new Date(this.stringToUSDate(this.template.fromDate)));
+    this.form.get('todate').setValue(new Date(this.stringToUSDate(this.template.toDate)));
+    this.form.get('fromtime').setValue(new Date(this.stringToUSDate(this.template.startTime)));
+    this.form.get('totime').setValue(new Date(this.stringToUSDate(this.template.endTime)));
   }
 
   public newSlot(): void {
@@ -54,9 +64,14 @@ export class ShiftEditComponent implements OnInit {
       });
   }
   public submit(): void{
-    this.template.fromDate = this.DateToString(this.fromdate);
-    this.template.toDate = this.DateToString(this.todate);
-    this.dialogRef.close(this.template);
+    if (this.form.valid) {
+      this.template.fromDate = this.DateToString(this.form.get('fromdate').value);
+      this.template.toDate = this.DateToString(this.form.get('todate').value);
+      this.template.toDate = this.form.get('fromtime').value;
+      this.template.toDate = this.form.get('totime').value;
+      this.template.toDate = this.form.get('Titel').value;
+      this.dialogRef.close(this.template);
+    }
   }
   stringToUSDate(DateString: string): Date
   {
