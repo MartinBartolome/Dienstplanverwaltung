@@ -140,6 +140,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         ((LocalEntity)local.get()).save(localRepository);
         return local;
     }
+
     public List<ILocal> getAllLocals(){
         return localRepository.findAll().stream()
                 .map(ILocal.class::cast)
@@ -367,5 +368,33 @@ public class SqlDatabaseManager implements IDatabaseManager {
         createManagerRole(local2.getId());
 
          */
+    }
+
+
+    // Für Unittests
+    public Optional<ILocal> updateLocal(long localId, String title, boolean isActive, boolean isGranted){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return Optional.empty();
+
+        ((LocalEntity)local.get()).setTitle(title);
+        ((LocalEntity)local.get()).setActive(isActive);
+        ((LocalEntity)local.get()).setGranted(isGranted);
+        ((LocalEntity)local.get()).save(localRepository);
+        return local;
+    }
+    public Optional<ILocal> setOwnerForLocal(long localId, String userName){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return Optional.empty();
+
+        Optional<IUser> user = getUser(userName);
+        if (!user.isPresent())
+            return Optional.empty();
+
+
+        ((LocalEntity)local.get()).setOwner((UserEntity) user.get());
+        ((LocalEntity)local.get()).save(localRepository);
+        return local;
     }
 }

@@ -39,4 +39,6 @@ public interface IDatabaseManager {
     void grantLocal(long localId);
     void localSetState(long localId, boolean isGranted);
     void setIsCanceledForShift(IShift dbShift, boolean isCanceled);
+
+
 }

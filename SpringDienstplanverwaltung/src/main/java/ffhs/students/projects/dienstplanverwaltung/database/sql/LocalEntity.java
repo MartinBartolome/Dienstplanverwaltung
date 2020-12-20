@@ -80,4 +80,9 @@ class LocalEntity implements ILocal, ISaveable {
     public void addEmployee(EmployeeEntity employee){
         employees.add(employee);
     }
+
+    // Unittests
+    public void setOwner(UserEntity owner){
+        this.owner = owner;
+    }
 }
