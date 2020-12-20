@@ -16,13 +16,13 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Von</mat-label>
-          <input matInput name= "FromDate" [matDatepicker]="dpfromDate" formControlName="fromdate">
+          <input matInput name= "FromDate" [matDatepicker]="dpfromDate" formControlName="fromdate" [readonly]="true">
           <mat-datepicker-toggle matSuffix [for]="dpfromDate"></mat-datepicker-toggle>
           <mat-datepicker #dpfromDate></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Bis</mat-label>
-          <input matInput name= "ToDate" [matDatepicker]="dptoDate" formControlName="todate">
+          <input matInput name= "ToDate" [matDatepicker]="dptoDate" formControlName="todate"  [readonly]="true">
           <mat-datepicker-toggle matSuffix [for]="dptoDate"></mat-datepicker-toggle>
           <mat-datepicker #dptoDate></mat-datepicker>
         </mat-form-field>
