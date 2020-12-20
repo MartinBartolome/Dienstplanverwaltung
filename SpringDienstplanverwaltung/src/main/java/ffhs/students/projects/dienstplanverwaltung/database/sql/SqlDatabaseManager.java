@@ -191,16 +191,23 @@ public class SqlDatabaseManager implements IDatabaseManager {
                 .map(this::getForSlotInfo)
                 .collect(Collectors.toList());
 
+
+        Optional<LocalDate> fromDate = Helper.dateFromString(shiftTemplateConfig.getFromDate());
+        Optional<LocalDate> toDate = Helper.dateFromString(shiftTemplateConfig.getToDate());
+        Optional<LocalTime> startTime = Helper.timeFromString(shiftTemplateConfig.getStartTime());
+        Optional<LocalTime> endTime = Helper.timeFromString(shiftTemplateConfig.getEndTime());
+
         //Daten aktualisieren
         ShiftTemplateEntity shiftTemplateEntity = ((ShiftTemplateEntity)shiftTemplate.get());
-        shiftTemplateEntity.setFromDate(Helper.dateFromString(shiftTemplateConfig.getFromDate()));
-        shiftTemplateEntity.setToDate(Helper.dateFromString(shiftTemplateConfig.getToDate()));
+        shiftTemplateEntity.setTitle(shiftTemplateConfig.getTitle());
+        fromDate.ifPresent(shiftTemplateEntity::setFromDate);
+        toDate.ifPresent(shiftTemplateEntity::setToDate);
+        startTime.ifPresent(shiftTemplateEntity::setFromTime);
+        endTime.ifPresent(shiftTemplateEntity::setToTime);
         shiftTemplateEntity.setRecurrenceType(Helper.getRecurrenceType(recurrenceString));
         shiftTemplateEntity.setWeekdays(weekDays);
         shiftTemplateEntity.updateSlots(newSlots,slotRepository);
-        shiftTemplateEntity.setTitle(shiftTemplateConfig.getTitle());
-        shiftTemplateEntity.setToTime(Helper.timeFromString(shiftTemplateConfig.getEndTime()));
-        shiftTemplateEntity.setFromTime(Helper.timeFromString(shiftTemplateConfig.getStartTime()));
+
         shiftTemplateEntity.save(shiftTemplateRepository);
         return Optional.of(shiftTemplateEntity);
     }
@@ -314,10 +321,12 @@ public class SqlDatabaseManager implements IDatabaseManager {
     @Autowired private ShiftTemplateRepository shiftTemplateRepository;
     @Autowired private ShiftRepository shiftRepository;
 
+
+
     public void createFakeDate(){
-
-
         createSysAdminIfNotExists();
+
+        /*
         UserEntity martin = userRepository.save(new UserEntity("Martin"));
         UserEntity celine = userRepository.save(new UserEntity("Celine"));
         UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
@@ -356,5 +365,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
         createManagerRole(local.getId());
         createManagerRole(local2.getId());
+
+         */
     }
 }

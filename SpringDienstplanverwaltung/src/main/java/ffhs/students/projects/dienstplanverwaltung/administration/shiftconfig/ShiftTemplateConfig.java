@@ -7,8 +7,11 @@ import ffhs.students.projects.dienstplanverwaltung.database.IServiceRole;
 import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 import ffhs.students.projects.dienstplanverwaltung.database.ISlot;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ShiftTemplateConfig {
@@ -56,6 +59,18 @@ public class ShiftTemplateConfig {
     public long getId() { return id; }
     public String getStartTime() {  return startTime; }
     public String getEndTime() {  return endTime;  }
+    public boolean isValid(){
+        if (recurrenceOptions == null || title.isEmpty() || fromDate.isEmpty())
+            return false;
+
+        Optional<LocalDate> from = Helper.dateFromString(getFromDate());
+        if (!from.isPresent())
+            return false;
+
+        Optional<LocalTime> start = Helper.timeFromString(startTime);
+        Optional<LocalTime> end = Helper.timeFromString(endTime);
+        return start.isPresent() && end.isPresent();
+    }
 
     public List<SlotConfig> getSlotInfos(){
         return slotInfos;
