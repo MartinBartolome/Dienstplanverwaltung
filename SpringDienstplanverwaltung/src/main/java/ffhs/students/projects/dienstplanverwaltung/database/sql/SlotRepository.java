@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface SlotRepository extends JpaRepository<SlotEntity, Integer> {
-    public Optional<ISlot> findById(long id);
+interface SlotRepository extends JpaRepository<SlotEntity, Integer> {
+    Optional<ISlot> findById(long id);
 }
 

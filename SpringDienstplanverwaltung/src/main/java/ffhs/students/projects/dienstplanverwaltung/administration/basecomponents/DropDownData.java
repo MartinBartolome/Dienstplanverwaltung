@@ -1,9 +1,8 @@
-package ffhs.students.projects.dienstplanverwaltung.administration;
+package ffhs.students.projects.dienstplanverwaltung.administration.basecomponents;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 import ffhs.students.projects.dienstplanverwaltung.database.RecurrenceType;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

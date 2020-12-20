@@ -1,7 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
-import ffhs.students.projects.dienstplanverwaltung.database.sql.SlotEntity;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -19,7 +18,6 @@ public interface IShiftTemplate {
     List<ISlot> getSlots();
     LocalTime getFromTime();
     LocalTime getToTime();
-    boolean equals(IShiftTemplate template);
     String getLongTitle();
     default boolean isOnDay(LocalDate day){
         if (!day.isAfter(getFrom()))

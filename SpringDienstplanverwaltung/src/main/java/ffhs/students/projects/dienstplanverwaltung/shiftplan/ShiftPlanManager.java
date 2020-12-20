@@ -139,7 +139,7 @@ public class ShiftPlanManager {
         if (!shiftTemplate.isPresent())
             return Optional.empty();
 
-        Optional<IShift> existingShift = databaseManager.getShift(local,day,shiftTemplate);
+        Optional<IShift> existingShift = databaseManager.getShift(local,day,shiftTemplate.get());
 
         //erstelle DB Schicht falls noch kein Eintrag vorhanden
         IShift dbShift = existingShift.orElseGet(() -> databaseManager.createShift(shiftTemplate.get(), day));
@@ -174,7 +174,7 @@ public class ShiftPlanManager {
         if(!shiftTemplate.isPresent())
             return null; // todo
 
-        Optional<IShift> existingShift = databaseManager.getShift(local.get(),day,shiftTemplate);
+        Optional<IShift> existingShift = databaseManager.getShift(local.get(),day,shiftTemplate.get());
 
         //erstelle DB Schicht falls noch kein Eintrag vorhanden
         IShift dbShift = existingShift.orElseGet(() -> databaseManager.createShift(shiftTemplate.get(), day));

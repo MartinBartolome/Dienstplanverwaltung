@@ -24,7 +24,6 @@ public class ShiftDayData {
         return shifts.stream()
                 .sorted(Comparator.comparing(ShiftDisplay::getFromTime))
                 .collect(Collectors.toList());
-        //return shifts;
     }
     public boolean isInMonth() { return isInMonth; }
     public void setInMonth(boolean inMonth) { isInMonth = inMonth;  }

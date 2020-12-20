@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface ServiceRoleRepository  extends JpaRepository<ServiceRoleEntity, Integer> {
+interface ServiceRoleRepository  extends JpaRepository<ServiceRoleEntity, Integer> {
     Optional<IServiceRole> findFirstByLocalAndName(ILocal local, String name);
     Optional<IServiceRole> findById(long id);
 }
