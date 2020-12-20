@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import { Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ListItem} from '../../../General/Models/ListItem';
 import {ShiftTemplateConfigs} from '../../Models/ShiftTemplateConfigs';
@@ -6,8 +6,7 @@ import {SlotEditComponent} from '../SlotEdit/SlotEdit.component';
 import {SlotInfo} from '../../Models/SlotInfo';
 import {DataService} from '../../../../Common/DataService';
 import {SharedService} from '../../../../Common/SharedService';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {passwordMatchValidator} from '../../../General/SignUp/SignUp.component';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-shift-edit',
@@ -21,7 +20,7 @@ export class ShiftEditComponent implements OnInit {
     todate: new FormControl('', ),
     fromtime: new FormControl('', [Validators.required]),
     totime: new FormControl('', [Validators.required]),
-  });
+  }, { validators: TimebeforeValidator});
 
   constructor(public dialogRef: MatDialogRef<SlotEditComponent>,
               @Inject(MAT_DIALOG_DATA) public template: ShiftTemplateConfigs,
@@ -35,7 +34,6 @@ export class ShiftEditComponent implements OnInit {
     this.form.patchValue({fromtime: this.template.startTime});
     this.form.patchValue({totime: this.template.endTime });
   }
-
   public newSlot(): void {
     const dialogRef = this.dialog.open(SlotEditComponent, {data: new SlotInfo()});
     dialogRef.afterClosed().subscribe((result: SlotInfo) => {
@@ -59,12 +57,7 @@ export class ShiftEditComponent implements OnInit {
       }
     });
   }
-  private updateSlotData(): void {
-    this.api.sendPostRequest('/updateShiftTemplateConfig?localId=' + this.globalVariables.getLocalID(), this.template)
-      .subscribe((data: ShiftTemplateConfigs) => {
-        this.template = data;
-      });
-  }
+
   public submit(): void{
     if (this.form.valid) {
       this.template.fromDate = this.DateToString(this.form.get('fromdate').value);
@@ -96,6 +89,26 @@ export class ShiftEditComponent implements OnInit {
     catch (error){
       return '';
     }
+  }
+  get getfromtime(): AbstractControl { return this.form.get('fromtime'); }
+  get gettotime(): AbstractControl { return this.form.get('totime'); }
 
+  onTimeInput(): void {
+    if (this.form.hasError('TimeInvalid')) {
+      this.gettotime.setErrors([{TimeInvalid: true}]);
+      this.getfromtime.setErrors([{TimeInvalid: true}]);
+    }
+    else {
+      this.gettotime.setErrors(null);
+      this.getfromtime.setErrors(null);
+    }
   }
 }
+export const TimebeforeValidator: ValidatorFn = (formGroup: FormGroup): ValidationErrors | null => {
+  if (formGroup.get('fromtime').value < formGroup.get('totime').value) {
+    return null;
+  }
+  else {
+    return { TimeInvalid: true};
+  }
+};

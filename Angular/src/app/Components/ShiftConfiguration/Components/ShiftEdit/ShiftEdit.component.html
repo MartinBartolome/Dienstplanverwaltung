@@ -30,14 +30,20 @@
       <mat-form-field appearance="outline">
         <mat-label>Von Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Von" name="FromTime" type="time" formControlName="fromtime">
+          <input matInput placeholder="Von" name="FromTime" type="time" formControlName="fromtime" (input)="onTimeInput()">
         </label>
+        <mat-error *ngIf="getfromtime.invalid && !getfromtime.hasError('required')">
+          Zeiten überprüfen!
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Bis Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Bis" name="ToTime" type="time" formControlName="totime">
+          <input matInput placeholder="Bis" name="ToTime" type="time" formControlName="totime" (input)="onTimeInput()">
         </label>
+        <mat-error *ngIf="gettotime.invalid && !gettotime.hasError('required')">
+          Zeiten überprüfen!
+        </mat-error>
       </mat-form-field>
     </div>
   </div>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   AbstractControl,
   FormControl,
-  FormGroup, FormGroupDirective, NgForm,
+  FormGroup,
   ValidationErrors,
   ValidatorFn,
   Validators
@@ -11,7 +11,6 @@ import {DataService} from '../../../Common/DataService';
 import {SharedService} from '../../../Common/SharedService';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {UserResponse} from '../Models/UserResponse';
-import {ErrorStateMatcher} from "@angular/material/core";
 
 @Component({
   selector: 'app-sign-up',
