@@ -11,6 +11,7 @@ import {ShiftDays} from '../../Models/ShiftDays';
 })
 export class SlotDetailComponent implements OnInit {
   @Input() slot: Slot;
+  @Input() canceled = false;
 
   constructor(private api: DataService, public globalVariables: SharedService) { }
 

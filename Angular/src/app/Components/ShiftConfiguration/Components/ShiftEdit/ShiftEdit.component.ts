@@ -33,7 +33,7 @@ export class ShiftEditComponent implements OnInit {
     this.form.patchValue({fromdate: this.stringToUSDate(this.template.fromDate)});
     this.form.patchValue({todate: this.stringToUSDate(this.template.toDate)});
     this.form.patchValue({fromtime: this.template.startTime});
-    this.form.patchValue({totime: this.template.endTime});
+    this.form.patchValue({totime: this.template.endTime });
   }
 
   public newSlot(): void {
@@ -77,9 +77,14 @@ export class ShiftEditComponent implements OnInit {
   }
   stringToUSDate(DateString: string): Date
   {
-    return new Date(DateString.split('.', 3)[1].toString() + '/' +
-      DateString.split('.', 3)[0].toString() + '/' +
-      DateString.split('.', 3)[2].toString());
+    try {
+      return new Date(DateString.split('.', 3)[1].toString() + '/' +
+        DateString.split('.', 3)[0].toString() + '/' +
+        DateString.split('.', 3)[2].toString());
+    }
+    catch (error){
+      return null;
+    }
   }
   DateToString(date: Date): string
   {
