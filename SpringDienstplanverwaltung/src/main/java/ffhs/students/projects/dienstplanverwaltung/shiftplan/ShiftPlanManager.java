@@ -108,7 +108,9 @@ public class ShiftPlanManager {
 
     // Employees assign / apply
     public static SlotVM addEmployeeToSlot(int localId,String employeeName,String slotIdString, AddOrRemove addOrRemove, AddingType addingType) {
-        LocalDate day = Helper.getDateFromSlotId(slotIdString);
+        Optional<LocalDate> day = Helper.getDateFromSlotId(slotIdString);
+        if (!day.isPresent())
+            return null;
 
         //Local
         Optional<ILocal> local = databaseManager.getLocalById(localId);
@@ -121,7 +123,7 @@ public class ShiftPlanManager {
             return null; // GetShiftDay(day,local.get()); todo
 
         //Slot
-        Optional<ISlot> slot = getSlotAndCreateShiftIfNeeded(databaseManager,day,slotIdString,local.get());
+        Optional<ISlot> slot = getSlotAndCreateShiftIfNeeded(databaseManager,day.get(),slotIdString,local.get());
         if (!slot.isPresent())
             return null; // todo GetShiftDay(day,local.get(),employee.get());
 
@@ -168,16 +170,19 @@ public class ShiftPlanManager {
         if (!employee.isPresent())
             return null; // todo
 
-        LocalDate day = Helper.getDateFromSlotId(shiftId);
+        Optional<LocalDate> day = Helper.getDateFromSlotId(shiftId);
+        if (!day.isPresent())
+            return null; // todo
+
         int shiftTemplateId = Helper.getShiftTemplateIdFromSlotId(shiftId);
         Optional<IShiftTemplate> shiftTemplate = databaseManager.getShiftTemplateById(shiftTemplateId);
         if(!shiftTemplate.isPresent())
             return null; // todo
 
-        Optional<IShift> existingShift = databaseManager.getShift(local.get(),day,shiftTemplate.get());
+        Optional<IShift> existingShift = databaseManager.getShift(local.get(),day.get(),shiftTemplate.get());
 
         //erstelle DB Schicht falls noch kein Eintrag vorhanden
-        IShift dbShift = existingShift.orElseGet(() -> databaseManager.createShift(shiftTemplate.get(), day));
+        IShift dbShift = existingShift.orElseGet(() -> databaseManager.createShift(shiftTemplate.get(), day.get()));
 
         databaseManager.setIsCanceledForShift(dbShift,isCanceled);
         return new ShiftVM(dbShift,employee.get());

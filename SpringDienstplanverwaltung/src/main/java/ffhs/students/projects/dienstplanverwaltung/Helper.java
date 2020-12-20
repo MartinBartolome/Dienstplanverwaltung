@@ -8,9 +8,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public abstract class Helper {
@@ -27,10 +29,16 @@ public abstract class Helper {
         if (date == null)
             return "";
         return dateFormatter.format(date);  }
-    public static LocalDate dateFromString(String dateString){
+
+    public static Optional<LocalDate> dateFromString(String dateString){
         if (dateString.isEmpty())
-            return LocalDate.now();
-        return LocalDate.parse(dateString,dateFormatter);
+            return Optional.empty();
+        try{
+            return Optional.of(LocalDate.parse(dateString,dateFormatter));
+        }
+        catch (DateTimeParseException e){
+            return Optional.empty();
+        }
     }
     public static String generateShiftId(IShift shift){
         long shiftTemplateId = shift.getShiftTemplate().isPresent() ? shift.getShiftTemplate().get().getId() : -1;
@@ -93,7 +101,7 @@ public abstract class Helper {
     }
 
 
-    public static LocalDate getDateFromSlotId(String slotId){
+    public static Optional<LocalDate> getDateFromSlotId(String slotId){
         String dateString = slotId.split(slotIdDevider)[0];
         return dateFromString(dateString);
     }
@@ -113,10 +121,15 @@ public abstract class Helper {
                 : fromTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public static LocalTime timeFromString(String startTime) {
+    public static Optional<LocalTime> timeFromString(String startTime) {
         if (startTime.isEmpty())
-            return LocalTime.now();
-        return LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm"));
+            return Optional.empty();
+        try{
+            return Optional.of(LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm")));
+        }
+        catch (DateTimeParseException e){
+            return Optional.empty();
+        }
     }
 
     /**

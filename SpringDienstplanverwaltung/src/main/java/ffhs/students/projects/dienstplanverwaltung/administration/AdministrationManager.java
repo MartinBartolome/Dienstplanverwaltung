@@ -125,9 +125,13 @@ public class AdministrationManager {
     }
 
     public static ShiftTemplateConfig updateShiftTemplateConfig(long localId, ShiftTemplateConfig shiftTemplateConfig){
+        if (!shiftTemplateConfig.isValid())
+            return new ShiftTemplateConfig();
+
         Optional<ILocal> local = databaseManager.getLocalById(localId);
         if (!local.isPresent())
             return new ShiftTemplateConfig();
+
 
         Optional<IShiftTemplate> shiftTemplate = databaseManager.createOrUpdateShiftTemplate(local.get(),shiftTemplateConfig);
         return shiftTemplate
