@@ -16,7 +16,7 @@ import {passwordMatchValidator} from '../../../General/SignUp/SignUp.component';
 })
 export class ShiftEditComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    Titel: new FormControl('',[ Validators.required]),
+    Titel: new FormControl('', [ Validators.required]),
     fromdate: new FormControl('', [Validators.required]),
     todate: new FormControl('', ),
     fromtime: new FormControl('', [Validators.required]),
@@ -42,7 +42,7 @@ export class ShiftEditComponent implements OnInit {
       if (result) {
         this.template.slotInfos.push(result);
         const newli = new ListItem();
-        newli.title = result.title + '(' + result.numberOfEmployeesNeeded  + ')';
+        newli.title = result.title + ' (' + result.numberOfEmployeesNeeded  + ')';
         this.template.slots.items.push(newli);
       }
     });
@@ -55,7 +55,7 @@ export class ShiftEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: SlotInfo) => {
       if (result) {
         this.template.slotInfos[this.template.slots.items.indexOf(slot)] = result;
-        slot.title = result.title + '(' + result.numberOfEmployeesNeeded  + ')';
+        slot.title = result.title + ' (' + result.numberOfEmployeesNeeded  + ')';
       }
     });
   }
