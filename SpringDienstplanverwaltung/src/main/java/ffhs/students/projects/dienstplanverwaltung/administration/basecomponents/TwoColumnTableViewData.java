@@ -1,14 +1,12 @@
-package ffhs.students.projects.dienstplanverwaltung.administration;
+package ffhs.students.projects.dienstplanverwaltung.administration.basecomponents;
 
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
-import ffhs.students.projects.dienstplanverwaltung.database.IUser;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TwoColumnTableViewData {
-    private TableViewData table1;
-    private TableViewData table2;
+    private final TableViewData table1;
+    private final TableViewData table2;
 
     public TwoColumnTableViewData(List<ILocal> locals){
         String title1 = "Lokal";

@@ -1,10 +1,10 @@
-<form>
+<form [formGroup]="form">
   <div class="LeftSide">
     <div class="TextInput">
       <mat-form-field appearance="outline">
         <mat-label>Titel</mat-label>
         <label>
-          <input matInput type="text" name="Title" placeholder="Titel" [(ngModel)]="template.title">
+          <input matInput type="text" name="Title" placeholder="Titel" formControlName="Titel">
         </label>
       </mat-form-field>
     </div>
@@ -16,13 +16,13 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Von</mat-label>
-          <input matInput name= "FromDate" [matDatepicker]="dpfromDate" [(ngModel)]="this.fromdate">
+          <input matInput name= "FromDate" [matDatepicker]="dpfromDate" formControlName="fromdate">
           <mat-datepicker-toggle matSuffix [for]="dpfromDate"></mat-datepicker-toggle>
           <mat-datepicker #dpfromDate></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Von</mat-label>
-          <input matInput name= "ToDate" [matDatepicker]="dptoDate" [(ngModel)]="this.todate">
+          <mat-label>Bis</mat-label>
+          <input matInput name= "ToDate" [matDatepicker]="dptoDate" formControlName="todate">
           <mat-datepicker-toggle matSuffix [for]="dptoDate"></mat-datepicker-toggle>
           <mat-datepicker #dptoDate></mat-datepicker>
         </mat-form-field>
@@ -30,13 +30,13 @@
       <mat-form-field appearance="outline">
         <mat-label>Von Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Von" name="FromTime" type="time" [(ngModel)]="template.startTime">
+          <input matInput placeholder="Von" name="FromTime" type="time" formControlName="fromtime">
         </label>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Bis Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Bis" name="ToTime" type="time" [(ngModel)]="template.endTime">
+          <input matInput placeholder="Bis" name="ToTime" type="time" formControlName="totime">
         </label>
       </mat-form-field>
     </div>

@@ -1,6 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig;
 
-import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.IEmployee;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 

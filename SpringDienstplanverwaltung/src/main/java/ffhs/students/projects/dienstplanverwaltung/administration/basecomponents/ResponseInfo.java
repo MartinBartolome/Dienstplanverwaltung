@@ -1,4 +1,4 @@
-package ffhs.students.projects.dienstplanverwaltung.administration;
+package ffhs.students.projects.dienstplanverwaltung.administration.basecomponents;
 
 public class ResponseInfo {
     private final boolean success;

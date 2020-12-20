@@ -6,6 +6,8 @@ import {SlotEditComponent} from '../SlotEdit/SlotEdit.component';
 import {SlotInfo} from '../../Models/SlotInfo';
 import {DataService} from '../../../../Common/DataService';
 import {SharedService} from '../../../../Common/SharedService';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {passwordMatchValidator} from '../../../General/SignUp/SignUp.component';
 
 @Component({
   selector: 'app-shift-edit',
@@ -13,8 +15,13 @@ import {SharedService} from '../../../../Common/SharedService';
   styleUrls: ['./ShiftEdit.component.css'],
 })
 export class ShiftEditComponent implements OnInit {
-  fromdate: Date;
-  todate: Date;
+  form: FormGroup = new FormGroup({
+    Titel: new FormControl('',[ Validators.required]),
+    fromdate: new FormControl('', [Validators.required]),
+    todate: new FormControl('', ),
+    fromtime: new FormControl('', [Validators.required]),
+    totime: new FormControl('', [Validators.required]),
+  });
 
   constructor(public dialogRef: MatDialogRef<SlotEditComponent>,
               @Inject(MAT_DIALOG_DATA) public template: ShiftTemplateConfigs,
@@ -22,8 +29,11 @@ export class ShiftEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fromdate = new Date(this.stringToUSDate(this.template.fromDate));
-    this.todate = new Date(this.stringToUSDate(this.template.toDate));
+    this.form.patchValue({Titel: this.template.title});
+    this.form.patchValue({fromdate: this.stringToUSDate(this.template.fromDate)});
+    this.form.patchValue({todate: this.stringToUSDate(this.template.toDate)});
+    this.form.patchValue({fromtime: this.template.startTime});
+    this.form.patchValue({totime: this.template.endTime});
   }
 
   public newSlot(): void {
@@ -31,7 +41,9 @@ export class ShiftEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: SlotInfo) => {
       if (result) {
         this.template.slotInfos.push(result);
-        this.updateSlotData();
+        const newli = new ListItem();
+        newli.title = result.title + '(' + result.numberOfEmployeesNeeded  + ')';
+        this.template.slots.items.push(newli);
       }
     });
   }
@@ -43,7 +55,7 @@ export class ShiftEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: SlotInfo) => {
       if (result) {
         this.template.slotInfos[this.template.slots.items.indexOf(slot)] = result;
-        this.updateSlotData();
+        slot.title = result.title + '(' + result.numberOfEmployeesNeeded  + ')';
       }
     });
   }
@@ -54,9 +66,14 @@ export class ShiftEditComponent implements OnInit {
       });
   }
   public submit(): void{
-    this.template.fromDate = this.DateToString(this.fromdate);
-    this.template.toDate = this.DateToString(this.todate);
-    this.dialogRef.close(this.template);
+    if (this.form.valid) {
+      this.template.fromDate = this.DateToString(this.form.get('fromdate').value);
+      this.template.toDate = this.DateToString(this.form.get('todate').value);
+      this.template.startTime = this.form.get('fromtime').value;
+      this.template.endTime = this.form.get('totime').value;
+      this.template.title = this.form.get('Titel').value;
+      this.dialogRef.close(this.template);
+    }
   }
   stringToUSDate(DateString: string): Date
   {
@@ -66,8 +83,14 @@ export class ShiftEditComponent implements OnInit {
   }
   DateToString(date: Date): string
   {
-    return date.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
-      + '.' + (date.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
-      + '.' + date.getFullYear();
+    try {
+      return date.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
+        + '.' + (date.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
+        + '.' + date.getFullYear();
+    }
+    catch (error){
+      return '';
+    }
+
   }
 }

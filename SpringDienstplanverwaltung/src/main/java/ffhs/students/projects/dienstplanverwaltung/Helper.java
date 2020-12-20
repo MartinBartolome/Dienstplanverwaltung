@@ -8,17 +8,35 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 public abstract class Helper {
     public static final String slotIdDevider = "-";
     public static final DateTimeFormatter dateFormatter= DateTimeFormatter.ofPattern("dd.MM.yyyy");
     public static boolean isDayInWeekInBiWeeklyRecurrence(LocalDate day, LocalDate startOfBiWeeklyRecurrence){
-        return true; // todo
+        if (day.isEqual(startOfBiWeeklyRecurrence))
+            return true;
+
+        if (day.isBefore(startOfBiWeeklyRecurrence))
+            return false;
+
+        LocalDate iOccurence = getDateOfWeekdayInWeek(day.getDayOfWeek(),startOfBiWeeklyRecurrence);
+        while(iOccurence.isBefore(day)){
+            iOccurence = iOccurence.plusWeeks(2);
+        }
+
+        return iOccurence.isEqual(day);
     }
+    private static LocalDate getDateOfWeekdayInWeek(DayOfWeek day,LocalDate weekDate){
+        int weekDateDay = weekDate.getDayOfWeek().getValue();
+        int difference = weekDateDay - day.getValue();
+        return weekDate.minusDays(difference);
+    }
+
     public static boolean isDayInMonth(LocalDate day,LocalDate month){
         return day.getMonth() == month.getMonth() && day.getYear() == month.getYear();
     }
@@ -27,10 +45,16 @@ public abstract class Helper {
         if (date == null)
             return "";
         return dateFormatter.format(date);  }
-    public static LocalDate dateFromString(String dateString){
+
+    public static Optional<LocalDate> dateFromString(String dateString){
         if (dateString.isEmpty())
-            return LocalDate.now();
-        return LocalDate.parse(dateString,dateFormatter);
+            return Optional.empty();
+        try{
+            return Optional.of(LocalDate.parse(dateString,dateFormatter));
+        }
+        catch (DateTimeParseException e){
+            return Optional.empty();
+        }
     }
     public static String generateShiftId(IShift shift){
         long shiftTemplateId = shift.getShiftTemplate().isPresent() ? shift.getShiftTemplate().get().getId() : -1;
@@ -41,10 +65,10 @@ public abstract class Helper {
     }
     public static String getRecurrenceString(RecurrenceType recurrenceType){
         switch (recurrenceType){
-            case Single: return "einmalig";
+            //case Single: return "einmalig";
             case Weekly: return  "wöchentlich";
             case BiWeekly:  return "zwei wöchentlich";
-            case Monthly:  return "monatlich";
+            //case Monthly:  return "monatlich";
         }
         return "";
     }
@@ -53,10 +77,10 @@ public abstract class Helper {
             return null;
 
         switch (recurrenceString){
-            case "einmalig": return RecurrenceType.Single;
+            //case "einmalig": return RecurrenceType.Single;
             case "wöchentlich": return RecurrenceType.Weekly;
             case "zwei wöchentlich":  return RecurrenceType.BiWeekly;
-            case "monatlich":  return RecurrenceType.Monthly;
+            //case "monatlich":  return RecurrenceType.Monthly;
         }
         return null;
     }
@@ -93,7 +117,7 @@ public abstract class Helper {
     }
 
 
-    public static LocalDate getDateFromSlotId(String slotId){
+    public static Optional<LocalDate> getDateFromSlotId(String slotId){
         String dateString = slotId.split(slotIdDevider)[0];
         return dateFromString(dateString);
     }
@@ -113,10 +137,15 @@ public abstract class Helper {
                 : fromTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public static LocalTime timeFromString(String startTime) {
+    public static Optional<LocalTime> timeFromString(String startTime) {
         if (startTime.isEmpty())
-            return LocalTime.now();
-        return LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm"));
+            return Optional.empty();
+        try{
+            return Optional.of(LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm")));
+        }
+        catch (DateTimeParseException e){
+            return Optional.empty();
+        }
     }
 
     /**

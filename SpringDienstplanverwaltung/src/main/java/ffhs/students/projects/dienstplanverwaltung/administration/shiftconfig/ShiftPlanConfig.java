@@ -1,6 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig;
 
-import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 
