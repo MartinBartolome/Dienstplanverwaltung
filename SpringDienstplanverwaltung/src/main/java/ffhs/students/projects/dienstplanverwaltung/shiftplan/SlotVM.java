@@ -25,7 +25,7 @@ public class SlotVM {
         detailTitle = ((ISlotDisplay) slot).getDetailTitle();
         assigned = ((ISlotDisplay) slot).getAssignedStrings();
         applied = ((ISlotDisplay) slot).getAppliedStrings();
-        allowedUserInteraction =employee.getAllowedSlotInteraction(slot);
+        allowedUserInteraction = employee.getAllowedSlotInteraction(slot);
     }
 
     public String getId() { return id; }

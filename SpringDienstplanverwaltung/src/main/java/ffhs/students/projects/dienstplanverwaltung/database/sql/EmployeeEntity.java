@@ -49,6 +49,9 @@ class EmployeeEntity implements IEmployee, ISaveable {
     }
     @Override public boolean isAdmin(){ return serviceRoles.stream().anyMatch(ServiceRoleEntity::isAdminRole); }
     @Override public SlotUserInteraction getAllowedSlotInteraction(ISlot slot) {
+        if (slot.getShift() != null && slot.getShift().getIsCanceled())
+            return SlotUserInteraction.None;
+        
         boolean isAdmin = this.isAdmin();
         boolean isApplicable = allowsApplicationForSlot(slot);
         if (isAdmin && isApplicable) return SlotUserInteraction.ApplyAndAssign;
