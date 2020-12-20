@@ -16,9 +16,9 @@ import {passwordMatchValidator} from '../../../General/SignUp/SignUp.component';
 })
 export class ShiftEditComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    Titel: new FormControl('',[Validators.required]),
+    Titel: new FormControl('',[ Validators.required]),
     fromdate: new FormControl('', [Validators.required]),
-    todate: new FormControl('', [ Validators.required ]),
+    todate: new FormControl('', ),
     fromtime: new FormControl('', [Validators.required]),
     totime: new FormControl('', [Validators.required]),
   });
@@ -29,11 +29,11 @@ export class ShiftEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form.get('Titel').setValue(new Date(this.stringToUSDate(this.template.title)));
-    this.form.get('fromdate').setValue(new Date(this.stringToUSDate(this.template.fromDate)));
-    this.form.get('todate').setValue(new Date(this.stringToUSDate(this.template.toDate)));
-    this.form.get('fromtime').setValue(new Date(this.stringToUSDate(this.template.startTime)));
-    this.form.get('totime').setValue(new Date(this.stringToUSDate(this.template.endTime)));
+    this.form.patchValue({Titel: this.template.title});
+    this.form.patchValue({fromdate: this.stringToUSDate(this.template.fromDate)});
+    this.form.patchValue({todate: this.stringToUSDate(this.template.toDate)});
+    this.form.patchValue({fromtime: this.template.startTime});
+    this.form.patchValue({totime: this.template.endTime});
   }
 
   public newSlot(): void {
@@ -41,7 +41,9 @@ export class ShiftEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: SlotInfo) => {
       if (result) {
         this.template.slotInfos.push(result);
-        this.updateSlotData();
+        const newli = new ListItem();
+        newli.title = result.title + '(' + result.numberOfEmployeesNeeded  + ')';
+        this.template.slots.items.push(newli);
       }
     });
   }
@@ -53,7 +55,7 @@ export class ShiftEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: SlotInfo) => {
       if (result) {
         this.template.slotInfos[this.template.slots.items.indexOf(slot)] = result;
-        this.updateSlotData();
+        slot.title = result.title + '(' + result.numberOfEmployeesNeeded  + ')';
       }
     });
   }
@@ -67,9 +69,9 @@ export class ShiftEditComponent implements OnInit {
     if (this.form.valid) {
       this.template.fromDate = this.DateToString(this.form.get('fromdate').value);
       this.template.toDate = this.DateToString(this.form.get('todate').value);
-      this.template.toDate = this.form.get('fromtime').value;
-      this.template.toDate = this.form.get('totime').value;
-      this.template.toDate = this.form.get('Titel').value;
+      this.template.startTime = this.form.get('fromtime').value;
+      this.template.endTime = this.form.get('totime').value;
+      this.template.title = this.form.get('Titel').value;
       this.dialogRef.close(this.template);
     }
   }
@@ -81,8 +83,14 @@ export class ShiftEditComponent implements OnInit {
   }
   DateToString(date: Date): string
   {
-    return date.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
-      + '.' + (date.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
-      + '.' + date.getFullYear();
+    try {
+      return date.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
+        + '.' + (date.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
+        + '.' + date.getFullYear();
+    }
+    catch (error){
+      return '';
+    }
+
   }
 }
