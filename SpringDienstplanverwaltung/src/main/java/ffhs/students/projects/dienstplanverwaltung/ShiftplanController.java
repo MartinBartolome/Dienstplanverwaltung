@@ -2,9 +2,9 @@ package ffhs.students.projects.dienstplanverwaltung;
 
 //import ffhs.students.projects.dienstplanverwaltung.database.sql.UserRepository;
 import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
-import ffhs.students.projects.dienstplanverwaltung.administration.ResponseInfo;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.ResponseInfo;
 import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenantConfig;
-import ffhs.students.projects.dienstplanverwaltung.administration.TableViewData;
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TableViewData;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
@@ -139,12 +139,20 @@ public class ShiftplanController {
     @GetMapping("/localSetState")
     public SysAdminTenantConfig localSetState(
             @RequestParam(value = "localId") long localId,
-            @RequestParam(value = "isGranted") boolean isGranted,
             @RequestParam(value = "isActive") boolean isActive){
 
         AdministrationManager.databaseManager = dbManager;
-        return AdministrationManager.localSetState(localId,isGranted,isActive);
+        return AdministrationManager.localSetState(localId,isActive);
     }
+    @CrossOrigin(origins = "*")
+    @GetMapping("/grantLocal")
+    public SysAdminTenantConfig grantLocal(
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.grantLocal(localId);
+    }
+
 
     @CrossOrigin(origins = "*")
     @GetMapping("/getEmployeesConfig")
@@ -228,8 +236,17 @@ public class ShiftplanController {
         return AdministrationManager.loginUser(username,password);
     }
 
-    @Autowired
-    public SqlDatabaseManager dbManager;
+    @CrossOrigin(origins = "*")
+    @GetMapping("/isEmployeeManager")
+    public boolean isEmployeeManager(
+            @RequestParam(value = "employeeName") String employeeName,
+            @RequestParam(value = "localId") long localId){
+
+        AdministrationManager.databaseManager = dbManager;
+        return AdministrationManager.isEmployeeManager(employeeName,localId);
+    }
+
+    @Autowired public SqlDatabaseManager dbManager;
 
 
     @GetMapping("/createFakeData")

@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface ShiftTemplateRepository extends JpaRepository<ShiftTemplateEntity, Integer> {
+interface ShiftTemplateRepository extends JpaRepository<ShiftTemplateEntity, Integer> {
     List<IShiftTemplate> findByLocalId( long localId);
     Optional<IShiftTemplate> findById(long id);
 }

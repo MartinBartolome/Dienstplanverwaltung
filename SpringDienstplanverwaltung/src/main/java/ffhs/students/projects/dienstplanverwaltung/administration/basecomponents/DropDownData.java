@@ -1,9 +1,8 @@
-package ffhs.students.projects.dienstplanverwaltung.administration;
+package ffhs.students.projects.dienstplanverwaltung.administration.basecomponents;
 
 import ffhs.students.projects.dienstplanverwaltung.Helper;
 import ffhs.students.projects.dienstplanverwaltung.database.IShiftTemplate;
 import ffhs.students.projects.dienstplanverwaltung.database.RecurrenceType;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +15,8 @@ public class DropDownData {
     public static DropDownData getForRecurrences(){
         DropDownData result = new DropDownData();
         result.dropDownOptions = Stream.of(RecurrenceType.values())
-                .map(Helper::getRecurrenceString).map(optionString -> new ListItem(optionString,-1))
+                .map(Helper::getRecurrenceString)
+                .map(optionString -> new ListItem(optionString,-1))
                 .collect(Collectors.toList());
         return result;
     }

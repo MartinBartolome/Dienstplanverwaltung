@@ -1,5 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.administration;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.TwoColumnTableViewData;
 import ffhs.students.projects.dienstplanverwaltung.database.ILocal;
 
 import java.util.List;

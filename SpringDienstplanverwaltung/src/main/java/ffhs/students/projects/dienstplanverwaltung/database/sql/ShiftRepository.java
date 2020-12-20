@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface ShiftRepository extends JpaRepository<ShiftEntity, Integer> {
+interface ShiftRepository extends JpaRepository<ShiftEntity, Integer> {
     List<IShift> findAllByLocalAndDayBetween(ILocal local,LocalDate start, LocalDate end);
     Optional<IShift> findFirstByDayIsAndShiftTemplateIsAndLocalIs(LocalDate day, IShiftTemplate shiftTemplate,ILocal local);
 }
