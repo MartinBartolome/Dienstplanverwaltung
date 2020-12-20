@@ -14,7 +14,7 @@ export class EmployeeInviteComponent implements OnInit {
   ngOnInit(): void {
   }
   Cancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.email);
   }
 }
 

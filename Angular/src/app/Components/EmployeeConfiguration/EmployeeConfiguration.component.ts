@@ -25,7 +25,16 @@ export class EmployeeConfigurationComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: string)  => {
       if (result)
       {
-        this.api.sendGetRequest('/inviteUser?userNickName=' + result + '&localId=' + this.globalVariables.getLocalID());
+        this.api.sendGetRequest('/inviteUser?userNickName=' + result + '&localId=' + this.globalVariables.getLocalID())
+          .subscribe((data: boolean) => {
+          if (data)
+          {
+            alert('Mitarbeiter erfolgreich eingeladen');
+          }
+          else {
+            alert('Mitarbeiter nicht gefunden');
+          }
+        });
       }
     });
   }
