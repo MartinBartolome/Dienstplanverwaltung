@@ -65,10 +65,10 @@ public abstract class Helper {
     }
     public static String getRecurrenceString(RecurrenceType recurrenceType){
         switch (recurrenceType){
-            case Single: return "einmalig";
+            //case Single: return "einmalig";
             case Weekly: return  "wöchentlich";
             case BiWeekly:  return "zwei wöchentlich";
-            case Monthly:  return "monatlich";
+            //case Monthly:  return "monatlich";
         }
         return "";
     }
@@ -77,10 +77,10 @@ public abstract class Helper {
             return null;
 
         switch (recurrenceString){
-            case "einmalig": return RecurrenceType.Single;
+            //case "einmalig": return RecurrenceType.Single;
             case "wöchentlich": return RecurrenceType.Weekly;
             case "zwei wöchentlich":  return RecurrenceType.BiWeekly;
-            case "monatlich":  return RecurrenceType.Monthly;
+            //case "monatlich":  return RecurrenceType.Monthly;
         }
         return null;
     }

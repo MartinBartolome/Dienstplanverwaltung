@@ -1,8 +1,8 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
 public enum RecurrenceType {
-    Single,
+    //Single,
     Weekly,
     BiWeekly,
-    Monthly
+    //Monthly
 }

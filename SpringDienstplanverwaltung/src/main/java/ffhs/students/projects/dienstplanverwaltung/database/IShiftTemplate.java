@@ -25,12 +25,14 @@ public interface IShiftTemplate {
         if (getTo() != null && !day.isBefore(getTo().plusDays(1)))
             return false;
 
+        /*
         if (getRecurrence() == RecurrenceType.Single){
             return false; //todo
         }
         if (getRecurrence() == RecurrenceType.Monthly){
             return false; //todo
         }
+        */
         DayOfWeek dayOfWeek = day.getDayOfWeek();
         boolean isDayInDays = getWeekDays().contains(dayOfWeek);
         if (!isDayInDays)
