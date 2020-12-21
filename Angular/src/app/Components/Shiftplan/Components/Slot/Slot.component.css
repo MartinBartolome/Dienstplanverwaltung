@@ -15,4 +15,5 @@ li {
 section{
   width: auto;
   line-height: revert;
+  font-weight: lighter;
 }
