@@ -19,6 +19,8 @@ export class AppComponent{
   LocalSelected = false;
   isSysAdmin = false;
   isManager = false;
+  LoggedUser = '';
+  SelectedLocal = '';
 
   constructor(private api: DataService, public globalVariables: SharedService) {
   }
@@ -62,9 +64,13 @@ export class AppComponent{
     this.loadisManager();
     this.loadShiftPlanData(new Date());
   }
-  public Login(status: boolean): void
-  {
-    this.LoginSuccess = status;
-    this.isSysAdmin = this.globalVariables.getUser().userIsSysAdmin;
+  public ReselectLocal(): void{
+    this.LocalSelected = false;
+  }
+  public Logout(): void{
+    this.LoginSuccess = false;
+    this.LoggedUser = '';
+    this.SelectedLocal = '';
+    this.LocalSelected = false;
   }
 }
