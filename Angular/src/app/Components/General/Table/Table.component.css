@@ -1,33 +1,38 @@
-section{
+section {
   display: flex;
   flex-direction: column;
   border-collapse: collapse;
-  border: 0.1em solid #e4e4e4;
 }
 
-.HeaderRow{
-  border-bottom:solid #e4e4e4;
+.HeaderRow {
   border-collapse: collapse;
-  border-width:0.1em;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  border-bottom: 0.2em solid #3F51B5;
+  margin-bottom: 1em;
   justify-content: space-between;
 }
-.SubRows{
+
+.SubRows {
   cursor: pointer;
   display: flex;
   flex-direction: row;
+  font-size: medium;
+  padding-top: 0.6em;
+  border-bottom: 0.1em solid #eeeeee;
   justify-content: space-between;
 }
-header{
-  font-size: 1.25em;
+
+header {
+  font-size: x-large;
 }
 
-.Highlight{
+.Highlight {
   background: #3F51B5;
   color: white;
 }
-mat-icon{
+
+mat-icon {
   cursor: pointer;
 }

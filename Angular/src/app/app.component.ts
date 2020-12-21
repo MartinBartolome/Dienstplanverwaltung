@@ -73,5 +73,6 @@ export class AppComponent{
     this.LoggedUser = '';
     this.SelectedLocal = '';
     this.LocalSelected = false;
+    this.isSysAdmin = false;
   }
 }
