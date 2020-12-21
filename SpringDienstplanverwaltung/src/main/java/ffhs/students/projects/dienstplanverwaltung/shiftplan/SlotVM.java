@@ -14,10 +14,7 @@ public class SlotVM {
     private final String detailTitle;
     private final List<String> assigned;
     private final List<String> applied;
-
-
-
-    private final SlotUserInteraction allowedUserInteraction;
+    private SlotUserInteraction allowedUserInteraction;
 
     public SlotVM(ISlot slot, IShift shift, IEmployee employee){
         id = Helper.generateSlotId(slot,shift);
@@ -34,4 +31,8 @@ public class SlotVM {
     public List<String> getAssigned() { return assigned; }
     public List<String> getApplied() { return applied; }
     public SlotUserInteraction getAllowedUserInteraction() { return allowedUserInteraction; }
+
+    public void setAllowedUserInteraction(SlotUserInteraction allowedUserInteraction){
+        this.allowedUserInteraction = allowedUserInteraction;
+    }
 }

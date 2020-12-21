@@ -1,6 +1,5 @@
 package ffhs.students.projects.dienstplanverwaltung;
 
-//import ffhs.students.projects.dienstplanverwaltung.database.sql.UserRepository;
 import ffhs.students.projects.dienstplanverwaltung.administration.AdministrationManager;
 import ffhs.students.projects.dienstplanverwaltung.administration.basecomponents.ResponseInfo;
 import ffhs.students.projects.dienstplanverwaltung.administration.SysAdminTenantConfig;
@@ -9,7 +8,7 @@ import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfi
 import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeesConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftPlanConfig;
 import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.ShiftTemplateConfig;
-import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
+import ffhs.students.projects.dienstplanverwaltung.database.IDatabaseManager;
 import ffhs.students.projects.dienstplanverwaltung.shiftplan.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -246,16 +245,7 @@ public class ShiftplanController {
         return AdministrationManager.isEmployeeManager(employeeName,localId);
     }
 
-    @Autowired public SqlDatabaseManager dbManager;
-
-
-    @GetMapping("/createFakeData")
-    public void test(){
-
-        dbManager.createFakeDate();
-    }
-
-
-
-
+    @GetMapping("/createSysAdmin")
+    public void createSysAdminIfNotExists(){ dbManager.createSysAdminIfNotExists(); }
+    @Autowired public IDatabaseManager dbManager;
 }

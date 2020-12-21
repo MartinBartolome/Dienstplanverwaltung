@@ -29,6 +29,7 @@ public interface IDatabaseManager {
     boolean createUserIfNotExist(String username, String password);
     Optional<IShiftTemplate> createOrUpdateShiftTemplate(ILocal local,ShiftTemplateConfig shiftTemplateConfig);
     void requestNewLocal(IUser user, String localName);
+    void createSysAdminIfNotExists();
 
     // Aktualisierungen
     void assignEmployeeToSlot(IEmployee employee, ISlot slot, boolean isAssigned);

@@ -133,7 +133,10 @@ public class ShiftPlanManager {
         if (addingType == AddingType.apply)
             databaseManager.applyEmployeeToSlot(employee.get(),slot.get(),addOrRemove == AddOrRemove.add);
 
-        return new SlotVM(slot.get(),slot.get().getShift(),employee.get());//GetShiftDay(day,local.get(),employee.get());
+        SlotVM slotVM = new SlotVM(slot.get(),slot.get().getShift(),employee.get());
+        if (addingType == AddingType.assign)
+            slotVM.setAllowedUserInteraction(SlotUserInteraction.ApplyAndAssign);
+        return slotVM;
     }
     private static Optional<ISlot> getSlotAndCreateShiftIfNeeded(IDatabaseManager databaseManager, LocalDate day, String slotIdString, ILocal local) {
         int shiftTemplateId = Helper.getShiftTemplateIdFromSlotId(slotIdString);
