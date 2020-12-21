@@ -1,5 +1,6 @@
 package ffhs.students.projects.dienstplanverwaltung.database;
 
+import ffhs.students.projects.dienstplanverwaltung.administration.employeesconfig.EmployeeConfig;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.swing.text.html.Option;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,6 +122,7 @@ class IDatabaseManagerTest {
     // in diesem Prozess wird der Besitzer zum Mitarbeiter
     // und erhält die Rolle Manager
     @Test
+    @Transactional
     void grantLocal() {
         Optional<ILocal> testLocal = dbManager.getLocalById(testLocalId);
         Assertions.assertTrue(testLocal.isPresent());
@@ -146,12 +149,80 @@ class IDatabaseManagerTest {
                 .filter(empl -> empl.getUser().getNickname().equals(testUserName))
                 .findFirst();
         Assertions.assertTrue(admin.isPresent());
+    }
 
+    @Test
+    void getOwnedLocalsForUser() {
+        Optional<IUser> user = dbManager.getUser(testUserName);
+        Assertions.assertTrue(user.isPresent());
 
+        List<ILocal> locals = dbManager.getOwnedLocalsForUser(user.get());
+        Assertions.assertTrue((long) locals.size() > 0);
+
+        Optional<ILocal> testLocal =  locals.stream().filter(local -> local.getId() == testLocalId).findFirst();
+        Assertions.assertTrue(testLocal.isPresent());
+    }
+
+    @Test
+    @Transactional
+    void getGrantedLocalsForUser() {
+        Optional<IUser> user = dbManager.getUser(testUserName);
+        Assertions.assertTrue(user.isPresent());
+
+        Optional<ILocal> testLocal = dbManager.getLocalById(testLocalId);
+        Assertions.assertTrue(testLocal.isPresent());
+        ((SqlDatabaseManager) dbManager).updateLocal(testLocalId,testLocal.get().getTitle(),testLocal.get().isActive(),false);
+
+        testLocal = dbManager.getLocalById(testLocalId);
+        Assertions.assertTrue(testLocal.isPresent());
+        Assertions.assertFalse(testLocal.get().isGranted());
+
+        List<ILocal> locals = dbManager.getGrantedLocalsForUser(user.get());
+        assertEquals(0, locals.size());
+
+        dbManager.grantLocal(testLocalId);
+        locals = dbManager.getGrantedLocalsForUser(user.get());
+        assertEquals(1, locals.size());
+    }
+
+    @Test
+    void getEmployeeForName() {
+        Optional<IUser> user = dbManager.getUser(testUserName);
+        Assertions.assertTrue(user.isPresent());
+
+        Optional<ILocal> testLocal = dbManager.getLocalById(testLocalId);
+        Assertions.assertTrue(testLocal.isPresent());
+
+        Optional<IEmployee> employee = dbManager.getEmployeeForName(testLocal.get(),testUserName);
+        Assertions.assertTrue(employee.isPresent());
+        assertEquals(user.get().getNickname(),employee.get().getUser().getNickname());
+    }
+
+    @Test
+    void updateServiceRole() {
+        Optional<ILocal> testLocal = dbManager.getLocalById(testLocalId);
+        Assertions.assertTrue(testLocal.isPresent());
+
+        Optional<IServiceRole> serviceRole = testLocal.get().getServiceRoles().stream().findFirst();
+        Assertions.assertTrue(serviceRole.isPresent());
+
+        String title = serviceRole.get().getName().equals("Test1") ? "Test2" : "Test1";
+        boolean isActive = !serviceRole.get().isActive();
+
+        dbManager.updateServiceRole(serviceRole.get().getId(),title,isActive);
+
+        testLocal = dbManager.getLocalById(testLocalId);
+        Assertions.assertTrue(testLocal.isPresent());
+        serviceRole = testLocal.get().getServiceRoles().stream().findFirst();
+        Assertions.assertTrue(serviceRole.isPresent());
+        assertEquals(title,serviceRole.get().getName());
+        assertEquals(isActive,serviceRole.get().isActive());
     }
 
 
-
+    // weitere Tests komplex
+    @Test
+    void createOrUpdateEmployee() {  }
 
     @Test
     void getShift() {
@@ -170,26 +241,9 @@ class IDatabaseManagerTest {
     void getShiftTemplateById() {
     }
 
-    @Test
-    void getEmployeeForName() {
-    }
-
-    @Test
-    void getGrantedLocalsForUser() {
-    }
-
-
 
     @Test
     void getSlotForSlotIdAndShift() {
-    }
-
-    @Test
-    void getOwnedLocalsForUser() {
-    }
-
-    @Test
-    void createOrUpdateEmployee() {
     }
 
     @Test
@@ -199,8 +253,6 @@ class IDatabaseManagerTest {
     @Test
     void createEmployeeInLocal() {
     }
-
-
 
     @Test
     void createOrUpdateShiftTemplate() {
@@ -217,16 +269,6 @@ class IDatabaseManagerTest {
     @Test
     void applyEmployeeToSlot() {
     }
-
-    @Test
-    void addServiceRole() {
-    }
-
-    @Test
-    void updateServiceRole() {
-    }
-
-
 
     @Test
     void setIsCanceledForShift() {
