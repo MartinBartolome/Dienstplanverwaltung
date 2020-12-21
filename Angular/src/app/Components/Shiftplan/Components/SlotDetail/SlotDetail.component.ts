@@ -35,13 +35,15 @@ export class SlotDetailComponent implements OnInit {
   clickOnAssigned(item): void{
     if (this.slot.allowedUserInteraction.includes('Assign'))
     {
-      const url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'false';
+      const url = '/assignEmployeeToSlot?localId=' + this.globalVariables.getLocalID()
+        + '&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'false';
       this.ChangeState(url);
     }
   }
   clickOnApplied(item): void{
     if (this.slot.allowedUserInteraction.includes('Assign')) {
-      const url = '/assignEmployeeToSlot?localId=1&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'true';
+      const url = '/assignEmployeeToSlot?localId=' + this.globalVariables.getLocalID()
+        + '&employeeName=' + item + '&slotIdString=' + this.slot.id + '&isAssigned=' + 'true';
       this.ChangeState(url);
     }
   }
