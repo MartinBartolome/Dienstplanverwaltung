@@ -23,8 +23,8 @@ label {
   width: 95%;
   float: left;
   display: flex;
+  flex-wrap: wrap;
   margin-left: 0.8em;
-  flex-direction: row;
 }
 
 .Slot {
