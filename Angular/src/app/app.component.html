@@ -1,7 +1,12 @@
 <div class="logout">
-  <label>{{ this.LoggedUser }} </label>
-  <label (click)="ReselectLocal()">&nbsp;-&nbsp;{{ this.SelectedLocal }}</label>
-  <button mat-raised-button color="primary" *ngIf="LoginSuccess" (click)="Logout()">Logout</button>
+  <label>{{ this.LoggedUser }}</label>
+  <button mat-icon-button class="LoginMenuButton" [matMenuTriggerFor]="LoginMenu" *ngIf="LoginSuccess">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #LoginMenu="matMenu" xPosition="before">
+    <button mat-menu-item *ngIf="LocalSelected" (click)="ReselectLocal()">Lokal Wechseln</button>
+    <button mat-menu-item *ngIf="LoginSuccess" (click)="Logout()">Logout</button>
+  </mat-menu>
 </div>
 <div class="webpage">
   <app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = $event;

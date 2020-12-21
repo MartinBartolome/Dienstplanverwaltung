@@ -7,6 +7,6 @@
   justify-content: flex-end;
   align-items: center;
 }
-button{
+.LoginMenuButton{
   margin: 1em;
 }
