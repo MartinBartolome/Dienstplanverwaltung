@@ -16,9 +16,3 @@ section{
   width: auto;
   line-height: revert;
 }
-
-.User{
-  display: flex;
-  padding: 0;
-  margin: 0;
-}
