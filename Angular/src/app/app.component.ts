@@ -53,6 +53,7 @@ export class AppComponent{
     this.api.sendGetRequest('/isEmployeeManager?localId=' + this.globalVariables.getLocalID()
       + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: boolean) => {
       this.isManager = data;
+      this.globalVariables.setisManager(this.isManager);
       if (this.isManager) {
         this.loadEmployeeData();
         this.loadShiftConfiguration();

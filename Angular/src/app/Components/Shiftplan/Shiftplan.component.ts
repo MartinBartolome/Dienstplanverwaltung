@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {ShiftPlan} from './Models/ShiftPlan';
 import {MatDialog} from '@angular/material/dialog';
 import {ShiftDayDetailComponent} from './Components/ShiftDayDetail/ShiftDayDetail.component';
-import {ShiftTemplateConfigs} from "../ShiftConfiguration/Models/ShiftTemplateConfigs";
 
 @Component({
   selector: 'app-shiftplan',

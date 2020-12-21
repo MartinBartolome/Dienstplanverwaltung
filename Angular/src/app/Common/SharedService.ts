@@ -9,6 +9,7 @@ export class SharedService{
   private LocalID: number;
   private Localname: string;
   private Nickname: string;
+  private IsManager: boolean;
   private User: UserResponse;
 
   setLocalID(setID: number): void{
@@ -36,5 +37,11 @@ export class SharedService{
   }
   getUser(): UserResponse{
     return this.User;
+  }
+  setisManager(ismanager: boolean): void{
+    this.IsManager = ismanager;
+  }
+  getisManager(): boolean{
+    return this.IsManager;
   }
 }

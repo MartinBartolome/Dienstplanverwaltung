@@ -2,7 +2,7 @@
   <label [ngClass]="{'Canceled': shift.canceled, 'normal': !shift.canceled}">
     {{shift.title}}
   </label>
-  <mat-checkbox [(ngModel)]="shift.canceled" color="primary" (click)="toggleCancel()">fällt aus</mat-checkbox>
+  <mat-checkbox [(ngModel)]="shift.canceled" color="primary" (click)="toggleCancel()" *ngIf="isManager">fällt aus</mat-checkbox>
   <div class="SlotContainer">
     <app-slot-detail *ngFor="let slot of shift.slots" [slot]="slot" class="Slot" [canceled]="shift.canceled"></app-slot-detail>
   </div>

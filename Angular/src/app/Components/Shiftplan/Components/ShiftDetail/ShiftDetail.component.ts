@@ -10,9 +10,11 @@ import {SharedService} from '../../../../Common/SharedService';
 })
 export class ShiftDetailComponent implements OnInit {
   @Input()  shift: Shift;
+  isManager: boolean;
   constructor(private api: DataService, public globalVariables: SharedService) { }
 
   ngOnInit(): void {
+    this.isManager = this.globalVariables.getisManager();
   }
 
   toggleCancel(): void{
