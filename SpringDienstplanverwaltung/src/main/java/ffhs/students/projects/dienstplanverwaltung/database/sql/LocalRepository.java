@@ -10,4 +10,7 @@ import java.util.Optional;
 interface LocalRepository extends JpaRepository<LocalEntity, Integer> {
      Optional<ILocal> findById(long id);
      List<ILocal> findAllByOwner(IUser owner);
+
+     //Unittest
+     Optional<ILocal> findFirstByIsUnittest(boolean isUnitTest);
 }

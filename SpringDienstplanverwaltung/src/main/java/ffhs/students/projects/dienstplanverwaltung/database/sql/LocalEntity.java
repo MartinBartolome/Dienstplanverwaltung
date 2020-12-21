@@ -1,6 +1,7 @@
 package ffhs.students.projects.dienstplanverwaltung.database.sql;
 
 import ffhs.students.projects.dienstplanverwaltung.database.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -47,6 +48,8 @@ class LocalEntity implements ILocal, ISaveable {
                 .collect(Collectors.toList());
     }
     public List<IServiceRole> getServiceRoles() {
+        if (serviceRoles == null)
+            return new ArrayList<>();
         return serviceRoles.stream()
                 .map(IServiceRole.class::cast)
                 .collect(Collectors.toList());
@@ -75,9 +78,40 @@ class LocalEntity implements ILocal, ISaveable {
 
     // Aktualisierungen
     public void addServiceRole(ServiceRoleEntity serviceRole){
+        if (serviceRoles == null)
+            serviceRoles = new ArrayList<>();
         serviceRoles.add(serviceRole);
     }
     public void addEmployee(EmployeeEntity employee){
         employees.add(employee);
+    }
+
+    // Unittests
+    //public void setOwner(UserEntity owner){ this.owner = owner; }
+    /*
+    public void initLists(){
+        serviceRoles = new ArrayList<>();
+        employees = new ArrayList<>();
+        shifts = new ArrayList<>();
+        shiftTemplates = new ArrayList<>();
+    }
+    */
+
+    private boolean isUnittest;
+    public static LocalEntity createUnittestLocal(IUser owner){
+        String localTilte = "UnitTestLokal";
+
+        LocalEntity testLocal = new LocalEntity();
+        testLocal.title = localTilte;
+        if (owner instanceof UserEntity)
+            testLocal.owner = (UserEntity)owner;
+
+        testLocal.isActive = true;
+        testLocal.serviceRoles = new ArrayList<>();
+        testLocal.employees = new ArrayList<>();
+        testLocal.shifts = new ArrayList<>();
+        testLocal.shiftTemplates = new ArrayList<>();
+        testLocal.isUnittest = true;
+        return testLocal;
     }
 }

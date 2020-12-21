@@ -8,6 +8,8 @@ import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.Sl
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.swing.text.html.Option;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -140,6 +142,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         ((LocalEntity)local.get()).save(localRepository);
         return local;
     }
+
     public List<ILocal> getAllLocals(){
         return localRepository.findAll().stream()
                 .map(ILocal.class::cast)
@@ -271,14 +274,18 @@ public class SqlDatabaseManager implements IDatabaseManager {
         if (!local.isPresent())
             return;
 
-        Optional<IServiceRole> adminRole = local.get().getServiceRoles()
-                .stream().filter(IServiceRole::isAdminRole)
+        List<IServiceRole> serviceRoles = local.get().getServiceRoles();
+        Optional<IServiceRole> adminRole = serviceRoles == null
+                ? Optional.empty()
+                : serviceRoles.stream().filter(IServiceRole::isAdminRole)
                 .findFirst();
 
         if (adminRole.isPresent())
             return;
 
-        ServiceRoleEntity.createManagerRole((LocalEntity)local.get()).save(serviceRoleRepository);
+        ServiceRoleEntity
+                .createManagerRole((LocalEntity)local.get())
+                .save(serviceRoleRepository);
     }
 
     public boolean createUserIfNotExist(String username, String password){
@@ -323,4 +330,55 @@ public class SqlDatabaseManager implements IDatabaseManager {
         UserEntity sysAdmin = new UserEntity(sysAdminName,sysAdminPassword,true);
         sysAdmin.save(userRepository);
     }
+
+
+    // Für Unittests
+    public Optional<ILocal> getAndCreateIfNeededDemoLocalAndDemoUSer(){
+        Optional<ILocal> testLocal = localRepository.findFirstByIsUnittest(true);
+        if (testLocal.isPresent())
+            return testLocal;
+
+        String testUserName = "UnitTestUser";
+        String testUserPassword = "passwort";
+        createUserIfNotExist(testUserName,testUserPassword);
+        Optional<IUser> user = getUser(testUserName);
+        if(!user.isPresent())
+            return Optional.empty();
+
+        LocalEntity newTestLocal = LocalEntity.createUnittestLocal(user.get());
+        newTestLocal.setGranted(false);
+        localRepository.save(newTestLocal);
+
+        createManagerRole(newTestLocal.getId());
+        return Optional.of(newTestLocal);
+    }
+    public Optional<ILocal> updateLocal(long localId, String title, boolean isActive, boolean isGranted){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return Optional.empty();
+
+        ((LocalEntity)local.get()).setTitle(title);
+        ((LocalEntity)local.get()).setActive(isActive);
+        ((LocalEntity)local.get()).setGranted(isGranted);
+        ((LocalEntity)local.get()).save(localRepository);
+        return local;
+    }
+
+    /*
+    public Optional<ILocal> setOwnerForLocal(long localId, String userName){
+        Optional<ILocal> local = localRepository.findById(localId);
+        if (!local.isPresent())
+            return Optional.empty();
+
+        Optional<IUser> user = getUser(userName);
+        if (!user.isPresent())
+            return Optional.empty();
+
+
+
+        ((LocalEntity)local.get()).setOwner((UserEntity) user.get());
+        ((LocalEntity)local.get()).save(localRepository);
+        return local;
+    }
+    */
 }
