@@ -1,36 +1,39 @@
-section{
-}
-section:after{
-  content: ".";
-  display:block;
-  height:0;
-  clear:both;
-  visibility:hidden;
+section {
 }
 
-label{
-  margin-top:0.1em;
-  float:left;
+section:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }
-.InputWrapper
-{
+
+label {
+  margin-top: 0.1em;
+  float: left;
+}
+
+.InputWrapper {
   margin: 0.5em;
   float: right;
 }
 
-.SlotContainer{
-  width:95%;
-  float:left;
+.SlotContainer {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  margin-left: 0.8em;
 }
 
-.Slot{
-  margin: 0 0.5em 0.5em 0;
+.Slot {
+  margin: 0 0.5em 0 0;
 }
-.Canceled{
+
+.Canceled {
   text-decoration: line-through;
 }
-.normal{
+
+.normal {
   text-decoration: none;
 }
