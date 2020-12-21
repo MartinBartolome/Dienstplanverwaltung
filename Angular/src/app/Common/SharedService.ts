@@ -7,7 +7,9 @@ import {UserResponse} from '../Components/General/Models/UserResponse';
 
 export class SharedService{
   private LocalID: number;
+  private Localname: string;
   private Nickname: string;
+  private IsManager: boolean;
   private User: UserResponse;
 
   setLocalID(setID: number): void{
@@ -16,6 +18,12 @@ export class SharedService{
 
   getLocalID(): number{
     return this.LocalID;
+  }
+  setLocalName(localname: string): void{
+    this.Localname = localname;
+  }
+  getLocalName(): string{
+    return this.Localname;
   }
 
   setNickName(setNick: string): void{
@@ -29,5 +37,11 @@ export class SharedService{
   }
   getUser(): UserResponse{
     return this.User;
+  }
+  setisManager(ismanager: boolean): void{
+    this.IsManager = ismanager;
+  }
+  getisManager(): boolean{
+    return this.IsManager;
   }
 }

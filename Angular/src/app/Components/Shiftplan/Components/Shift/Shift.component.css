@@ -23,7 +23,6 @@ label{
   float:left;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 }
 
 .Slot{

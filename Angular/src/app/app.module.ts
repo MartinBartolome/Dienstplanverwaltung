@@ -39,6 +39,7 @@ import { LocalEditComponent } from './Components/General/LocalManagement/LocalEd
 import { TenantConfigComponent } from './Components/General/SysAdmin/TenantConfig/TenantConfig.component';
 import { SignUpComponent } from './Components/General/SignUp/SignUp.component';
 import { DoubleTableComponent } from './Components/General/DoubleTable/DoubleTable.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { DoubleTableComponent } from './Components/General/DoubleTable/DoubleTab
     MatIconModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'de-de'},

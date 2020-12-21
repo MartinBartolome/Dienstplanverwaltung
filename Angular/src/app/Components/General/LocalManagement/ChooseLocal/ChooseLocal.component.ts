@@ -25,6 +25,7 @@ export class ChooselocalComponent implements OnInit {
 
   public SelectLocal(): void{
     this.globalVariables.setLocalID(this.selected.id);
+    this.globalVariables.setLocalName(this.selected.title);
     this.submitEM.emit(true);
   }
 
@@ -36,13 +37,6 @@ export class ChooselocalComponent implements OnInit {
 
   public ManageLocals(): void{
     const dialogRef = this.dialog.open(LocalConfigurationComponent, {});
-    dialogRef.afterClosed().subscribe(() => {
-      this.GetLocals();
-    });
-  }
-
-  public OpenSysadminSite(): void{
-    const dialogRef = this.dialog.open(TenantConfigComponent, {});
     dialogRef.afterClosed().subscribe(() => {
       this.GetLocals();
     });

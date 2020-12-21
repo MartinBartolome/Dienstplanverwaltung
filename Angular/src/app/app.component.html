@@ -1,24 +1,38 @@
-<app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = $event; isSysAdmin = globalVariables.getUser().userIsSysAdmin"></app-login>
-<app-chooselocal *ngIf="LoginSuccess && !LocalSelected && !isSysAdmin" (submitEM)="LocalSelected = $event; Reload()" ></app-chooselocal>
-<app-tenantconfig *ngIf="isSysAdmin"></app-tenantconfig>
-<div *ngIf="LoginSuccess && LocalSelected">
-  <mat-tab-group mat-stretch-tabs class="tabcontainer">
-    <mat-tab label="Schichtplan" >
-      <ng-template matTabContent>
-        <app-shiftplan [data]="ShiftPlanData" (DateChange)="loadShiftPlanData($event)" (ReloadChange)="loadShiftPlanData($event)"></app-shiftplan>
-      </ng-template>
-    </mat-tab>
-    <mat-tab label="Schichtverwaltung" *ngIf="isManager">
-      <ng-template matTabContent>
-        <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration" (ShiftConfigChanged)="Reload()"></app-shift-configuration>
-      </ng-template>
-    </mat-tab>
-    <mat-tab label="Mitarbeiterverwaltung" *ngIf="isManager">
-      <ng-template matTabContent>
-        <app-employee-configuration [employees]="EmployeeData"></app-employee-configuration>
-      </ng-template>
-    </mat-tab>
-  </mat-tab-group>
+<div class="logout">
+  <label>{{ this.LoggedUser }}</label>
+  <button mat-icon-button class="LoginMenuButton" [matMenuTriggerFor]="LoginMenu" *ngIf="LoginSuccess">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #LoginMenu="matMenu" xPosition="before">
+    <button mat-menu-item *ngIf="LocalSelected" (click)="ReselectLocal()">Lokal Wechseln</button>
+    <button mat-menu-item *ngIf="LoginSuccess" (click)="Logout()">Logout</button>
+  </mat-menu>
 </div>
-
-
+<div class="webpage">
+  <app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = $event;
+    isSysAdmin = globalVariables.getUser().userIsSysAdmin;
+    LoggedUser = globalVariables.getNickName()"></app-login>
+  <app-chooselocal *ngIf="LoginSuccess && !LocalSelected && !isSysAdmin"
+                   (submitEM)="LocalSelected = $event;
+                     Reload(); SelectedLocal = globalVariables.getLocalName()" ></app-chooselocal>
+  <app-tenantconfig *ngIf="isSysAdmin"></app-tenantconfig>
+  <div *ngIf="LoginSuccess && LocalSelected">
+    <mat-tab-group mat-stretch-tabs class="tabcontainer">
+      <mat-tab label="Schichtplan" >
+        <ng-template matTabContent>
+          <app-shiftplan [data]="ShiftPlanData" (DateChange)="loadShiftPlanData($event)" (ReloadChange)="loadShiftPlanData($event)"></app-shiftplan>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Schichtverwaltung" *ngIf="isManager">
+        <ng-template matTabContent>
+          <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration" (ShiftConfigChanged)="Reload()"></app-shift-configuration>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Mitarbeiterverwaltung" *ngIf="isManager">
+        <ng-template matTabContent>
+          <app-employee-configuration [employees]="EmployeeData" (DataChanged)="Reload()"></app-employee-configuration>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

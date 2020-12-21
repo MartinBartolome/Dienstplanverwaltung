@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {EmployeesConfig} from './Models/EmployeesConfig';
 import {EmployeeInviteComponent} from './Components/EmployeeInvite/EmployeeInvite.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -15,6 +15,7 @@ import {SharedService} from '../../Common/SharedService';
 })
 export class EmployeeConfigurationComponent implements OnInit {
   @Input() employees: EmployeesConfig;
+  @Output() DataChanged = new EventEmitter();
 
   constructor(public dialog: MatDialog, private api: DataService, public globalVariables: SharedService) { }
 
@@ -30,6 +31,7 @@ export class EmployeeConfigurationComponent implements OnInit {
           if (data)
           {
             alert('Mitarbeiter erfolgreich eingeladen');
+            this.DataChanged.emit();
           }
           else {
             alert('Mitarbeiter nicht gefunden');
@@ -49,6 +51,7 @@ export class EmployeeConfigurationComponent implements OnInit {
             this.employees.employeeConfigs[this.employees.employees.items.indexOf(item)] = data;
           });
       }
+      this.DataChanged.emit();
     });
   }
 }
