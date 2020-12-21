@@ -47,7 +47,7 @@ public abstract class Helper {
         return dateFormatter.format(date);  }
 
     public static Optional<LocalDate> dateFromString(String dateString){
-        if (dateString.isEmpty())
+        if (dateString == null || dateString.isEmpty())
             return Optional.empty();
         try{
             return Optional.of(LocalDate.parse(dateString,dateFormatter));
@@ -86,6 +86,9 @@ public abstract class Helper {
     }
 
     public static String getDayString(DayOfWeek dayOfWeek){
+        if (dayOfWeek == null)
+            return "getDayString Fehler";
+
         switch (dayOfWeek){
             case MONDAY:  return "Montag";
             case TUESDAY:  return "Dienstag";
@@ -138,7 +141,7 @@ public abstract class Helper {
     }
 
     public static Optional<LocalTime> timeFromString(String startTime) {
-        if (startTime.isEmpty())
+        if (startTime == null || startTime.isEmpty())
             return Optional.empty();
         try{
             return Optional.of(LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm")));

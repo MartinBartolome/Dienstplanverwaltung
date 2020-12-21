@@ -162,11 +162,11 @@ public class SqlDatabaseManager implements IDatabaseManager {
             return;
 
         IUser owner = local.get().getOwner();
-        Optional<EmployeeEntity> manager = EmployeeEntity.createManagerForLocal(owner,local.get());
+        Optional<IEmployee> manager = EmployeeEntity.createManagerForLocal(owner,local.get());
         if (!manager.isPresent())
             return;
 
-        manager.get().save(employeeRepository);
+        ((EmployeeEntity)manager.get()).save(employeeRepository);
         ((LocalEntity)local.get()).setGranted(true);
         ((LocalEntity)local.get()).save(localRepository);
     }

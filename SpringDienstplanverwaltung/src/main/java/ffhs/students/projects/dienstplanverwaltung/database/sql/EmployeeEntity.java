@@ -79,7 +79,7 @@ class EmployeeEntity implements IEmployee, ISaveable {
         this.slotsAppliedTo = new ArrayList<>();
         local.addEmployee(this);
     }
-    public static Optional<EmployeeEntity> createManagerForLocal(IUser user, ILocal local){
+    public static Optional<IEmployee> createManagerForLocal(IUser user, ILocal local){
         if (!(user instanceof  UserEntity) ||  !(local instanceof LocalEntity))
             return Optional.empty();
 
@@ -87,9 +87,18 @@ class EmployeeEntity implements IEmployee, ISaveable {
         if (!adminRole.isPresent())
             return Optional.empty();
 
-        EmployeeEntity manager = new EmployeeEntity((UserEntity) user,(LocalEntity) local);
-        manager.addServiceRole(adminRole.get().getId());
-        return Optional.of(manager);
+        Optional<IEmployee> employeeForUser = local.getEmployees().stream()
+                .filter(employee -> employee.getUser().getNickname().equals(user.getNickname()))
+                .findFirst();
+
+        if (employeeForUser.isPresent() && (employeeForUser.get() instanceof EmployeeEntity) ){
+            ((EmployeeEntity) employeeForUser.get()).addServiceRole(adminRole.get().getId());
+            return employeeForUser;
+        }
+
+        EmployeeEntity newManager = new EmployeeEntity((UserEntity) user,(LocalEntity) local);
+        newManager.addServiceRole(adminRole.get().getId());
+        return Optional.of(newManager);
     }
     // Aktualisierung
     public void updateWithConfig(EmployeeConfig employeeConfig, EmployeeRepository repo) {

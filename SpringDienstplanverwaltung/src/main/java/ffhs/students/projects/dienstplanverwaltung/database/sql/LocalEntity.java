@@ -21,11 +21,11 @@ class LocalEntity implements ILocal, ISaveable {
     @ManyToOne
     @JoinColumn()
     private UserEntity owner;
-    @OneToMany(mappedBy = "local")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "local")
     private List<ServiceRoleEntity> serviceRoles;
-    @OneToMany(mappedBy = "local")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "local")
     private List<EmployeeEntity> employees;
-    @OneToMany(mappedBy = "local")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "local")
     private List<ShiftTemplateEntity> shiftTemplates;
     @OneToMany(mappedBy = "local")
     private List<ShiftEntity> shifts;
