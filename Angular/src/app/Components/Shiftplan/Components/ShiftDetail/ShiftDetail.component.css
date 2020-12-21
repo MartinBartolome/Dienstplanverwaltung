@@ -20,11 +20,10 @@ mat-checkbox
 }
 
 .SlotContainer{
-  width:95%;
+  width:100%;
   float:left;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   margin: 0.5em;
 }
 
