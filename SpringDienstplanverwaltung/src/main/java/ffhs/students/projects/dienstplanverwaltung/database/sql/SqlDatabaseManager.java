@@ -301,16 +301,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         return userRepository.findByNicknameAndAndPassword(username,password);
     }
 
-    public void createSysAdminIfNotExists(){
-        String sysAdminName = "Sysadmin";
-        Optional<IUser> exitingSysAdmin = getUser(sysAdminName);
-        if (exitingSysAdmin.isPresent())
-            return;
 
-        String sysAdminPassword = "password";
-        UserEntity sysAdmin = new UserEntity(sysAdminName,sysAdminPassword,true);
-        sysAdmin.save(userRepository);
-    }
 
 
     @Autowired private ServiceRoleRepository serviceRoleRepository;
@@ -322,50 +313,14 @@ public class SqlDatabaseManager implements IDatabaseManager {
     @Autowired private ShiftRepository shiftRepository;
 
 
+    public void createSysAdminIfNotExists(){
+        String sysAdminName = "Sysadmin";
+        Optional<IUser> exitingSysAdmin = getUser(sysAdminName);
+        if (exitingSysAdmin.isPresent())
+            return;
 
-    public void createFakeDate(){
-        createSysAdminIfNotExists();
-
-        /*
-        UserEntity martin = userRepository.save(new UserEntity("Martin"));
-        UserEntity celine = userRepository.save(new UserEntity("Celine"));
-        UserEntity matthias = userRepository.save(new UserEntity("Matthias"));
-
-        LocalEntity local = localRepository.save(new LocalEntity("City Cafe",martin));
-        LocalEntity local2 = localRepository.save(new LocalEntity("Staubsauger e.V.",matthias));
-
-        IServiceRole serviceRole1 = serviceRoleRepository.save(new ServiceRoleEntity("Barkeeper",local,true));
-        IServiceRole serviceRole2 = serviceRoleRepository.save(new ServiceRoleEntity("Kellner",local,true));
-
-
-        EmployeeEntity eMartin = employeeRepository.save(new EmployeeEntity(martin,local));
-        EmployeeEntity eCeline = employeeRepository.save(new EmployeeEntity(celine,local));
-        EmployeeEntity eMatthias = employeeRepository.save(new EmployeeEntity(matthias,local));
-        EmployeeEntity eMatthias2 = employeeRepository.save(new EmployeeEntity(matthias,local2));
-
-
-
-        List<DayOfWeek> days = new ArrayList<>(Arrays.asList( DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,
-                DayOfWeek.FRIDAY,DayOfWeek.SATURDAY,DayOfWeek.SUNDAY));
-
-
-        ShiftTemplateEntity shiftTemplate = new ShiftTemplateEntity(local,"Abend",
-                LocalTime.of(18,0), LocalTime.of(23,0),
-                RecurrenceType.Weekly,LocalDate.of(2020,1,1),null,
-                days);
-
-        //List<EmployeeEntity> assigned = new ArrayList<>(Arrays.asList(eCeline));
-        //List<EmployeeEntity> applied = new ArrayList<>(Arrays.asList(eMatthias,eMartin));
-        SlotEntity slot = new SlotEntity(null,2, new ArrayList<>(), new ArrayList<>());
-        slot.setTitle("Bar");
-        slot.addToShiftTemplate(shiftTemplate);
-
-        shiftTemplateRepository.save(shiftTemplate);
-        slotRepository.save(slot);
-
-        createManagerRole(local.getId());
-        createManagerRole(local2.getId());
-
-         */
+        String sysAdminPassword = "password";
+        UserEntity sysAdmin = new UserEntity(sysAdminName,sysAdminPassword,true);
+        sysAdmin.save(userRepository);
     }
 }
