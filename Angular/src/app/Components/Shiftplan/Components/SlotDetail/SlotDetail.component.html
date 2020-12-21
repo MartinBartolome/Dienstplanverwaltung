@@ -3,8 +3,8 @@
     <label>
       {{ slot.detailTitle }}
     </label>
-    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())>=0 && this.slot.allowedUserInteraction.includes('Apply')" (click)="Apply(false)">Abmelden</button>
-    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())<0 && this.slot.allowedUserInteraction.includes('Apply')" (click)="Apply(true)">Melden</button>
+    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())>=0 && this.slot.allowedUserInteraction.includes('Apply') && !canceled" (click)="Apply(false)">Abmelden</button>
+    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())<0 && this.slot.allowedUserInteraction.includes('Apply') && !canceled" (click)="Apply(true)">Melden</button>
   </header>
   <div class="UserContainer">
     <div class="User">

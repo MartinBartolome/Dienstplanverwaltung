@@ -17,6 +17,7 @@ export class AppComponent{
   ShiftPlanData: ShiftPlan;
   LoginSuccess = false;
   LocalSelected = false;
+  isSysAdmin = false;
   isManager = false;
 
   constructor(private api: DataService, public globalVariables: SharedService) {
@@ -60,5 +61,10 @@ export class AppComponent{
   {
     this.loadisManager();
     this.loadShiftPlanData(new Date());
+  }
+  public Login(status: boolean): void
+  {
+    this.LoginSuccess = status;
+    this.isSysAdmin = this.globalVariables.getUser().userIsSysAdmin;
   }
 }

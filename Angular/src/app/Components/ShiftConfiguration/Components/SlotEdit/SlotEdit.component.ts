@@ -6,6 +6,7 @@ import {Table} from '../../../General/Models/Table';
 import {SharedService} from '../../../../Common/SharedService';
 import {ListItem} from '../../../General/Models/ListItem';
 import {ServiceRoleEditComponent} from '../ServiceRoleEdit/ServiceRoleEdit.component';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-slot-edit',
@@ -13,6 +14,12 @@ import {ServiceRoleEditComponent} from '../ServiceRoleEdit/ServiceRoleEdit.compo
   styleUrls: ['./SlotEdit.component.css']
 })
 export class SlotEditComponent implements OnInit {
+  form: FormGroup = new FormGroup({
+    Titel: new FormControl('', [Validators.required]),
+    numberOfEmployeesNeeded: new FormControl('1', [Validators.required, Validators.min(1) ])
+  });
+
+
   constructor(public dialogRef: MatDialogRef<SlotEditComponent>,
               @Inject(MAT_DIALOG_DATA) public slotInfos: SlotInfo,
               private api: DataService, public globalVariables: SharedService, public dialog: MatDialog) { }
@@ -24,6 +31,25 @@ export class SlotEditComponent implements OnInit {
     if (this.slotInfos.id === null)
     {
       this.slotInfos.id = -1;
+    }
+    if (this.slotInfos.title !== undefined)
+    {
+      this.form.patchValue({Titel: this.slotInfos.title});
+    }
+    if (this.slotInfos.numberOfEmployeesNeeded !== undefined)
+    {
+      this.form.patchValue({numberOfEmployeesNeeded: this.slotInfos.numberOfEmployeesNeeded});
+    }
+
+
+  }
+
+  submit(): void{
+    if (this.form.valid)
+    {
+      this.slotInfos.title = this.form.get('Titel').value;
+      this.slotInfos.numberOfEmployeesNeeded = this.form.get('numberOfEmployeesNeeded').value;
+      this.dialogRef.close(this.slotInfos);
     }
   }
 

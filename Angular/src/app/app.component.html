@@ -1,5 +1,6 @@
-<app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = $event"></app-login>
-<app-chooselocal *ngIf="LoginSuccess && !LocalSelected" (submitEM)="LocalSelected = $event; Reload()" ></app-chooselocal>
+<app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = $event; isSysAdmin = globalVariables.getUser().userIsSysAdmin"></app-login>
+<app-chooselocal *ngIf="LoginSuccess && !LocalSelected && !isSysAdmin" (submitEM)="LocalSelected = $event; Reload()" ></app-chooselocal>
+<app-tenantconfig *ngIf="isSysAdmin"></app-tenantconfig>
 <div *ngIf="LoginSuccess && LocalSelected">
   <mat-tab-group mat-stretch-tabs class="tabcontainer">
     <mat-tab label="Schichtplan" >

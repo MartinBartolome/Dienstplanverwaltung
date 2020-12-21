@@ -4,6 +4,6 @@
   </label>
   <mat-checkbox [(ngModel)]="shift.canceled" color="primary" (click)="toggleCancel()">fällt aus</mat-checkbox>
   <div class="SlotContainer">
-    <app-slot-detail *ngFor="let slot of shift.slots" [slot]="slot" class="Slot"></app-slot-detail>
+    <app-slot-detail *ngFor="let slot of shift.slots" [slot]="slot" class="Slot" [canceled]="shift.canceled"></app-slot-detail>
   </div>
 </section>
