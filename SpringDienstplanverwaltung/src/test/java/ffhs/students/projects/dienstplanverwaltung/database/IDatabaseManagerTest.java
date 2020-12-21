@@ -3,6 +3,7 @@ package ffhs.students.projects.dienstplanverwaltung.database;
 import ffhs.students.projects.dienstplanverwaltung.database.sql.SqlDatabaseManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,31 +22,36 @@ import static org.junit.jupiter.api.Assertions.*;
 class IDatabaseManagerTest {
     @Autowired  public IDatabaseManager dbManager;
 
-    /* Bedingung für den Test ist ein Lokal mit der id = 10000
-    dieses muss (falls nicht vorhanden) "per Hand" angelegt werden
-     */
-    long localID = 10000;
     String testUserName = "UnitTestUser";
     String testUserPassword = "passwort";
 
     @BeforeAll
     static void beforeAll(){
         System.out.println("beforeAll");
-
-
     }
 
+    long testLocalId = -1;
+    @BeforeEach
+    void beforeEach(){
+        System.out.println("beforeAll");
+        if (testLocalId == -1) {
+            Optional<ILocal> testLocal = ((SqlDatabaseManager) dbManager).getAndCreateIfNeededDemoLocalAndDemoUSer();
+            testLocalId = testLocal
+                    .map(ILocal::getId)
+                    .orElse(-1L);
+        }
+    }
 
     @Test
     void getLocalById() {
-        Optional<ILocal> testLocal = dbManager.getLocalById(localID);
-        Assertions.assertTrue(testLocal.isPresent());
+        Optional<ILocal> test = dbManager.getLocalById(testLocalId);
+        Assertions.assertTrue(test.isPresent());
     }
 
     @Test
     void getAllLocals() {
         List<ILocal> locals = dbManager.getAllLocals();
-        Optional<ILocal> testLocal = locals.stream().filter(local -> local.getId() == localID).findFirst();
+        Optional<ILocal> testLocal = locals.stream().filter(local -> local.getId() == testLocalId).findFirst();
         Assertions.assertTrue(testLocal.isPresent());
     }
 
@@ -76,7 +83,8 @@ class IDatabaseManagerTest {
 
     @Test
     void updateLocal() {
-        Optional<ILocal> testLocal = dbManager.getLocalById(localID);
+
+        Optional<ILocal> testLocal = dbManager.getLocalById(testLocalId);
         Assertions.assertTrue(testLocal.isPresent());
 
         String title = testLocal.get().getTitle();
@@ -85,8 +93,8 @@ class IDatabaseManagerTest {
         title = title.equals("test1") ? "test2" : "test1";
         isActive = !isActive;
 
-        dbManager.updateLocal(localID,title,isActive);
-        testLocal = dbManager.getLocalById(localID);
+        dbManager.updateLocal(testLocalId,title,isActive);
+        testLocal = dbManager.getLocalById(testLocalId);
         Assertions.assertTrue(testLocal.isPresent());
 
         assertEquals(isActive, testLocal.get().isActive());
@@ -95,14 +103,14 @@ class IDatabaseManagerTest {
 
     @Test
     void localSetState() {
-        Optional<ILocal> testLocal = dbManager.getLocalById(localID);
+        Optional<ILocal> testLocal = dbManager.getLocalById(testLocalId);
         Assertions.assertTrue(testLocal.isPresent());
 
         boolean isActive = testLocal.get().isActive();
         isActive = !isActive;
 
-        dbManager.localSetState(localID,isActive);
-        testLocal = dbManager.getLocalById(localID);
+        dbManager.localSetState(testLocalId,isActive);
+        testLocal = dbManager.getLocalById(testLocalId);
         Assertions.assertTrue(testLocal.isPresent());
 
         assertEquals(isActive, testLocal.get().isActive());
@@ -113,25 +121,18 @@ class IDatabaseManagerTest {
     // und erhält die Rolle Manager
     @Test
     void grantLocal() {
-        Optional<ILocal> testLocal = dbManager.getLocalById(localID);
+        Optional<ILocal> testLocal = dbManager.getLocalById(testLocalId);
         Assertions.assertTrue(testLocal.isPresent());
-        ((SqlDatabaseManager) dbManager).updateLocal(localID,testLocal.get().getTitle(),testLocal.get().isActive(),false);
+        ((SqlDatabaseManager) dbManager).updateLocal(testLocalId,testLocal.get().getTitle(),testLocal.get().isActive(),false);
 
-        createUserIfNotExist();
-        Optional<IUser> user = dbManager.getUser(testUserName);
-        Assertions.assertTrue(user.isPresent());
-
-        ((SqlDatabaseManager) dbManager).createManagerRole(localID);
-        ((SqlDatabaseManager) dbManager).setOwnerForLocal(localID,testUserName);
-        assertEquals(testLocal.get().getOwner().getNickname(),testUserName);
-
-        testLocal = dbManager.getLocalById(localID);
+        testLocal = dbManager.getLocalById(testLocalId);
         Assertions.assertTrue(testLocal.isPresent());
         Assertions.assertFalse(testLocal.get().isGranted());
 
+        dbManager.grantLocal(testLocalId);
+        
         // Status ist granted
-        dbManager.grantLocal(localID);
-        testLocal = dbManager.getLocalById(localID);
+        testLocal = dbManager.getLocalById(testLocalId);
         Assertions.assertTrue(testLocal.isPresent());
         Assertions.assertTrue(testLocal.get().isGranted());
 
@@ -145,6 +146,8 @@ class IDatabaseManagerTest {
                 .filter(empl -> empl.getUser().getNickname().equals(testUserName))
                 .findFirst();
         Assertions.assertTrue(admin.isPresent());
+
+
     }
 
 

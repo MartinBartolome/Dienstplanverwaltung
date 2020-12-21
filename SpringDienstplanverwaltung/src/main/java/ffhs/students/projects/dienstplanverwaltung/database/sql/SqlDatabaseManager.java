@@ -8,6 +8,8 @@ import ffhs.students.projects.dienstplanverwaltung.administration.shiftconfig.Sl
 import ffhs.students.projects.dienstplanverwaltung.database.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.swing.text.html.Option;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -331,6 +333,25 @@ public class SqlDatabaseManager implements IDatabaseManager {
 
 
     // Für Unittests
+    public Optional<ILocal> getAndCreateIfNeededDemoLocalAndDemoUSer(){
+        Optional<ILocal> testLocal = localRepository.findFirstByIsUnittest(true);
+        if (testLocal.isPresent())
+            return testLocal;
+
+        String testUserName = "UnitTestUser";
+        String testUserPassword = "passwort";
+        createUserIfNotExist(testUserName,testUserPassword);
+        Optional<IUser> user = getUser(testUserName);
+        if(!user.isPresent())
+            return Optional.empty();
+
+        LocalEntity newTestLocal = LocalEntity.createUnittestLocal(user.get());
+        newTestLocal.setGranted(false);
+        localRepository.save(newTestLocal);
+
+        createManagerRole(newTestLocal.getId());
+        return Optional.of(newTestLocal);
+    }
     public Optional<ILocal> updateLocal(long localId, String title, boolean isActive, boolean isGranted){
         Optional<ILocal> local = localRepository.findById(localId);
         if (!local.isPresent())
@@ -342,6 +363,8 @@ public class SqlDatabaseManager implements IDatabaseManager {
         ((LocalEntity)local.get()).save(localRepository);
         return local;
     }
+
+    /*
     public Optional<ILocal> setOwnerForLocal(long localId, String userName){
         Optional<ILocal> local = localRepository.findById(localId);
         if (!local.isPresent())
@@ -357,4 +380,5 @@ public class SqlDatabaseManager implements IDatabaseManager {
         ((LocalEntity)local.get()).save(localRepository);
         return local;
     }
+    */
 }
