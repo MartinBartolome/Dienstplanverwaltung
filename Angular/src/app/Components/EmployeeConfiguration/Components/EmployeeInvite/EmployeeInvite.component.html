@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Mitarbeiter einladen</h1>
+<div mat-dialog-content>
+  <p>Bitte die (Nick)Name Adresse eingeben:</p>
+  <mat-form-field>
+    <mat-label>(Nick)Name</mat-label>
+    <label>
+      <input type="email" matInput [(ngModel)]="email" placeholder="">
+    </label>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="email" cdkFocusInitial>Ok</button>
+  <button mat-raised-button color="primary" (click)="Cancel()">Abbrechen</button>
+</div>

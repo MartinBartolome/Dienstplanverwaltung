@@ -1,0 +1,40 @@
+section{
+  display: flex;
+  flex-direction: column;
+  border-collapse: collapse;
+  border: 0.1em solid #e4e4e4;
+  min-width: 50%;
+}
+
+.HeaderRow{
+  border-bottom:solid #e4e4e4;
+  border-collapse: collapse;
+  border-width:0.1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.SubRows{
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+header{
+  font-size: 1.25em;
+}
+
+.Highlight{
+  background: #3F51B5;
+  color: white;
+}
+mat-icon{
+  cursor: pointer;
+}
+.doubletable{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}

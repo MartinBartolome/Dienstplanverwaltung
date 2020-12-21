@@ -1,0 +1,8 @@
+<section>
+  <div class="wrapper">
+    <div class="EmployeeTable">
+      <app-table [table]="employees.employees" [AllowSelection]="false" (EditItemEvent)="EditEmployee($event)" [AllowDelete]="false"></app-table>
+      <button mat-raised-button color="primary" (click)="InviteEmployee()">Mitarbeiter<br />einladen</button>
+    </div>
+  </div>
+</section>

@@ -1,14 +1,23 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Vorname</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let c of data">
-    <td>{{c.nachname}}</td>
-    <td>{{c.vorname}}</td>
-  </tr>
-  </tbody>
-</table>
+<app-login *ngIf="!LoginSuccess" (submitEM)="LoginSuccess = $event"></app-login>
+<app-chooselocal *ngIf="LoginSuccess && !LocalSelected" (submitEM)="LocalSelected = $event; Reload()" ></app-chooselocal>
+<div *ngIf="LoginSuccess && LocalSelected">
+  <mat-tab-group mat-stretch-tabs class="tabcontainer">
+    <mat-tab label="Schichtplan" >
+      <ng-template matTabContent>
+        <app-shiftplan [data]="ShiftPlanData" (DateChange)="loadShiftPlanData($event)" (ReloadChange)="loadShiftPlanData($event)"></app-shiftplan>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Schichtverwaltung" *ngIf="isManager">
+      <ng-template matTabContent>
+        <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration" (ShiftConfigChanged)="Reload()"></app-shift-configuration>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Mitarbeiterverwaltung" *ngIf="isManager">
+      <ng-template matTabContent>
+        <app-employee-configuration [employees]="EmployeeData"></app-employee-configuration>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+

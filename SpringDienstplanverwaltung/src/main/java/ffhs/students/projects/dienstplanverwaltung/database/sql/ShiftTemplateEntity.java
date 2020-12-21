@@ -192,9 +192,9 @@ class ShiftTemplateEntity implements IShiftTemplate,ISaveable,IDeleteable {
 
         String result = "(";
         String daysString = days.stream()
-                .reduce((r,day) -> r+day+",")
+                .reduce((r,day) -> r + ","+day)
                 .orElse("").trim();
-        result += daysString.substring(daysString.length() -1);
+        result += daysString;//.substring(0,daysString.length() -1);
         result += ")";
         return result;
     }

@@ -1,0 +1,25 @@
+section{
+  display: flex;
+  flex-direction: row;
+  border-collapse: collapse;
+  border: 0.1em solid #e4e4e4;
+  padding:0.5em;
+}
+
+header{
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+.settings{
+  display: flex;
+  flex-direction: column;
+}
+
+form{
+  margin-left:2em;
+}
+
+.ButtonNav{
+  margin-bottom: 0.5em;
+}

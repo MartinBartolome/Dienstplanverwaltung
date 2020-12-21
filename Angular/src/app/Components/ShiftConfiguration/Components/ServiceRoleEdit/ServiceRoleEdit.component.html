@@ -1,0 +1,13 @@
+<section>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Titel</mat-label>
+      <label>
+        <input type="text" matInput placeholder="Titel" formControlName="Titel">
+      </label>
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-raised-button color="primary" (click)="close()" cdkFocusInitial>Ok</button>
+    </div>
+  </form>
+</section>

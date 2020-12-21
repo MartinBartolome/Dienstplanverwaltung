@@ -1,0 +1,16 @@
+.Tab{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+app-doubletable{
+  width: 98.5%;
+}
+button{
+  margin-top: 0.5em;
+}
+.button {
+  display: flex;
+  justify-content: flex-end;
+}

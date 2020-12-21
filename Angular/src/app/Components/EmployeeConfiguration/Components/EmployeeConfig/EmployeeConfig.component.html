@@ -1,0 +1,28 @@
+<section>
+  <div class="settings">
+    <header>{{ employee.nickName }}</header>
+    <app-table [table]="employee.serviceRoles" (AddEvent)="newServiceRole()" [AllowSelection]="true" (EditItemEvent)="editServiceRole($event)"></app-table>
+  </div>
+  <form class="settings">
+    <p>
+      <mat-checkbox name="isActive" [(ngModel)]="employee.isActive" color="primary">Deaktivieren</mat-checkbox>
+    </p>
+    <mat-form-field appearance="outline">
+      <mat-label>Stundensatz in {{ employee.currency }}</mat-label>
+      <label>
+        <input matInput placeholder="Stundensatz" name="Stundensatz" [(ngModel)]="employee.hourlyRate">
+      </label>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Monatskontingent</mat-label>
+      <label>
+        <input matInput placeholder="Monatskontingent" name="Monatskontingent" [(ngModel)]="employee.monthlyContingent">
+      </label>
+    </mat-form-field>
+    <div mat-dialog-actions class="ButtonNav">
+      <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="employee">Speichern</button>
+      <button mat-raised-button color="primary" (click)="dialogRef.close()">Abbrechen</button>
+    </div>
+  </form>
+
+</section>
