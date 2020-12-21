@@ -151,6 +151,7 @@ class SlotEntity implements ISlot, ISlotDisplay,IDeleteable, ISaveable {
         copy.assigned = new ArrayList<>();
         copy.applied = new ArrayList<>();
         copy.serviceRoles = new ArrayList<>();
+        if (serviceRoles != null) serviceRoles.forEach(copy::addServiceRole);
         copy.save(repo);
     }
 }
