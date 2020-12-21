@@ -47,6 +47,8 @@ class LocalEntity implements ILocal, ISaveable {
                 .collect(Collectors.toList());
     }
     public List<IServiceRole> getServiceRoles() {
+        if (serviceRoles == null)
+            return new ArrayList<>();
         return serviceRoles.stream()
                 .map(IServiceRole.class::cast)
                 .collect(Collectors.toList());
@@ -75,6 +77,8 @@ class LocalEntity implements ILocal, ISaveable {
 
     // Aktualisierungen
     public void addServiceRole(ServiceRoleEntity serviceRole){
+        if (serviceRoles == null)
+            serviceRoles = new ArrayList<>();
         serviceRoles.add(serviceRole);
     }
     public void addEmployee(EmployeeEntity employee){
@@ -84,5 +88,11 @@ class LocalEntity implements ILocal, ISaveable {
     // Unittests
     public void setOwner(UserEntity owner){
         this.owner = owner;
+    }
+    public void initLists(){
+        serviceRoles = new ArrayList<>();
+        employees = new ArrayList<>();
+        shifts = new ArrayList<>();
+        shiftTemplates = new ArrayList<>();
     }
 }

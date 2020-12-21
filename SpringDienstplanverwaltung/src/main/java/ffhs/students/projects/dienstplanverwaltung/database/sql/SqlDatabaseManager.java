@@ -272,14 +272,18 @@ public class SqlDatabaseManager implements IDatabaseManager {
         if (!local.isPresent())
             return;
 
-        Optional<IServiceRole> adminRole = local.get().getServiceRoles()
-                .stream().filter(IServiceRole::isAdminRole)
+        List<IServiceRole> serviceRoles = local.get().getServiceRoles();
+        Optional<IServiceRole> adminRole = serviceRoles == null
+                ? Optional.empty()
+                : serviceRoles.stream().filter(IServiceRole::isAdminRole)
                 .findFirst();
 
         if (adminRole.isPresent())
             return;
 
-        ServiceRoleEntity.createManagerRole((LocalEntity)local.get()).save(serviceRoleRepository);
+        ServiceRoleEntity
+                .createManagerRole((LocalEntity)local.get())
+                .save(serviceRoleRepository);
     }
 
     public boolean createUserIfNotExist(String username, String password){
@@ -391,6 +395,7 @@ public class SqlDatabaseManager implements IDatabaseManager {
         Optional<IUser> user = getUser(userName);
         if (!user.isPresent())
             return Optional.empty();
+
 
 
         ((LocalEntity)local.get()).setOwner((UserEntity) user.get());

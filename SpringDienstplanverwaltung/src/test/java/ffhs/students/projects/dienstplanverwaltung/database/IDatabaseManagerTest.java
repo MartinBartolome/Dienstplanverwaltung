@@ -6,9 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -122,6 +121,7 @@ class IDatabaseManagerTest {
         Optional<IUser> user = dbManager.getUser(testUserName);
         Assertions.assertTrue(user.isPresent());
 
+        ((SqlDatabaseManager) dbManager).createManagerRole(localID);
         ((SqlDatabaseManager) dbManager).setOwnerForLocal(localID,testUserName);
         assertEquals(testLocal.get().getOwner().getNickname(),testUserName);
 
