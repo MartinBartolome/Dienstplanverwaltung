@@ -17,7 +17,7 @@ public interface ISlotDisplay extends ISlot {
     }
     default String getDetailTitle(){
         String title = getTitle();
-        String numbers = "(" + getApplied().size() + "/" + getNumberOfEmployeesNeeded() + ")";
+        String numbers = "(" + getAssigned().size() + "/" + getNumberOfEmployeesNeeded() + ")";
         return title + numbers;
     }
     default List<String> getAssignedStrings(){
