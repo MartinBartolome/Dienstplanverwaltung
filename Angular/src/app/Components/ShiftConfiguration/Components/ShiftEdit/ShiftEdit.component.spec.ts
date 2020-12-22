@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShiftEditComponent } from './ShiftEdit.component';
+import {ShiftEditComponent} from './ShiftEdit.component';
 
 describe('ShiftEditComponent', () => {
   let component: ShiftEditComponent;
@@ -8,9 +8,9 @@ describe('ShiftEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShiftEditComponent ]
+      declarations: [ShiftEditComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -9,15 +9,17 @@ import {SharedService} from '../../../../Common/SharedService';
   styleUrls: ['./ShiftDetail.component.css']
 })
 export class ShiftDetailComponent implements OnInit {
-  @Input()  shift: Shift;
+  @Input() shift: Shift;
   isManager: boolean;
-  constructor(private api: DataService, public globalVariables: SharedService) { }
+
+  constructor(private api: DataService, public globalVariables: SharedService) {
+  }
 
   ngOnInit(): void {
     this.isManager = this.globalVariables.getisManager();
   }
 
-  toggleCancel(): void{
+  toggleCancel(): void {
     this.api.sendGetRequest('/shiftSetIsCanceled?shiftId=' + this.shift.id + '&localId='
       + this.globalVariables.getLocalID() + '&employeeName='
       + this.globalVariables.getNickName() + '&isCanceled=' + !this.shift.canceled).subscribe((data: Shift) => {

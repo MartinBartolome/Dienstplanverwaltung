@@ -11,7 +11,8 @@ export class LocalEditComponent implements OnInit {
   @Output() EditLocal = new EventEmitter();
 
   constructor(public dialogRef: MatDialogRef<LocalEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public Local: ListItem) { }
+              @Inject(MAT_DIALOG_DATA) public Local: ListItem) {
+  }
 
   ngOnInit(): void {
   }

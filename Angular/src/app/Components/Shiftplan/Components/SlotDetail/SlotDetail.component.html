@@ -3,8 +3,14 @@
     <label>
       {{ slot.detailTitle }}
     </label>
-    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())>=0 && this.slot.allowedUserInteraction.includes('Apply') && !canceled" (click)="Apply(false)">Abmelden</button>
-    <button mat-raised-button color="primary" type="button" *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())<0 && this.slot.allowedUserInteraction.includes('Apply') && !canceled" (click)="Apply(true)">Melden</button>
+    <button mat-raised-button color="primary" type="button"
+            *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())>=0 && this.slot.allowedUserInteraction.includes('Apply') && !canceled"
+            (click)="Apply(false)">Abmelden
+    </button>
+    <button mat-raised-button color="primary" type="button"
+            *ngIf="slot.applied.indexOf(this.globalVariables.getNickName())<0 && this.slot.allowedUserInteraction.includes('Apply') && !canceled"
+            (click)="Apply(true)">Melden
+    </button>
   </header>
   <div class="UserContainer">
     <div class="User">
@@ -17,8 +23,11 @@
     <div class="User">
       <label>gemeldet:</label>
       <ul *ngFor="let a of slot.applied ; last as isLast">
-        <li *ngIf="isLast == false" [ngClass]="{'Highlight': slot.assigned.indexOf(a)>=0}" (click)="clickOnApplied(a)">{{ a }},</li>
-        <li *ngIf="isLast == true" [ngClass]="{'Highlight': slot.assigned.indexOf(a)>=0}" (click)="clickOnApplied(a)">{{ a }}</li>
+        <li *ngIf="isLast == false" [ngClass]="{'Highlight': slot.assigned.indexOf(a)>=0}"
+            (click)="clickOnApplied(a)">{{ a }},
+        </li>
+        <li *ngIf="isLast == true" [ngClass]="{'Highlight': slot.assigned.indexOf(a)>=0}"
+            (click)="clickOnApplied(a)">{{ a }}</li>
       </ul>
     </div>
   </div>

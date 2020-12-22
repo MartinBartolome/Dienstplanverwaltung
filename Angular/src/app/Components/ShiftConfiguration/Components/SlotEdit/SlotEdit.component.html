@@ -11,7 +11,8 @@
       <input matInput placeholder="Anzahl Mitarbeiter" name="CountEmployee" formControlName="numberOfEmployeesNeeded">
     </label>
   </mat-form-field>
-  <app-table [table]="slotInfos.serviceRoleTable" (EditItemEvent)="editServiceRole($event)" (AddEvent)="newServiceRole()" [AllowSelection]="true"></app-table>
+  <app-table [table]="slotInfos.serviceRoleTable" (EditItemEvent)="editServiceRole($event)"
+             (AddEvent)="newServiceRole()" [AllowSelection]="true"></app-table>
   <div mat-dialog-actions class="ButtonNav">
     <button mat-raised-button color="primary" type="submit" (click)="submit()">Speichern</button>
     <button mat-raised-button color="primary" (click)="dialogRef.close()">Abbrechen</button>

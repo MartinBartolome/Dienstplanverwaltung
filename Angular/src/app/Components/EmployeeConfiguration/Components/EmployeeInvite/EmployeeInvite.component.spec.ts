@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmployeeInviteComponent } from './EmployeeInvite.component';
+import {EmployeeInviteComponent} from './EmployeeInvite.component';
 
 describe('EmployeeInviteComponent', () => {
   let component: EmployeeInviteComponent;
@@ -8,9 +8,9 @@ describe('EmployeeInviteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EmployeeInviteComponent ]
+      declarations: [EmployeeInviteComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

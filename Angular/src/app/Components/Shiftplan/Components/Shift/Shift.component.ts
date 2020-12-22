@@ -7,8 +7,10 @@ import {Shift} from '../../Models/Shift';
   styleUrls: ['./Shift.component.css']
 })
 export class ShiftComponent implements OnInit {
-  @Input()  shift: Shift;
-  constructor() { }
+  @Input() shift: Shift;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

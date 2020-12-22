@@ -16,16 +16,16 @@ export class ShiftConfigurationComponent implements OnInit {
   @Input() ShiftConfiguration: ShiftConfiguration;
   @Output() ShiftConfigChanged = new EventEmitter();
 
-  constructor(public dialog: MatDialog, private api: DataService, public globalVariables: SharedService) { }
+  constructor(public dialog: MatDialog, private api: DataService, public globalVariables: SharedService) {
+  }
 
   ngOnInit(): void {
   }
 
-  newTemplate(): void{
-    const dialogRef = this.dialog.open(ShiftEditComponent, { data: this.ShiftConfiguration.emptyShiftTemplateConfig });
+  newTemplate(): void {
+    const dialogRef = this.dialog.open(ShiftEditComponent, {data: this.ShiftConfiguration.emptyShiftTemplateConfig});
     dialogRef.afterClosed().subscribe((result: ShiftTemplateConfigs) => {
-      if (result)
-      {
+      if (result) {
         this.api.sendPostRequest('/updateShiftTemplateConfig?localId=' + this.globalVariables.getLocalID(), result)
           .subscribe((data: ShiftTemplateConfigs) => {
             this.ShiftConfiguration.shiftTemplateConfigs.push(data);
@@ -35,19 +35,20 @@ export class ShiftConfigurationComponent implements OnInit {
     });
   }
 
-  public editTemplate(template: ListItem): void{
+  public editTemplate(template: ListItem): void {
     const dialogRef = this.dialog.open(ShiftEditComponent,
-      { data: this.ShiftConfiguration.shiftTemplateConfigs[
-          this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)]});
-    dialogRef.afterClosed().subscribe((result: ShiftTemplateConfigs)  => {
-      if (result)
       {
+        data: this.ShiftConfiguration.shiftTemplateConfigs[
+          this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)]
+      });
+    dialogRef.afterClosed().subscribe((result: ShiftTemplateConfigs) => {
+      if (result) {
         this.api.sendPostRequest('/updateShiftTemplateConfig?localId=' + this.globalVariables.getLocalID(), result)
           .subscribe((data: ShiftTemplateConfigs) => {
-          this.ShiftConfiguration.shiftTemplateConfigs[
-            this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)] = data;
-          this.ShiftConfigChanged.emit(true);
-        });
+            this.ShiftConfiguration.shiftTemplateConfigs[
+              this.ShiftConfiguration.shiftTemplatesTable.items.indexOf(template)] = data;
+            this.ShiftConfigChanged.emit(true);
+          });
       }
     });
   }

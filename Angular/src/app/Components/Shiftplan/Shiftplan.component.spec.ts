@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShiftplanComponent } from './Shiftplan.component';
+import {ShiftplanComponent} from './Shiftplan.component';
 
 describe('ShiftplanComponent', () => {
   let component: ShiftplanComponent;
@@ -8,9 +8,9 @@ describe('ShiftplanComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShiftplanComponent ]
+      declarations: [ShiftplanComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

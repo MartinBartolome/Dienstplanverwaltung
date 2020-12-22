@@ -11,7 +11,7 @@ import {DataService} from "../../../Common/DataService";
   templateUrl: './Login.component.html',
   styleUrls: ['./Login.component.css']
 })
-export class LoginComponent{
+export class LoginComponent {
   @Input() error: string | null;
   @Output() submitEM = new EventEmitter();
 
@@ -20,33 +20,31 @@ export class LoginComponent{
     password: new FormControl('1234'),
   });
 
-  submit(): void{
+  submit(): void {
     this.api.sendGetRequest('/loginUser?username=' +
       this.form.get('username').value + '&password=' +
       this.form.get('password').value)
       .subscribe((data: UserResponse) => {
-        if (data.success)
-        {
+        if (data.success) {
           this.globalVariables.setNickName(this.form.get('username').value);
           this.globalVariables.setUser(data);
           this.submitEM.emit(true);
-        }
-        else {
+        } else {
           alert(data.message);
           this.submitEM.emit(false);
         }
       });
   }
 
-  signup(): void{
+  signup(): void {
     const dialogRef = this.dialog.open(SignUpComponent);
-    dialogRef.afterClosed().subscribe((result: string)  => {
-      if (result)
-      {
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
         this.submitEM.emit(true);
       }
     });
   }
 
-  constructor(public globalVariables: SharedService, public dialog: MatDialog,private api: DataService) { }
+  constructor(public globalVariables: SharedService, public dialog: MatDialog, private api: DataService) {
+  }
 }

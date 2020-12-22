@@ -1,18 +1,19 @@
-label{
+label {
   margin-left: 1em;
-  float:left;
+  float: left;
 }
 
 ul {
   list-style: none;
-  float:left;
+  float: left;
   margin: 0 0 0 0.2em;
-  padding:0;
+  padding: 0;
 }
+
 li {
 }
 
-section{
+section {
   width: auto;
   line-height: revert;
   font-weight: lighter;

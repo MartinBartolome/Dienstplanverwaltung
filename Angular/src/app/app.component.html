@@ -14,18 +14,20 @@
     LoggedUser = globalVariables.getNickName()"></app-login>
   <app-chooselocal *ngIf="LoginSuccess && !LocalSelected && !isSysAdmin"
                    (submitEM)="LocalSelected = $event;
-                     Reload(); SelectedLocal = globalVariables.getLocalName()" ></app-chooselocal>
+                     Reload(); SelectedLocal = globalVariables.getLocalName()"></app-chooselocal>
   <app-tenantconfig *ngIf="isSysAdmin"></app-tenantconfig>
   <div *ngIf="LoginSuccess && LocalSelected">
     <mat-tab-group mat-stretch-tabs class="tabcontainer">
-      <mat-tab label="Schichtplan" >
+      <mat-tab label="Schichtplan">
         <ng-template matTabContent>
-          <app-shiftplan [data]="ShiftPlanData" (DateChange)="loadShiftPlanData($event)" (ReloadChange)="loadShiftPlanData($event)"></app-shiftplan>
+          <app-shiftplan [data]="ShiftPlanData" (DateChange)="loadShiftPlanData($event)"
+                         (ReloadChange)="loadShiftPlanData($event)"></app-shiftplan>
         </ng-template>
       </mat-tab>
       <mat-tab label="Schichtverwaltung" *ngIf="isManager">
         <ng-template matTabContent>
-          <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration" (ShiftConfigChanged)="Reload()"></app-shift-configuration>
+          <app-shift-configuration [ShiftConfiguration]="ShiftConfiguration"
+                                   (ShiftConfigChanged)="Reload()"></app-shift-configuration>
         </ng-template>
       </mat-tab>
       <mat-tab label="Mitarbeiterverwaltung" *ngIf="isManager">

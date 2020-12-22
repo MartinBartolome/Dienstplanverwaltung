@@ -10,17 +10,17 @@
     </div>
     <app-table [table]="template.days" [AllowSelection]="true"></app-table>
     <div>
-        <header>Gültigkeit</header>
+      <header>Gültigkeit</header>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Von</mat-label>
-          <input matInput name= "FromDate" [matDatepicker]="dpfromDate" formControlName="fromdate" [readonly]="true">
+          <input matInput name="FromDate" [matDatepicker]="dpfromDate" formControlName="fromdate" [readonly]="true">
           <mat-datepicker-toggle matSuffix [for]="dpfromDate"></mat-datepicker-toggle>
           <mat-datepicker #dpfromDate></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Bis</mat-label>
-          <input matInput name= "ToDate" [matDatepicker]="dptoDate" formControlName="todate"  [readonly]="true">
+          <input matInput name="ToDate" [matDatepicker]="dptoDate" formControlName="todate" [readonly]="true">
           <mat-datepicker-toggle matSuffix [for]="dptoDate"></mat-datepicker-toggle>
           <mat-datepicker #dptoDate></mat-datepicker>
         </mat-form-field>
@@ -28,7 +28,8 @@
       <mat-form-field appearance="outline">
         <mat-label>Von Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Von" name="FromTime" type="time" formControlName="fromtime" (input)="onTimeInput()">
+          <input matInput placeholder="Von" name="FromTime" type="time" formControlName="fromtime"
+                 (input)="onTimeInput()">
         </label>
         <mat-error *ngIf="getfromtime.invalid && !getfromtime.hasError('required')">
           Zeiten überprüfen!

@@ -9,7 +9,8 @@ import {ShiftDays} from '../../Models/ShiftDays';
 export class ShiftDayComponent implements OnInit {
   @Input() ShiftDays: ShiftDays;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

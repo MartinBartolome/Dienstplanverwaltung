@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ChooselocalComponent } from './ChooseLocal.component';
+import {ChooselocalComponent} from './ChooseLocal.component';
 
 describe('ChooselocalComponent', () => {
   let component: ChooselocalComponent;
@@ -8,9 +8,9 @@ describe('ChooselocalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChooselocalComponent ]
+      declarations: [ChooselocalComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

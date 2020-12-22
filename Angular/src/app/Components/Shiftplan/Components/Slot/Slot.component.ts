@@ -9,7 +9,8 @@ import {Slot} from '../../Models/Slot';
 export class SlotComponent implements OnInit {
   @Input() slot: Slot;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

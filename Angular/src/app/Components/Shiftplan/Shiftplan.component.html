@@ -12,8 +12,9 @@
     <div class="DayBox">Fr</div>
     <div class="DayBox">Sa</div>
     <div class="DayBox">So</div>
-    <div class="DayBox" *ngFor="let ShiftDays of data.shiftDays" [ngClass]="{'GrayedBox': !ShiftDays.inMonth, 'NormalBox': ShiftDays.inMonth}">
-      <div class="date">{{ShiftDays.day.slice(0,2)}}</div>
+    <div class="DayBox" *ngFor="let ShiftDays of data.shiftDays"
+         [ngClass]="{'GrayedBox': !ShiftDays.inMonth, 'NormalBox': ShiftDays.inMonth}">
+      <div class="date">{{ShiftDays.day.slice(0, 2)}}</div>
       <app-shift-day [ShiftDays]="ShiftDays" (click)="clickOpenDetail(ShiftDays)"></app-shift-day>
     </div>
   </div>

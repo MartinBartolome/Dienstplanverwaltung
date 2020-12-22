@@ -11,17 +11,18 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class ServiceRoleEditComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    Titel: new FormControl('', [ Validators.required ])
+    Titel: new FormControl('', [Validators.required])
   });
 
   constructor(public dialogRef: MatDialogRef<ServiceRoleEditComponent>,
-              @Inject(MAT_DIALOG_DATA) public ServiceRole: ListItem) { }
+              @Inject(MAT_DIALOG_DATA) public ServiceRole: ListItem) {
+  }
 
   ngOnInit(): void {
     this.form.get('Titel').setValue(this.ServiceRole.title);
   }
 
-  close(): void{
+  close(): void {
     if (this.form.valid) {
       this.ServiceRole.title = this.form.get('Titel').value;
       this.dialogRef.close(this.ServiceRole);

@@ -16,62 +16,60 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class SlotEditComponent implements OnInit {
   form: FormGroup = new FormGroup({
     Titel: new FormControl('', [Validators.required]),
-    numberOfEmployeesNeeded: new FormControl('1', [Validators.required, Validators.min(1) ])
+    numberOfEmployeesNeeded: new FormControl('1', [Validators.required, Validators.min(1)])
   });
 
 
   constructor(public dialogRef: MatDialogRef<SlotEditComponent>,
               @Inject(MAT_DIALOG_DATA) public slotInfos: SlotInfo,
-              private api: DataService, public globalVariables: SharedService, public dialog: MatDialog) { }
+              private api: DataService, public globalVariables: SharedService, public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     if (this.slotInfos.serviceRoleTable === undefined) {
       this.loadServiceRoles();
     }
-    if (this.slotInfos.id === null)
-    {
+    if (this.slotInfos.id === null) {
       this.slotInfos.id = -1;
     }
-    if (this.slotInfos.title !== undefined)
-    {
+    if (this.slotInfos.title !== undefined) {
       this.form.patchValue({Titel: this.slotInfos.title});
     }
-    if (this.slotInfos.numberOfEmployeesNeeded !== undefined)
-    {
+    if (this.slotInfos.numberOfEmployeesNeeded !== undefined) {
       this.form.patchValue({numberOfEmployeesNeeded: this.slotInfos.numberOfEmployeesNeeded});
     }
 
 
   }
 
-  submit(): void{
-    if (this.form.valid)
-    {
+  submit(): void {
+    if (this.form.valid) {
       this.slotInfos.title = this.form.get('Titel').value;
       this.slotInfos.numberOfEmployeesNeeded = this.form.get('numberOfEmployeesNeeded').value;
       this.dialogRef.close(this.slotInfos);
     }
   }
 
-  public loadServiceRoles(): void{
+  public loadServiceRoles(): void {
     this.api.sendGetRequest('/getServiceRoles?localId=' + this.globalVariables.getLocalID()).subscribe((data: Table) => {
       this.slotInfos.serviceRoleTable = data;
     });
   }
-  newServiceRole(): void{
-    const dialogRef = this.dialog.open(ServiceRoleEditComponent, { data: new ListItem()});
+
+  newServiceRole(): void {
+    const dialogRef = this.dialog.open(ServiceRoleEditComponent, {data: new ListItem()});
     dialogRef.afterClosed().subscribe((result: ListItem) => {
       this.api.sendGetRequest('/addServiceRole?localId=' + this.globalVariables.getLocalID() + '&title=' + result.title)
         .subscribe((data: Table) => {
           this.slotInfos.serviceRoleTable = data;
-      });
+        });
     });
   }
 
-  public editServiceRole(ServiceRole: ListItem): void{
+  public editServiceRole(ServiceRole: ListItem): void {
     ServiceRole.selected = false;
     const dialogRef = this.dialog.open(ServiceRoleEditComponent,
-      { data: ServiceRole });
+      {data: ServiceRole});
     dialogRef.afterClosed().subscribe((result: ListItem) => {
       this.api.sendGetRequest('/updateServiceRole?serviceRoleId=' + ServiceRole.id + '&title=' + result.title + '&isActive=true')
         .subscribe((data: Table) => {

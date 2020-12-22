@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShiftConfigurationComponent } from './ShiftConfiguration.component';
+import {ShiftConfigurationComponent} from './ShiftConfiguration.component';
 
 describe('ShiftConfigurationComponent', () => {
   let component: ShiftConfigurationComponent;
@@ -8,9 +8,9 @@ describe('ShiftConfigurationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShiftConfigurationComponent ]
+      declarations: [ShiftConfigurationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

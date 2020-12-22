@@ -1,39 +1,41 @@
-section{
+section {
   border: 0.1em solid #e4e4e4;
 }
-section:after{
+
+section:after {
   content: ".";
-  display:block;
-  height:0;
-  clear:both;
-  visibility:hidden;
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }
 
-label{
+label {
   margin: 0.5em;
-  float:left;
+  float: left;
 }
-mat-checkbox
-{
+
+mat-checkbox {
   margin: 0.5em;
   float: right;
 }
 
-.SlotContainer{
-  width:100%;
-  float:left;
+.SlotContainer {
+  width: 100%;
+  float: left;
   display: flex;
   flex-direction: column;
   margin: 0.5em;
 }
 
-.Slot{
+.Slot {
   margin: 0 0.5em 0.5em 0.5em;
 }
 
-.Canceled{
+.Canceled {
   text-decoration: line-through;
 }
-.normal{
+
+.normal {
   text-decoration: none;
 }

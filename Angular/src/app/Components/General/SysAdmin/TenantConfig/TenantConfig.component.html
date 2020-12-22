@@ -2,7 +2,7 @@
   <mat-card-title>Verwaltung</mat-card-title>
   <mat-card-content>
     <mat-tab-group mat-stretch-tabs>
-      <mat-tab [label]="SysadminData.tab1Title" >
+      <mat-tab [label]="SysadminData.tab1Title">
         <ng-template matTabContent>
           <div class="Tab">
             <app-doubletable [tables]="SysadminData.table1Data" [AllowSelection]="true"></app-doubletable>
@@ -12,7 +12,7 @@
           </div>
         </ng-template>
       </mat-tab>
-      <mat-tab [label]="SysadminData.tab2Title" >
+      <mat-tab [label]="SysadminData.tab2Title">
         <ng-template matTabContent>
           <div class="Tab">
             <app-doubletable [tables]="SysadminData.table2Data" [AllowSelection]="true"></app-doubletable>

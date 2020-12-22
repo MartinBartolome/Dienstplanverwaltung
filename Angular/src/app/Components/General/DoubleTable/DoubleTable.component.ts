@@ -12,26 +12,24 @@ export class DoubleTableComponent implements OnInit {
   @Input() tables: SysAdminTableData;
   @Input() AllowSelection: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  ItemSelectedt1(item: ListItem): void{
-    if (!this.AllowSelection)
-    {
+  ItemSelectedt1(item: ListItem): void {
+    if (!this.AllowSelection) {
 
-    }
-    else {
+    } else {
       this.tables.table2.items[this.tables.table1.items.indexOf(item)].selected = item.selected;
     }
   }
-  ItemSelectedt2(item: ListItem): void{
-    if (!this.AllowSelection)
-    {
+
+  ItemSelectedt2(item: ListItem): void {
+    if (!this.AllowSelection) {
       item.selected = false;
-    }
-    else {
+    } else {
       this.tables.table1.items[this.tables.table2.items.indexOf(item)].selected = item.selected;
     }
   }

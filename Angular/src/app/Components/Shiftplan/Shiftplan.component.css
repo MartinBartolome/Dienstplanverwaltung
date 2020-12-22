@@ -1,38 +1,42 @@
-section{
-  padding-left:5em;
-  padding-right:5em;
+section {
+  padding-left: 5em;
+  padding-right: 5em;
 }
-header{
+
+header {
   font-size: 2em;
 }
+
 #calendar {
   display: flex;
   flex-wrap: wrap;
 }
 
-.DayBox{
+.DayBox {
   border-collapse: collapse;
   border: 0.1em solid #e4e4e4;
   display: inline-block;
   flex-grow: 1;
-  width: calc(100% * (1/8) - 1px);
+  width: calc(100% * (1 / 8) - 1px);
   text-align: center;
 }
 
-#Navigation{
+#Navigation {
   display: flex;
   justify-content: space-between;
   margin: 1em;
 }
-.date{
-  float:right;
+
+.date {
+  float: right;
   padding-top: 0.5em;
   padding-right: 0.5em;
 }
 
-.GrayedBox{
+.GrayedBox {
   background-color: lightgrey;
 }
-.NormalBox{
+
+.NormalBox {
   background-color: white;
 }

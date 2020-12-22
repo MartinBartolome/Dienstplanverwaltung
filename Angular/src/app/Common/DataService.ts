@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
-import {  throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import {throwError} from 'rxjs';
+import {retry, catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,10 @@ export class DataService {
   private REST_API_SERVER = 'http://192.168.178.20:8080';
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  handleError(error: HttpErrorResponse): any{
+  handleError(error: HttpErrorResponse): any {
     let errorMessage;
     if (error.error instanceof ErrorEvent) {
       // Client-side errors
@@ -25,13 +26,17 @@ export class DataService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
+
   public sendGetRequest(specific: string): any {
     return this.httpClient.get(this.REST_API_SERVER + specific).pipe(retry(3), catchError(this.handleError));
   }
+
   public sendPostRequest(specific: string, data: any): any {
-    const header = {   headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-      }) };
+    const header = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
     const body = JSON.stringify(data);
     return this.httpClient.post(this.REST_API_SERVER + specific, body, header).pipe(retry(3),
       catchError(this.handleError));
