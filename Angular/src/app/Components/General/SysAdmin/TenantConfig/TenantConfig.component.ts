@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SysAdminTenantConfig} from '../../Models/SysAdminTenantConfig';
 import {DataService} from '../../../../Common/DataService';
-import {ListItem} from "../../Models/ListItem";
-import {EmployeeConfig} from "../../../EmployeeConfiguration/Models/EmployeeConfig";
 
 @Component({
   selector: 'app-tenantconfig',

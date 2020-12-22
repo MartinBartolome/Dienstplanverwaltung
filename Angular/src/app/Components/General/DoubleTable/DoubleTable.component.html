@@ -5,8 +5,7 @@
       <mat-icon *ngIf="tables.table1.showsAddButton"
                 aria-hidden="false"
                 aria-label="Hinzufügen"
-                color="primary"
-                (click)="AddNew()">add_circle
+                color="primary">add_circle
       </mat-icon>
     </div>
     <div class="SubRows" *ngFor="let item of tables.table1.items"
@@ -18,15 +17,13 @@
                   aria-hidden="false"
                   aria-label="Editieren"
                   color="primary"
-                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
-                  (click)="ItemEdit(item)">build_circle
+                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }">build_circle
         </mat-icon>
         <mat-icon *ngIf="tables.table1.showsAddButton"
                   aria-hidden="false"
                   aria-label="Editieren"
                   color="primary"
-                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
-                  (click)="ItemDelete(item)">delete
+                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }">delete
         </mat-icon>
       </div>
     </div>
@@ -37,8 +34,7 @@
       <mat-icon *ngIf="tables.table2.showsAddButton"
                 aria-hidden="false"
                 aria-label="Hinzufügen"
-                color="primary"
-                (click)="AddNew()">add_circle
+                color="primary">add_circle
       </mat-icon>
     </div>
     <div class="SubRows" *ngFor="let item of tables.table2.items"
@@ -50,15 +46,13 @@
                   aria-hidden="false"
                   aria-label="Editieren"
                   color="primary"
-                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
-                  (click)="ItemEdit(item)">build_circle
+                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }">build_circle
         </mat-icon>
         <mat-icon *ngIf="tables.table2.showsAddButton"
                   aria-hidden="false"
                   aria-label="Editieren"
                   color="primary"
-                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }"
-                  (click)="ItemDelete(item)">delete
+                  [ngStyle]="{color:item.selected? 'white' : '#3f51b5' }">delete
         </mat-icon>
       </div>
     </div>

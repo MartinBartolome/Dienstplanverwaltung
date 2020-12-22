@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Table} from '../Models/Table';
+import {Component, Input, OnInit} from '@angular/core';
 import {ListItem} from '../Models/ListItem';
 import {SysAdminTableData} from '../Models/SysAdminTableData';
 

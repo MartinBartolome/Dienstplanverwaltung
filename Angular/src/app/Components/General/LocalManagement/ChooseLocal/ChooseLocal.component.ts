@@ -5,7 +5,6 @@ import {ListItem} from '../../Models/ListItem';
 import {DataService} from '../../../../Common/DataService';
 import {SharedService} from '../../../../Common/SharedService';
 import {LocalConfigurationComponent} from '../LocalConfiguration/LocalConfiguration.component';
-import {TenantConfigComponent} from '../../SysAdmin/TenantConfig/TenantConfig.component';
 
 @Component({
   selector: 'app-chooselocal',

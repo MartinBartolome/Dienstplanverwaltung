@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Slot} from '../../Models/Slot';
 import {DataService} from '../../../../Common/DataService';
 import {SharedService} from '../../../../Common/SharedService';
-import {ShiftDays} from '../../Models/ShiftDays';
 
 @Component({
   selector: 'app-slot-detail',
