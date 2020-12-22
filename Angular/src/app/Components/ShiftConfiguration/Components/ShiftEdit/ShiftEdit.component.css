@@ -1,35 +1,48 @@
-form{
+form {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
 }
 
-.TextInput{
+header {
+  margin-top: 1.5em;
+  font-size: x-large;
+  border-bottom: 0.15em solid #3F51B5;
+}
+
+.TextInput {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  width:100%;
+  width: 100%;
 }
-.FormInput, .FormLabel{
-  width: calc(100% * (1/2) - 2em);
+
+.FormInput, .FormLabel {
+  width: calc(100% * (1 / 2) - 2em);
 }
-.LeftSide{
+
+.LeftSide {
   display: flex;
   flex-direction: column;
 }
 
-.RightSide{
+.RightSide {
   margin-left: 1em;
   display: flex;
   flex-direction: column;
 }
 
-button{
-  margin:1em;
+.mat-form-field {
+  width: 50%;
 }
-.ButtonNav{
+
+button {
+  margin: 1em;
+}
+
+.ButtonNav {
   height: 100%;
   display: flex;
   flex-direction: row;
