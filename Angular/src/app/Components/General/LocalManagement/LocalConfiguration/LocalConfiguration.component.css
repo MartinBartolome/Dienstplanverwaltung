@@ -1,3 +1,8 @@
-Button{
-  width: 100%;
+Button {
+  width: 15em;
+}
+
+form {
+  width: 30em;
+  text-align: center;
 }
