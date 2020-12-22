@@ -1,4 +1,4 @@
-section{
+section {
   display: flex;
   flex-direction: column;
   border-collapse: collapse;
@@ -6,33 +6,37 @@ section{
   min-width: 50%;
 }
 
-.HeaderRow{
-  border-bottom:solid #e4e4e4;
+.HeaderRow {
+  border-bottom: solid #e4e4e4;
   border-collapse: collapse;
-  border-width:0.1em;
+  border-width: 0.1em;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
 }
-.SubRows{
+
+.SubRows {
   cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-header{
+
+header {
   font-size: 1.25em;
 }
 
-.Highlight{
+.Highlight {
   background: #3F51B5;
   color: white;
 }
-mat-icon{
+
+mat-icon {
   cursor: pointer;
 }
-.doubletable{
+
+.doubletable {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

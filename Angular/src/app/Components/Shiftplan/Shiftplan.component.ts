@@ -14,37 +14,36 @@ export class ShiftplanComponent implements OnInit, OnChanges {
   @Output() ReloadChange = new EventEmitter<Date>();
   @Input() DateTitle: string;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes: SimpleChanges): void
-  {
-    this.DateTitle = this.stringToUSDate(this.data.month).toLocaleString('de-de', { month: 'long', year: 'numeric'});
+  ngOnChanges(changes: SimpleChanges): void {
+    this.DateTitle = this.stringToUSDate(this.data.month).toLocaleString('de-de', {month: 'long', year: 'numeric'});
   }
 
-  ChangeMonth(value: number): void
-  {
+  ChangeMonth(value: number): void {
     this.data.month = this.DateToString(new Date(
       this.stringToUSDate(this.data.month).setMonth(this.stringToUSDate(this.data.month).getMonth() + value)));
     this.DateChange.emit(this.stringToUSDate(this.data.month));
   }
 
-  clickOpenDetail(SiftDays): void{
+  clickOpenDetail(SiftDays): void {
     const dialogRef = this.dialog.open(ShiftDayDetailComponent, {
       data: SiftDays
     });
     dialogRef.afterClosed().subscribe(() => {
-        this.ReloadChange.emit(this.stringToUSDate(this.data.month));
+      this.ReloadChange.emit(this.stringToUSDate(this.data.month));
     });
   }
-  DateToString(date: Date): string
-  {
+
+  DateToString(date: Date): string {
     return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
   }
-  stringToUSDate(DateString: string): Date
-  {
+
+  stringToUSDate(DateString: string): Date {
     return new Date(DateString.split('.', 3)[1].toString() + '/' +
       DateString.split('.', 3)[0].toString() + '/' +
       DateString.split('.', 3)[2].toString());

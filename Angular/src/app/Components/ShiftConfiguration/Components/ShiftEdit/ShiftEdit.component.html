@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="LeftSide">
     <div class="TextInput">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 100%">
         <mat-label>Titel</mat-label>
         <label>
           <input matInput type="text" name="Title" placeholder="Titel" formControlName="Titel">
@@ -10,19 +10,17 @@
     </div>
     <app-table [table]="template.days" [AllowSelection]="true"></app-table>
     <div>
-      <p>
-        <label>Gültigkeit</label>
-      </p>
+      <header>Gültigkeit</header>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Von</mat-label>
-          <input matInput name= "FromDate" [matDatepicker]="dpfromDate" formControlName="fromdate" [readonly]="true">
+          <input matInput name="FromDate" [matDatepicker]="dpfromDate" formControlName="fromdate" [readonly]="true">
           <mat-datepicker-toggle matSuffix [for]="dpfromDate"></mat-datepicker-toggle>
           <mat-datepicker #dpfromDate></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Bis</mat-label>
-          <input matInput name= "ToDate" [matDatepicker]="dptoDate" formControlName="todate"  [readonly]="true">
+          <input matInput name="ToDate" [matDatepicker]="dptoDate" formControlName="todate" [readonly]="true">
           <mat-datepicker-toggle matSuffix [for]="dptoDate"></mat-datepicker-toggle>
           <mat-datepicker #dptoDate></mat-datepicker>
         </mat-form-field>
@@ -30,7 +28,8 @@
       <mat-form-field appearance="outline">
         <mat-label>Von Uhrzeit</mat-label>
         <label>
-          <input matInput placeholder="Von" name="FromTime" type="time" formControlName="fromtime" (input)="onTimeInput()">
+          <input matInput placeholder="Von" name="FromTime" type="time" formControlName="fromtime"
+                 (input)="onTimeInput()">
         </label>
         <mat-error *ngIf="getfromtime.invalid && !getfromtime.hasError('required')">
           Zeiten überprüfen!
@@ -49,7 +48,7 @@
   </div>
   <div class="RightSide">
     <div class="TextInput">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 100%">
         <mat-label>Takt</mat-label>
         <mat-select [(value)]="template.recurrenceOptions.selectedItem.title">
           <mat-option [value]="item.title"

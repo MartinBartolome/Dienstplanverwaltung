@@ -17,25 +17,26 @@ export class ChooselocalComponent implements OnInit {
   selected: ListItem;
   @Output() submitEM = new EventEmitter();
 
-  constructor(public api: DataService, public globalVariables: SharedService, public dialog: MatDialog){}
+  constructor(public api: DataService, public globalVariables: SharedService, public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.GetLocals();
   }
 
-  public SelectLocal(): void{
+  public SelectLocal(): void {
     this.globalVariables.setLocalID(this.selected.id);
     this.globalVariables.setLocalName(this.selected.title);
     this.submitEM.emit(true);
   }
 
-  private GetLocals(): void{
+  private GetLocals(): void {
     this.api.sendGetRequest('/getChooseLocal?userNickName=' + this.globalVariables.getNickName()).subscribe((data: Table) => {
       this.Locals = data;
     });
   }
 
-  public ManageLocals(): void{
+  public ManageLocals(): void {
     const dialogRef = this.dialog.open(LocalConfigurationComponent, {});
     dialogRef.afterClosed().subscribe(() => {
       this.GetLocals();

@@ -10,7 +10,7 @@ import {SharedService} from './Common/SharedService';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
   title = 'Dienstplanverwaltung';
   EmployeeData: EmployeesConfig;
   ShiftConfiguration: ShiftConfiguration;
@@ -25,16 +25,17 @@ export class AppComponent{
   constructor(private api: DataService, public globalVariables: SharedService) {
   }
 
-  public loadEmployeeData(): void{
+  public loadEmployeeData(): void {
     this.api.sendGetRequest('/getEmployeesConfig?localId=' + this.globalVariables.getLocalID()
       + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: EmployeesConfig) => {
       this.EmployeeData = data;
     });
   }
-  public loadShiftPlanData(SelectedDate: Date): void{
-    const CombinedURL =  '/shiftPlan?localId=' + this.globalVariables.getLocalID() + '&employeeName='
+
+  public loadShiftPlanData(SelectedDate: Date): void {
+    const CombinedURL = '/shiftPlan?localId=' + this.globalVariables.getLocalID() + '&employeeName='
       + this.globalVariables.getNickName() + '&month='
-      + SelectedDate.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false })
+      + SelectedDate.getDate().toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
       + '.' + (SelectedDate.getMonth() + 1).toLocaleString('de-de', {minimumIntegerDigits: 2, useGrouping: false})
       + '.' + SelectedDate.getFullYear();
     this.api.sendGetRequest(CombinedURL).subscribe((data: ShiftPlan) => {
@@ -42,14 +43,14 @@ export class AppComponent{
     });
   }
 
-  public loadShiftConfiguration(): void{
+  public loadShiftConfiguration(): void {
     this.api.sendGetRequest('/getShiftPlanConfig?localId=' + this.globalVariables.getLocalID()
       + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: ShiftConfiguration) => {
       this.ShiftConfiguration = data;
     });
   }
 
-  public loadisManager(): void{
+  public loadisManager(): void {
     this.api.sendGetRequest('/isEmployeeManager?localId=' + this.globalVariables.getLocalID()
       + '&employeeName=' + this.globalVariables.getNickName()).subscribe((data: boolean) => {
       this.isManager = data;
@@ -60,15 +61,17 @@ export class AppComponent{
       }
     });
   }
-  public Reload(): void
-  {
+
+  public Reload(): void {
     this.loadisManager();
     this.loadShiftPlanData(new Date());
   }
-  public ReselectLocal(): void{
+
+  public ReselectLocal(): void {
     this.LocalSelected = false;
   }
-  public Logout(): void{
+
+  public Logout(): void {
     this.LoginSuccess = false;
     this.LoggedUser = '';
     this.SelectedLocal = '';

@@ -1,20 +1,20 @@
-section{
+section {
   width: 25em;
   border: 0.1em solid #e4e4e4;
 }
 
-header{
+header {
   text-align: center;
-  margin-top:0.3em;
+  margin-top: 0.3em;
   margin-bottom: 1em;
 }
 
-.ShiftContainer{
+.ShiftContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
-.Shift{
+.Shift {
   margin: 0 0.5em 0.5em 0.5em;
 }

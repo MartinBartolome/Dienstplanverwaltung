@@ -14,9 +14,11 @@
         <mat-form-field>
           <mat-label>Passwort eingeben:</mat-label>
           <label>
-            <input [type]="hide ? 'password' : 'text'" matInput placeholder="Password" formControlName="password"  (input)="onPasswordInput()">
+            <input [type]="hide ? 'password' : 'text'" matInput placeholder="Password" formControlName="password"
+                   (input)="onPasswordInput()">
           </label>
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
@@ -32,7 +34,8 @@
           <mat-error *ngIf="confirmpassword.invalid && !confirmpassword.hasError('required')">
             Passwörter stimmen nicht überein!
           </mat-error>
-          <button mat-icon-button matSuffix (click)="rehide = !rehide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="rehide">
+          <button mat-icon-button matSuffix (click)="rehide = !rehide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="rehide">
             <mat-icon>{{rehide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>

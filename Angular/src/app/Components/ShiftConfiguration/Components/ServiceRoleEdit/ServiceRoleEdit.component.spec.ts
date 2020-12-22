@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ServiceRoleEditComponent } from './ServiceRoleEdit.component';
+import {ServiceRoleEditComponent} from './ServiceRoleEdit.component';
 
 describe('ServiceRoleEditComponent', () => {
   let component: ServiceRoleEditComponent;
@@ -8,9 +8,9 @@ describe('ServiceRoleEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ServiceRoleEditComponent ]
+      declarations: [ServiceRoleEditComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

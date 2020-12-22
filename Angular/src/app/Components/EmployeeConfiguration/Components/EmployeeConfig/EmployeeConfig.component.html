@@ -1,7 +1,8 @@
+<header>{{ employee.nickName }}</header>
 <section>
   <div class="settings">
-    <header>{{ employee.nickName }}</header>
-    <app-table [table]="employee.serviceRoles" (AddEvent)="newServiceRole()" [AllowSelection]="true" (EditItemEvent)="editServiceRole($event)"></app-table>
+    <app-table [table]="employee.serviceRoles" (AddEvent)="newServiceRole()" [AllowSelection]="true"
+               (EditItemEvent)="editServiceRole($event)"></app-table>
   </div>
   <form class="settings">
     <p>
@@ -24,5 +25,4 @@
       <button mat-raised-button color="primary" (click)="dialogRef.close()">Abbrechen</button>
     </div>
   </form>
-
 </section>

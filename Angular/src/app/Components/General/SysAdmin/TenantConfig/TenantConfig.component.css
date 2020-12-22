@@ -8,7 +8,7 @@
   min-width: 300px;
 }
 
-mat-card{
+mat-card {
   margin: 100px 0;
 }
 
@@ -25,18 +25,21 @@ mat-card-content {
   background-color: red;
 }
 
-.Tab{
+.Tab {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: flex-end;
 }
-app-doubletable{
+
+app-doubletable {
   width: 98.5%;
 }
-button{
+
+button {
   margin-top: 0.5em;
 }
+
 .button {
   display: flex;
   justify-content: flex-end;

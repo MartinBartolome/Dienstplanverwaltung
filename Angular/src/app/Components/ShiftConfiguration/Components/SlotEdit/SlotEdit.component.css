@@ -1,8 +1,10 @@
-form{
+form {
+  width: 20em;
   display: flex;
   flex-direction: column;
 }
-.ButtonNav{
+
+.ButtonNav {
   height: 100%;
   display: flex;
   flex-direction: row;

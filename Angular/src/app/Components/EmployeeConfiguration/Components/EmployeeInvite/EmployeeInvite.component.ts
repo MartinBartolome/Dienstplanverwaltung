@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 
 
@@ -9,10 +9,13 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class EmployeeInviteComponent implements OnInit {
   email: string;
-  constructor(public dialogRef: MatDialogRef<EmployeeInviteComponent>){ }
+
+  constructor(public dialogRef: MatDialogRef<EmployeeInviteComponent>) {
+  }
 
   ngOnInit(): void {
   }
+
   Cancel(): void {
     this.dialogRef.close(this.email);
   }

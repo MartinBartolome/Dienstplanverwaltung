@@ -16,22 +16,26 @@ export class TableComponent implements OnInit {
   @Output() ItemSelectedEvent = new EventEmitter<ListItem>();
   @Output() AddEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
-  ItemEdit(item: ListItem): void  {
+
+  ItemEdit(item: ListItem): void {
     this.EditItemEvent.emit(item);
   }
-  ItemDelete(item: ListItem): void  {
+
+  ItemDelete(item: ListItem): void {
     this.DeleteItemEvent.emit(item);
   }
-  AddNew(): void{
+
+  AddNew(): void {
     this.AddEvent.emit();
   }
-  ItemSelected(item: ListItem): void{
-    if (!this.AllowSelection)
-    {
+
+  ItemSelected(item: ListItem): void {
+    if (!this.AllowSelection) {
       item.selected = false;
       this.ItemSelectedEvent.emit(item);
     }

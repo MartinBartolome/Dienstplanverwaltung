@@ -1,12 +1,14 @@
-.tabcontainer{
+.tabcontainer {
   max-width: 100%;
 }
-.logout{
+
+.logout {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
 }
-.LoginMenuButton{
+
+.LoginMenuButton {
   margin: 1em;
 }

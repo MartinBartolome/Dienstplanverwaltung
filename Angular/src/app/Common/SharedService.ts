@@ -5,43 +5,50 @@ import {UserResponse} from '../Components/General/Models/UserResponse';
   providedIn: 'root',
 })
 
-export class SharedService{
+export class SharedService {
   private LocalID: number;
   private Localname: string;
   private Nickname: string;
   private IsManager: boolean;
   private User: UserResponse;
 
-  setLocalID(setID: number): void{
+  setLocalID(setID: number): void {
     this.LocalID = setID;
   }
 
-  getLocalID(): number{
+  getLocalID(): number {
     return this.LocalID;
   }
-  setLocalName(localname: string): void{
+
+  setLocalName(localname: string): void {
     this.Localname = localname;
   }
-  getLocalName(): string{
+
+  getLocalName(): string {
     return this.Localname;
   }
 
-  setNickName(setNick: string): void{
+  setNickName(setNick: string): void {
     this.Nickname = setNick;
   }
-  getNickName(): string{
+
+  getNickName(): string {
     return this.Nickname;
   }
-  setUser(setNick: UserResponse): void{
+
+  setUser(setNick: UserResponse): void {
     this.User = setNick;
   }
-  getUser(): UserResponse{
+
+  getUser(): UserResponse {
     return this.User;
   }
-  setisManager(ismanager: boolean): void{
+
+  setisManager(ismanager: boolean): void {
     this.IsManager = ismanager;
   }
-  getisManager(): boolean{
+
+  getisManager(): boolean {
     return this.IsManager;
   }
 }

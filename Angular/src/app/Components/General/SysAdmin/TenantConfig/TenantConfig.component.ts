@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SysAdminTenantConfig} from '../../Models/SysAdminTenantConfig';
 import {DataService} from '../../../../Common/DataService';
 import {ListItem} from "../../Models/ListItem";
@@ -20,7 +20,8 @@ export class TenantConfigComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  Stilllegen(): void{
+
+  Stilllegen(): void {
     for (const o of this.SysadminData.table1Data.table1.items) {
       if (o.selected) {
         this.api.sendGetRequest('/localSetState?localId=' + o.id
@@ -30,7 +31,8 @@ export class TenantConfigComponent implements OnInit {
       }
     }
   }
-  Bewilligen(): void{
+
+  Bewilligen(): void {
     for (const o of this.SysadminData.table2Data.table1.items) {
       if (o.selected) {
         this.api.sendGetRequest('/grantLocal?localId=' + o.id).subscribe((data: SysAdminTenantConfig) => {
@@ -39,7 +41,8 @@ export class TenantConfigComponent implements OnInit {
       }
     }
   }
-  Aktivieren(): void{
+
+  Aktivieren(): void {
     for (const o of this.SysadminData.table3Data.table1.items) {
       if (o.selected) {
         this.api.sendGetRequest('/localSetState?localId=' + o.id
